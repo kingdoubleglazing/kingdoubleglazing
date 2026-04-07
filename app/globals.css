@@ -53,6 +53,37 @@ body {
   outline-offset: 2px;
 }
 
+/* ── Keyframes ── */
+@keyframes reveal-up {
+  from { opacity: 0; translate: 0 1.5rem; }
+  to   { opacity: 1; translate: 0 0; }
+}
+
+@keyframes stamp-in {
+  from { opacity: 0; scale: 1.04; letter-spacing: 0.08em; }
+  to   { opacity: 1; scale: 1;    letter-spacing: 0.02em; }
+}
+
+@keyframes border-draw {
+  from { height: 0; }
+  to   { height: 100%; }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+@keyframes molten-shift {
+  0%, 100% { background-position: 0%   50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(255, 215, 0, 0.5); }
+  50%       { box-shadow: 0 0 0 6px rgba(255, 215, 0, 0);   }
+}
+
 /* ── Custom Utilities ── */
 @layer utilities {
   /* Display-LG: 3.5rem Bebas Neue stamp */
@@ -90,5 +121,117 @@ body {
   /* Molten Glass CTA gradient */
   .bg-molten-glass {
     background: linear-gradient(to right, var(--color-primary), var(--color-primary-fixed-dim));
+  }
+
+  /* Animated molten gradient — hero CTA buttons only */
+  .animate-molten {
+    background: linear-gradient(90deg,
+      var(--color-primary),
+      var(--color-primary-container),
+      var(--color-primary-fixed-dim)
+    );
+    background-size: 200% 100%;
+    animation: molten-shift 4s ease-in-out infinite;
+  }
+
+  /* Scroll-driven reveal — pure CSS, no JS, static-safe */
+  .animate-reveal {
+    animation: reveal-up 0.5s ease-in-out both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  /* Page-load headline stamp — Bebas Neue display headings only */
+  .animate-stamp {
+    animation: stamp-in 0.45s ease-in-out both;
+  }
+
+  /* Staggered child reveal — set style="--i:N" on each child */
+  .animate-stagger-child {
+    animation: reveal-up 0.45s ease-in-out both;
+    animation-delay: calc(var(--i, 0) * 80ms);
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  /* Value Ledger with animated left border draw */
+  .value-ledger-animated {
+    position: relative;
+    background: var(--color-surface-container-lowest);
+    padding-left: 1.25rem;
+  }
+  .value-ledger-animated::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: var(--color-primary-container);
+    animation: border-draw 0.45s ease-in-out both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 25%;
+  }
+
+  /* Loading skeleton shimmer */
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-surface-container)      25%,
+      var(--color-surface-container-high) 50%,
+      var(--color-surface-container)      75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.6s ease-in-out infinite;
+  }
+
+  /* CTA badge pulse — "Stop. Don't Overpay." stamp */
+  .animate-badge-pulse {
+    animation: badge-pulse 2.4s ease-in-out infinite;
+  }
+
+  /* Interactive card — 2px lift, bottom shadow anchor ("bolted-down") */
+  .card-interactive {
+    transition: translate 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    will-change: translate;
+  }
+  .card-interactive:hover {
+    translate: 0 -2px;
+    box-shadow: 0 4px 0 0 var(--color-primary-container);
+  }
+
+  /* FAQ details smooth reveal — works with native <details data-faq> */
+  details[data-faq] summary {
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.15s ease-in-out;
+  }
+  details[data-faq] summary::-webkit-details-marker { display: none; }
+  details[data-faq][open] summary { color: var(--color-primary); }
+  details[data-faq] .faq-body {
+    animation: reveal-up 0.3s ease-in-out both;
+  }
+
+  /* Reduced motion — strip animation, preserve layout intent */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-reveal,
+    .animate-stamp,
+    .animate-stagger-child,
+    .animate-molten,
+    .animate-badge-pulse {
+      animation: none;
+      opacity: 1;
+    }
+    .animate-shimmer {
+      animation: none;
+      background: var(--color-surface-container);
+    }
+    .value-ledger-animated::before {
+      animation: none;
+      height: 100%;
+    }
+    .card-interactive {
+      transition: none;
+    }
   }
 }

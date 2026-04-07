@@ -99,7 +99,55 @@ Reinforces "King of Value" positioning.
 
 ---
 
-## 6. Tailwind v4 Token Reference
+## 6. Micro Animations
+
+All motion is **purposeful and weighted** — industrial machinery, not a toy. Rules:
+- Easing: `ease-in-out` only. No spring, no bounce.
+- Duration: 200–500ms. Nothing lingers.
+- Scroll-driven via `animation-timeline: view()` — zero JS, static-safe.
+- All utilities respect `prefers-reduced-motion`.
+
+### Utility Reference
+
+| Class | Where to use | Effect |
+|---|---|---|
+| `.animate-stamp` | `<h1>` with `.text-display-lg` | Page-load opacity + slight descale + letter-spacing snap |
+| `.animate-reveal` | Blocks entering the viewport | Fade + 1.5rem slide up, scroll-driven |
+| `.animate-stagger-child` | List items, grid cards — set `style="--i:N"` on each | Staggered reveal-up, 80ms per step |
+| `.value-ledger-animated` | Price breakdowns | Left yellow border draws downward as block enters view |
+| `.animate-molten` | Hero CTA button only | Gradient sweeps left→right on loop |
+| `.animate-badge-pulse` | "Stop. Don't Overpay." badge | Slow yellow glow pulse |
+| `.animate-shimmer` | Loading skeletons | Horizontal shimmer sweep |
+| `.card-interactive` | ServiceCards, GlassOptions cards | 2px lift + yellow bottom shadow on hover |
+
+### Component → Animation Map
+
+| Component | Apply |
+|---|---|
+| Hero `<h1>` | `.animate-stamp` |
+| Hero primary CTA button | `.animate-molten` |
+| "Stop. Don't Overpay." badge | `.animate-badge-pulse` |
+| TrustBar items | `.animate-stagger-child` with `--i:0` through `--i:4` |
+| ServiceCards grid | `.card-interactive` + `.animate-stagger-child` |
+| BenefitsGrid items | `.animate-stagger-child` |
+| ProcessSteps list | `.animate-stagger-child` |
+| Price breakdown | `.value-ledger-animated` (replaces `.value-ledger`) |
+| FAQ `<details>` | `data-faq` attribute, body div gets `.faq-body` |
+| Image/content loading | `.animate-shimmer` on placeholder |
+
+### shadcn Components — Animation Notes
+
+When using shadcn/Radix components, hook into `data-state` attributes for transitions:
+
+```css
+/* Accordion open/close */
+[data-state="open"]  { animation: reveal-up 0.3s ease-in-out both; }
+[data-state="closed"] { opacity: 0; }
+```
+
+---
+
+## 7. Tailwind v4 Token Reference
 
 All tokens live in `app/globals.css` under `@theme`. Tailwind generates utilities automatically:
 

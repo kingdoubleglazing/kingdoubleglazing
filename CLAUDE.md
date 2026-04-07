@@ -29,6 +29,9 @@
 | Design tokens, glass effects, animations, UI patterns | `tailwind-design-system` |
 | High-quality, distinctive UI/page design | `frontend-design` |
 | Claude API / Anthropic SDK integration | `claude-api` |
+| Finding existing shadcn components before building custom | `shadcn-component-discovery` |
+
+> **shadcn-component-discovery** is located in `.agents/skills/shadcn-component-discovery/`. Invoke it PROACTIVELY before building any UI component, block, or section. Components sourced from registries must be restyled to the KDG design system (0px radius, industrial palette, Bebas Neue/Barlow fonts, `rounded-none` everywhere).
 
 ## Core principles (always apply)
 
@@ -37,7 +40,7 @@
 3. **Server Components by default.** `'use client'` only when interaction genuinely requires it.
 4. **One primary keyword per page.** No cannibalisation. Check `docs/seo.md` before creating any page.
 5. **Internal linking discipline.** Every page links to 3+ others and is linked from 3+ others.
-6. **Components are owned, not borrowed.** No shadcn, no Material, no UI library. Small library, fully understood.
+6. **Components are owned, not borrowed.** No UI library runtime dependencies (no Material). Shadcn is permitted as a copy-paste source via the `shadcn-component-discovery` skill — treat each installed component as owned code. All shadcn components **must** be restyled: `rounded-none`, KDG palette, zero-JS where possible.
 7. **Zero runtime cost.** Tailwind only, no CSS-in-JS. Self-hosted fonts via `next/font`.
 8. **All copy via props.** No hardcoded text inside components. Content lives in `/data/` files.
 9. **Mobile-first.** Emergency CTAs designed for thumb reach. All components responsive.
