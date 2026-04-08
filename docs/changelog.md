@@ -4,6 +4,18 @@ Track significant changes, decisions, and milestones. Most recent first.
 
 ---
 
+## 2026-04-09 — Custom Mirrors page built
+
+- Created `app/custom-mirrors/page.tsx` — full page replacing the placeholder stub
+- Sections: Hero (compact) → BenefitsGrid → ProcessSteps → FAQ → CtaBanner
+- 6 benefits: any shape/size, edge finishes, moisture-resistant backing, mirror-safe adhesive, transparent pricing, installed in hours
+- 4 process steps: measure/quote → glass cut to order → installation booked → fitted
+- 8 FAQ items inline: cost, sizes/shapes, bevelling, adhesive system, wet areas, gym mirrors, lead time, old mirror removal
+- JSON-LD: Service + BreadcrumbList + FAQPage schemas
+- Primary keyword: custom mirrors melbourne
+
+---
+
 ## 2026-04-09 — Glass Splashbacks page built
 
 - Created `app/glass-splashbacks/page.tsx` — full page replacing the placeholder stub
