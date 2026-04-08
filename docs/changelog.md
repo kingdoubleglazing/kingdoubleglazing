@@ -4,6 +4,20 @@ Track significant changes, decisions, and milestones. Most recent first.
 
 ---
 
+## 2026-04-09 — Commercial Glazing page built
+
+- Created `app/commercial-glazing/page.tsx` — full B2B page replacing the placeholder stub
+- Sections: Hero → TrustBar (commercial credentials) → BenefitsGrid → ProcessSteps → TestimonialCarousel (commercial filter) → FAQ → CtaBanner (contact-focused, not estimate)
+- Added 3 `commercial`-tagged entries to `data/testimonials.ts` (strata manager, retail fitout, property developer)
+- TrustBar: Licensed Glazier, Insurance Certs on Request, Strata & Developer Ready, Melbourne Owned, Melbourne-Wide
+- BenefitsGrid: 6 commercial benefits — full scope, compliance docs, itemised quotes, preferred supplier, out-of-hours, NABERS documentation
+- ProcessSteps: 4 B2B project flow steps — scope review → itemised quote → scheduled & confirmed → installed & certified
+- 8 FAQ items covering strata, multi-site, insurance certs, out-of-hours, double glazing retrofits, pricing, lead time, references
+- JSON-LD: Service + BreadcrumbList + FAQPage schemas
+- Primary keyword: commercial glazing melbourne
+
+---
+
 ## 2026-04-09 — Custom Mirrors page built
 
 - Created `app/custom-mirrors/page.tsx` — full page replacing the placeholder stub

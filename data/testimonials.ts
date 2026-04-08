@@ -119,6 +119,30 @@ export const testimonials = [
     tag: 'emergency',
     text: "Storm took out my lounge window at 11pm on a Wednesday. I expected to be told someone would come in the morning. King had a glazier here within the hour. He cleaned up the glass, boarded the frame properly, and the permanent replacement was fitted two days later. Professional job, not a handyman with a piece of wood.",
   },
+  {
+    name: 'James R. — Strata Manager',
+    suburb: 'South Melbourne',
+    source: 'Google',
+    rating: 5,
+    tag: 'commercial',
+    text: "We manage 14 strata buildings across Melbourne. King handles all our glazing — routine replacements, double glazing retrofits on older blocks, and emergency call-outs. The invoicing is clean, the pricing is consistent, and they show up when they say they will. That last part is rarer than it should be.",
+  },
+  {
+    name: 'Natalie W. — Retail Fitout',
+    suburb: 'Collingwood',
+    source: 'Google',
+    rating: 5,
+    tag: 'commercial',
+    text: "Needed a full shopfront glass installation done over a weekend so we could open Monday. King confirmed the timeline, showed up Saturday morning, and were done by Sunday afternoon. The glass is immaculate — not a mark on it. Every trade we brought in for the fitout delivered late except these guys.",
+  },
+  {
+    name: 'Tom B. — Property Developer',
+    suburb: 'Richmond',
+    source: 'Google',
+    rating: 5,
+    tag: 'commercial',
+    text: "Used King on a 12-unit apartment project — double glazing throughout plus frameless balustrades on the upper levels. Scope was substantial and they handled it without the project management headaches I've had with other glaziers. Itemised quotes, predictable scheduling, zero defects at handover. We're using them on the next project.",
+  },
 ] as const
 
 export type Testimonial = (typeof testimonials)[number]
