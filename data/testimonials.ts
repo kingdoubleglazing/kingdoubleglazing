@@ -4,7 +4,7 @@ export const testimonials = [
     suburb: 'Fitzroy North',
     source: 'Google',
     rating: 5,
-    tag: 'retrofit',
+    tag: 'energy',
     text: 'Heating bill dropped noticeably in the first month. Our Victorian terrace was a nightmare to heat — now the lounge actually holds temperature overnight. The retrofit took one day and the crew left the place spotless.',
   },
   {
@@ -36,7 +36,7 @@ export const testimonials = [
     suburb: 'Camberwell',
     source: 'Google',
     rating: 5,
-    tag: 'retrofit',
+    tag: 'energy',
     text: 'West-facing bedroom was genuinely unusable in summer — 34°C at 9pm. Tinted Low-E glass has fixed it completely. Air con barely runs now. The estimate tool online gave me the exact price before anyone even came out.',
   },
   {
@@ -62,6 +62,22 @@ export const testimonials = [
     rating: 5,
     tag: 'noise',
     text: "Flight path noise was the main reason we almost moved. A friend suggested acoustic glazing as a last resort before we listed the house. We're not moving. The difference in the front rooms is night and day — my daughter actually sleeps through now. Worth every cent.",
+  },
+  {
+    name: 'Rob & Diane F.',
+    suburb: 'Glen Waverley',
+    source: 'Google',
+    rating: 5,
+    tag: 'energy',
+    text: "Our gas bills were brutal every winter — the old single-pane windows were just radiating cold into the rooms. We went with Low-E double glazing throughout. First winter after: $380 less on gas over the quarter. The house holds heat in a way it never did before. We wished we'd done it when we bought the place.",
+  },
+  {
+    name: 'Yasmin T.',
+    suburb: 'Northcote',
+    source: 'Google',
+    rating: 5,
+    tag: 'energy',
+    text: "I was skeptical about the energy saving claims — they always sound too good. But the condensation alone proved the point: zero condensation on the inner pane since installation, where before it was streaming every winter morning. The heating runs half as often. The numbers are real.",
   },
 ] as const
 
