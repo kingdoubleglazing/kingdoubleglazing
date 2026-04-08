@@ -4,6 +4,18 @@ Track significant changes, decisions, and milestones. Most recent first.
 
 ---
 
+## 2026-04-09 — Shower Screens hub page built
+
+- Created `app/shower-screens/page.tsx` — full hub page replacing the placeholder stub
+- Sections: Hero (compact) → TrustBar → ServiceCards → BenefitsGrid → ProcessSteps → BeforeAfter → Testimonials → FAQ → CtaBanner
+- ServiceCards: inline section with 2 cards linking to `/shower-screens/frameless/` and `/shower-screens/semi-frameless/`
+- All section data defined locally in the page (shower-specific benefits, process steps, before/after metrics)
+- Created `data/shower-screens-faq.ts` — 8 FAQ items for shower screen queries
+- JSON-LD: Service + BreadcrumbList + FAQPage schemas embedded in page
+- Primary keyword: shower screens melbourne
+
+---
+
 ## 2026-04-07 — Responsive mobile navigation (Sheet drawer)
 
 - Installed `@radix-ui/react-dialog`
