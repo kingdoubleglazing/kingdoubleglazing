@@ -4,6 +4,18 @@ Track significant changes, decisions, and milestones. Most recent first.
 
 ---
 
+## 2026-04-09 — Semi-frameless shower screens page built
+
+- Created `app/shower-screens/semi-frameless/page.tsx` — full page replacing the placeholder stub
+- Sections: Hero (compact) → BenefitsGrid → BeforeAfter → ComparisonTable (inline) → FAQ → CtaBanner
+- Inline comparison: Semi-Frameless (highlighted) vs Frameless vs Framed (8 rows)
+- Benefits and BeforeAfter data scoped to the semi-frameless vs framed scenario
+- FAQ reuses `data/shower-screens-faq.ts`
+- JSON-LD: Service + BreadcrumbList + FAQPage schemas
+- Primary keyword: semi frameless shower screens melbourne
+
+---
+
 ## 2026-04-09 — Frameless shower screens page built
 
 - Created `app/shower-screens/frameless/page.tsx` — full page replacing the placeholder stub
