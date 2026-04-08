@@ -178,7 +178,7 @@ export default function CommercialGlazingPage() {
         subtext="Shopfronts, partitions, balustrades, strata programs. Itemised quotes, compliance documentation, predictable scheduling."
         primaryCta={{ label: 'Discuss Your Project', href: '/contact/' }}
         secondaryCta={{ label: 'Call Now', href: siteConfig.phoneHref }}
-        imageSrc="/hero-main.webp"
+        imageSrc="/hero/hero-commercial-glazing.webp"
         imageAlt="Commercial glazing installation — glass partitions in a Melbourne office"
       />
 

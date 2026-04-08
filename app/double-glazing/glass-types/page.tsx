@@ -51,7 +51,7 @@ export default function GlassTypesPage() {
         subtext="Standard clear, Tinted Low-E, Acoustic Laminated, Triple Glazed — compared honestly. No upsell."
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
-        imageSrc="/hero-main.webp"
+        imageSrc="/hero/hero-double-glazing.webp"
         imageAlt="Four double glazing glass types compared for Melbourne homes"
       />
       <TrustBar />

@@ -1,9 +1,12 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { processSteps } from '@/data/process-steps'
 
 interface StepItem {
   title: string
   body: string
+  imageSrc?: string
+  imageAlt?: string
 }
 
 interface ProcessStepsProps {
@@ -108,6 +111,16 @@ function StepCard({
 
       {/* Content */}
       <div className="md:mt-6 pb-12 md:pb-0">
+        {step.imageSrc && (
+          <div className="relative w-full aspect-video mb-5 overflow-hidden">
+            <Image
+              src={step.imageSrc}
+              alt={step.imageAlt ?? step.title}
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
         <h3 className="font-headline text-lg font-semibold uppercase tracking-wide text-inverse-on-surface leading-snug mb-3">
           {step.title}
         </h3>

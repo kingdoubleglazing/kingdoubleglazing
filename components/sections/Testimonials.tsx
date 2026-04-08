@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { testimonials, type Testimonial } from '@/data/testimonials'
 
 interface TestimonialsProps {
@@ -132,13 +133,25 @@ function TestimonialCard({
 
       {/* Footer */}
       <div className="flex items-end justify-between gap-4 border-t border-on-surface/8 pt-5">
-        <div>
+        <div className="flex items-center gap-3">
+          {t.customerImage && (
+            <div className="relative shrink-0 w-10 h-10 overflow-hidden rounded-full bg-on-surface/10">
+              <Image
+                src={t.customerImage}
+                alt={t.name}
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
+          <div>
           <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface leading-none mb-1">
             {t.name}
           </p>
           <p className="font-headline text-[0.8125rem] font-semibold uppercase tracking-[0.15em] text-on-surface/40">
             {t.suburb} · {t.source}
           </p>
+          </div>
         </div>
         <Stars count={t.rating} />
       </div>

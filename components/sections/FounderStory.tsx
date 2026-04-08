@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { siteConfig } from '@/data/site'
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -82,8 +83,21 @@ function FounderHero() {
             </Link>
           </div>
 
-          {/* Right — stats ledger */}
-          <div className="grid grid-cols-2 gap-0 ghost-border self-start">
+          {/* Right — founder photo + stats ledger */}
+          <div className="flex flex-col gap-6 self-start">
+
+            {/* Founder photo */}
+            <div className="relative w-full aspect-4/3 overflow-hidden">
+              <Image
+                src="/testimonial-founder/founder.webp"
+                alt="Casmaku, founder of King Double Glazing, Melbourne glazing specialist"
+                fill
+                className="object-cover object-top"
+              />
+            </div>
+
+            {/* Stats ledger */}
+            <div className="grid grid-cols-2 gap-0 ghost-border">
             {stats.map(({ value, label }, i) => (
               <div
                 key={label}
@@ -105,6 +119,8 @@ function FounderHero() {
                 </p>
               </div>
             ))}
+            </div>
+
           </div>
 
         </div>

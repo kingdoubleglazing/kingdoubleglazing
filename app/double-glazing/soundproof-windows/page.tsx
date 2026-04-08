@@ -66,7 +66,7 @@ export default function SoundproofWindowsPage() {
         subtext="Acoustic laminated double glazing — Rw 42. Traffic, trams, and flight paths. One day, from $645/m²."
         primaryCta={{ label: 'Get Acoustic Estimate', href: '/instant-estimate/?glass=acoustic-laminated' }}
         secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
-        imageSrc="/hero-main.webp"
+        imageSrc="/hero/hero-double-glazing.webp"
         imageAlt="Melbourne home with acoustic double glazing on a busy arterial road"
       />
       <TrustBar />

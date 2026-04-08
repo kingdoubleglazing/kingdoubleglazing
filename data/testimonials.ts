@@ -1,4 +1,4 @@
-export const testimonials = [
+export const testimonials: Testimonial[] = [
   {
     name: 'Sarah M.',
     suburb: 'Fitzroy North',
@@ -6,6 +6,7 @@ export const testimonials = [
     rating: 5,
     tag: 'energy',
     text: 'Heating bill dropped noticeably in the first month. Our Victorian terrace was a nightmare to heat — now the lounge actually holds temperature overnight. The retrofit took one day and the crew left the place spotless.',
+    customerImage: '/testimonial-founder/customer-1.webp',
   },
   {
     name: 'David K.',
@@ -14,6 +15,7 @@ export const testimonials = [
     rating: 5,
     tag: 'noise',
     text: "We live 40 metres from a tram stop. The acoustic difference after the laminated glass went in was honestly shocking. I didn't expect it to be that dramatic. Wish we'd done it ten years ago.",
+    customerImage: '/testimonial-founder/customer-2.webp',
   },
   {
     name: 'Jen & Tom R.',
@@ -143,7 +145,16 @@ export const testimonials = [
     tag: 'commercial',
     text: "Used King on a 12-unit apartment project — double glazing throughout plus frameless balustrades on the upper levels. Scope was substantial and they handled it without the project management headaches I've had with other glaziers. Itemised quotes, predictable scheduling, zero defects at handover. We're using them on the next project.",
   },
-] as const
+] 
 
-export type Testimonial = (typeof testimonials)[number]
+export type Testimonial = {
+  name: string
+  suburb: string
+  source: string
+  rating: number
+  tag: 'energy' | 'noise' | 'retrofit' | 'heritage' | 'emergency' | 'commercial'
+  text: string
+  customerImage?: string
+}
+
 export type TestimonialTag = Testimonial['tag']

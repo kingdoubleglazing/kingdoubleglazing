@@ -52,7 +52,7 @@ export default function RetrofitDoubleGlazingPage() {
         subtext="From $495/m² — Keep your existing timber or aluminium. Double the performance."
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
-        imageSrc="/hero-main.webp"
+        imageSrc="/hero/hero-double-glazing.webp"
         imageAlt="Retrofit double glazing installed in Melbourne home timber window frames"
       />
       <TrustBar />

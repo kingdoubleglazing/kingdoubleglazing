@@ -155,7 +155,7 @@ export default function CustomMirrorsPage() {
         subtext="Custom-cut mirrors for Melbourne bathrooms, gyms, and feature walls. Bevelled edges, moisture-resistant backing, installed in hours."
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: siteConfig.phoneHref }}
-        imageSrc="/hero-main.webp"
+        imageSrc="/hero/hero-custom-mirros.webp"
         imageAlt="Custom bevelled mirror installed above a Melbourne bathroom vanity"
       />
 

@@ -105,7 +105,7 @@ export default function DoubleGlazingCostPage() {
         subtext="From $495/m² — see your exact price in 60 seconds. No sales call required."
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
-        imageSrc="/hero-main.webp"
+        imageSrc="/hero/hero-double-glazing.webp"
         imageAlt="Melbourne home windows showing double glazing retrofit installation"
       />
       <TrustBar />

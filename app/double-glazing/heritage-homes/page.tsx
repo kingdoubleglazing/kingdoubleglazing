@@ -112,7 +112,7 @@ export default function HeritageHomesPage() {
         subtext="Retrofit double glazing for Victorian and Edwardian homes — permit-free, frame-preserving, one day. From $495/m²."
         primaryCta={{ label: 'Check My Property', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
-        imageSrc="/hero-main.webp"
+        imageSrc="/hero/hero-double-glazing.webp"
         imageAlt="Victorian heritage terrace in Melbourne with original timber sash windows"
       />
       <TrustBar />

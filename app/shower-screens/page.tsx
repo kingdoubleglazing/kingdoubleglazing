@@ -179,7 +179,7 @@ export default function ShowerScreensPage() {
         subtext="Toughened safety glass. Installed in hours. Transparent pricing before anyone visits your home."
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: siteConfig.phoneHref }}
-        imageSrc="/hero-main.webp"
+        imageSrc="/hero/hero-shower-screens.webp"
         imageAlt="Frameless shower screen installed in a Melbourne bathroom"
       />
 

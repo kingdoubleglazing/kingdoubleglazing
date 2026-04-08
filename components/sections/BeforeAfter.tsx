@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 interface Metric {
@@ -70,6 +72,57 @@ export function BeforeAfter({
           <p className="font-sans text-base text-inverse-on-surface/50 mt-4 max-w-xl leading-relaxed">
             {subheading}
           </p>
+        </div>
+
+        {/* Photo Proof — visual before/after pairs */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 mb-10">
+          <div className="relative aspect-video overflow-hidden">
+            <div className="absolute top-3 left-3 z-10 bg-black/70 text-white font-headline text-xs font-semibold uppercase tracking-[0.2em] px-3 py-1.5">
+              Before
+            </div>
+            <Image
+              src="/before-after-pairs/condensation-before.webp"
+              alt="Single-pane window covered in condensation before double glazing retrofit"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-video overflow-hidden">
+            <div className="absolute top-3 left-3 z-10 bg-primary-container text-on-primary-fixed font-headline text-xs font-semibold uppercase tracking-[0.2em] px-3 py-1.5">
+              After
+            </div>
+            <Image
+              src="/before-after-pairs/condensation-after.webp"
+              alt="Crystal clear double-glazed window with zero condensation after King retrofit"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 mb-12">
+          <div className="relative aspect-video overflow-hidden">
+            <div className="absolute top-3 left-3 z-10 bg-black/70 text-white font-headline text-xs font-semibold uppercase tracking-[0.2em] px-3 py-1.5">
+              Before
+            </div>
+            <Image
+              src="/before-after-pairs/aesthetic-before.webp"
+              alt="Old, rotting single-glaze window frame before double glazing upgrade"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-video overflow-hidden">
+            <div className="absolute top-3 left-3 z-10 bg-primary-container text-on-primary-fixed font-headline text-xs font-semibold uppercase tracking-[0.2em] px-3 py-1.5">
+              After
+            </div>
+            <Image
+              src="/before-after-pairs/aesthetic-after.webp"
+              alt="Sleek retrofitted double-glazed window in restored heritage timber frame"
+              fill
+              className="object-cover"
+            />
+          </div>
         </div>
 
         {/* Column labels */}

@@ -203,7 +203,7 @@ export default function SemiFramelessShowerScreensPage() {
         subtext="6–8 mm safety glass, slim channel frame, custom cut to your recess. Licensed glazier. Transparent pricing."
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: siteConfig.phoneHref }}
-        imageSrc="/hero-main.webp"
+        imageSrc="/hero/hero-shower-screens.webp"
         imageAlt="Semi-frameless toughened glass shower screen installed in a Melbourne bathroom"
       />
 
