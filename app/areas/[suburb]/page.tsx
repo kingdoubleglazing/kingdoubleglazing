@@ -13,7 +13,7 @@ export async function generateMetadata({
   params: Promise<{ suburb: string }>
 }): Promise<Metadata> {
   const { suburb } = await params
-  const data = suburbData[suburb]
+  const data = suburbBySlug[suburb]
   if (!data) return {}
   return buildMetadata({
     title: `Double Glazing ${data.name} | Retrofit Windows ${data.postcode}`,
@@ -28,7 +28,7 @@ export default async function SuburbPage({
   params: Promise<{ suburb: string }>
 }) {
   const { suburb } = await params
-  const data = suburbData[suburb]
+  const data = suburbBySlug[suburb]
   if (!data) notFound()
 
   return (
