@@ -1,11 +1,16 @@
 import Link from 'next/link'
-import { processSteps, type ProcessStep } from '@/data/process-steps'
+import { processSteps } from '@/data/process-steps'
+
+interface StepItem {
+  title: string
+  body: string
+}
 
 interface ProcessStepsProps {
   heading?: string
   subheading?: string
   cta?: { label: string; href: string }
-  steps?: readonly ProcessStep[]
+  steps?: readonly StepItem[]
 }
 
 export function ProcessSteps({
@@ -70,7 +75,7 @@ function StepCard({
   index,
   isLast,
 }: {
-  step: ProcessStep
+  step: StepItem
   index: number
   isLast: boolean
 }) {

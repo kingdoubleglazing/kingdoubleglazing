@@ -1,9 +1,14 @@
-import { retrofitFaq, type RetrofitFaqItem } from '@/data/retrofit-faq'
+import { retrofitFaq } from '@/data/retrofit-faq'
+
+interface FaqItem {
+  q: string
+  a: string
+}
 
 interface FAQProps {
   heading?: string
   subheading?: string
-  items?: readonly RetrofitFaqItem[]
+  items?: readonly FaqItem[]
 }
 
 export function FAQ({

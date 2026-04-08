@@ -50,7 +50,7 @@ const defaultItems: BenefitItem[] = [
 interface BenefitsGridProps {
   eyebrow?: string
   heading?: string
-  items?: BenefitItem[]
+  items?: readonly BenefitItem[]
 }
 
 export function BenefitsGrid({
