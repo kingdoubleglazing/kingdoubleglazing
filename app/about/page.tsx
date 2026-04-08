@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo/generateMetadata'
+import { HeroSection } from '@/components/sections/HeroSection'
 
 export const metadata: Metadata = buildMetadata({
   title: "About King Double Glazing | Melbourne's Anti-Ripoff Glaziers",
@@ -10,13 +11,16 @@ export const metadata: Metadata = buildMetadata({
 
 export default function AboutPage() {
   return (
-    <div className="px-4 py-16 max-w-7xl mx-auto">
-      <h1 className="text-display-lg text-on-surface mb-4">
-        About King Double Glazing
-      </h1>
-      <p className="text-lg text-on-surface/70 max-w-2xl">
-        We&apos;re Melbourne glaziers on a mission to bring transparent pricing to the double glazing industry. No middlemen, no upsells, no surprises.
-      </p>
-    </div>
+    <>
+      <HeroSection
+        badge="Melbourne's Anti-Ripoff Glaziers"
+        headlineWhite="About King"
+        headlineYellow="Double Glazing"
+        subtext="Transparent pricing. No middlemen. No upsells. No surprises."
+        primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
+        secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
+        imageAlt="King Double Glazing team — Melbourne glaziers"
+      />
+    </>
   )
 }

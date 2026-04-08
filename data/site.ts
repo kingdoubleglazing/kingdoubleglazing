@@ -1,3 +1,6 @@
+// Routes that use the transparent/overlay navbar (absolute positioned, white text, dark logo)
+export const transparentNavRoutes = ['/', '/about/']
+
 // Single source of truth for all business contact & identity details.
 export const siteConfig = {
   name: 'King Double Glazing',

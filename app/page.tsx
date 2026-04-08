@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo/generateMetadata'
+import { HeroSection } from '@/components/sections/HeroSection'
 
 export const metadata: Metadata = buildMetadata({
   title: "Retrofit Double Glazing Melbourne | From $495/m² | King Double Glazing",
@@ -10,13 +11,17 @@ export const metadata: Metadata = buildMetadata({
 
 export default function HomePage() {
   return (
-    <div className="px-4 py-16 max-w-7xl mx-auto">
-      <h1 className="text-display-lg text-on-surface mb-4">
-        Double Glazing Melbourne — Stop. Don&apos;t Overpay.
-      </h1>
-      <p className="text-lg text-on-surface/70 max-w-2xl">
-        Retrofit double glazing for existing Melbourne windows. Transparent pricing from $495/m². No pushy sales. No surprises.
-      </p>
-    </div>
+    <>
+      <HeroSection
+        badge="Stop. Don't Overpay."
+        headlineWhite="Melbourne's Honest"
+        headlineYellow="Retrofit Specialists"
+        subtext="From $495/m² — No hidden costs, no sales pressure."
+        primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
+        secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
+        imageSrc="/hero-main.webp"
+        imageAlt="Double glazed windows overlooking Melbourne skyline at dusk"
+      />
+    </>
   )
 }

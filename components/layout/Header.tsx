@@ -2,9 +2,11 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu, Phone } from 'lucide-react'
 import { mainNav, servicesNav } from '@/data/nav'
 import { siteConfig } from '@/data/site'
+import { transparentNavRoutes } from '@/data/site'
 import { Button } from '@/components/ui/Button'
 import {
   NavigationMenu,
@@ -25,8 +27,18 @@ import {
 import { cn } from '@/lib/utils'
 
 export function Header() {
+  const pathname = usePathname()
+  const isTransparent = transparentNavRoutes.includes(pathname)
+
   return (
-    <header className="sticky top-0 z-40 bg-surface border-b border-surface-container-high">
+    <header
+      className={cn(
+        'z-40 w-full',
+        isTransparent
+          ? 'absolute top-0 left-0 right-0 bg-transparent border-transparent'
+          : 'sticky top-0 bg-surface border-b border-surface-container-high'
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Logo */}
@@ -36,7 +48,7 @@ export function Header() {
             aria-label="King Double Glazing — home"
           >
             <Image
-              src={siteConfig.logos.light}
+              src={isTransparent ? siteConfig.logos.dark : siteConfig.logos.light}
               alt="King Double Glazing"
               width={160}
               height={50}
@@ -49,7 +61,12 @@ export function Header() {
           <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1">
             <Link
               href="/"
-              className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface/70 px-3 py-2 hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150"
+              className={cn(
+                'font-headline text-sm font-semibold uppercase tracking-wide px-3 py-2 transition-colors duration-150',
+                isTransparent
+                  ? 'text-white/80 hover:text-white'
+                  : 'text-on-surface/70 hover:text-on-surface hover:bg-surface-container-low'
+              )}
             >
               Home
             </Link>
@@ -58,7 +75,13 @@ export function Header() {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+                  <NavigationMenuTrigger
+                    className={cn(
+                      isTransparent && 'bg-transparent! text-white/80 hover:text-white! hover:bg-white/10! data-[active]:bg-white/10! data-[state=open]:bg-white/10!'
+                    )}
+                  >
+                    Services
+                  </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="grid grid-cols-2 gap-0 w-140 p-4">
                       {servicesNav.map((group) => (
@@ -102,7 +125,12 @@ export function Header() {
                 <Link
                   key={href}
                   href={href}
-                  className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface/70 px-3 py-2 hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150"
+                  className={cn(
+                    'font-headline text-sm font-semibold uppercase tracking-wide px-3 py-2 transition-colors duration-150',
+                    isTransparent
+                      ? 'text-white/80 hover:text-white'
+                      : 'text-on-surface/70 hover:text-on-surface hover:bg-surface-container-low'
+                  )}
                 >
                   {label}
                 </Link>
@@ -113,7 +141,12 @@ export function Header() {
           <div className="flex items-center gap-3 shrink-0">
             <Link
               href={siteConfig.phoneHref}
-              className="hidden sm:inline-flex items-center gap-1.5 font-headline text-sm font-semibold uppercase tracking-wide text-on-surface/70 hover:text-on-surface transition-colors duration-150"
+              className={cn(
+                'hidden sm:inline-flex items-center gap-1.5 font-headline text-sm font-semibold uppercase tracking-wide transition-colors duration-150',
+                isTransparent
+                  ? 'text-white/80 hover:text-white'
+                  : 'text-on-surface/70 hover:text-on-surface'
+              )}
               aria-label={`Call us: ${siteConfig.phone}`}
             >
               <Phone size={15} aria-hidden="true" />
@@ -126,7 +159,12 @@ export function Header() {
             {/* Mobile hamburger */}
             <Sheet>
               <SheetTrigger
-                className="lg:hidden inline-flex items-center justify-center p-2 text-on-surface/70 hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-container"
+                className={cn(
+                  'lg:hidden inline-flex items-center justify-center p-2 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-container',
+                  isTransparent
+                    ? 'text-white/80 hover:text-white'
+                    : 'text-on-surface/70 hover:text-on-surface hover:bg-surface-container-low'
+                )}
                 aria-label="Open navigation menu"
               >
                 <Menu size={22} aria-hidden="true" />
@@ -215,4 +253,3 @@ export function Header() {
     </header>
   )
 }
-

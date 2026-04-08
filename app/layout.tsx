@@ -67,11 +67,13 @@ export default function RootLayout({
           message="24/7 Emergency Glass Repair — broken window? We come to you."
           cta="Call Now"
         />
-        <Header />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <div className="relative flex flex-col flex-1">
+          <Header />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
