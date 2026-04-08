@@ -11,7 +11,7 @@ interface Metric {
 interface BeforeAfterProps {
   heading?: string
   subheading?: string
-  metrics?: Metric[]
+  metrics?: readonly Metric[]
 }
 
 // ── Default data ──────────────────────────────────────────────────────────────

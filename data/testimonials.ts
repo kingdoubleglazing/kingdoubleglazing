@@ -79,6 +79,22 @@ export const testimonials = [
     tag: 'energy',
     text: "I was skeptical about the energy saving claims — they always sound too good. But the condensation alone proved the point: zero condensation on the inner pane since installation, where before it was streaming every winter morning. The heating runs half as often. The numbers are real.",
   },
+  {
+    name: 'Oliver & Kate B.',
+    suburb: 'Carlton',
+    source: 'Google',
+    rating: 5,
+    tag: 'heritage',
+    text: "We were told by two other glaziers that we'd need council approval and a heritage consultant before touching the windows. King told us that a glass-only retrofit is permit-exempt — kept the frames, just replaced the glass. They were right. No permit, no consultant, done in one day. The house looks exactly the same from the street, and the draughts are completely gone.",
+  },
+  {
+    name: 'Fiona M.',
+    suburb: 'Fitzroy',
+    source: 'Google',
+    rating: 5,
+    tag: 'heritage',
+    text: "Our Victorian terrace is on the Heritage Overlay and I was nervous about any window work. King assessed the frames, confirmed the retrofit was permit-free, and did the whole house in a day. The original sash windows still look original — you'd never know the glass had changed. Warmer, quieter, no heritage headache.",
+  },
 ] as const
 
 export type Testimonial = (typeof testimonials)[number]
