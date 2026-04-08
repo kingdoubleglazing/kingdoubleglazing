@@ -29,7 +29,7 @@ export default function HomePage() {
         subtext="From $495/m² — No hidden costs, no sales pressure."
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
-        imageSrc="/hero-main.webp"
+        imageSrc="/hero/hero-home.png"
         imageAlt="Double glazed windows overlooking Melbourne skyline at dusk"
       />
       <TrustBar />
