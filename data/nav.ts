@@ -4,6 +4,7 @@ export const mainNav = [
   { label: 'Areas', href: '/areas/' },
   { label: 'About Us', href: '/about/' },
   { label: 'Blog', href: '/blog/' },
+  { label: 'Contact', href: '/contact/' },
 ] as const
 
 export type ServiceItem = {
