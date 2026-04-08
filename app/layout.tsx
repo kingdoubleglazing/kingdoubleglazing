@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { EmergencyBanner } from "@/components/layout/EmergencyBanner";
+import { FloatingNav } from "@/components/layout/FloatingNav";
 import { localBusinessSchema } from "@/lib/seo/schema/localBusiness";
 
 const bebasNeue = Bebas_Neue({
@@ -67,6 +68,7 @@ export default function RootLayout({
           message="24/7 Emergency Glass Repair — broken window? We come to you."
           cta="Call Now"
         />
+        <FloatingNav />
         <div className="relative flex flex-col flex-1">
           <Header />
           <main id="main-content" className="flex-1">
