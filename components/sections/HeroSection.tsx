@@ -12,6 +12,7 @@ interface HeroSectionProps {
   secondaryCta?: { label: string; href: string }
   imageSrc?: string
   imageAlt?: string
+  compact?: boolean
 }
 
 export function HeroSection({
@@ -23,9 +24,10 @@ export function HeroSection({
   secondaryCta,
   imageSrc = '/hero-main.webp',
   imageAlt = 'Double glazed windows with Melbourne skyline view',
+  compact = false,
 }: HeroSectionProps) {
   return (
-    <section className="relative min-h-[70vh] flex flex-col overflow-hidden bg-[#111318]">
+    <section className={`relative flex flex-col overflow-hidden bg-[#111318] ${compact ? 'min-h-[50vh]' : 'min-h-[70vh]'}`}>
       {/* Background image */}
       <Image
         src={imageSrc}

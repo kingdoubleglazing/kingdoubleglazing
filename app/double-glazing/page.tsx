@@ -1,5 +1,16 @@
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo/generateMetadata'
+import { HeroSection } from '@/components/sections/HeroSection'
+import { TrustBar } from '@/components/sections/TrustBar'
+import { BenefitsGrid } from '@/components/sections/BenefitsGrid'
+import { GlassOptions } from '@/components/blocks/GlassOptions'
+import { ProcessSteps } from '@/components/sections/ProcessSteps'
+import { ComparisonTable } from '@/components/sections/ComparisonTable'
+import { BeforeAfter } from '@/components/sections/BeforeAfter'
+import { Testimonials } from '@/components/sections/Testimonials'
+import { FAQ } from '@/components/sections/FAQ'
+import { CtaBanner } from '@/components/sections/CtaBanner'
+import { testimonials } from '@/data/testimonials'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Retrofit Double Glazing Melbourne | Upgrade Existing Windows',
@@ -10,13 +21,46 @@ export const metadata: Metadata = buildMetadata({
 
 export default function RetrofitDoubleGlazingPage() {
   return (
-    <div className="px-4 py-16 max-w-7xl mx-auto">
-      <h1 className="text-display-lg text-on-surface mb-4">
-        Retrofit Double Glazing Melbourne
-      </h1>
-      <p className="text-lg text-on-surface/70 max-w-2xl">
-        Upgrade your existing windows to double glazing without replacing the frames. The smart way to improve comfort, reduce noise and cut energy bills.
-      </p>
-    </div>
+    <>
+      <HeroSection
+        compact
+        badge="Retrofit Specialists"
+        headlineWhite="Upgrade Your Windows"
+        headlineYellow="Not Your Frames"
+        subtext="From $495/m² — Keep your existing timber or aluminium. Double the performance."
+        primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
+        secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
+        imageSrc="/hero-main.webp"
+        imageAlt="Retrofit double glazing installed in Melbourne home timber window frames"
+      />
+      <TrustBar />
+      <BenefitsGrid
+        eyebrow="Why Retrofit"
+        heading={"6 Reasons to\nRetrofit"}
+      />
+      <GlassOptions
+        variant="full"
+        heading="Choose Your Glass"
+        subheading="Four performance tiers. Every budget. Transparent pricing — no surprises at invoice."
+      />
+      <ProcessSteps
+        heading="How It Works"
+        subheading="Four steps from enquiry to a warmer, quieter home."
+        cta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
+      />
+      <ComparisonTable />
+      <BeforeAfter />
+      <Testimonials
+        heading={"Melbourne Homes.\nReal Feedback."}
+        subheading="Every review is from a verified retrofit customer."
+        items={testimonials}
+      />
+      <FAQ />
+      <CtaBanner
+        heading={"Get Your\nInstant Estimate"}
+        subtext="Enter your window dimensions and get a transparent, itemised price in 60 seconds. No sales calls. No site visit required."
+        primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
+      />
+    </>
   )
 }
