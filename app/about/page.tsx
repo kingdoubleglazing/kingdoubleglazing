@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo/generateMetadata'
 import { HeroSection } from '@/components/sections/HeroSection'
+import { TrustBar } from '@/components/sections/TrustBar'
 
 export const metadata: Metadata = buildMetadata({
   title: "About King Double Glazing | Melbourne's Anti-Ripoff Glaziers",
@@ -21,6 +22,7 @@ export default function AboutPage() {
         secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
         imageAlt="King Double Glazing team — Melbourne glaziers"
       />
+      <TrustBar />
     </>
   )
 }

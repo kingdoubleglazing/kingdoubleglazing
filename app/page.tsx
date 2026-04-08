@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo/generateMetadata'
 import { HeroSection } from '@/components/sections/HeroSection'
+import { TrustBar } from '@/components/sections/TrustBar'
 
 export const metadata: Metadata = buildMetadata({
   title: "Retrofit Double Glazing Melbourne | From $495/m² | King Double Glazing",
@@ -22,6 +23,7 @@ export default function HomePage() {
         imageSrc="/hero-main.webp"
         imageAlt="Double glazed windows overlooking Melbourne skyline at dusk"
       />
+      <TrustBar />
     </>
   )
 }
