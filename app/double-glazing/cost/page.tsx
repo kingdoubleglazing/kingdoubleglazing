@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
-import { buildMetadata } from '@/lib/seo/generateMetadata'
+import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
+import { buildServiceSchema } from '@/lib/seo/schema/service'
+import { buildBreadcrumbSchema } from '@/lib/seo/schema/breadcrumbList'
 import { Tag, ShieldCheck, Zap, TrendingDown, BadgeDollarSign, FileText } from 'lucide-react'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { TrustBar } from '@/components/sections/TrustBar'
@@ -72,8 +74,29 @@ const quotingSteps = [
 ] as const
 
 export default function DoubleGlazingCostPage() {
+  const serviceSchema = buildServiceSchema({
+    name: 'Double Glazing Cost Melbourne',
+    description:
+      'Transparent double glazing pricing for Melbourne homes. Retrofit from $495/m² — itemised quote with no hidden charges.',
+    url: `${BASE_URL}/double-glazing/cost/`,
+  })
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', href: '/' },
+    { name: 'Retrofit Double Glazing', href: '/double-glazing/' },
+    { name: 'Cost', href: '/double-glazing/cost/' },
+  ])
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <HeroSection
         compact
         badge="Transparent Pricing"

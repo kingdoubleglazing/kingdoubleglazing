@@ -17,6 +17,7 @@ import { suburbs, suburbBySlug } from '@/data/suburbs'
 import { testimonials } from '@/data/testimonials'
 import { buildSuburbFaq } from '@/data/suburb-faq'
 import { siteConfig } from '@/data/site'
+import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { BenefitsGrid } from '@/components/sections/BenefitsGrid'
 import { Testimonials } from '@/components/sections/Testimonials'
@@ -177,25 +178,15 @@ export default async function SuburbPage({
         <div className="max-w-7xl mx-auto px-4">
 
           {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-8">
-            <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 font-headline text-[0.7rem] uppercase tracking-widest text-on-surface/40">
-              <li>
-                <Link href="/" className="hover:text-on-surface transition-colors duration-150">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/areas/" className="hover:text-on-surface transition-colors duration-150">
-                  Service Areas
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li className="text-on-surface" aria-current="page">
-                {data.name}
-              </li>
-            </ol>
-          </nav>
+          <Breadcrumb
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'Service Areas', href: '/areas/' },
+              { name: `Double Glazing ${data.name}`, href: `/areas/${suburb}/` },
+            ]}
+            emitSchema={false}
+            className="mb-8"
+          />
 
           <div className="grid lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-start">
 
@@ -334,6 +325,7 @@ export default async function SuburbPage({
         heading={`${data.name} Questions`}
         subheading={`Common questions from ${data.name} homeowners before booking.`}
         items={faqItems}
+        emitSchema={false}
       />
 
       {/* ── CTA ──────────────────────────────────────────────────────── */}

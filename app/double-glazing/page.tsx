@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
-import { buildMetadata } from '@/lib/seo/generateMetadata'
+import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
+import { buildServiceSchema } from '@/lib/seo/schema/service'
+import { buildBreadcrumbSchema } from '@/lib/seo/schema/breadcrumbList'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { TrustBar } from '@/components/sections/TrustBar'
 import { BenefitsGrid } from '@/components/sections/BenefitsGrid'
@@ -20,8 +22,28 @@ export const metadata: Metadata = buildMetadata({
 })
 
 export default function RetrofitDoubleGlazingPage() {
+  const serviceSchema = buildServiceSchema({
+    name: 'Retrofit Double Glazing Melbourne',
+    description:
+      'Retrofit double glazing for Melbourne homes — upgrade existing timber or aluminium windows without full replacement. From $495/m².',
+    url: `${BASE_URL}/double-glazing/`,
+  })
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', href: '/' },
+    { name: 'Retrofit Double Glazing', href: '/double-glazing/' },
+  ])
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <HeroSection
         compact
         badge="Retrofit Specialists"

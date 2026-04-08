@@ -8,7 +8,7 @@ Single source of truth for all outstanding tasks. Keep this file updated — rem
 
 - [x] **Phone number (display)** — `phone` in `data/site.ts` set to `0406 470 595`
 - [ ] **Verify `phoneTel` / `phoneHref`** — confirm E.164 mobile format is correct (`+61406470595`) in `data/site.ts`
-- [ ] **Street address** — fill `address.street` and `address.postcode` in `data/site.ts`
+- [ ] **Street address** — fill `address.street` in `data/site.ts` (postcode now set to 3000 — Melbourne CBD matching geo coords)
 - [ ] **VIC Glazier Licence number** — replace `[TODO]` in `components/layout/Footer.tsx`; also add `licenseNumber` key to `data/site.ts`
 - [ ] **Social links** — fill `social.facebook`, `social.instagram`, `social.google` in `data/site.ts`
 

@@ -1,4 +1,5 @@
 import { retrofitFaq } from '@/data/retrofit-faq'
+import { buildFaqSchema } from '@/lib/seo/schema/faqPage'
 
 interface FaqItem {
   q: string
@@ -9,15 +10,29 @@ interface FAQProps {
   heading?: string
   subheading?: string
   items?: readonly FaqItem[]
+  /** Emit FAQPage JSON-LD schema. Set false if the parent page already emits it. */
+  emitSchema?: boolean
 }
 
 export function FAQ({
   heading = 'Common Questions',
   subheading = 'Everything Melbourne homeowners ask before booking.',
   items = retrofitFaq,
+  emitSchema = true,
 }: FAQProps) {
+  const schema = emitSchema
+    ? buildFaqSchema(items.map(({ q, a }) => ({ question: q, answer: a })))
+    : null
+
   return (
-    <section className="bg-surface-container-low py-16 md:py-24">
+    <>
+      {schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      )}
+      <section className="bg-surface-container-low py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Header */}
@@ -88,5 +103,6 @@ export function FAQ({
 
       </div>
     </section>
+    </>
   )
 }

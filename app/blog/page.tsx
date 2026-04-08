@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
 import { buildBreadcrumbSchema } from '@/lib/seo/schema/breadcrumbList'
-import { HeroSection } from '@/components/sections/HeroSection'
+import { BlogHero } from '@/components/blog/BlogHero'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { blogPosts, BLOG_CATEGORIES, type BlogCategory } from '@/data/blog-posts'
 import { siteConfig } from '@/data/site'
@@ -82,16 +82,11 @@ export default async function BlogPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <HeroSection
-        compact
+      <BlogHero
         badge="Honest Advice"
-        headlineWhite="Double Glazing"
-        headlineYellow="Guides"
-        subtext="Practical, no-fluff articles for Melbourne homeowners. Real costs, real specs, and what actually works."
-        primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
-        secondaryCta={{ label: siteConfig.phone, href: siteConfig.phoneHref }}
-        imageSrc="/hero-main.webp"
-        imageAlt="Double glazed window installation in Melbourne home"
+        title="Double Glazing Guides"
+        excerpt="Practical, no-fluff articles for Melbourne homeowners. Real costs, real specs, and what actually works."
+        asH1
       />
 
       {/* ── Category filter + post grid ── */}

@@ -12,12 +12,12 @@ export const siteConfig = {
   email: 'info@kingdoubleglazing.com.au',
   licenseNumber: '', // VIC Glazier Licence — awaiting Tas
   address: {
-    street: '',
+    street: '', // Physical street address — awaiting Tas confirmation
     suburb: 'Melbourne',
     state: 'VIC',
-    postcode: '',
+    postcode: '3000',
     country: 'AU',
-    display: 'Melbourne, VIC, Australia',
+    display: 'Melbourne, VIC 3000, Australia',
   },
   geo: {
     latitude: -37.8136,

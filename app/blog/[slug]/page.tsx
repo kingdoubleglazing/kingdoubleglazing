@@ -7,7 +7,7 @@ import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
 import { buildBreadcrumbSchema } from '@/lib/seo/schema/breadcrumbList'
 import { buildArticleSchema } from '@/lib/seo/schema/article'
 import { buildFaqSchema } from '@/lib/seo/schema/faqPage'
-import { HeroSection } from '@/components/sections/HeroSection'
+import { BlogHero } from '@/components/blog/BlogHero'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { BlogProseComponents } from '@/components/blog/BlogProse'
 import { getBlogPost, getBlogPostContent, getRelatedPosts, getAllBlogSlugs } from '@/lib/blog'
@@ -102,16 +102,13 @@ export default async function BlogPostPage({
       )}
 
       {/* ── Hero — post title as H1 ── */}
-      <HeroSection
-        compact
+      <BlogHero
         badge={categoryLabel ?? 'King Double Glazing Blog'}
-        headlineWhite={post.title}
-        headlineYellow=""
-        subtext={post.excerpt}
-        primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
-        secondaryCta={{ label: siteConfig.phone, href: siteConfig.phoneHref }}
-        imageSrc="/hero-main.webp"
-        imageAlt={post.title}
+        title={post.title}
+        excerpt={post.excerpt}
+        datePublished={post.datePublished}
+        readTime={post.readTime}
+        asH1
       />
 
       {/* ── Article body ── */}

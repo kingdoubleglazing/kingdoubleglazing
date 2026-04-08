@@ -4,6 +4,17 @@ Track significant changes, decisions, and milestones. Most recent first.
 
 ---
 
+## 2026-04-09 — SEO critical gaps resolved
+
+- **OG images**: Created `app/opengraph-image.tsx` (root brand OG image via `ImageResponse`) and `app/blog/[slug]/opengraph-image.tsx` (dynamic per-post OG images — imports `blogPosts` directly to avoid edge-runtime `fs` incompatibility)
+- **JSON-LD — double-glazing hub**: Added `Service` + `BreadcrumbList` schemas to `app/double-glazing/page.tsx`
+- **JSON-LD — cost page**: Added `Service` + `BreadcrumbList` schemas to `app/double-glazing/cost/page.tsx`; FAQ schema emitted by `<FAQ>` component automatically
+- **FAQ component schema**: Added `buildFaqSchema` emission to `components/sections/FAQ.tsx`; new `emitSchema` prop (default `true`) prevents double-emission on pages that inject FAQ schema themselves
+- **Breadcrumb component**: Created `components/ui/Breadcrumb.tsx` — accessible `<nav>` with `BreadcrumbList` JSON-LD emission, `className` prop for spacing, `emitSchema` opt-out; replaced inline breadcrumb in suburb pages
+- **NAP**: Set `address.postcode = '3000'` and updated `display` in `data/site.ts` to match Melbourne CBD geo coordinates; street address awaits Tas confirmation
+
+---
+
 ## 2026-04-09 — Blog Post page built (`/blog/[slug]/`)
 
 - Implemented `app/blog/[slug]/page.tsx`: `generateStaticParams` from `blogPosts`, `generateMetadata` per-post, Hero (compact, post title as H1) → MDX article body → FAQ accordion → Related Posts grid → Related Services links → CtaBanner
