@@ -237,17 +237,17 @@ function ContactCard({
   sublabel: string
 }) {
   const inner = (
-    <div className="bg-surface-container p-5 flex flex-col gap-2 h-full border border-outline-variant">
-      <div className="flex items-center gap-2 text-primary">
+    <div className="bg-on-primary-fixed/[0.08] p-5 flex flex-col gap-2 h-full border border-on-primary-fixed/15">
+      <div className="flex items-center gap-2 text-on-primary-fixed">
         {icon}
-        <span className="font-headline text-xs font-semibold uppercase tracking-widest text-primary">
+        <span className="font-headline text-xs font-semibold uppercase tracking-widest text-on-primary-fixed/60">
           {label}
         </span>
       </div>
-      <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface leading-tight">
+      <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-primary-fixed leading-tight">
         {value}
       </p>
-      <p className="font-sans text-xs text-on-surface/40 leading-snug">
+      <p className="font-sans text-xs text-on-primary-fixed/50 leading-snug">
         {sublabel}
       </p>
     </div>

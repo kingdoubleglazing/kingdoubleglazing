@@ -76,26 +76,26 @@ export default function InstantEstimatePage() {
       />
 
       {/* ── Compact hero — tool is the star ── */}
-      <section className="bg-surface py-16 md:py-20 border-b border-outline-variant">
+      <section className="bg-primary-container py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col gap-5 max-w-3xl">
             {/* Eyebrow badge */}
-            <span className="inline-block w-fit bg-primary-container text-on-primary-fixed font-headline text-xs font-semibold uppercase tracking-widest px-3 py-1">
+            <span className="inline-block w-fit bg-on-primary-fixed text-primary-container font-headline text-xs font-semibold uppercase tracking-widest px-3 py-1">
               Instant Estimate Tool
             </span>
 
             {/* H1 */}
             <h1
-              className="font-display uppercase leading-none text-on-surface"
+              className="font-display uppercase leading-none text-on-primary-fixed"
               style={{ fontSize: 'clamp(3rem, 9vw, 7rem)' }}
             >
               See Your Price
               <br />
-              <span className="text-primary-container">Before You Call</span>
+              <span className="bg-on-primary-fixed text-primary-container px-2 inline-block leading-tight">Before You Call</span>
             </h1>
 
             {/* Value prop */}
-            <p className="font-sans text-base text-on-surface/60 max-w-lg leading-relaxed">
+            <p className="font-sans text-base text-on-primary-fixed/70 max-w-lg leading-relaxed">
               Accurate within 10%. No email required to see your number. Most
               lead-capture tools gate the value behind a form — we don&apos;t.
             </p>
@@ -110,7 +110,7 @@ export default function InstantEstimatePage() {
               ].map(item => (
                 <li
                   key={item}
-                  className="font-headline text-xs font-semibold uppercase tracking-widest text-primary"
+                  className="font-headline text-xs font-semibold uppercase tracking-widest text-on-primary-fixed"
                 >
                   ✓ {item}
                 </li>
@@ -121,14 +121,14 @@ export default function InstantEstimatePage() {
             <div className="flex flex-col sm:flex-row gap-3 mt-3">
               <a
                 href="#calculator"
-                className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 w-fit"
+                className="inline-flex items-center gap-3 bg-on-primary-fixed text-primary-container font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-on-primary-fixed/80 transition-colors duration-150 w-fit"
               >
                 Get My Estimate
                 <span aria-hidden="true">↓</span>
               </a>
               <Link
                 href="/double-glazing/cost/"
-                className="inline-flex items-center gap-3 bg-transparent text-on-surface/60 font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 border border-outline hover:bg-surface-container transition-colors duration-150 w-fit"
+                className="inline-flex items-center gap-3 bg-transparent text-on-primary-fixed/70 font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 border border-on-primary-fixed/30 hover:bg-on-primary-fixed/10 transition-colors duration-150 w-fit"
               >
                 Cost guide instead
               </Link>
