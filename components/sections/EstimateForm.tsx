@@ -127,7 +127,7 @@ export function EstimateForm() {
         >
           Tell Us About
           <br />
-          <span className="text-primary">Your Windows</span>
+          <span className="bg-primary-container text-on-primary-fixed px-2 inline-block leading-tight">Your Windows</span>
         </h2>
 
         {/* ── Section A: Window count ── */}
@@ -307,7 +307,7 @@ export function EstimateForm() {
                 <span
                   className={[
                     'font-display leading-none shrink-0',
-                    glassId === g.id ? 'text-on-primary-fixed' : 'text-primary',
+                    glassId === g.id ? 'text-on-primary-fixed' : 'text-on-surface',
                   ].join(' ')}
                   style={{ fontSize: '1.25rem' }}
                 >
@@ -523,7 +523,7 @@ export function EstimateForm() {
               A technician is available on{' '}
               <a
                 href={siteConfig.phoneHref}
-                className="text-primary font-semibold underline"
+                className="text-on-surface font-semibold underline"
               >
                 {siteConfig.phone}
               </a>{' '}
