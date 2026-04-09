@@ -132,8 +132,6 @@ export default async function BlogPage({
               {filtered.map((post, i) => (
                 <li
                   key={post.slug}
-                  className="animate-stagger-child"
-                  style={{ '--i': i } as React.CSSProperties}
                 >
                   <article className="bg-surface flex flex-col h-full">
                     {/* Card header — category + read time */}

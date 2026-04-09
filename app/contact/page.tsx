@@ -103,34 +103,26 @@ export default function ContactPage() {
       />
 
       {/* ── Compact hero ── */}
-      <section className="bg-inverse-surface py-16 md:py-20 overflow-hidden relative">
-        <span
-          className="pointer-events-none select-none absolute -bottom-4 -right-6 font-display uppercase leading-none text-inverse-on-surface/4"
-          style={{ fontSize: 'clamp(8rem, 22vw, 18rem)' }}
-          aria-hidden="true"
-        >
-          CONTACT
-        </span>
-
-        <div className="relative max-w-7xl mx-auto px-4">
+      <section className="bg-primary-container py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
             {/* Left — headline + value prop */}
             <div className="flex flex-col gap-5">
-              <span className="inline-block w-fit bg-primary-container text-on-primary-fixed font-headline text-xs font-semibold uppercase tracking-widest px-3 py-1">
+              <span className="inline-block w-fit bg-on-primary-fixed text-primary-container font-headline text-xs font-semibold uppercase tracking-widest px-3 py-1">
                 Free Quote
               </span>
               <h1
-                className="font-display uppercase leading-none text-inverse-on-surface"
+                className="font-display uppercase leading-none text-on-primary-fixed"
                 style={{ fontSize: 'clamp(3rem, 9vw, 7rem)' }}
               >
                 Get a Quote.
                 <br />
-                <span className="text-primary-container">No Pressure.</span>
+                <span className="bg-on-primary-fixed text-primary-container px-2 inline-block leading-tight">No Pressure.</span>
               </h1>
-              <p className="font-sans text-base text-inverse-on-surface/60 max-w-md leading-relaxed">
+              <p className="font-sans text-base text-on-primary-fixed/70 max-w-md leading-relaxed">
                 Tell us about your project and we&apos;ll respond within one business day.
                 Or use the{' '}
-                <Link href="/instant-estimate/" className="text-primary-container underline underline-offset-2 hover:no-underline">
+                <Link href="/instant-estimate/" className="text-on-primary-fixed underline underline-offset-2 hover:no-underline">
                   Instant Estimate Tool
                 </Link>{' '}
                 to see a ballpark price right now.
@@ -245,17 +237,17 @@ function ContactCard({
   sublabel: string
 }) {
   const inner = (
-    <div className="bg-inverse-on-surface/5 p-5 flex flex-col gap-2 h-full ghost-border">
-      <div className="flex items-center gap-2 text-primary-container">
+    <div className="bg-surface-container p-5 flex flex-col gap-2 h-full border border-outline-variant">
+      <div className="flex items-center gap-2 text-primary">
         {icon}
-        <span className="font-headline text-xs font-semibold uppercase tracking-widest text-primary-container">
+        <span className="font-headline text-xs font-semibold uppercase tracking-widest text-primary">
           {label}
         </span>
       </div>
-      <p className="font-headline text-sm font-semibold uppercase tracking-wide text-inverse-on-surface leading-tight">
+      <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface leading-tight">
         {value}
       </p>
-      <p className="font-sans text-xs text-inverse-on-surface/40 leading-snug">
+      <p className="font-sans text-xs text-on-surface/40 leading-snug">
         {sublabel}
       </p>
     </div>
