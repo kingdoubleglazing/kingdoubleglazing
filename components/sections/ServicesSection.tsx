@@ -1,39 +1,45 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { LayoutGrid, AlertOctagon, ShowerHead, Building2, ArrowRight, type LucideIcon } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 interface ServiceCard {
-  icon: LucideIcon
   title: string
   description: string
   href: string
+  image: string
+  imageAlt: string
   featured?: boolean
 }
 
 const defaultServices: ServiceCard[] = [
   {
-    icon: LayoutGrid,
     title: 'Retrofit\nDouble Glazing',
     description: 'Upgrade existing timber or aluminium frames without the demolition.',
     href: '/double-glazing/',
+    image: '/hero/hero-double-glazing.webp',
+    imageAlt: 'Retrofit double glazing installation Melbourne',
     featured: true,
   },
   {
-    icon: AlertOctagon,
     title: 'Emergency\nGlass Repair',
     description: 'Rapid response for broken windows, shopfronts, and doors.',
     href: '/emergency-glass/',
+    image: '/hero/hero-emergency.webp',
+    imageAlt: 'Emergency glass repair Melbourne',
   },
   {
-    icon: ShowerHead,
     title: 'Shower\nScreens',
     description: 'Frameless and semi-frameless toughened glass installations.',
     href: '/shower-screens/',
+    image: '/hero/hero-shower-screens.webp',
+    imageAlt: 'Frameless shower screens Melbourne',
   },
   {
-    icon: Building2,
     title: 'Commercial\nGlazing',
     description: 'High-spec solutions for offices, retail, and industrial spaces.',
     href: '/commercial-glazing/',
+    image: '/hero/hero-commercial-glazing.webp',
+    imageAlt: 'Commercial glazing Melbourne',
   },
 ]
 
@@ -59,41 +65,48 @@ export function ServicesSection({
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 ghost-border">
-          {services.map(({ icon: Icon, title, description, href, featured }, i) => (
+          {services.map(({ title, description, href, image, imageAlt, featured }, i) => (
             <Link
               key={href}
               href={href}
               className={[
-                `group relative flex flex-col p-7 ghost-border transition-colors duration-150 ${i % 2 === 0 ? 'bg-surface hover:bg-surface-container-lowest' : 'bg-surface-container-low hover:bg-surface-container'}`,
+                'group relative flex flex-col ghost-border overflow-hidden min-h-96',
                 featured ? 'border-l-4 border-primary-container' : '',
               ].filter(Boolean).join(' ')}
             >
-              {/* Icon */}
-              <Icon
-                size={36}
-                strokeWidth={1.5}
-                aria-hidden="true"
-                className="text-primary mb-6 shrink-0"
+              {/* Background image */}
+              <Image
+                src={image}
+                alt={imageAlt}
+                fill
+                className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />
 
-              {/* Title */}
-              <h3 className="font-headline text-xl font-semibold uppercase tracking-wide text-on-surface leading-tight mb-4">
-                {title.split('\n').map((line, i) => (
-                  <span key={i} className="block">{line}</span>
-                ))}
-              </h3>
+              {/* Dark overlay */}
+              <div className="absolute inset-0 bg-inverse-surface/70 group-hover:bg-inverse-surface/60 transition-colors duration-300" />
 
-              {/* Description */}
-              <p className="font-sans text-sm text-on-surface/55 leading-relaxed flex-1 mb-8">
-                {description}
-              </p>
+              {/* Content */}
+              <div className="relative flex flex-col p-7 flex-1 z-10">
+                {/* Title */}
+                <h3 className="font-headline text-xl font-semibold uppercase tracking-wide text-inverse-on-surface leading-tight mb-4">
+                  {title.split('\n').map((line, j) => (
+                    <span key={j} className="block">{line}</span>
+                  ))}
+                </h3>
 
-              {/* Arrow */}
-              <ArrowRight
-                size={20}
-                aria-hidden="true"
-                className="text-on-surface/40 group-hover:text-primary transition-colors duration-150 group-hover:translate-x-1 motion-safe:transition-transform"
-              />
+                {/* Description */}
+                <p className="font-sans text-sm text-inverse-on-surface/60 leading-relaxed flex-1 mb-8">
+                  {description}
+                </p>
+
+                {/* Arrow */}
+                <ArrowRight
+                  size={20}
+                  aria-hidden="true"
+                  className="text-inverse-on-surface/40 group-hover:text-primary-container transition-colors duration-150 group-hover:translate-x-1 motion-safe:transition-transform"
+                />
+              </div>
             </Link>
           ))}
         </div>

@@ -212,7 +212,7 @@ function GlassCard({
 
       {/* CTA link */}
       <Link
-        href={`/double-glazing/glass-types/#${glass.id}`}
+        href={compact ? `/double-glazing/glass-types/#${glass.id}` : `#${glass.id}`}
         className="inline-flex items-center gap-2 font-headline text-sm font-semibold uppercase tracking-[0.1em] text-on-surface group-hover:text-primary transition-colors duration-150"
         aria-label={`Learn more about ${glass.name}`}
       >
