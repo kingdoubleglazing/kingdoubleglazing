@@ -58,7 +58,7 @@ export default function AreasPage() {
         subtext={`Retrofit double glazing, shower screens and glass services across ${suburbs.length} Melbourne suburbs. Transparent pricing from $495/m².`}
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
-        imageSrc="/hero/hero-home.webp"
+        imageSrc="/stock/AdobeStock_323273938.webp"
         imageAlt="Double glazed windows installed in a Melbourne home"
       />
 

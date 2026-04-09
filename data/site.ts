@@ -9,19 +9,20 @@ export const siteConfig = {
   phone: '0406 470 595',
   phoneTel: '+61406470595', // E.164 format for JSON-LD schema
   phoneHref: 'tel:+61406470595', // ready-to-use href for <a> tags
-  email: 'info@kingdoubleglazing.com.au',
+  email: 'hello@kingdoubleglazing.com.au',
+  abn: '87 627 894 428',
   licenseNumber: '', // VIC Glazier Licence — awaiting Tas
   address: {
-    street: '', // Physical street address — awaiting Tas confirmation
-    suburb: 'Melbourne',
+    street: '5 Glenarm Road',
+    suburb: 'Glen Iris',
     state: 'VIC',
-    postcode: '3000',
+    postcode: '3146',
     country: 'AU',
-    display: 'Melbourne, VIC 3000, Australia',
+    display: '5 Glenarm Road, Glen Iris VIC 3146, Australia',
   },
   geo: {
-    latitude: -37.8136,
-    longitude: 144.9631,
+    latitude: -37.8577,
+    longitude: 145.0594,
   },
   social: {
     facebook: '',

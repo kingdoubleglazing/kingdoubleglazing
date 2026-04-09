@@ -206,7 +206,7 @@ export default function FramelessShowerScreensPage() {
         subtext="10 mm toughened safety glass, cut to your exact recess, installed in hours. Licensed glazier. Transparent pricing."
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: siteConfig.phoneHref }}
-        imageSrc="/hero/hero-shower-screens.webp"
+        imageSrc="/stock/shower-pane-1000x667-1.webp"
         imageAlt="Frameless 10 mm toughened glass shower screen in a Melbourne bathroom"
       />
 

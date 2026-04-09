@@ -66,7 +66,7 @@ export default function EnergyEfficientWindowsPage() {
         subtext="Low-E double glazing from $595/m² — 69% less heat loss. VEU rebate applied at invoice."
         primaryCta={{ label: 'Get Energy Estimate', href: '/instant-estimate/?glass=tinted-low-e' }}
         secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
-        imageSrc="/hero/hero-double-glazing.webp"
+        imageSrc="/stock/double-glazed-2000px.webp"
         imageAlt="Melbourne home with energy efficient Low-E double glazing installed"
       />
       <TrustBar />

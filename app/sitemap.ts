@@ -22,6 +22,7 @@ const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/instant-estimate/`, changeFrequency: 'monthly', priority: 0.8 },
   { url: `${BASE_URL}/areas/`, changeFrequency: 'monthly', priority: 0.7 },
   { url: `${BASE_URL}/blog/`, changeFrequency: 'weekly', priority: 0.6 },
+  { url: `${BASE_URL}/gallery/`, changeFrequency: 'monthly', priority: 0.7 },
   { url: `${BASE_URL}/about/`, changeFrequency: 'yearly', priority: 0.5 },
   { url: `${BASE_URL}/contact/`, changeFrequency: 'yearly', priority: 0.6 },
 ]

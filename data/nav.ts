@@ -2,6 +2,7 @@ export const mainNav = [
   { label: 'Home', href: '/' },
   { label: 'Emergency Glass', href: '/emergency-glass/' },
   { label: 'Areas', href: '/areas/' },
+  { label: 'Gallery', href: '/gallery/' },
   { label: 'About Us', href: '/about/' },
   { label: 'Blog', href: '/blog/' },
   { label: 'Contact', href: '/contact/' },
@@ -109,6 +110,7 @@ export const footerNav = {
     { label: 'Commercial Glazing', href: '/commercial-glazing/' },
   ],
   company: [
+    { label: 'Our Work', href: '/gallery/' },
     { label: 'About Us', href: '/about/' },
     { label: 'Contact', href: '/contact/' },
     { label: 'Blog', href: '/blog/' },

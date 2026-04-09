@@ -26,7 +26,7 @@ export default function AboutPage() {
         subtext="Transparent pricing. No middlemen. No upsells. No surprises."
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
-        imageSrc="/hero/hero-home.webp"
+        imageSrc="/stock/AdobeStock_323273938.webp"
         imageAlt="King Double Glazing workshop — Melbourne glaziers"
         compact
       />

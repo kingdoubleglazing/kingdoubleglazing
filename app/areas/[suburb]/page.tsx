@@ -169,7 +169,7 @@ export default async function SuburbPage({
         subtext={`Retrofit specialists for ${data.name} homes. From $495/m² — transparent pricing, installed in one day.`}
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: siteConfig.phone, href: siteConfig.phoneHref }}
-        imageSrc="/hero/hero-home.webp"
+        imageSrc="/stock/AdobeStock_323273938.webp"
         imageAlt={`Double glazed windows installed in a ${data.name} home`}
       />
 

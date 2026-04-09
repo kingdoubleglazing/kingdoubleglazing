@@ -20,8 +20,8 @@ export const processSteps = [
   {
     title: 'You Save',
     body: 'Lower energy bills from day one. Quieter rooms. Government rebate paperwork handled by us.',
-    imageSrc: '/process-steps/step-3-finish.webp',
-    imageAlt: 'Crystal-clear double-glazed window in a Melbourne home after installation',
+    imageSrc: '/stock/window-house.webp',
+    imageAlt: 'Homeowner opening a new double-glazed window in a Melbourne home',
   },
 ] as const
 

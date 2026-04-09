@@ -10,6 +10,7 @@ import { costRanges } from '@/data/cost-ranges'
 import { GlassOptions } from '@/components/blocks/GlassOptions'
 import { ProcessSteps } from '@/components/sections/ProcessSteps'
 import { Testimonials } from '@/components/sections/Testimonials'
+import { GalleryPreview } from '@/components/sections/GalleryPreview'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 
 export const metadata: Metadata = buildMetadata({
@@ -48,6 +49,7 @@ export default function HomePage() {
         lastUpdated="Apr 2026"
       />
       <Testimonials />
+      <GalleryPreview />
       <CtaBanner />
     </>
   )

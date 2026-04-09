@@ -163,7 +163,7 @@ export default function GlassSplashbacksPage() {
         subtext="Custom toughened glass splashbacks for Melbourne kitchens and bathrooms. Cut to size, installed in hours. Transparent pricing."
         primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
         secondaryCta={{ label: 'Call Now', href: siteConfig.phoneHref }}
-        imageSrc="/hero-main.webp"
+        imageSrc="/stock/splashback-2.webp"
         imageAlt="Custom coloured toughened glass splashback installed in a Melbourne kitchen"
       />
 
