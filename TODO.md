@@ -59,7 +59,7 @@ Single source of truth for all outstanding tasks. Keep this file updated — rem
 - [x] `ImageGallery` JSON-LD schema
 - [x] Internal links: gallery → 8 service pages
 - [x] Added to `app/sitemap.ts`
-- [ ] Add "View our work →" links from service pages → `/gallery/?category=<x>` (tracked above in SEO — Internal linking)
+- [x] Add "View our work →" links from service pages → `/gallery/?category=<x>` (tracked above in SEO — Internal linking)
 
 ---
 
