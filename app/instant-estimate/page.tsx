@@ -174,7 +174,7 @@ export default function InstantEstimatePage() {
             >
               Your Instant
               <br />
-              <span className="bg-inverse-surface text-primary-container px-2 inline-block leading-tight">Double Glazing Estimate</span>
+              <span className="text-primary-container">Double Glazing Estimate</span>
             </h2>
           </div>
 

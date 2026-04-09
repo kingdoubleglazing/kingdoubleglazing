@@ -40,7 +40,7 @@ Single source of truth for all outstanding tasks. Keep this file updated — rem
 
 - [x] **Expand `suburbSlugs` in `app/sitemap.ts`** *(Medium)* — removed hardcoded slug list; `app/sitemap.ts` now imports `suburbs` from `data/suburbs.ts` and maps all 30 slugs dynamically
 - [x] **Suburb pages — unique copy per page** *(High)* — unique intro + landmark already in `data/suburbs.ts`; added 18 suburb-specific testimonials to `data/testimonials.ts` covering all previously uncovered suburbs (Kew, Malvern, Canterbury, Glen Iris, Doncaster, Box Hill, Burwood, Caulfield, Ringwood, Toorak, Templestowe, Mitcham, Nunawading, Vermont, Wantirna, Wheelers Hill, Mont Albert, Balwyn North); suburb page template already filters by suburb name
-- [ ] **Verify rendered word counts** *(Medium)* — check actual text output with PageSpeed / Screaming Frog; suburb pages are component-driven so verify no pages are text-thin
+- [x] **Verify rendered word counts** *(Medium)* — check actual text output with PageSpeed / Screaming Frog; suburb pages are component-driven so verify no pages are text-thin
 - [x] **E-E-A-T signals** *(High)* — FounderStory on /about/ covers author bio (Tas Markou, 40+ years); "Our Work" gallery link sections added to all 6 service pages (previous task); case studies remain as a future content enhancement
 
 ---
