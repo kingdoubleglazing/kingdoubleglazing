@@ -27,7 +27,7 @@ export function CostRangeCards({
   variant = 'home',
   className = '',
 }: CostRangeCardsProps) {
-  const lgCols = variant === 'home' ? 'lg:grid-cols-3' : 'lg:grid-cols-4'
+  const lgCols = 'lg:grid-cols-3'
   const isPricing = variant === 'pricing'
 
   return (
