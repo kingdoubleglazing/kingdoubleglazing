@@ -32,6 +32,7 @@ export default function HomePage() {
         secondaryCta={{ label: 'Call Now', href: 'tel:+61406470595' }}
         imageSrc="/hero/hero-home.webp"
         imageAlt="Double glazed windows overlooking Melbourne skyline at dusk"
+        showWarrantyBadge
       />
       <TrustBar />
       <ProblemSolutionSection />

@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Phone } from 'lucide-react'
 import { siteConfig } from '@/data/site'
 import { Button } from '@/components/ui/Button'
+import { WarrantyBadge } from '@/components/ui/WarrantyBadge'
 
 interface HeroSectionProps {
   badge?: string
@@ -13,6 +14,7 @@ interface HeroSectionProps {
   imageSrc?: string
   imageAlt?: string
   compact?: boolean
+  showWarrantyBadge?: boolean
 }
 
 export function HeroSection({
@@ -25,6 +27,7 @@ export function HeroSection({
   imageSrc = '/hero-main.webp',
   imageAlt = 'Double glazed windows with Melbourne skyline view',
   compact = false,
+  showWarrantyBadge = false,
 }: HeroSectionProps) {
   return (
     <section className={`relative flex flex-col overflow-hidden bg-[#111318] ${compact ? 'min-h-[50vh]' : 'min-h-[70vh]'}`}>
@@ -81,7 +84,7 @@ export function HeroSection({
           {subtext}
         </p>
 
-        {/* CTAs */}
+        {/* CTAs + Warranty Badge */}
         <div className="flex flex-wrap items-center gap-3 md:gap-4">
           <Button as="link" href={primaryCta.href} size="lg">
             {primaryCta.label}
@@ -94,7 +97,20 @@ export function HeroSection({
             <Phone size={16} aria-hidden="true" />
             {secondaryCta?.label ?? 'Call Now'}
           </a>
+
+          {showWarrantyBadge && (
+            <div className="ml-auto hidden sm:block">
+              <WarrantyBadge className="w-[100px] h-[100px] md:w-[120px] md:h-[120px]" />
+            </div>
+          )}
         </div>
+
+        {/* Warranty badge — mobile: below CTAs, centred */}
+        {showWarrantyBadge && (
+          <div className="flex sm:hidden mt-6">
+            <WarrantyBadge className="w-[90px] h-[90px]" />
+          </div>
+        )}
       </div>
     </section>
   )
