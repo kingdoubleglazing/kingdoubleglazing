@@ -58,24 +58,25 @@ export function WhyRetrofit() {
           </h2>
         </div>
 
-        {/* 2-col on mobile, 3-col on lg — "minimum scrolling" layout */}
-        <ul className="grid grid-cols-2 lg:grid-cols-3 ghost-border">
+        {/* Mobile: compact bullet list. lg+: 3-col card grid */}
+        <ul className="flex flex-col divide-y divide-on-surface/10 lg:divide-y-0 lg:grid lg:grid-cols-3 lg:ghost-border">
           {items.map(({ icon: Icon, headline, sub }) => (
             <li
               key={headline}
-              className="ghost-border p-4 md:p-5 flex flex-col gap-3"
+              className="flex items-center gap-3 py-3
+                lg:ghost-border lg:p-5 lg:flex-col lg:items-start lg:gap-3 lg:py-5"
             >
               {/* Icon square */}
-              <div className="w-9 h-9 bg-primary-container flex items-center justify-center shrink-0">
-                <Icon size={16} strokeWidth={2} aria-hidden="true" className="text-on-primary-fixed" />
+              <div className="w-7 h-7 lg:w-9 lg:h-9 bg-primary-container flex items-center justify-center shrink-0">
+                <Icon size={14} strokeWidth={2} aria-hidden="true" className="text-on-primary-fixed lg:[font-size:16px]" />
               </div>
 
               {/* Text */}
-              <div>
-                <h3 className="font-headline text-base font-semibold uppercase tracking-wide text-on-surface leading-snug mb-1">
+              <div className="flex-1 min-w-0">
+                <h3 className="font-headline text-sm lg:text-base font-semibold uppercase tracking-wide text-on-surface leading-snug lg:mb-1">
                   {headline}
                 </h3>
-                <p className="font-sans text-sm text-on-surface/75 leading-snug">
+                <p className="hidden lg:block font-sans text-sm text-on-surface/75 leading-snug">
                   {sub}
                 </p>
               </div>
