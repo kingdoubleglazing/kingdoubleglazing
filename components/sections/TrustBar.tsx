@@ -1,4 +1,4 @@
-import { Clock, ShieldCheck, Star, MapPin, type LucideIcon } from 'lucide-react'
+import { Clock, ShieldCheck, Star, Layers, type LucideIcon } from 'lucide-react'
 
 interface TrustItem {
   icon: LucideIcon
@@ -9,7 +9,7 @@ const defaultItems: TrustItem[] = [
   { icon: Clock,       label: '50+ Years Combined Experience' },
   { icon: Star,        label: 'Beat Any Quote by 30%' },
   { icon: ShieldCheck, label: '10-Year Warranty' },
-  { icon: MapPin,      label: 'Melbourne-Owned' },
+  { icon: Layers,      label: 'Fits Most Window Frames' },
 ]
 
 interface TrustBarProps {

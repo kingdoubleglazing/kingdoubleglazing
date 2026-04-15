@@ -185,6 +185,10 @@ export default function AboutPage() {
                   detail: 'Send us a real competitor quote. We\'ll come in 30% cheaper — guaranteed in writing, same 10-year warranty.',
                 },
                 {
+                  label: 'Fits most existing windows',
+                  detail: 'Custom adaptors are made to suit timber, aluminium, and steel frames. If your frames can\'t take a retrofit, we\'ll tell you at the free home visit — no charge, no pressure.',
+                },
+                {
                   label: '10-year warranty on every job',
                   detail: 'Glass and workmanship covered. No conditions, no fine print.',
                 },

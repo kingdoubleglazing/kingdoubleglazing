@@ -32,7 +32,7 @@ export default function HomePage() {
         badge="10-Year Warranty · Beat Any Quote 30%"
         headlineWhite="Stop Overpaying for"
         headlineYellow="Double Glazing."
-        subtext="We upgrade your existing windows with a second layer of glass. Up to 70% quieter. Up to 50% warmer. Half the price of full replacement."
+        subtext="We upgrade your existing windows with a second layer of glass. Up to 70% quieter. Up to 50% warmer. Half the price of full replacement. Custom adaptors fit timber, aluminium, and steel frames."
         primaryCta={{ label: 'Get My Instant Price →', href: '/instant-estimate/' }}
         secondaryCta={{ label: `Or call ${siteConfig.phone}`, href: siteConfig.phoneHref }}
         imageSrc="/hero/hero-double-glazing.webp"
