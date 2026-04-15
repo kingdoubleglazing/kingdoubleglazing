@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
-import { Suspense } from 'react'
-import Link from 'next/link'
 import { buildMetadata } from '@/lib/seo/generateMetadata'
 import { TrustBar } from '@/components/sections/TrustBar'
-import { EstimateForm } from '@/components/sections/EstimateForm'
+import { EstimateCalculator } from '@/components/EstimateCalculator'
 import { FAQ } from '@/components/sections/FAQ'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { estimateFaq } from '@/data/estimate-faq'
@@ -125,34 +123,13 @@ export default function InstantEstimatePage() {
       <GlassComparisonTable />
 
       {/* The tool */}
-      <section className="bg-surface-container-low py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="mb-10 md:mb-14 max-w-xl">
-            <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-              The Tool
-            </p>
-            <h2
-              className="font-display uppercase leading-[0.88] text-on-surface"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
-            >
-              Your Instant
-              <br />
-              <span className="text-primary-container">Double Glazing Estimate</span>
-            </h2>
-          </div>
-
-          <Suspense fallback={
-            <div className="bg-surface ghost-border p-12 max-w-2xl mx-auto font-headline text-sm uppercase tracking-widest text-on-surface/80">
-              Loading…
-            </div>
-          }>
-            <EstimateForm />
-          </Suspense>
-
-          <p className="mt-8 max-w-2xl mx-auto text-center font-sans text-xs text-on-surface/60 leading-relaxed">
-            Estimate is indicative only. Free on-site measure confirms exact dimensions and final price before any work begins.
-          </p>
+      <section className="bg-inverse-surface" id="estimate-form">
+        <div className="max-w-4xl mx-auto">
+          <EstimateCalculator />
         </div>
+        <p className="max-w-4xl mx-auto px-6 py-6 md:px-10 font-sans text-xs text-inverse-on-surface/30 leading-relaxed text-center">
+          Estimate is indicative only. Free on-site measure confirms exact dimensions and final price before any work begins.
+        </p>
       </section>
 
       <FAQ

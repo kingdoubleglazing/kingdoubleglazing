@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm'
 import { randomUUID } from 'crypto'
 import { getDb } from '@/db'
 import { quotes } from '@/db/schema'
-import { calculateEstimate } from '@/data/pricing'
+import { calculateEstimate, WINDOW_BAND_MIDPOINT } from '@/data/pricing'
 import { sendQuoteNotification, sendQuoteConfirmation } from '@/lib/email'
 
 const schema = z.object({
@@ -12,7 +12,7 @@ const schema = z.object({
   email:          z.string().email(),
   phone:          z.string().min(8).max(20),
   propertyType:   z.enum(['house', 'apartment', 'townhouse']),
-  windowCount:    z.coerce.number().min(1).max(50),
+  windowBand:     z.enum(['1-3', '4-7', '8-12', '12+']),
   glassType:      z.enum(['standard', 'lowe', 'acoustic']),
   orientation:    z.enum(['north', 'east', 'west', 'south', 'mixed']),
   storeys:        z.coerce.number().min(1).max(3),
@@ -39,24 +39,48 @@ export async function submitQuote(
   try {
     const data = parsed.data
     const estimate = calculateEstimate({
-      ...data,
-      storeys: data.storeys as 1 | 2 | 3,
+      propertyType:   data.propertyType,
+      windowBand:     data.windowBand,
+      glassType:      data.glassType,
+      storeys:        data.storeys as 1 | 2 | 3,
+      frameCondition: data.frameCondition,
     })
     const confirmToken = randomUUID()
+    const windowCount  = WINDOW_BAND_MIDPOINT[data.windowBand]
 
     const db = getDb()
     const [quote] = await db.insert(quotes).values({
-      ...data,
-      estimateLow:  estimate.low,
-      estimateHigh: estimate.high,
+      name:           data.name,
+      email:          data.email,
+      phone:          data.phone,
+      propertyType:   data.propertyType,
+      windowCount,
+      glassType:      data.glassType,
+      orientation:    data.orientation,
+      storeys:        data.storeys,
+      frameCondition: data.frameCondition,
+      priority:       data.priority,
+      estimateLow:    estimate.low,
+      estimateHigh:   estimate.high,
       confirmToken,
       status: 'pending',
     }).returning()
 
     await sendQuoteNotification({
-      ...data,
-      ...estimate,
-      quoteId:      quote.id,
+      name:           data.name,
+      email:          data.email,
+      phone:          data.phone,
+      propertyType:   data.propertyType,
+      windowBand:     data.windowBand,
+      glassType:      data.glassType,
+      orientation:    data.orientation,
+      storeys:        data.storeys,
+      frameCondition: data.frameCondition,
+      priority:       data.priority,
+      low:            estimate.low,
+      mid:            estimate.mid,
+      high:           estimate.high,
+      quoteId:        quote.id,
       confirmToken,
     })
 
@@ -79,7 +103,7 @@ export async function confirmQuote(token: string) {
     if (!quote) return { error: 'Quote not found or already confirmed.' }
 
     await sendQuoteConfirmation(quote)
-    return { success: true }
+    return { success: true, name: quote.name, phone: quote.phone }
   } catch (err) {
     console.error('Confirm quote error:', err)
     return { error: 'Something went wrong.' }

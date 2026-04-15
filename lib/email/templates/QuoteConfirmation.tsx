@@ -9,7 +9,7 @@ interface Props {
   email: string
   estimateLow: number | null
   estimateHigh: number | null
-  windowCount: number | null
+  windowBand: string | null
   glassType: string | null
 }
 
@@ -19,7 +19,7 @@ const GLASS_LABELS: Record<string, string> = {
   acoustic: 'Acoustic Laminated Glass',
 }
 
-export function QuoteConfirmationEmail({ name, estimateLow, estimateHigh, windowCount, glassType }: Props) {
+export function QuoteConfirmationEmail({ name, estimateLow, estimateHigh, windowBand, glassType }: Props) {
   return (
     <Html lang="en">
       <Head />
@@ -42,15 +42,15 @@ export function QuoteConfirmationEmail({ name, estimateLow, estimateHigh, window
           </Text>
 
           {/* Summary */}
-          {(windowCount || glassType || estimateLow) && (
+          {(windowBand || glassType || estimateLow) && (
             <Section style={summarySection}>
               <Text style={summaryHeading}>Your summary</Text>
-              {windowCount != null && (
+              {windowBand != null && (
                 <table width="100%" cellPadding={0} cellSpacing={0} style={{ marginBottom: 8 }}>
                   <tbody>
                     <tr>
                       <td style={rowLabel}>Windows</td>
-                      <td style={rowValue}>{windowCount}</td>
+                      <td style={rowValue}>{windowBand} windows</td>
                     </tr>
                   </tbody>
                 </table>

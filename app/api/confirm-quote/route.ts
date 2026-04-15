@@ -8,5 +8,8 @@ export async function GET(req: NextRequest) {
   const result = await confirmQuote(token)
   if ('error' in result) return NextResponse.redirect(new URL('/confirm-error', req.url))
 
-  return NextResponse.redirect(new URL('/confirm-success', req.url))
+  const dest = new URL('/confirm-success', req.url)
+  dest.searchParams.set('name', result.name)
+  dest.searchParams.set('phone', result.phone)
+  return NextResponse.redirect(dest)
 }

@@ -28,11 +28,19 @@ export async function sendContactNotification(data: {
   })
 }
 
+// Reverse-map from DB midpoint → display band (matches WINDOW_BAND_MIDPOINT in data/pricing.ts)
+const MIDPOINT_TO_BAND: Record<number, string> = {
+  2:  '1–3',
+  5:  '4–7',
+  10: '8–12',
+  14: '12+',
+}
+
 export async function sendQuoteNotification(data: {
   name: string
   email: string
   phone: string
-  windowCount: number
+  windowBand: string
   glassType: string
   orientation: string
   propertyType: string
@@ -63,10 +71,11 @@ export async function sendQuoteConfirmation(quote: {
   windowCount: number | null
   glassType: string | null
 }) {
+  const windowBand = quote.windowCount != null ? (MIDPOINT_TO_BAND[quote.windowCount] ?? null) : null
   await getResend().emails.send({
     from:    FROM_EMAIL,
     to:      quote.email,
     subject: 'Your King Double Glazing quote is confirmed',
-    react:   QuoteConfirmationEmail(quote),
+    react:   QuoteConfirmationEmail({ ...quote, windowBand }),
   })
 }

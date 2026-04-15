@@ -8,7 +8,7 @@ interface Props {
   email: string
   phone: string
   propertyType: string
-  windowCount: number
+  windowBand: string
   glassType: string
   orientation: string
   storeys: number
@@ -33,7 +33,7 @@ const PRIORITY_LABELS: Record<string, string> = {
 }
 
 export function QuoteNotificationEmail({
-  name, email, phone, propertyType, windowCount, glassType,
+  name, email, phone, propertyType, windowBand, glassType,
   orientation, storeys, frameCondition, priority,
   low, high, confirmUrl, quoteId,
 }: Props) {
@@ -68,7 +68,7 @@ export function QuoteNotificationEmail({
             <Row label="Phone"           value={phone} />
             <Row label="Email"           value={email} />
             <Row label="Property type"   value={capitalise(propertyType)} />
-            <Row label="Windows"         value={String(windowCount)} />
+            <Row label="Windows"         value={`${windowBand} windows`} />
             <Row label="Glass type"      value={GLASS_LABELS[glassType] ?? glassType} />
             <Row label="Orientation"     value={capitalise(orientation)} />
             <Row label="Storeys"         value={String(storeys)} />
