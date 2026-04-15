@@ -1,4 +1,4 @@
-import { Hammer, PaintBucket, Layers, Zap, Thermometer, Volume2, type LucideIcon } from 'lucide-react'
+import { Hammer, Layers, Zap, Volume2, Thermometer, BadgePercent, type LucideIcon } from 'lucide-react'
 
 interface WhyRetrofitItem {
   icon: LucideIcon
@@ -10,32 +10,32 @@ const items: WhyRetrofitItem[] = [
   {
     icon: Hammer,
     headline: 'No Structural Work',
-    sub: 'No demolition. No building permits.',
-  },
-  {
-    icon: PaintBucket,
-    headline: 'No Painting or Plastering',
-    sub: 'Your walls and frames stay untouched.',
+    sub: 'No demolition, no painting, no plastering. Your frames stay where they are.',
   },
   {
     icon: Layers,
     headline: 'Suits Most Domestic Frames',
-    sub: 'Custom adaptors fit timber, aluminium, and steel.',
+    sub: 'Custom adaptors fit timber, aluminium, and steel windows.',
   },
   {
     icon: Zap,
     headline: 'Installed in One Day',
-    sub: 'Most homes done by sundown.',
-  },
-  {
-    icon: Thermometer,
-    headline: '50–55% Less Heat Loss',
-    sub: 'Compared to standard single glazing.',
+    sub: 'Most Melbourne homes done by sundown.',
   },
   {
     icon: Volume2,
     headline: 'Up to 70% Quieter',
     sub: 'Acoustic glass cuts traffic and tram noise.',
+  },
+  {
+    icon: Thermometer,
+    headline: '50–55% Less Heat Loss',
+    sub: 'Compared to standard single glazing — lower bills, warmer rooms.',
+  },
+  {
+    icon: BadgePercent,
+    headline: 'We Beat Any Quote by 30%',
+    sub: 'Send us a real competitor quote. We come in 30% cheaper, in writing, with the 10-year warranty.',
   },
 ]
 
