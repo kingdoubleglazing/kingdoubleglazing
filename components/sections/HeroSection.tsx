@@ -67,7 +67,7 @@ export function HeroSection({
             style={{ fontSize: 'clamp(3.5rem, 9vw, 8.5rem)' }}
           >
             {headlineWhite}
-          </span>
+          </span>{' '}
           <span
             className="block text-primary-container"
             style={{ fontSize: 'clamp(3.5rem, 9vw, 8.5rem)' }}
