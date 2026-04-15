@@ -1,24 +1,19 @@
 'use client'
 
 import { useActionState } from 'react'
-import Link from 'next/link'
 import { siteConfig } from '@/data/site'
-import { submitContactForm, type ContactFormState } from '@/app/contact/actions'
+import { submitContact, type ContactState } from '@/app/actions/contact'
 
-const SERVICE_OPTIONS = [
-  'Retrofit Double Glazing',
-  'Emergency Glass Repair',
-  'Shower Screens',
-  'Glass Splashbacks',
-  'Custom Mirrors',
-  'Commercial Glazing',
-  'Other / Not Sure',
+const initial: ContactState = { status: 'idle' }
+
+const TIME_OPTIONS = [
+  { value: 'morning',   label: 'Morning' },
+  { value: 'afternoon', label: 'Afternoon' },
+  { value: 'evening',   label: 'Evening' },
 ] as const
 
-const initial: ContactFormState = { status: 'idle' }
-
 export function ContactForm() {
-  const [state, action, pending] = useActionState(submitContactForm, initial)
+  const [state, action, pending] = useActionState(submitContact, initial)
 
   if (state.status === 'success') {
     return (
@@ -28,19 +23,15 @@ export function ContactForm() {
             ✓ Message Received
           </p>
           <p className="font-sans text-sm text-on-surface/70 leading-relaxed">
-            We&apos;ll be in touch within one business day. If it&apos;s urgent, call us now on{' '}
-            <a href={siteConfig.phoneHref} className="text-primary font-semibold underline">
-              {siteConfig.phone}
-            </a>
-            .
+            Got it, {state.name}. Tas will call you within 2 hours.
           </p>
         </div>
-        <p className="font-sans text-xs text-on-surface/80 leading-relaxed">
-          While you wait, check out the{' '}
-          <Link href="/instant-estimate/" className="underline hover:text-on-surface/80">
-            Instant Estimate Tool
-          </Link>{' '}
-          to see a ballpark figure before our call.
+        <p className="font-sans text-xs text-on-surface/60 leading-relaxed">
+          If it&apos;s urgent, call directly on{' '}
+          <a href={siteConfig.phoneHref} className="text-primary font-semibold underline">
+            {siteConfig.phone}
+          </a>
+          .
         </p>
       </div>
     )
@@ -53,9 +44,6 @@ export function ContactForm() {
       className="bg-surface ghost-border p-8 md:p-12 max-w-2xl mx-auto flex flex-col gap-6"
       aria-label="Contact form"
     >
-      {/* Honeypot — hidden from real users */}
-      <input type="text" name="_hp" tabIndex={-1} aria-hidden="true" className="hidden" />
-
       {/* Error banner */}
       {state.status === 'error' && (
         <div role="alert" className="bg-danger/10 px-4 py-3">
@@ -63,13 +51,13 @@ export function ContactForm() {
         </div>
       )}
 
-      {/* ── Name ── */}
+      {/* ── Full Name ── */}
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="cf-name"
           className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
         >
-          Name <RequiredMark />
+          Full Name <RequiredMark />
         </label>
         <input
           id="cf-name"
@@ -82,73 +70,60 @@ export function ContactForm() {
         />
       </div>
 
-      {/* ── Email + Phone side by side ── */}
+      {/* ── Phone + Email ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div className="flex flex-col gap-1.5">
-          <label
-            htmlFor="cf-email"
-            className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
-          >
-            Email
-          </label>
-          <input
-            id="cf-email"
-            type="email"
-            name="email"
-            autoComplete="email"
-            placeholder="you@example.com"
-            className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
-          />
-        </div>
         <div className="flex flex-col gap-1.5">
           <label
             htmlFor="cf-phone"
             className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
           >
-            Phone
+            Phone Number <RequiredMark />
           </label>
           <input
             id="cf-phone"
             type="tel"
             name="phone"
             autoComplete="tel"
+            required
             placeholder="04XX XXX XXX"
             className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
           />
         </div>
+        <div className="flex flex-col gap-1.5">
+          <label
+            htmlFor="cf-email"
+            className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
+          >
+            Email Address <RequiredMark />
+          </label>
+          <input
+            id="cf-email"
+            type="email"
+            name="email"
+            autoComplete="email"
+            required
+            placeholder="you@example.com"
+            className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
+          />
+        </div>
       </div>
-      <p className="font-sans text-xs text-on-surface/60 -mt-4">
-        At least one contact method required.
-      </p>
 
-      {/* ── Service ── */}
+      {/* ── Suburb ── */}
       <div className="flex flex-col gap-1.5">
         <label
-          htmlFor="cf-service"
+          htmlFor="cf-suburb"
           className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
         >
-          What are you after? <span className="normal-case tracking-normal font-sans font-normal text-on-surface/60">(optional)</span>
+          Suburb <span className="normal-case tracking-normal font-sans font-normal text-on-surface/60">(optional)</span>
         </label>
-        <div className="relative">
-          <select
-            id="cf-service"
-            name="service"
-            defaultValue=""
-            className="w-full appearance-none bg-surface-container-high px-4 py-3 pr-10 font-sans text-base text-on-surface focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2 cursor-pointer"
-          >
-            <option value="" disabled>Select a service…</option>
-            {SERVICE_OPTIONS.map(opt => (
-              <option key={opt} value={opt}>{opt}</option>
-            ))}
-          </select>
-          {/* Chevron icon */}
-          <span
-            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-on-surface/80"
-            aria-hidden="true"
-          >
-            ▾
-          </span>
-        </div>
+        <input
+          id="cf-suburb"
+          type="text"
+          name="suburb"
+          autoComplete="address-level2"
+          placeholder="e.g. Brunswick, Richmond, Glen Waverley"
+          className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
+        />
       </div>
 
       {/* ── Message ── */}
@@ -168,18 +143,34 @@ export function ContactForm() {
         />
       </div>
 
+      {/* ── Preferred time ── */}
+      <fieldset>
+        <legend className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75 mb-3 block">
+          Preferred contact time <span className="normal-case tracking-normal font-sans font-normal text-on-surface/60">(optional)</span>
+        </legend>
+        <div className="flex gap-2 flex-wrap">
+          {TIME_OPTIONS.map(({ value, label }) => (
+            <label key={value} className="cursor-pointer select-none">
+              <input type="radio" name="preferredTime" value={value} className="sr-only peer" />
+              <span className="inline-flex items-center px-4 py-2 font-headline text-xs font-semibold uppercase tracking-[0.12em] bg-surface-container text-on-surface/70 peer-checked:bg-primary-container peer-checked:text-on-primary-fixed transition-colors duration-150">
+                {label}
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
       {/* ── Submit ── */}
       <button
         type="submit"
         disabled={pending}
         className="w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-5 hover:bg-primary-fixed-dim transition-colors duration-150 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3"
       >
-        {pending ? 'Sending…' : 'Send Message'}
-        {!pending && <span aria-hidden="true" className="text-base leading-none">→</span>}
+        {pending ? 'Sending…' : 'Send Enquiry →'}
       </button>
 
       <p className="text-center font-sans text-xs text-on-surface/60">
-        We respond within one business day. No spam, no pressure.
+        Tas will call within 2 hours. No spam, no pressure.
       </p>
 
       {/* Alternatives */}

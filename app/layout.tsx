@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { EmergencyBanner } from "@/components/layout/EmergencyBanner";
 import { FloatingNav } from "@/components/layout/FloatingNav";
 import { localBusinessSchema } from "@/lib/seo/schema/localBusiness";
+import { buildWebSiteSchema } from "@/lib/seo/schema/website";
 import { siteConfig } from "@/data/site";
 
 const GTM_ID = "GTM-KDRL294K";
@@ -83,7 +84,13 @@ export default function RootLayout({
         </noscript>
         <script
           type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static schema
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static schema
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebSiteSchema()) }}
         />
         <EmergencyBanner />
         <FloatingNav />

@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Phone, Mail, Clock, MapPin } from 'lucide-react'
-import { buildMetadata } from '@/lib/seo/generateMetadata'
+import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
+import { SchemaScript } from '@/components/SchemaScript'
 import { TrustBar } from '@/components/sections/TrustBar'
 import { ContactForm } from '@/components/sections/ContactForm'
 import { FAQ } from '@/components/sections/FAQ'
@@ -11,19 +12,24 @@ import { contactFaq } from '@/data/contact-faq'
 import { siteConfig } from '@/data/site'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Contact King Double Glazing | Free Quote Melbourne',
+  title: 'Contact King Double Glazing | Free Double Glazing Quote Melbourne',
   description:
     'Get a free double glazing quote in Melbourne. Call, email, or send a message — we respond within one business day. We beat any genuine quote by 30%. 10-year warranty.',
   path: '/contact/',
 })
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'ContactPage',
-  name: 'Contact King Double Glazing',
-  url: `${siteConfig.domain}/contact/`,
-  description: 'Contact page for King Double Glazing — free quotes and enquiries for retrofit double glazing in Melbourne.',
-}
+const contactPageSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    '@id': `${BASE_URL}/contact/#webpage`,
+    url: `${siteConfig.domain}/contact/`,
+    name: 'Contact King Double Glazing | Free Double Glazing Quote Melbourne',
+    description: 'Get a free double glazing quote in Melbourne. Call, email, or send a message — we respond within one business day. We beat any genuine competitor quote by 30%.',
+    isPartOf: { '@id': `${siteConfig.domain}/#website` },
+    about: { '@id': `${siteConfig.domain}/#business` },
+  },
+]
 
 export default async function ContactPage({
   searchParams,
@@ -36,11 +42,7 @@ export default async function ContactPage({
   const isShowerVisit = params.service === 'shower-visit'
   return (
     <>
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static schema
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+      <SchemaScript schemas={contactPageSchemas} />
 
       {/* Hero */}
       <section className="relative min-h-[55vh] flex items-end overflow-hidden bg-[#111318]">

@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { buildMetadata } from '@/lib/seo/generateMetadata'
+import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
+import { buildWebPageSchema } from '@/lib/seo/schema/webpage'
+import { getFAQSchema } from '@/data/faqs'
+import { SchemaScript } from '@/components/SchemaScript'
 import { TrustBar } from '@/components/sections/TrustBar'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { CtaBanner } from '@/components/sections/CtaBanner'
@@ -10,13 +13,36 @@ import { siteConfig } from '@/data/site'
 export const metadata: Metadata = buildMetadata({
   title: "About King Double Glazing | Melbourne's Anti-Ripoff Glaziers | Tas Markou",
   description:
-    'Tas Markou learned the trade from his father. 50+ years combined experience. King Double Glazing was built to beat any quote by 30% with a 10-year warranty on every job.',
+    'Built by a Melbourne glazing family with 50+ years combined experience. King Double Glazing beats any genuine quote by 30% with a 10-year warranty on every job. No call centres, no surprises.',
   path: '/about/',
 })
+
+const aboutPageSchemas = [
+  buildWebPageSchema({
+    url: `${BASE_URL}/about/`,
+    name: "About King Double Glazing | Melbourne's Anti-Ripoff Glaziers | Tas Markou",
+    description: 'Built by a Melbourne glazing family with 50+ years combined experience. King Double Glazing beats any genuine quote by 30% with a 10-year warranty on every job.',
+    breadcrumb: [
+      { name: 'Home', url: `${BASE_URL}/` },
+      { name: 'About', url: `${BASE_URL}/about/` },
+    ],
+  }),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Tas Markou',
+    jobTitle: 'Founder',
+    worksFor: { '@id': `${siteConfig.domain}/#business` },
+    image: `${siteConfig.domain}/testimonial-founder/founder.webp`,
+    description: 'Tas Markou learned the trade from his father, a Melbourne glazier. He built a commercial glazing business with 40+ staff at peak before founding King Double Glazing to offer honest, transparent retrofit double glazing pricing.',
+  },
+  getFAQSchema('general'),
+]
 
 export default function AboutPage() {
   return (
     <>
+      <SchemaScript schemas={aboutPageSchemas} />
       {/* Hero */}
       <section className="bg-inverse-surface py-16 md:py-24 overflow-hidden relative">
         <span

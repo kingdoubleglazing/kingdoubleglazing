@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Phone } from 'lucide-react'
-import { buildMetadata } from '@/lib/seo/generateMetadata'
+import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
+import { buildWebPageSchema } from '@/lib/seo/schema/webpage'
+import { SchemaScript } from '@/components/SchemaScript'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { TrustBar } from '@/components/sections/TrustBar'
 import { ComparisonTable } from '@/components/sections/ComparisonTable'
@@ -19,9 +21,17 @@ export const metadata: Metadata = buildMetadata({
   path: '/',
 })
 
+const homePageSchema = buildWebPageSchema({
+  url: `${BASE_URL}/`,
+  name: `Stop Overpaying for Double Glazing Melbourne | ${siteConfig.pricing.retrofitFromDisplay} | King Double Glazing`,
+  description: 'We upgrade your existing windows with a second layer of glass. Up to 70% quieter. Up to 50% warmer. Half the price of full replacement. We beat any genuine quote by 30%.',
+  breadcrumb: [{ name: 'Home', url: `${BASE_URL}/` }],
+})
+
 export default function HomePage() {
   return (
     <>
+      <SchemaScript schemas={[homePageSchema]} />
       {/* 1. Hero */}
       <HeroSection
         badge="10-Year Warranty · Beat Any Quote 30%"

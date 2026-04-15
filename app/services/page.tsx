@@ -2,18 +2,47 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Phone } from 'lucide-react'
-import { buildMetadata } from '@/lib/seo/generateMetadata'
+import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
+import { buildWebPageSchema } from '@/lib/seo/schema/webpage'
+import { buildServiceSchema } from '@/lib/seo/schema/service'
+import { buildFaqSchema } from '@/lib/seo/schema/faqPage'
+import { retrofitFaqs, emergencyFaqs } from '@/data/faqs'
+import { SchemaScript } from '@/components/SchemaScript'
 import { TrustBar } from '@/components/sections/TrustBar'
 import { FAQ } from '@/components/sections/FAQ'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { siteConfig } from '@/data/site'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Our Services | Retrofit Double Glazing, Shower Screens & More | King Double Glazing',
+  title: 'Double Glazing Services Melbourne | Retrofit, Emergency Glass, Shower Screens | King Double Glazing',
   description:
-    `Retrofit double glazing, emergency glass repair, shower screens, splashbacks, mirrors, and commercial glazing across Melbourne. ${siteConfig.pricing.retrofitFromDisplay}. 10-year warranty.`,
+    `Retrofit double glazing from ${siteConfig.pricing.retrofitFromDisplay}, emergency glass repair, shower screens, splashbacks, mirrors, and commercial glazing across Melbourne. 10-year warranty.`,
   path: '/services/',
 })
+
+const servicesPageSchemas = [
+  buildWebPageSchema({
+    url: `${BASE_URL}/services/`,
+    name: 'Double Glazing Services Melbourne | Retrofit, Emergency Glass, Shower Screens | King Double Glazing',
+    description: `Retrofit double glazing from ${siteConfig.pricing.retrofitFromDisplay}, emergency glass repair, shower screens, splashbacks, mirrors, and commercial glazing across Melbourne. 10-year warranty.`,
+    breadcrumb: [
+      { name: 'Home', url: `${BASE_URL}/` },
+      { name: 'Services', url: `${BASE_URL}/services/` },
+    ],
+  }),
+  buildServiceSchema({
+    name: 'Retrofit Double Glazing Melbourne',
+    description: 'We add a second layer of glass to your existing windows. Works on timber, aluminium, and steel frames. Installed in one day. Up to 70% quieter, up to 50% warmer. From $595/m².',
+    url: `${BASE_URL}/services/#retrofit`,
+    priceRange: siteConfig.pricing.retrofitFromDisplay,
+  }),
+  buildServiceSchema({
+    name: 'Emergency Glass Repair Melbourne',
+    description: 'Same-day emergency glass repair across Melbourne. Broken windows, shopfronts, sliding doors, skylights. Temporary boarding available. Insurance reports on request.',
+    url: `${BASE_URL}/services/#emergency`,
+  }),
+  buildFaqSchema([...retrofitFaqs, ...emergencyFaqs]),
+]
 
 const servicesFaqItems = [
   {
@@ -30,33 +59,10 @@ const servicesFaqItems = [
   },
 ]
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: 'King Double Glazing Services',
-  provider: { '@type': 'LocalBusiness', name: siteConfig.legalName, url: siteConfig.domain },
-  areaServed: 'Melbourne, Victoria',
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Glazing Services',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Retrofit Double Glazing' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Emergency Glass Repair' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Shower Screens' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Kitchen Glass Splashbacks' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom Mirrors' } },
-    ],
-  },
-}
-
 export default function ServicesPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static schema
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+      <SchemaScript schemas={servicesPageSchemas} />
 
       {/* Hero */}
       <section className="relative min-h-[50vh] flex items-end overflow-hidden bg-[#111318]">
