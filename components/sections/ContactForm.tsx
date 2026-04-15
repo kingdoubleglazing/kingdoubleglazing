@@ -7,9 +7,6 @@ import { submitContactForm, type ContactFormState } from '@/app/contact/actions'
 
 const SERVICE_OPTIONS = [
   'Retrofit Double Glazing',
-  'Soundproof Windows',
-  'Energy Efficient Windows',
-  'Heritage Home Glazing',
   'Emergency Glass Repair',
   'Shower Screens',
   'Glass Splashbacks',
@@ -38,9 +35,9 @@ export function ContactForm() {
             .
           </p>
         </div>
-        <p className="font-sans text-xs text-on-surface/40 leading-relaxed">
+        <p className="font-sans text-xs text-on-surface/80 leading-relaxed">
           While you wait, check out the{' '}
-          <Link href="/instant-estimate/" className="underline hover:text-on-surface/60">
+          <Link href="/instant-estimate/" className="underline hover:text-on-surface/80">
             Instant Estimate Tool
           </Link>{' '}
           to see a ballpark figure before our call.
@@ -70,7 +67,7 @@ export function ContactForm() {
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="cf-name"
-          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/55"
+          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
         >
           Name <RequiredMark />
         </label>
@@ -81,7 +78,7 @@ export function ContactForm() {
           autoComplete="name"
           required
           placeholder="Your full name"
-          className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/30 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
+          className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
         />
       </div>
 
@@ -90,7 +87,7 @@ export function ContactForm() {
         <div className="flex flex-col gap-1.5">
           <label
             htmlFor="cf-email"
-            className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/55"
+            className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
           >
             Email
           </label>
@@ -100,13 +97,13 @@ export function ContactForm() {
             name="email"
             autoComplete="email"
             placeholder="you@example.com"
-            className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/30 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
+            className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
           />
         </div>
         <div className="flex flex-col gap-1.5">
           <label
             htmlFor="cf-phone"
-            className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/55"
+            className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
           >
             Phone
           </label>
@@ -116,11 +113,11 @@ export function ContactForm() {
             name="phone"
             autoComplete="tel"
             placeholder="04XX XXX XXX"
-            className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/30 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
+            className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
           />
         </div>
       </div>
-      <p className="font-sans text-xs text-on-surface/35 -mt-4">
+      <p className="font-sans text-xs text-on-surface/60 -mt-4">
         At least one contact method required.
       </p>
 
@@ -128,9 +125,9 @@ export function ContactForm() {
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="cf-service"
-          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/55"
+          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
         >
-          What are you after? <span className="normal-case tracking-normal font-sans font-normal text-on-surface/35">(optional)</span>
+          What are you after? <span className="normal-case tracking-normal font-sans font-normal text-on-surface/60">(optional)</span>
         </label>
         <div className="relative">
           <select
@@ -146,7 +143,7 @@ export function ContactForm() {
           </select>
           {/* Chevron icon */}
           <span
-            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-on-surface/40"
+            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-on-surface/80"
             aria-hidden="true"
           >
             ▾
@@ -158,16 +155,16 @@ export function ContactForm() {
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="cf-message"
-          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/55"
+          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
         >
-          Message <span className="normal-case tracking-normal font-sans font-normal text-on-surface/35">(optional)</span>
+          Message <span className="normal-case tracking-normal font-sans font-normal text-on-surface/60">(optional)</span>
         </label>
         <textarea
           id="cf-message"
           name="message"
           rows={4}
           placeholder="Tell us about your project — window count, location, urgency, anything useful."
-          className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/30 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2 resize-y min-h-28"
+          className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2 resize-y min-h-28"
         />
       </div>
 
@@ -181,7 +178,7 @@ export function ContactForm() {
         {!pending && <span aria-hidden="true" className="text-base leading-none">→</span>}
       </button>
 
-      <p className="text-center font-sans text-xs text-on-surface/35">
+      <p className="text-center font-sans text-xs text-on-surface/60">
         We respond within one business day. No spam, no pressure.
       </p>
 
@@ -189,13 +186,13 @@ export function ContactForm() {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 pt-2 border-t border-surface-container-high">
         <a
           href={siteConfig.phoneHref}
-          className="font-headline text-xs font-semibold uppercase tracking-widest text-on-surface/50 hover:text-primary transition-colors duration-150"
+          className="font-headline text-xs font-semibold uppercase tracking-widest text-on-surface/70 hover:text-primary transition-colors duration-150"
         >
           ☎ {siteConfig.phone}
         </a>
         <a
           href={`mailto:${siteConfig.email}`}
-          className="font-headline text-xs font-semibold uppercase tracking-widest text-on-surface/50 hover:text-primary transition-colors duration-150"
+          className="font-headline text-xs font-semibold uppercase tracking-widest text-on-surface/70 hover:text-primary transition-colors duration-150"
         >
           ✉ {siteConfig.email}
         </a>

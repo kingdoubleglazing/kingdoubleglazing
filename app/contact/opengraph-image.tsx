@@ -67,7 +67,7 @@ export default function OGImage() {
           lineHeight: 1.4,
         }}
       >
-        Call, email, or send a message — we respond within one business day. Transparent pricing from $495/m². No pressure.
+        Call, email, or send a message — we respond within one business day. Transparent pricing from $595/m². No pressure.
       </p>
 
       <div

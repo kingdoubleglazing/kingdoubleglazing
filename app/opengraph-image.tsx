@@ -71,7 +71,7 @@ export default function OGImage() {
           lineHeight: 1.4,
         }}
       >
-        Melbourne's retrofit double glazing specialists. From $495/m² — transparent pricing, no surprises.
+        Melbourne's retrofit double glazing specialists. From $595/m² — transparent pricing, no surprises.
       </p>
 
       {/* Footer row */}
@@ -101,7 +101,7 @@ export default function OGImage() {
             textTransform: 'uppercase',
           }}
         >
-          From $495/m²
+          From $595/m²
         </span>
       </div>
     </div>,

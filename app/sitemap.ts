@@ -1,46 +1,14 @@
 import type { MetadataRoute } from 'next'
-import { blogPosts } from '@/data/blog-posts'
-import { suburbs } from '@/data/suburbs'
 
 const BASE_URL = 'https://kingdoubleglazing.com.au'
 
-// Static routes with change frequency and priority
-const staticRoutes: MetadataRoute.Sitemap = [
-  { url: `${BASE_URL}/`, changeFrequency: 'weekly', priority: 1.0 },
-  { url: `${BASE_URL}/double-glazing/`, changeFrequency: 'weekly', priority: 0.9 },
-  { url: `${BASE_URL}/double-glazing/cost/`, changeFrequency: 'weekly', priority: 0.9 },
-  { url: `${BASE_URL}/double-glazing/soundproof-windows/`, changeFrequency: 'monthly', priority: 0.8 },
-  { url: `${BASE_URL}/double-glazing/energy-efficient-windows/`, changeFrequency: 'monthly', priority: 0.8 },
-  { url: `${BASE_URL}/double-glazing/heritage-homes/`, changeFrequency: 'monthly', priority: 0.8 },
-  { url: `${BASE_URL}/double-glazing/glass-types/`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/emergency-glass/`, changeFrequency: 'weekly', priority: 0.9 },
-  { url: `${BASE_URL}/shower-screens/`, changeFrequency: 'monthly', priority: 0.8 },
-  { url: `${BASE_URL}/shower-screens/frameless/`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/shower-screens/semi-frameless/`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/glass-splashbacks/`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/custom-mirrors/`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/commercial-glazing/`, changeFrequency: 'monthly', priority: 0.8 },
-  { url: `${BASE_URL}/instant-estimate/`, changeFrequency: 'monthly', priority: 0.8 },
-  { url: `${BASE_URL}/areas/`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/blog/`, changeFrequency: 'weekly', priority: 0.6 },
-  { url: `${BASE_URL}/gallery/`, changeFrequency: 'monthly', priority: 0.7 },
-  { url: `${BASE_URL}/about/`, changeFrequency: 'yearly', priority: 0.5 },
-  { url: `${BASE_URL}/contact/`, changeFrequency: 'yearly', priority: 0.6 },
-]
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const suburbRoutes: MetadataRoute.Sitemap = suburbs.map(({ slug }) => ({
-    url: `${BASE_URL}/areas/${slug}/`,
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  }))
-
-  const blogPostRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}/`,
-    changeFrequency: 'monthly',
-    priority: 0.6,
-    lastModified: post.dateModified ?? post.datePublished,
-  }))
-
-  return [...staticRoutes, ...suburbRoutes, ...blogPostRoutes]
+  return [
+    { url: `${BASE_URL}/`,                 changeFrequency: 'weekly',  priority: 1.0 },
+    { url: `${BASE_URL}/services/`,        changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE_URL}/gallery/`,         changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE_URL}/instant-estimate/`,changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE_URL}/about/`,           changeFrequency: 'yearly',  priority: 0.6 },
+    { url: `${BASE_URL}/contact/`,         changeFrequency: 'yearly',  priority: 0.7 },
+  ]
 }

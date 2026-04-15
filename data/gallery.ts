@@ -1,98 +1,80 @@
-export type GalleryCategory = 'double-glazing' | 'shower-screens' | 'commercial' | 'repairs'
-
-export interface GalleryImage {
-  src: string
-  alt: string
-  category: GalleryCategory
-  caption: string
-  /** Internal link to the relevant service page */
-  href: string
-}
-
-export const GALLERY_CATEGORIES: { value: GalleryCategory | 'all'; label: string }[] = [
-  { value: 'all',            label: 'All Work' },
-  { value: 'double-glazing', label: 'Double Glazing' },
-  { value: 'shower-screens', label: 'Shower Screens' },
-  { value: 'commercial',     label: 'Commercial' },
-  { value: 'repairs',        label: 'Glass Repairs' },
-]
-
-export const galleryImages: GalleryImage[] = [
+export const galleryItems = [
   {
     src: '/gallery/Double-glazing-category.webp',
-    alt: 'Retrofit double glazing installed in a Melbourne home — sealed unit sits inside the existing frame',
-    category: 'double-glazing',
-    caption: 'Retrofit double glazing',
-    href: '/double-glazing/',
-  },
-  {
-    src: '/gallery/Semi-frameless-shower-screen-b.webp',
-    alt: 'Semi-frameless shower screen with brushed nickel hardware in a Melbourne bathroom',
-    category: 'shower-screens',
-    caption: 'Semi-frameless shower screen',
-    href: '/shower-screens/semi-frameless/',
-  },
-  {
-    src: '/gallery/Balconia_-Yarraville-bowling-club.webp',
-    alt: 'Balcony glazing installation at Yarraville Bowling Club, Melbourne',
-    category: 'commercial',
-    caption: 'Balcony glazing — Yarraville Bowling Club',
-    href: '/commercial-glazing/',
-  },
-  {
-    src: '/gallery/Balconia_-Yarraville-bowling-club-2.webp',
-    alt: 'Completed balcony glass panels at Yarraville Bowling Club',
-    category: 'commercial',
-    caption: 'Balcony glazing — Yarraville Bowling Club',
-    href: '/commercial-glazing/',
+    alt: 'Retrofit double glazing installed in Melbourne home',
+    category: 'retrofit',
+    caption: 'Retrofit Double Glazing',
   },
   {
     src: '/gallery/Balconia-pic-1000x667-1.webp',
-    alt: 'Commercial balcony glass installation Melbourne — frameless panels with unobstructed views',
+    alt: 'Balconia glazing project — exterior glass installation',
     category: 'commercial',
-    caption: 'Commercial balcony glazing',
-    href: '/commercial-glazing/',
+    caption: 'Commercial Glazing',
   },
   {
-    src: '/gallery/office-partition.webp',
-    alt: 'Floor-to-ceiling glass office partition installed in Melbourne CBD',
+    src: '/gallery/Balconia_-Yarraville-bowling-club.webp',
+    alt: 'Yarraville bowling club glazing project',
     category: 'commercial',
-    caption: 'Glass office partition',
-    href: '/commercial-glazing/',
+    caption: 'Yarraville Bowling Club',
+  },
+  {
+    src: '/gallery/Balconia_-Yarraville-bowling-club-2.webp',
+    alt: 'Yarraville bowling club — interior glazing detail',
+    category: 'commercial',
+    caption: 'Yarraville Bowling Club — Detail',
   },
   {
     src: '/gallery/Shop-fronts-1b.webp',
-    alt: 'Commercial shop front glazing Melbourne — full-height glass facade',
-    category: 'commercial',
-    caption: 'Shop front glazing',
-    href: '/commercial-glazing/',
+    alt: 'Commercial shopfront glass installation Melbourne',
+    category: 'shopfronts',
+    caption: 'Shopfront Glazing',
   },
   {
     src: '/gallery/Shop-fronts-2b.webp',
-    alt: 'Glass shop front installation in Melbourne — toughened safety glass',
-    category: 'commercial',
-    caption: 'Shop front glazing',
-    href: '/commercial-glazing/',
+    alt: 'Retail shopfront double glazing Melbourne',
+    category: 'shopfronts',
+    caption: 'Retail Shopfront',
   },
   {
     src: '/gallery/Shop-fronts-3b.webp',
-    alt: 'Commercial glazing shop front Melbourne — aluminium framed glass panels',
-    category: 'commercial',
-    caption: 'Shop front glazing',
-    href: '/commercial-glazing/',
+    alt: 'Commercial glass shopfront — Melbourne CBD',
+    category: 'shopfronts',
+    caption: 'Commercial Shopfront',
   },
   {
-    src: '/gallery/glass-repairs-2-scaled.webp',
-    alt: 'Emergency glass repair Melbourne — broken window board-up and replacement',
-    category: 'repairs',
-    caption: 'Emergency glass repair',
-    href: '/emergency-glass/',
+    src: '/gallery/office-partition.webp',
+    alt: 'Glass office partition installation',
+    category: 'commercial',
+    caption: 'Office Partitions',
+  },
+  {
+    src: '/gallery/Semi-frameless-shower-screen-b.webp',
+    alt: 'Semi-frameless shower screen installation Melbourne',
+    category: 'shower-screens',
+    caption: 'Semi-Frameless Shower Screen',
   },
   {
     src: '/gallery/glass-repairs-cropped.webp',
-    alt: 'Glass repair and replacement by licensed glazier in Melbourne',
+    alt: 'Emergency glass repair Melbourne',
     category: 'repairs',
-    caption: 'Glass repair',
-    href: '/emergency-glass/',
+    caption: 'Glass Repairs',
   },
-]
+  {
+    src: '/gallery/glass-repairs-2-scaled.webp',
+    alt: 'Glass repair and replacement Melbourne',
+    category: 'repairs',
+    caption: 'Glass Replacement',
+  },
+] as const
+
+export type GalleryItem = (typeof galleryItems)[number]
+export type GalleryCategory = GalleryItem['category']
+
+export const galleryCategories = [
+  { id: 'all',           label: 'All Work' },
+  { id: 'retrofit',      label: 'Retrofit Glazing' },
+  { id: 'shopfronts',    label: 'Shopfronts' },
+  { id: 'commercial',    label: 'Commercial' },
+  { id: 'shower-screens', label: 'Shower Screens' },
+  { id: 'repairs',       label: 'Repairs' },
+] as const

@@ -1,4 +1,4 @@
-import { MapPin, BadgeDollarSign, Star, Crown, Zap, type LucideIcon } from 'lucide-react'
+import { Clock, ShieldCheck, Star, MapPin, type LucideIcon } from 'lucide-react'
 
 interface TrustItem {
   icon: LucideIcon
@@ -6,11 +6,10 @@ interface TrustItem {
 }
 
 const defaultItems: TrustItem[] = [
-  { icon: MapPin,           label: 'Melbourne Owned' },
-  { icon: BadgeDollarSign,  label: 'From $495/m²' },
-  { icon: Star,             label: '4.9★ Reviews' },
-  { icon: Crown,            label: 'Free Measure & Quote' },
-  { icon: Zap,              label: '24/7 Emergency Glass' },
+  { icon: Clock,       label: '50+ Years Combined Experience' },
+  { icon: Star,        label: 'Beat Any Quote by 30%' },
+  { icon: ShieldCheck, label: '10-Year Warranty' },
+  { icon: MapPin,      label: 'Melbourne-Owned' },
 ]
 
 interface TrustBarProps {
@@ -19,17 +18,17 @@ interface TrustBarProps {
 
 export function TrustBar({ items = defaultItems }: TrustBarProps) {
   return (
-    <div className="bg-primary-container overflow-x-auto">
-      <ul className="flex items-stretch min-w-max md:min-w-0 md:justify-between max-w-7xl mx-auto divide-x divide-on-primary-fixed/20">
+    <div className="bg-inverse-surface overflow-x-auto">
+      <ul className="flex items-stretch min-w-max md:min-w-0 md:justify-between max-w-5xl mx-auto divide-x divide-white/10">
         {items.map(({ icon: Icon, label }) => (
           <li key={label} className="flex items-center gap-2.5 px-6 py-3.5 shrink-0 md:flex-1 md:justify-center">
             <Icon
               size={16}
               strokeWidth={2.5}
               aria-hidden="true"
-              className="text-on-primary-fixed shrink-0"
+              className="text-primary-container shrink-0"
             />
-            <span className="font-headline text-xs font-semibold uppercase tracking-widest text-on-primary-fixed whitespace-nowrap">
+            <span className="font-headline text-xs font-semibold uppercase tracking-widest text-inverse-on-surface/80 whitespace-nowrap">
               {label}
             </span>
           </li>

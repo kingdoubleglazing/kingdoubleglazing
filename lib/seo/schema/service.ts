@@ -11,7 +11,7 @@ export function buildServiceSchema({
   description,
   url,
   areaServed = 'Melbourne, Victoria',
-  priceRange = 'From $495/m²',
+  priceRange = 'From $595/m²',
 }: ServiceSchemaInput) {
   return {
     '@context': 'https://schema.org',

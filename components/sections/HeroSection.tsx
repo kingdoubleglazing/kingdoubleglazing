@@ -52,7 +52,7 @@ export function HeroSection({
       />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-end flex-1 max-w-7xl mx-auto w-full px-4 pb-16 md:pb-20 pt-36">
+      <div className="relative z-10 flex flex-col justify-end flex-1 max-w-5xl mx-auto w-full px-4 pb-16 md:pb-20 pt-30">
         {/* Badge */}
         <div className="mb-6 md:mb-8">
           <span className="inline-block bg-primary-container px-3 py-1 font-headline text-xs font-semibold uppercase tracking-widest text-on-primary-fixed">
@@ -77,10 +77,7 @@ export function HeroSection({
         </h1>
 
         {/* Subtext */}
-        <p
-          className="font-headline font-semibold uppercase tracking-widest text-white/75 mb-8 md:mb-10"
-          style={{ fontSize: 'clamp(0.85rem, 1.4vw, 1.05rem)' }}
-        >
+        <p className="font-sans text-base text-white/85 mb-8 max-w-xl leading-relaxed">
           {subtext}
         </p>
 
@@ -100,15 +97,15 @@ export function HeroSection({
 
           {showWarrantyBadge && (
             <div className="ml-auto hidden sm:block">
-              <WarrantyBadge className="w-[100px] h-[100px] md:w-[120px] md:h-[120px]" />
+              <WarrantyBadge />
             </div>
           )}
         </div>
 
-        {/* Warranty badge — mobile: below CTAs, centred */}
+        {/* Warranty badge — mobile: below CTAs */}
         {showWarrantyBadge && (
           <div className="flex sm:hidden mt-6">
-            <WarrantyBadge className="w-[90px] h-[90px]" />
+            <WarrantyBadge />
           </div>
         )}
       </div>

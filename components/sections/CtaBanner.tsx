@@ -26,7 +26,7 @@ export function CtaBanner({
         KING
       </span>
 
-      <div className="relative max-w-7xl mx-auto px-4">
+      <div className="relative max-w-5xl mx-auto px-4">
         <div className="flex flex-col items-center text-center gap-8">
 
           {/* Headline block */}
@@ -69,8 +69,8 @@ export function CtaBanner({
             {[
               'No site visit required',
               'Price locked at quote',
-              '10-year warranty',
-              'Melbourne-wide',
+              'Lifetime warranty',
+              'We beat any quote by 30%',
             ].map((item) => (
               <p
                 key={item}

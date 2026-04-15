@@ -1,25 +1,23 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Phone, Mail, Clock, MapPin } from 'lucide-react'
 import { buildMetadata } from '@/lib/seo/generateMetadata'
 import { TrustBar } from '@/components/sections/TrustBar'
-import { ProcessSteps } from '@/components/sections/ProcessSteps'
 import { ContactForm } from '@/components/sections/ContactForm'
 import { FAQ } from '@/components/sections/FAQ'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { contactFaq } from '@/data/contact-faq'
 import { siteConfig } from '@/data/site'
 
-// ── Metadata ────────────────────────────────────────────────────
 export const metadata: Metadata = buildMetadata({
   title: 'Contact King Double Glazing | Free Quote Melbourne',
   description:
-    'Get a free double glazing quote in Melbourne. Call, email, or send a message — we respond within one business day. Transparent pricing from $495/m². No pressure.',
+    'Get a free double glazing quote in Melbourne. Call, email, or send a message — we respond within one business day. We beat any genuine quote by 30%. 10-year warranty.',
   path: '/contact/',
 })
 
-// ── JSON-LD schemas ─────────────────────────────────────────────
-const contactPageSchema = {
+const schema = {
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
   name: 'Contact King Double Glazing',
@@ -27,116 +25,55 @@ const contactPageSchema = {
   description: 'Contact page for King Double Glazing — free quotes and enquiries for retrofit double glazing in Melbourne.',
 }
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: siteConfig.legalName,
-  url: siteConfig.domain,
-  telephone: siteConfig.phoneTel,
-  email: siteConfig.email,
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: siteConfig.address.suburb,
-    addressRegion: siteConfig.address.state,
-    addressCountry: siteConfig.address.country,
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: siteConfig.geo.latitude,
-    longitude: siteConfig.geo.longitude,
-  },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '08:00',
-      closes: '17:00',
-    },
-  ],
-  priceRange: '$$',
-}
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: contactFaq.map(item => ({
-    '@type': 'Question',
-    name: item.q,
-    acceptedAnswer: { '@type': 'Answer', text: item.a },
-  })),
-}
-
-const contactProcessSteps = [
-  {
-    title: 'Send Your Enquiry',
-    body: 'Use the form, call, or email. Describe your project in as much or as little detail as you have — we can work with "I have some windows that need upgrading".',
-  },
-  {
-    title: 'We Respond Fast',
-    body: 'Within one business day by email. Phone calls answered same day during business hours. Emergency glass? Call directly for immediate dispatch.',
-  },
-  {
-    title: 'Free Measure & Quote',
-    body: 'A King technician visits, measures precisely, and provides a binding written quote at no cost. No obligation to proceed.',
-  },
-] as const
-
-// ── Page ────────────────────────────────────────────────────────
 export default function ContactPage() {
   return (
     <>
-      {/* JSON-LD */}
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static schema
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static schema
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static schema
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      {/* ── Compact hero ── */}
-      <section className="bg-primary-container py-16 md:py-20 overflow-hidden relative">
-        <span
-          className="pointer-events-none select-none absolute -bottom-4 -right-6 font-display uppercase leading-none text-on-primary-fixed/[0.06]"
-          style={{ fontSize: 'clamp(8rem, 22vw, 18rem)' }}
+      {/* Hero */}
+      <section className="relative min-h-[55vh] flex items-end overflow-hidden bg-[#111318]">
+        <Image
+          src="/hero/hero-home.webp"
+          alt="Contact King Double Glazing Melbourne"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(105deg, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.45) 100%)' }}
           aria-hidden="true"
-        >
-          CONTACT
-        </span>
-        <div className="relative max-w-7xl mx-auto px-4">
+        />
+        <div className="relative z-10 max-w-5xl mx-auto w-full px-4 pb-14 md:pb-20 pt-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
-            {/* Left — headline + value prop */}
             <div className="flex flex-col gap-5">
-              <span className="inline-block w-fit bg-on-primary-fixed text-primary-container font-headline text-xs font-semibold uppercase tracking-widest px-3 py-1">
+              <span className="inline-block w-fit bg-primary-container text-on-primary-fixed font-headline text-xs font-semibold uppercase tracking-widest px-3 py-1">
                 Free Quote
               </span>
               <h1
-                className="font-display uppercase leading-none text-on-primary-fixed"
+                className="font-display uppercase leading-none text-white"
                 style={{ fontSize: 'clamp(3rem, 9vw, 7rem)' }}
               >
                 Get a Quote.
                 <br />
-                <span className="bg-on-primary-fixed text-primary-container px-2 inline-block leading-tight">No Pressure.</span>
+                <span className="text-primary-container">No Pressure.</span>
               </h1>
-              <p className="font-sans text-base text-on-primary-fixed/70 max-w-md leading-relaxed">
-                Tell us about your project and we&apos;ll respond within one business day.
+              <p className="font-sans text-base text-white/85 max-w-md leading-relaxed">
+                Fill in the form, call, or email. We respond within one business day.
                 Or use the{' '}
-                <Link href="/instant-estimate/" className="text-on-primary-fixed underline underline-offset-2 hover:no-underline">
+                <Link href="/instant-estimate/" className="text-primary-container underline underline-offset-2 hover:no-underline">
                   Instant Estimate Tool
                 </Link>{' '}
-                to see a ballpark price right now.
+                to see your price right now.
               </p>
             </div>
 
-            {/* Right — contact detail cards */}
+            {/* Contact cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <ContactCard
                 icon={<Phone size={16} aria-hidden="true" />}
@@ -170,12 +107,11 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ── Trust bar ── */}
       <TrustBar />
 
-      {/* ── Contact form section ── */}
+      {/* Contact form */}
       <section className="bg-surface-container-low py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           <div className="mb-10 md:mb-14 max-w-xl">
             <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
               Enquiry Form
@@ -186,39 +122,28 @@ export default function ContactPage() {
             >
               Send Us a Message
             </h2>
-            <p className="font-sans text-base text-on-surface/55 mt-4 max-w-md leading-relaxed">
-              No obligation. No follow-up calls unless you ask. Just honest answers and transparent pricing.
+            <p className="font-sans text-base text-on-surface/75 mt-4 max-w-md leading-relaxed">
+              No obligation. No follow-up calls unless you ask. Honest answers and transparent pricing.
             </p>
           </div>
-
           <ContactForm />
-
-          <p className="mt-6 text-center font-sans text-xs text-on-surface/30 max-w-xl mx-auto leading-relaxed">
+          <p className="mt-6 text-center font-sans text-xs text-on-surface/55 max-w-xl mx-auto leading-relaxed">
             Prefer to skip the form?{' '}
-            <Link href="/instant-estimate/" className="underline hover:text-on-surface/50">
+            <Link href="/instant-estimate/" className="underline hover:text-on-surface/70">
               Get an instant estimate
             </Link>{' '}
-            online — no email required to see your number.
+            — no email required to see your number.
           </p>
         </div>
       </section>
 
-      {/* ── How it works ── */}
-      <ProcessSteps
-        heading="What Happens Next"
-        subheading="Three steps from enquiry to installed windows."
-        steps={contactProcessSteps}
-        cta={{ label: 'Instant Estimate instead', href: '/instant-estimate/' }}
-      />
-
-      {/* ── FAQ ── */}
+      {/* 3 FAQs max */}
       <FAQ
         heading="Common Questions"
-        subheading="Everything homeowners ask before making contact."
+        subheading="Quick answers before you get in touch."
         items={contactFaq}
       />
 
-      {/* ── Soft CTA ── */}
       <CtaBanner
         heading={"Want the\nNumber First?"}
         subtext="Use the Instant Estimate Tool — see your price in 60 seconds, no email required. Then contact us when you're ready."
@@ -229,7 +154,6 @@ export default function ContactPage() {
   )
 }
 
-// ── Sub-components ──────────────────────────────────────────────
 function ContactCard({
   icon,
   label,
@@ -244,17 +168,17 @@ function ContactCard({
   sublabel: string
 }) {
   const inner = (
-    <div className="bg-on-primary-fixed/[0.08] p-5 flex flex-col gap-2 h-full border border-on-primary-fixed/15">
-      <div className="flex items-center gap-2 text-on-primary-fixed">
+    <div className="bg-white/10 p-5 flex flex-col gap-2 h-full border border-white/20">
+      <div className="flex items-center gap-2 text-white">
         {icon}
-        <span className="font-headline text-xs font-semibold uppercase tracking-widest text-on-primary-fixed/60">
+        <span className="font-headline text-xs font-semibold uppercase tracking-widest text-white/70">
           {label}
         </span>
       </div>
-      <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-primary-fixed leading-tight">
+      <p className="font-headline text-sm font-semibold uppercase tracking-wide text-white leading-tight">
         {value}
       </p>
-      <p className="font-sans text-xs text-on-primary-fixed/50 leading-snug">
+      <p className="font-sans text-xs text-white/65 leading-snug">
         {sublabel}
       </p>
     </div>

@@ -1,27 +1,21 @@
 export const processSteps = [
   {
-    title: 'Measure Online',
-    body: 'Enter your window dimensions into our Instant Estimate Tool. Get a transparent price in 60 seconds — no site visit required.',
+    title: 'Tell Us About Your Windows',
+    body: '60 seconds online or a quick phone call. Window count, suburb, main goal — that\'s all we need.',
     imageSrc: '/process-steps/step-1-measure.webp',
-    imageAlt: 'Hands using a laser tape measure on an existing window frame',
+    imageAlt: 'Homeowner answering questions about their windows online',
   },
   {
-    title: 'Confirm Your Quote',
-    body: 'A King technician reviews your submission. You receive an itemised quote within 24 hours. No vague estimates, no pressure.',
+    title: 'We Measure and Quote',
+    body: 'Free home visit. A King glazier measures precisely and gives you a fixed price in writing — no surprises.',
     imageSrc: '/process-steps/step-2-install.webp',
-    imageAlt: 'Glazier carefully lifting a double-glazed unit into a window frame',
+    imageAlt: 'Glazier measuring an existing window frame',
   },
   {
-    title: 'We Install',
-    body: 'Our crew fits new double-glazed units directly into your existing frames. One day. No structural work. No mess.',
+    title: 'We Install in a Day',
+    body: 'No mess. No frame damage. Done in a single day. Lifetime warranty from the moment we leave.',
     imageSrc: '/process-steps/step-3-finish.webp',
-    imageAlt: "Glazier peeling protective film from a finished double-glazed window",
-  },
-  {
-    title: 'You Save',
-    body: 'Lower energy bills from day one. Quieter rooms. Government rebate paperwork handled by us.',
-    imageSrc: '/stock/window-house.webp',
-    imageAlt: 'Homeowner opening a new double-glazed window in a Melbourne home',
+    imageAlt: 'Glazier completing a retrofit double glazing installation',
   },
 ] as const
 

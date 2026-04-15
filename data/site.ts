@@ -1,5 +1,6 @@
 // Routes that use the transparent/overlay navbar (absolute positioned, white text, dark logo)
-export const transparentNavRoutes = ['/', '/about/']
+// Note: /about now uses its own dark hero so no transparent nav needed
+export const transparentNavRoutes = ['/']
 
 // Single source of truth for all business contact & identity details.
 export const siteConfig = {

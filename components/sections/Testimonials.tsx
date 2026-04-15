@@ -10,11 +10,11 @@ interface TestimonialsProps {
 export function Testimonials({
   heading = 'Real Homes.\nReal Results.',
   subheading = 'Every review is from a verified Melbourne customer.',
-  items = testimonials,
+  items = testimonials.slice(0, 6),
 }: TestimonialsProps) {
   return (
     <section className="bg-surface py-16 md:py-24 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-4">
 
         {/* Header */}
         <div className="mb-10 md:mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -30,7 +30,7 @@ export function Testimonials({
                 <span key={i} className="block">{line}</span>
               ))}
             </h2>
-            <p className="font-sans text-sm text-on-surface/50 mt-4">
+            <p className="font-sans text-sm text-on-surface/70 mt-4">
               {subheading}
             </p>
           </div>
@@ -38,7 +38,7 @@ export function Testimonials({
           {/* Aggregate badge */}
           <div className="shrink-0 flex flex-col items-start sm:items-end gap-1">
             <Stars count={5} />
-            <p className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/40">
+            <p className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/80">
               5.0 · {items.length} Reviews · Google
             </p>
           </div>
@@ -61,7 +61,7 @@ export function Testimonials({
 
         {/* Mobile swipe hint */}
         <p
-          className="mt-4 text-center font-headline text-[0.8125rem] uppercase tracking-[0.2em] text-on-surface/30 md:hidden"
+          className="mt-4 text-center font-headline text-[0.8125rem] uppercase tracking-[0.2em] text-on-surface/55 md:hidden"
           aria-hidden="true"
         >
           Swipe to read more
@@ -148,7 +148,7 @@ function TestimonialCard({
           <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface leading-none mb-1">
             {t.name}
           </p>
-          <p className="font-headline text-[0.8125rem] font-semibold uppercase tracking-[0.15em] text-on-surface/40">
+          <p className="font-headline text-[0.8125rem] font-semibold uppercase tracking-[0.15em] text-on-surface/80">
             {t.suburb} · {t.source}
           </p>
           </div>

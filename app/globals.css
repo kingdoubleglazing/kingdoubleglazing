@@ -42,9 +42,9 @@
   --spacing-section: 3.5rem;
 }
 
-/* Accessibility: 18px base for older users — all rem values scale up proportionally */
+/* Accessibility: 20px base — text-sm = 17.5px, text-base = 20px */
 html {
-  font-size: 112.5%;
+  font-size: 125%;
 }
 
 body {

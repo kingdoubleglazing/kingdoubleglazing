@@ -1,4 +1,4 @@
-import { retrofitFaq } from '@/data/retrofit-faq'
+import { homepageFaq } from '@/data/homepage-faq'
 import { buildFaqSchema } from '@/lib/seo/schema/faqPage'
 
 interface FaqItem {
@@ -17,7 +17,7 @@ interface FAQProps {
 export function FAQ({
   heading = 'Common Questions',
   subheading = 'Everything Melbourne homeowners ask before booking.',
-  items = retrofitFaq,
+  items = homepageFaq,
   emitSchema = true,
 }: FAQProps) {
   const schema = emitSchema
@@ -33,7 +33,7 @@ export function FAQ({
         />
       )}
       <section className="bg-surface-container-low py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-4">
 
         {/* Header */}
         <div className="mb-12 md:mb-16 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
@@ -48,7 +48,7 @@ export function FAQ({
               {heading}
             </h2>
           </div>
-          <p className="font-sans text-base text-on-surface/55 max-w-sm leading-relaxed lg:text-right">
+          <p className="font-sans text-base text-on-surface/75 max-w-sm leading-relaxed lg:text-right">
             {subheading}
           </p>
         </div>

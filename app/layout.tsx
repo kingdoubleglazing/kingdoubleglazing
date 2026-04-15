@@ -39,11 +39,11 @@ export const metadata: Metadata = {
     shortcut: '/icon-small.png',
   },
   title: {
-    default: "King Double Glazing Melbourne | From $495/m² | Stop. Don't Overpay.",
+    default: "King Double Glazing Melbourne | From $595/m² | Stop. Don't Overpay.",
     template: "%s | King Double Glazing",
   },
   description:
-    "Melbourne's retrofit double glazing specialists. Upgrade your existing windows from $495/m². Instant online estimate. Transparent pricing. No surprises.",
+    "Melbourne's retrofit double glazing specialists. Upgrade your existing windows from $595/m². Instant online estimate. Transparent pricing. No surprises.",
   openGraph: {
     siteName: "King Double Glazing",
     locale: "en_AU",
@@ -84,10 +84,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
-        <EmergencyBanner
-          message="24/7 Emergency Glass Repair — broken window? We come to you."
-          cta="Call Now"
-        />
+        <EmergencyBanner />
         <FloatingNav />
         <div className="relative flex flex-col flex-1">
           <Header />

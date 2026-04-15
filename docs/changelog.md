@@ -4,6 +4,48 @@ Track significant changes, decisions, and milestones. Most recent first.
 
 ---
 
+## 2026-04-15 — Full site migration: 27-route SEO site → 5-page conversion funnel
+
+Executed full migration per `references/migration/migration.md`, `homepage-funnel.md`, and `copy-voice.md`.
+
+**Deleted** (27 routes → 5 routes):
+- `app/areas/`, `app/blog/`, `app/commercial-glazing/`, `app/custom-mirrors/`, `app/double-glazing/` (all subpages), `app/emergency-glass/`, `app/gallery/`, `app/glass-splashbacks/`, `app/shower-screens/`
+- `components/sections/`: AcousticComparisonTable, ThermalComparisonTable, GlassFeatureMatrix, GlassPickerGuide, GlassTypeDetail, GlassCostTable, CostRangeCards, RetrofitSystem, GalleryPreview, BeforeAfter
+- `components/blocks/GlassOptions.tsx`
+- All blog/area/glass-type data files
+
+**Rewrote** (copy + structure):
+- `EmergencyBanner` → repurposed as yellow "Stop — Don't Overpay" discount bar (sticky top)
+- `Header` → simplified to 5 nav items, Instant Estimate styled as yellow button
+- `Footer` → 3-column, removed area links
+- `FloatingNav` → removed servicesNav dependency
+- `TrustBar` → 4 new items (50+ years, beat any quote 30%, lifetime warranty, Melbourne-owned)
+- `ProblemSolutionSection` → 3-line numbered problem list
+- `BenefitsGrid` → updated copy to include numbers in every benefit
+- `ComparisonTable` → full rewrite as 3-column (Do Nothing / Retrofit / Full Replacement) per funnel spec
+- `ServicesSection` → updated hrefs to /services/#anchor
+- `FounderStory` → condensed to 80-word strip with Tas's real story
+- `ProcessSteps` → simplified to 3 steps
+- `data/process-steps.ts`, `data/testimonials.ts` (top 3 now outcome-led), `data/contact-faq.ts` (3 Qs), `data/estimate-faq.ts` (5 Qs)
+- `CtaBanner` → lifetime warranty (was 10-year)
+- `ContactForm` → service options trimmed to 5-page scope
+
+**Created**:
+- `app/services/page.tsx` — single scrollable page with 6 anchor-linked sections
+- `lib/pricing.ts` — pure pricing function for estimate tool
+- `data/homepage-faq.ts` — 5 homepage FAQs per funnel spec
+
+**Pages rewritten**:
+- `app/page.tsx` — exact section order per `HOMEPAGE_FUNNEL.md §0` (15 sections)
+- `app/about/page.tsx` — Tas's real story, guarantees block, testimonials
+- `app/contact/page.tsx` — simplified, 3 FAQs, prominent click-to-call
+- `app/instant-estimate/page.tsx` — rebuilt around new multi-step EstimateForm
+- `components/sections/EstimateForm.tsx` — new 4-step form + show-then-gate result per funnel spec
+
+**Sitemap** → 5 pages only. **Nav** → 5 items only. No VEU/rebate mentions anywhere.
+
+---
+
 ## 2026-04-10 — PageSpeed fixes (mobile 80→target 90+, accessibility 88→96+, SEO 92→100)
 
 - **ProcessSteps image `sizes`** (`components/sections/ProcessSteps.tsx`): Added `sizes="(min-width: 768px) 25vw, 100vw"` to step images; was defaulting to full-width causing ~278 KiB over-download on desktop where images display at ~25vw

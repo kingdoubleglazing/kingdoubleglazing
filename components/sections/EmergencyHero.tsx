@@ -90,7 +90,7 @@ export function EmergencyHero() {
                 {siteConfig.phone}
               </span>
             </span>
-            <span className="font-headline text-sm font-semibold uppercase tracking-[0.25em] text-white/70 mt-1">
+            <span className="font-headline text-sm font-semibold uppercase tracking-[0.25em] text-white/85 mt-1">
               Available 24 hours, 7 days
             </span>
           </a>
@@ -105,7 +105,7 @@ export function EmergencyHero() {
                   aria-hidden="true"
                   className="text-primary-container shrink-0"
                 />
-                <span className="font-headline text-sm font-semibold uppercase tracking-[0.15em] text-white/70">
+                <span className="font-headline text-sm font-semibold uppercase tracking-[0.15em] text-white/85">
                   {item}
                 </span>
               </li>

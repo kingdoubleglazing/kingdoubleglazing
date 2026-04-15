@@ -6,7 +6,7 @@ export const localBusinessSchema = {
   '@id': `${siteConfig.domain}/#business`,
   name: siteConfig.name,
   alternateName: siteConfig.legalName,
-  description: "Melbourne's retrofit double glazing specialists. Stop. Don't Overpay. From $495/m².",
+  description: "Melbourne's retrofit double glazing specialists. Stop. Don't Overpay. From $595/m².",
   url: siteConfig.domain,
   telephone: siteConfig.phoneTel,
   email: siteConfig.email,
@@ -27,7 +27,7 @@ export const localBusinessSchema = {
     '@type': 'State',
     name: 'Victoria',
   },
-  priceRange: 'From $495/m²',
+  priceRange: 'From $595/m²',
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',

@@ -4,18 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, Phone } from 'lucide-react'
-import { mainNav, servicesNav } from '@/data/nav'
+import { mainNav, ctaNav } from '@/data/nav'
 import { siteConfig } from '@/data/site'
 import { transparentNavRoutes } from '@/data/site'
-import { Button } from '@/components/ui/Button'
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu'
 import {
   Sheet,
   SheetClose,
@@ -39,8 +30,9 @@ export function Header() {
           : 'sticky top-0 bg-surface border-b border-surface-container-high'
       )}
     >
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-4">
         <div className="flex items-center justify-between h-16 gap-4">
+
           {/* Logo */}
           <Link
             href="/"
@@ -58,91 +50,29 @@ export function Header() {
           </Link>
 
           {/* Main nav — desktop */}
-          <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1">
-            <Link
-              href="/"
-              className={cn(
-                'font-headline text-sm font-semibold uppercase tracking-wide px-3 py-2 transition-colors duration-150',
-                isTransparent
-                  ? 'text-white/80 hover:text-white'
-                  : 'text-on-surface/70 hover:text-on-surface hover:bg-surface-container-low'
-              )}
-            >
-              Home
-            </Link>
-
-            {/* Services dropdown */}
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger
-                    className={cn(
-                      isTransparent && 'bg-transparent! text-white/80 hover:text-white! hover:bg-white/10! data-[active]:bg-white/10! data-[state=open]:bg-white/10!'
-                    )}
-                  >
-                    Services
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="grid grid-cols-2 gap-0 w-140 p-4">
-                      {servicesNav.map((group) => (
-                        <div key={group.heading}>
-                          <p className="font-headline text-xs font-semibold uppercase tracking-widest text-on-surface/40 px-3 pb-1 pt-2">
-                            {group.heading}
-                          </p>
-                          <ul>
-                            {group.items.map((item) => (
-                              <li key={item.href}>
-                                <NavigationMenuLink asChild>
-                                  <Link
-                                    href={item.href}
-                                    className={cn(
-                                      'block px-3 py-2 hover:bg-surface-container-low transition-colors duration-150',
-                                      'focus:outline-none focus:bg-surface-container-low'
-                                    )}
-                                  >
-                                    <span className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface block">
-                                      {item.label}
-                                    </span>
-                                    <span className="text-xs text-on-surface/50 font-sans normal-case tracking-normal">
-                                      {item.description}
-                                    </span>
-                                  </Link>
-                                </NavigationMenuLink>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-
-            {mainNav
-              .filter(({ href }) => href !== '/')
-              .map(({ label, href }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className={cn(
-                    'font-headline text-sm font-semibold uppercase tracking-wide px-3 py-2 transition-colors duration-150',
-                    isTransparent
-                      ? 'text-white/80 hover:text-white'
-                      : 'text-on-surface/70 hover:text-on-surface hover:bg-surface-container-low'
-                  )}
-                >
-                  {label}
-                </Link>
-              ))}
+          <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1 flex-1 justify-center">
+            {mainNav.map(({ label, href }) => (
+              <Link
+                key={href}
+                href={href}
+                className={cn(
+                  'font-headline text-sm font-semibold uppercase tracking-wide px-3 py-2 transition-colors duration-150',
+                  isTransparent
+                    ? 'text-white/80 hover:text-white'
+                    : 'text-on-surface/70 hover:text-on-surface hover:bg-surface-container-low'
+                )}
+              >
+                {label}
+              </Link>
+            ))}
           </nav>
 
-          {/* CTA — desktop */}
+          {/* Right side: phone + Get Quote CTA + mobile hamburger */}
           <div className="flex items-center gap-3 shrink-0">
             <Link
               href={siteConfig.phoneHref}
               className={cn(
-                'hidden sm:inline-flex items-center gap-1.5 font-headline text-sm font-semibold uppercase tracking-wide transition-colors duration-150',
+                'hidden xl:inline-flex items-center gap-1.5 font-headline text-sm font-semibold uppercase tracking-wide transition-colors duration-150',
                 isTransparent
                   ? 'text-white/80 hover:text-white'
                   : 'text-on-surface/70 hover:text-on-surface'
@@ -152,9 +82,14 @@ export function Header() {
               <Phone size={15} aria-hidden="true" />
               {siteConfig.phone}
             </Link>
-            <Button as="link" href="/instant-estimate/" size="sm" className="hidden sm:inline-flex">
-              Get Quote
-            </Button>
+
+            {/* Get Quote CTA — desktop */}
+            <Link
+              href={ctaNav.href}
+              className="hidden lg:inline-flex items-center font-headline text-sm font-bold uppercase tracking-wide px-5 py-2 bg-primary-container text-on-primary-fixed hover:bg-primary-fixed-dim transition-colors duration-150"
+            >
+              {ctaNav.label}
+            </Link>
 
             {/* Mobile hamburger */}
             <Sheet>
@@ -188,7 +123,7 @@ export function Header() {
                     </Link>
                   </SheetClose>
 
-                  {/* Top-level nav links */}
+                  {/* Nav links */}
                   <nav aria-label="Mobile navigation">
                     <ul className="space-y-1 mb-6">
                       {mainNav.map(({ label, href }) => (
@@ -196,7 +131,7 @@ export function Header() {
                           <SheetClose asChild>
                             <Link
                               href={href}
-                              className="font-headline text-base font-semibold uppercase tracking-wide text-inverse-on-surface/80 hover:text-primary-container px-3 py-2.5 block transition-colors duration-150"
+                              className="font-headline text-base font-semibold uppercase tracking-wide px-3 py-2.5 block transition-colors duration-150 text-inverse-on-surface/80 hover:text-primary-container"
                             >
                               {label}
                             </Link>
@@ -204,50 +139,31 @@ export function Header() {
                         </li>
                       ))}
                     </ul>
-
-                    {/* Services — grouped inline */}
-                    {servicesNav.map((group) => (
-                      <div key={group.heading} className="mb-5">
-                        <p className="font-headline text-xs font-semibold uppercase tracking-widest text-inverse-on-surface/30 px-3 mb-1">
-                          {group.heading}
-                        </p>
-                        <ul className="space-y-0.5">
-                          {group.items.map((item) => (
-                            <li key={item.href}>
-                              <SheetClose asChild>
-                                <Link
-                                  href={item.href}
-                                  className="font-headline text-sm font-semibold uppercase tracking-wide text-inverse-on-surface/70 hover:text-primary-container px-3 py-2 block transition-colors duration-150"
-                                >
-                                  {item.label}
-                                </Link>
-                              </SheetClose>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
                   </nav>
 
                   {/* Bottom CTAs */}
                   <div className="mt-auto space-y-3 pt-6 border-t border-white/10">
+                    <SheetClose asChild>
+                      <Link
+                        href={ctaNav.href}
+                        className="w-full inline-flex items-center justify-center font-headline text-sm font-bold uppercase tracking-wide px-6 py-3 bg-primary-container text-on-primary-fixed"
+                      >
+                        {ctaNav.label} →
+                      </Link>
+                    </SheetClose>
                     <a
                       href={siteConfig.phoneHref}
-                      className="font-headline inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-inverse-on-surface/70 hover:text-primary-container transition-colors duration-150"
+                      className="font-headline inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-inverse-on-surface/85 hover:text-primary-container transition-colors duration-150"
                     >
                       <Phone size={14} aria-hidden="true" />
                       {siteConfig.phone}
                     </a>
-                    <SheetClose asChild>
-                      <Button as="link" href="/instant-estimate/" size="sm" fullWidth>
-                        Get Quote
-                      </Button>
-                    </SheetClose>
                   </div>
                 </div>
               </SheetContent>
             </Sheet>
           </div>
+
         </div>
       </div>
     </header>
