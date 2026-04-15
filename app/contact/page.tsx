@@ -32,6 +32,8 @@ export default async function ContactPage({
 }) {
   const params = await searchParams
   const isUploadFlow = params.upload === '1'
+  const isShowerDiy = params.service === 'shower-diy'
+  const isShowerVisit = params.service === 'shower-visit'
   return (
     <>
       <script
@@ -122,6 +124,20 @@ export default async function ContactPage({
             <div className="mb-8 max-w-2xl bg-primary-container/20 border-l-4 border-primary-container px-5 py-4">
               <p className="font-sans text-base text-on-surface leading-relaxed">
                 <strong>Sending us a competitor quote?</strong> Mention it in the message field and attach a photo or PDF — we&apos;ll beat it by 30% in writing.
+              </p>
+            </div>
+          )}
+          {isShowerDiy && (
+            <div className="mb-8 max-w-2xl bg-primary-container/20 border-l-4 border-primary-container px-5 py-4">
+              <p className="font-sans text-base text-on-surface leading-relaxed">
+                <strong>Sending us shower screen measurements?</strong> Drop the dimensions in the message field. We&apos;ll quote within one business day, accurate within 10% if you measure carefully.
+              </p>
+            </div>
+          )}
+          {isShowerVisit && (
+            <div className="mb-8 max-w-2xl bg-primary-container/20 border-l-4 border-primary-container px-5 py-4">
+              <p className="font-sans text-base text-on-surface leading-relaxed">
+                <strong>Booking a free shower screen measure?</strong> Tell us your suburb and a good time. Tas will be in touch within one business day.
               </p>
             </div>
           )}

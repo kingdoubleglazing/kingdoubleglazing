@@ -346,8 +346,14 @@ function ResultStep({
         >
           {estimate?.label ?? '$2,400 – $5,800'}
         </p>
+        <div className="mt-5">
+          <span className="inline-flex items-center gap-2 font-headline text-xs font-semibold uppercase tracking-wide bg-primary-container text-on-primary-fixed px-3 py-1.5">
+            <span aria-hidden="true">±</span>
+            Accurate Within 10%
+          </span>
+        </div>
         <p className="font-sans text-base text-inverse-on-surface/85 mt-4 leading-relaxed">
-          Estimated range — final quote after free in-home check. Accurate within ±10%.
+          Estimated range — final quote confirmed at the free in-home check.
         </p>
       </div>
 

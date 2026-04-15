@@ -181,10 +181,11 @@ export default function ServicesPage() {
         </p>
         <ul className="space-y-3 mb-8">
           {[
-            'Frameless — clean, minimal, modern',
-            'Semi-frameless — cost-effective with a clean look',
-            'Framed — budget-friendly, durable',
+            'Frameless — no metal frame, looks like a single sheet of glass',
+            'Semi-frameless — cleaner look, lower cost',
+            'Framed — most affordable, very durable',
             'Custom sizes cut to your exact dimensions',
+            'Measure-it-yourself quote available — accurate within 10% if you measure carefully',
             '10-year warranty on every screen',
           ].map(b => (
             <li key={b} className="flex items-start gap-3 font-sans text-sm text-on-surface/70">
@@ -193,12 +194,20 @@ export default function ServicesPage() {
             </li>
           ))}
         </ul>
-        <Link
-          href="/contact/"
-          className="inline-flex items-center gap-3 bg-inverse-surface text-inverse-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-on-surface/80 transition-colors duration-150"
-        >
-          Get a Quote →
-        </Link>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/contact/?service=shower-diy"
+            className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150"
+          >
+            Send My Measurements →
+          </Link>
+          <Link
+            href="/contact/?service=shower-visit"
+            className="inline-flex items-center gap-3 bg-transparent text-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 border border-on-surface/30 hover:bg-on-surface/10 transition-colors duration-150"
+          >
+            Or Book a Free Measure →
+          </Link>
+        </div>
       </ServiceSection>
 
       {/* ── #splashbacks ── */}
