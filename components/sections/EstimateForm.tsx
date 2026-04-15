@@ -30,7 +30,7 @@ const INITIAL: FormState = {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export function EstimateForm() {
-  const [step, setStep] = useState<1 | 2 | 3 | 4 | 'result'>(1)
+  const [step, setStep] = useState<1 | 2 | 3 | 'result'>(1)
   const [form, setForm] = useState<FormState>(INITIAL)
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -43,7 +43,15 @@ export function EstimateForm() {
     setStep(s => {
       if (s === 1) return 2
       if (s === 2) return 3
-      if (s === 3) return 4
+      return s
+    })
+  }
+
+  function back() {
+    setStep(s => {
+      if (s === 2) return 1
+      if (s === 3) return 2
+      if (s === 'result') return 3
       return s
     })
   }
@@ -67,19 +75,19 @@ export function EstimateForm() {
     : null
 
   if (step === 'result') {
-    return <ResultStep estimate={estimate} form={form} submitted={submitted} submitting={submitting} onSubmit={handleSubmit} update={update} />
+    return <ResultStep estimate={estimate} form={form} submitted={submitted} submitting={submitting} onSubmit={handleSubmit} update={update} onBack={back} />
   }
 
   return (
     <div
       id="estimate-form"
       className="bg-surface ghost-border p-8 md:p-12 max-w-2xl mx-auto"
-      aria-label={`Instant estimate — step ${step} of 4`}
+      aria-label={`Instant estimate — step ${step} of 3`}
     >
       {/* Progress indicator — hidden on step 1 */}
       {step !== 1 && (
-        <div className="mb-8 flex items-center gap-3" aria-label={`Step ${step} of 4`}>
-          {([2, 3, 4] as const).map(n => (
+        <div className="mb-8 flex items-center gap-3" aria-label={`Step ${step} of 3`}>
+          {([2, 3] as const).map(n => (
             <div key={n} className="flex items-center gap-3">
               <span
                 className={[
@@ -90,19 +98,18 @@ export function EstimateForm() {
               >
                 {n < step ? '✓' : n}
               </span>
-              {n < 4 && <div className="w-6 h-px bg-surface-container-highest" aria-hidden="true" />}
+              {n < 3 && <div className="w-6 h-px bg-surface-container-highest" aria-hidden="true" />}
             </div>
           ))}
           <span className="ml-2 font-headline text-xs font-semibold uppercase tracking-wide text-on-surface/80">
-            Step {step} of 4
+            Step {step} of 3
           </span>
         </div>
       )}
 
-      {step === 1 && <Step1 form={form} update={update} onNext={next} />}
-      {step === 2 && <Step2 form={form} update={update} onNext={next} />}
-      {step === 3 && <Step3 form={form} update={update} onNext={next} />}
-      {step === 4 && <Step4 form={form} update={update} onNext={showResult} />}
+      {step === 1 && <Step1 form={form} update={update} onNext={next} onBack={back} />}
+      {step === 2 && <Step2 form={form} update={update} onNext={next} onBack={back} />}
+      {step === 3 && <Step3 form={form} update={update} onNext={showResult} onBack={back} />}
     </div>
   )
 }
@@ -126,7 +133,7 @@ function Step1({ form, update, onNext }: StepProps) {
         <br />
         <span className="bg-primary-container text-on-primary-fixed px-2 inline-block leading-tight">Your Home.</span>
       </h2>
-      <p className="font-sans text-sm text-on-surface/70 mb-10 leading-relaxed">No progress bar yet — this takes 60 seconds.</p>
+      <p className="font-sans text-sm text-on-surface/70 mb-10 leading-relaxed">Takes 60 seconds.</p>
 
       <fieldset className="mb-8">
         <legend className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface/75 mb-4 block">
@@ -179,7 +186,7 @@ function Step1({ form, update, onNext }: StepProps) {
 
 // ── Step 2 — Window count ─────────────────────────────────────────────────────
 
-function Step2({ form, update, onNext }: StepProps) {
+function Step2({ form, update, onNext, onBack }: StepProps) {
   const options: { id: WindowCount; label: string }[] = [
     { id: '1-3',  label: '1–3 windows' },
     { id: '4-6',  label: '4–6 windows' },
@@ -189,6 +196,14 @@ function Step2({ form, update, onNext }: StepProps) {
 
   return (
     <>
+      <button
+        type="button"
+        onClick={onBack}
+        className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface/70 hover:text-on-surface transition-colors duration-150 mb-6 block"
+      >
+        ← Back
+      </button>
+
       <h2
         className="font-display uppercase leading-none text-on-surface mb-2"
         style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
@@ -233,7 +248,7 @@ function Step2({ form, update, onNext }: StepProps) {
 
 // ── Step 3 — Goal ─────────────────────────────────────────────────────────────
 
-function Step3({ form, update, onNext }: StepProps) {
+function Step3({ form, update, onNext, onBack }: StepProps) {
   const goals: { id: Priority; emoji: string; label: string }[] = [
     { id: 'noise',  emoji: '🔇', label: 'Cut noise' },
     { id: 'warmth', emoji: '🔥', label: 'Keep winter warmth in' },
@@ -243,6 +258,14 @@ function Step3({ form, update, onNext }: StepProps) {
 
   return (
     <>
+      <button
+        type="button"
+        onClick={onBack}
+        className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface/70 hover:text-on-surface transition-colors duration-150 mb-6 block"
+      >
+        ← Back
+      </button>
+
       <h2
         className="font-display uppercase leading-none text-on-surface mb-2"
         style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
@@ -288,91 +311,6 @@ function Step3({ form, update, onNext }: StepProps) {
   )
 }
 
-// ── Step 4 — Contact details ──────────────────────────────────────────────────
-
-function Step4({ form, update, onNext }: StepProps) {
-  const canProceed = form.firstName.trim() && form.email.trim() && form.mobile.trim()
-
-  return (
-    <>
-      <h2
-        className="font-display uppercase leading-none text-on-surface mb-2"
-        style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
-      >
-        Where Should We
-        <br />
-        <span className="bg-primary-container text-on-primary-fixed px-2 inline-block leading-tight">Send Your Estimate?</span>
-      </h2>
-      <p className="font-sans text-sm text-on-surface/70 mb-10 leading-relaxed">
-        You&apos;ll see your estimate range immediately. We&apos;ll also send your formal written quote.
-      </p>
-
-      <div className="flex flex-col gap-5 mb-8">
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="firstName" className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75">
-            First name <span className="text-danger font-sans">*</span>
-          </label>
-          <input
-            id="firstName"
-            type="text"
-            autoComplete="given-name"
-            required
-            value={form.firstName}
-            onChange={e => update('firstName', e.target.value)}
-            placeholder="Your first name"
-            className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
-          />
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="email" className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75">
-            Email <span className="text-danger font-sans">*</span>
-          </label>
-          <input
-            id="email"
-            type="email"
-            autoComplete="email"
-            required
-            value={form.email}
-            onChange={e => update('email', e.target.value)}
-            placeholder="you@example.com"
-            className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
-          />
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="mobile" className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75">
-            Mobile <span className="text-danger font-sans">*</span>
-          </label>
-          <input
-            id="mobile"
-            type="tel"
-            autoComplete="tel"
-            required
-            value={form.mobile}
-            onChange={e => update('mobile', e.target.value)}
-            placeholder="04XX XXX XXX"
-            className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
-          />
-          <p className="font-sans text-xs text-on-surface/80">
-            So we can confirm your options and your 30% price beat.
-          </p>
-        </div>
-      </div>
-
-      <button
-        type="button"
-        onClick={onNext}
-        disabled={!canProceed}
-        className="w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-5 hover:bg-primary-fixed-dim transition-colors duration-150 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        Show My Estimate →
-      </button>
-      <p className="mt-3 text-center font-sans text-xs text-on-surface/60">
-        No spam. No unsolicited calls. Unsubscribe any time.
-      </p>
-    </>
-  )
-}
-
 // ── Result step ───────────────────────────────────────────────────────────────
 
 function ResultStep({
@@ -382,6 +320,7 @@ function ResultStep({
   submitting,
   onSubmit,
   update,
+  onBack,
 }: {
   estimate: ReturnType<typeof getEstimate> | null
   form: FormState
@@ -389,10 +328,13 @@ function ResultStep({
   submitting: boolean
   onSubmit: (e: React.FormEvent) => Promise<void>
   update: <K extends keyof FormState>(key: K, value: FormState[K]) => void
+  onBack: () => void
 }) {
+  const canSubmit = form.firstName.trim() && form.email.trim() && form.mobile.trim()
+
   return (
     <div id="estimate-result" className="max-w-2xl mx-auto">
-      {/* The number — hero of the page */}
+      {/* The number — hero of the result screen */}
       <div className="bg-inverse-surface px-8 py-12 md:px-12 md:py-16">
         <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary-container mb-3">
           Most Melbourne homes like yours invest
@@ -404,53 +346,89 @@ function ResultStep({
         >
           {estimate?.label ?? '$2,400 – $5,800'}
         </p>
-        <p className="font-sans text-sm text-inverse-on-surface/85 mt-4 leading-relaxed">
+        <p className="font-sans text-base text-inverse-on-surface/85 mt-4 leading-relaxed">
           Estimated range — final quote after free in-home check. Accurate within ±10%.
         </p>
       </div>
 
-      {/* Confirmation + lead capture */}
+      {/* Lead capture */}
       <div className="bg-surface ghost-border border-t-0 px-8 pb-10 pt-8 md:px-12">
-        <p className="font-sans text-base text-on-surface/70 leading-relaxed mb-6">
-          We&apos;ll send your formal written quote by email within 24 hours.
-          No surprises. No pressure.
-        </p>
-
         {!submitted ? (
-          <form onSubmit={onSubmit} className="flex flex-col gap-4">
-            {/* Upload competitor quote */}
-            <div className="bg-surface-container-lowest px-5 py-4 border-l-4 border-primary-container">
-              <p className="font-headline text-xs font-semibold uppercase tracking-wide text-on-surface mb-1">
-                Already got a quote from someone else?
-              </p>
-              <p className="font-sans text-xs text-on-surface/70 leading-relaxed">
-                Contact us with your quote — we&apos;ll beat it by 30%.
-              </p>
-            </div>
-
+          <>
             <button
-              type="submit"
-              disabled={submitting}
-              className="w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-5 hover:bg-primary-fixed-dim transition-colors duration-150 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+              type="button"
+              onClick={onBack}
+              className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface/70 hover:text-on-surface transition-colors duration-150 mb-6 block"
             >
-              {submitting ? 'Sending…' : 'Send My Written Quote →'}
+              ← Back
             </button>
 
-            <div className="flex flex-col sm:flex-row gap-3 mt-2">
-              <Link
-                href="/contact/"
-                className="flex-1 inline-flex items-center justify-center gap-3 bg-inverse-surface text-inverse-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-6 py-4 hover:bg-on-surface/80 transition-colors duration-150"
+            <p className="font-sans text-base text-on-surface/80 leading-relaxed mb-6">
+              Pop in your details and Tas will send you a written quote within one business day.
+            </p>
+
+            <form onSubmit={onSubmit} className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="firstName" className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75">
+                  First name <span className="text-danger font-sans">*</span>
+                </label>
+                <input
+                  id="firstName"
+                  type="text"
+                  autoComplete="given-name"
+                  required
+                  value={form.firstName}
+                  onChange={e => update('firstName', e.target.value)}
+                  placeholder="Your first name"
+                  className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
+                />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="email" className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75">
+                  Email <span className="text-danger font-sans">*</span>
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  required
+                  value={form.email}
+                  onChange={e => update('email', e.target.value)}
+                  placeholder="you@example.com"
+                  className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
+                />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="mobile" className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75">
+                  Mobile <span className="text-danger font-sans">*</span>
+                </label>
+                <input
+                  id="mobile"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  required
+                  value={form.mobile}
+                  onChange={e => update('mobile', e.target.value)}
+                  placeholder="04XX XXX XXX"
+                  className="bg-surface-container-high px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/55 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting || !canSubmit}
+                className="w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-5 hover:bg-primary-fixed-dim transition-colors duration-150 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3"
               >
-                Book Free Home Visit
-              </Link>
-              <a
-                href={siteConfig.phoneHref}
-                className="flex-1 inline-flex items-center justify-center gap-3 bg-transparent text-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-6 py-4 ghost-border hover:bg-surface-container transition-colors duration-150"
-              >
-                Call {siteConfig.phone}
-              </a>
-            </div>
-          </form>
+                {submitting ? 'Sending…' : 'Send My Written Quote →'}
+              </button>
+
+              <p className="mt-1 text-center font-sans text-xs text-on-surface/70">
+                No spam. No call centres. Just Tas.
+              </p>
+            </form>
+          </>
         ) : (
           <div className="bg-surface-container-lowest px-6 py-5">
             <p className="font-headline text-sm font-semibold uppercase tracking-wide text-primary mb-1">
@@ -469,6 +447,23 @@ function ResultStep({
           This is an estimated range based on typical Melbourne homes.
           Final quote confirmed after a free on-site check — no surprises, no pressure.
         </p>
+
+        {!submitted && (
+          <div className="flex flex-col sm:flex-row gap-3 mt-4">
+            <Link
+              href="/contact/"
+              className="flex-1 inline-flex items-center justify-center gap-3 bg-inverse-surface text-inverse-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-6 py-4 hover:bg-on-surface/80 transition-colors duration-150"
+            >
+              Book Free Home Visit
+            </Link>
+            <a
+              href={siteConfig.phoneHref}
+              className="flex-1 inline-flex items-center justify-center gap-3 bg-transparent text-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-6 py-4 ghost-border hover:bg-surface-container transition-colors duration-150"
+            >
+              Call {siteConfig.phone}
+            </a>
+          </div>
+        )}
       </div>
     </div>
   )
@@ -480,4 +475,5 @@ interface StepProps {
   form: FormState
   update: <K extends keyof FormState>(key: K, value: FormState[K]) => void
   onNext: () => void
+  onBack: () => void
 }
