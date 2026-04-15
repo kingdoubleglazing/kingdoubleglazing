@@ -117,13 +117,13 @@ This is the most important single element on the page. Research 1 §7 reports a 
 
 **Table.**
 
-| | Do Nothing | **Retrofit With Us** ⭐ | Full Window Replacement |
+| | Do Nothing | **Retrofit With Us** ⭐ | Full Replacement |
 |---|---|---|---|
 | **Upfront cost** | $0 | From $495/m² | $15,000+ |
 | **Noise reduction** | None | Up to 70% quieter | Up to 70% quieter |
 | **Winter warmth** | Freezing | Up to 50% warmer | Up to 50% warmer |
 | **Time to install** | — | 1 day | 2–4 weeks |
-| **Mess / disruption** | None | Minimal | Major — walls damaged |
+| **Mess / disruption** | None | Minimal | Frames removed, some wall patching |
 | **Keep your existing frames?** | Yes | Yes | No — ripped out |
 | **Warranty** | — | Lifetime | Varies |
 | **Energy bill savings** | None | Up to 40% less heating | Up to 40% less heating |
@@ -134,9 +134,11 @@ This is the most important single element on the page. Research 1 §7 reports a 
 - Replacement column is neutral
 - On mobile, stack as three cards with the middle one first and highlighted
 
+> Building new, or frames too old to retrofit? We do full replacement too — just ask for a quote.
+
 **CTA directly below table.** `Get My Instant Price — See What Your Home Would Cost →` (yellow button, links to `/instant-estimate`)
 
-**Why this specific structure.** Research 1 §7: "Put your solution in the middle and visually highlight it with a 'Best Value for Most Homes' label, so eyes land on it." Research 2 §7: "Column order: Do Nothing (left), Retrofit Double Glazing (You) (center, highlighted), Full Window Replacement (right). This keeps the status quo visible but emphasises your solution as the 'smart middle'." This isn't opinion — both independent research files reached the same conclusion.
+**Why this specific structure.** Research 1 §7: "Put your solution in the middle and visually highlight it with a 'Best Value for Most Homes' label, so eyes land on it." Research 2 §7: "Column order: Do Nothing (left), Retrofit Double Glazing (You) (center, highlighted), Full Window Replacement (right). This keeps the status quo visible but emphasises your solution as the 'smart middle'." This isn't opinion — both independent research files reached the same conclusion. Replacement is framed neutrally, not negatively, because King Double Glazing offers it as a secondary service for new builds and homes with frames too damaged to retrofit. The comparison still makes retrofit the clear winner for the 90%+ of customers whose existing frames are sound.
 
 **Critical: do NOT put pricing on this table that contradicts the Instant Estimate tool.** The "$495/m²" is a starting-from number that lets the table tell the story. The actual per-window pricing stays gated behind the estimate tool — that's the funnel.
 

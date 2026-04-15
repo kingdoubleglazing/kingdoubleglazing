@@ -13,7 +13,7 @@ export const homepageFaq = [
   },
   {
     q: 'What\'s the warranty?',
-    a: 'Lifetime, no strings attached. Same warranty we\'ve offered for 50+ years combined experience.',
+    a: '10 years on glass and workmanship. Guaranteed in writing on every job, no conditions.',
   },
   {
     q: 'What if I already have a quote from someone else?',

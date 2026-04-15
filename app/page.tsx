@@ -40,8 +40,8 @@ export default function HomePage() {
       {/* 2. Trust bar */}
       <TrustBar />
 
-      {/* 3. Problem + Fix combined */}
-      <ProblemFixSection />
+      {/* 3. Problem/fix anchor strip */}
+      <ProblemAnchorStrip />
 
       {/* 5. Comparison table — the centrepiece */}
       <ComparisonTable />
@@ -147,6 +147,27 @@ function ProblemFixSection() {
   )
 }
 
+// ── Problem/fix anchor strip ─────────────────────────────────────────────────
+
+function ProblemAnchorStrip() {
+  return (
+    <div className="bg-black py-8 md:py-10">
+      <div className="max-w-175 mx-auto px-4 text-center space-y-3">
+        <p className="font-sans text-base md:text-lg text-white/75 leading-snug">
+          Single-pane windows leak heat, let traffic noise in, and cost{' '}
+          <span className="text-primary-container font-semibold">$15,000+</span> to replace.
+        </p>
+        <p className="font-sans text-base md:text-lg text-white leading-snug">
+          We add a second layer of glass to the windows you already have —{' '}
+          up to <span className="text-primary-container font-semibold">70% quieter</span>,{' '}
+          up to <span className="text-primary-container font-semibold">50% warmer</span>,{' '}
+          a fraction of the price.
+        </p>
+      </div>
+    </div>
+  )
+}
+
 // ── Estimate CTA block ───────────────────────────────────────────────────────
 
 function EstimateCTABlock() {
@@ -244,15 +265,15 @@ function UploadQuoteSection() {
 
 function EmergencyStrip() {
   return (
-    <section className="bg-inverse-surface border-t border-white/10 py-6">
+    <section className="bg-danger py-6">
       <div className="max-w-5xl mx-auto px-4 flex flex-wrap items-center justify-between gap-4">
-        <p className="font-sans text-sm text-inverse-on-surface/85 leading-relaxed">
-          <strong className="text-inverse-on-surface">Broken window right now?</strong>{' '}
+        <p className="font-sans text-sm text-white/90 leading-relaxed">
+          <strong className="text-white">Broken window right now?</strong>{' '}
           We do emergency glass repair across Melbourne.
         </p>
         <a
           href={siteConfig.phoneHref}
-          className="inline-flex items-center gap-2 font-headline text-sm font-semibold uppercase tracking-wide text-primary-container hover:text-primary-fixed-dim transition-colors duration-150"
+          className="inline-flex items-center gap-2 font-headline text-sm font-semibold uppercase tracking-wide text-white hover:text-white/80 transition-colors duration-150"
         >
           <Phone size={15} aria-hidden="true" />
           Call {siteConfig.phone}

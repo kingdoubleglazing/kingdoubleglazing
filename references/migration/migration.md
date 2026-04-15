@@ -128,13 +128,16 @@ lib/seo/schema/article.ts                 # blog is dead
 
 **`app/services/page.tsx`** — does not exist yet. Create as a single scrollable page with anchor-linked sections:
 1. `#retrofit` — Retrofit Double Glazing (the hero service, most detailed)
-2. `#emergency` — Emergency Glass Repair
-3. `#shower-screens` — Shower Screens (frameless, semi-frameless, framed all on one page)
-4. `#splashbacks` — Kitchen Glass Splashbacks
-5. `#mirrors` — Custom Mirrors
-6. `#commercial` — Commercial Glazing (one short paragraph + contact CTA, not a full section)
+2. `#replacement` — Full Window Replacement & New Installs (secondary service — one short section, three lines of copy, photo optional, CTA to contact form not estimate tool)
+3. `#emergency` — Emergency Glass Repair
+4. `#shower-screens` — Shower Screens (frameless, semi-frameless, framed all on one page)
+5. `#splashbacks` — Kitchen Glass Splashbacks
+6. `#mirrors` — Custom Mirrors
+7. `#commercial` — Commercial Glazing (one short paragraph + contact CTA, not a full section)
 
 Each section gets: short outcome-led heading, 3–4 plain-English benefit bullets with numbers where possible, one photo or illustration, and a CTA back to the estimate tool (retrofit) or contact form (everything else).
+
+> The #replacement section should be brief (50–80 words), clearly positioned as secondary to retrofit, and CTA should go to the contact form rather than the Instant Estimate tool (the estimate tool is retrofit-specific).
 
 ### Components to rewrite (keep file, replace copy/structure)
 

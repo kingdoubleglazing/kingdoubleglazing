@@ -69,7 +69,7 @@ export function CtaBanner({
             {[
               'No site visit required',
               'Price locked at quote',
-              'Lifetime warranty',
+              '10-year warranty',
               'We beat any quote by 30%',
             ].map((item) => (
               <p

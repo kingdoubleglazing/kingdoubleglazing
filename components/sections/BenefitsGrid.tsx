@@ -94,7 +94,7 @@ export function BenefitsGrid({
               <li
                 key={itemHeading}
                 className="group relative overflow-hidden bg-surface animate-stagger-child
-                  flex items-center gap-3 py-3 sm:py-0
+                  flex items-center gap-3 py-3
                   sm:flex-col sm:items-start sm:ghost-border sm:p-7 sm:card-interactive"
                 // biome-ignore lint/suspicious/noExplicitAny: CSS custom prop
                 style={{ '--i': i } as any}

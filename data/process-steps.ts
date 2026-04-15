@@ -13,7 +13,7 @@ export const processSteps = [
   },
   {
     title: 'We Install in a Day',
-    body: 'No mess. No frame damage. Done in a single day. Lifetime warranty from the moment we leave.',
+    body: 'No mess. No frame damage. Done in a single day. 10-year warranty from the moment we leave.',
     imageSrc: '/process-steps/step-3-finish.webp',
     imageAlt: 'Glazier completing a retrofit double glazing installation',
   },

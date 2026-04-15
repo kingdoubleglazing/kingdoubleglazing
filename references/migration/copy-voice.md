@@ -48,6 +48,7 @@ These words are banned from H1s, H2s, hero subheads, and CTA buttons. They're al
 | Accredited | DO NOT USE — compliance risk |
 | Cheapest | "we beat any quote by 30%" |
 | Best in Melbourne | don't use — unprovable superlative |
+| "Full replacement is bad" framing | "Full replacement is sometimes necessary" — neutral tone only |
 | Number one | don't use — unprovable superlative |
 | Industry-leading | don't use — meaningless |
 | Premium | don't use — means nothing |
@@ -173,6 +174,7 @@ These are brand anchors. Use them verbatim, don't rephrase:
 - **"Half the price of full replacement."** (positioning)
 - **"Installed in a day."** (speed)
 - **"Same frames. Same look. A fraction of the cost."** (retrofit explanation)
+- **"We do full replacement too — just ask."** (secondary service acknowledgement, used sparingly, only on the homepage comparison table and the /services page)
 
 ---
 

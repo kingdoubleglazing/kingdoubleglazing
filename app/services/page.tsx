@@ -136,11 +136,11 @@ export default function ServicesPage() {
         id="emergency"
         eyebrow="Rapid Response"
         heading="Emergency Glass Repair"
-        dark
+        danger
         image="/stock/AdobeStock_323273938.webp"
         imageAlt="Emergency glass repair — glazier on site in Melbourne"
       >
-        <p className="font-sans text-base text-inverse-on-surface/85 leading-relaxed mb-6">
+        <p className="font-sans text-base text-white/85 leading-relaxed mb-6">
           Broken window right now? We do same-day emergency glass repair across Melbourne.
           Shopfronts, residential, sliding doors, skylights.
         </p>
@@ -151,15 +151,15 @@ export default function ServicesPage() {
             'All glass types — safety, toughened, laminated',
             'Insurance reports available on request',
           ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-sm text-inverse-on-surface/85">
-              <span className="text-primary-container font-bold mt-0.5 shrink-0">✓</span>
+            <li key={b} className="flex items-start gap-3 font-sans text-sm text-white/85">
+              <span className="text-white font-bold mt-0.5 shrink-0">✓</span>
               {b}
             </li>
           ))}
         </ul>
         <a
           href={siteConfig.phoneHref}
-          className="inline-flex items-center gap-2 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150"
+          className="inline-flex items-center gap-2 bg-black text-white font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-black/80 transition-colors duration-150"
         >
           <Phone size={16} aria-hidden="true" />
           Call {siteConfig.phone} Now
@@ -317,6 +317,7 @@ function ServiceSection({
   heading,
   featured,
   dark,
+  danger,
   image,
   imageAlt,
   children,
@@ -326,23 +327,25 @@ function ServiceSection({
   heading: string
   featured?: boolean
   dark?: boolean
+  danger?: boolean
   image?: string
   imageAlt?: string
   children: React.ReactNode
 }) {
-  const bg = dark ? 'bg-inverse-surface' : featured ? 'bg-surface' : 'bg-surface-container-lowest'
+  const bg = danger ? 'bg-danger' : dark ? 'bg-inverse-surface' : featured ? 'bg-surface' : 'bg-surface-container-lowest'
   const border = featured ? 'border-l-4 border-primary-container' : ''
+  const onDark = dark || danger
 
   return (
     <section id={id} className={`${bg} py-16 md:py-20 scroll-mt-20`}>
       <div className="max-w-5xl mx-auto px-4">
         <div className={`grid grid-cols-1 ${image ? 'lg:grid-cols-2 gap-12 lg:gap-20 items-center' : ''}`}>
           <div className={`${border} ${border ? 'pl-8' : ''}`}>
-            <p className={`font-headline text-xs font-semibold uppercase tracking-[0.2em] mb-4 ${dark ? 'text-primary-container' : 'text-primary'}`}>
+            <p className={`font-headline text-xs font-semibold uppercase tracking-[0.2em] mb-4 ${onDark ? 'text-white/60' : 'text-primary'}`}>
               {eyebrow}
             </p>
             <h2
-              className={`font-display uppercase leading-none mb-8 ${dark ? 'text-inverse-on-surface' : 'text-on-surface'}`}
+              className={`font-display uppercase leading-none mb-8 ${onDark ? 'text-white' : 'text-on-surface'}`}
               style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
             >
               {heading}
