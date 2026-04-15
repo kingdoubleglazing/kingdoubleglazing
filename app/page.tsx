@@ -99,7 +99,7 @@ function EstimateCTABlock() {
   return (
     <section className="bg-primary-container py-16 md:py-20 overflow-hidden relative">
       <span
-        className="pointer-events-none select-none absolute -bottom-6 -right-4 font-display uppercase leading-none text-on-primary-fixed/[0.06]"
+        className="pointer-events-none select-none absolute -bottom-6 -right-4 font-display uppercase leading-none text-on-primary-fixed/6"
         style={{ fontSize: 'clamp(8rem, 22vw, 18rem)' }}
         aria-hidden="true"
       >

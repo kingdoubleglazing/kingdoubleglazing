@@ -9,6 +9,7 @@ import { CtaBanner } from '@/components/sections/CtaBanner'
 import { estimateFaq } from '@/data/estimate-faq'
 import { siteConfig } from '@/data/site'
 import { Eye, ShieldCheck, PhoneOff, Clock, Calculator } from 'lucide-react'
+import { GlassComparisonTable } from '@/components/sections/GlassComparisonTable'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Instant Double Glazing Estimate Melbourne | See Your Price First',
@@ -120,6 +121,8 @@ export default function InstantEstimatePage() {
       </section>
 
       <TrustBar items={estimateTrustItems} />
+
+      <GlassComparisonTable />
 
       {/* The tool */}
       <section className="bg-surface-container-low py-16 md:py-24">
