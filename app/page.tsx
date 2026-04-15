@@ -30,7 +30,7 @@ export default function HomePage() {
         badge="Stop. Don't Overpay."
         headlineWhite="Stop Overpaying for"
         headlineYellow="Double Glazing."
-        subtext="We upgrade your existing windows with a second layer of glass. Up to 70% quieter. Up to 50% warmer in winter. Half the price of full replacement."
+        subtext="We upgrade your existing windows with a second layer of glass. Up to 70% quieter. Up to 50% warmer. Half the price of full replacement."
         primaryCta={{ label: 'Get My Instant Price →', href: '/instant-estimate/' }}
         secondaryCta={{ label: `Or call ${siteConfig.phone}`, href: siteConfig.phoneHref }}
         imageSrc="/hero/hero-double-glazing.webp"
@@ -158,8 +158,8 @@ function ProblemAnchorStrip() {
     <div className="bg-black py-8 md:py-10">
       <div className="max-w-175 mx-auto px-4 text-center space-y-3">
         <p className="font-sans text-base md:text-lg text-white/75 leading-snug">
-          Single-pane windows leak heat, let traffic noise in, and cost{' '}
-          <span className="text-primary-container font-semibold">$15,000+</span> to replace.
+          If your windows are just one layer of glass, they leak heat, let traffic noise in, and full replacement costs{' '}
+          <span className="text-primary-container font-semibold">$15,000+</span>.
         </p>
         <p className="font-sans text-base md:text-lg text-white leading-snug">
           We add a second layer of glass to the windows you already have —{' '}

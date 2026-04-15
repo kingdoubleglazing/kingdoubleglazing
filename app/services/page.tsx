@@ -86,8 +86,8 @@ export default function ServicesPage() {
             <span className="text-primary-container">Every Job.</span>
           </h1>
           <p className="font-sans text-base text-white/85 max-w-lg leading-relaxed">
-            Retrofit double glazing is our main business. We also do emergency repairs,
-            shower screens, splashbacks, mirrors, and commercial glazing across Melbourne.
+            Retrofit double glazing — adding a second layer of glass to the windows you already have — is our main business.
+            We also do emergency repairs, shower screens, splashbacks, mirrors, and commercial glazing across Melbourne.
             10-year warranty on every job.
           </p>
         </div>

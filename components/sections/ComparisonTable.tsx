@@ -67,7 +67,7 @@ interface ComparisonTableProps {
 }
 
 export function ComparisonTable({
-  heading = 'Retrofit, Replace, Or Live With It — How The Options Compare',
+  heading = 'Add a Second Glass Layer, Replace the Whole Window, or Live With It — How They Compare',
 }: ComparisonTableProps) {
   return (
     <section className="bg-surface-container-low py-16 md:py-24">
@@ -123,6 +123,7 @@ export function ComparisonTable({
                   >
                     Retrofit With Us
                   </span>
+                  <span className="block font-sans text-xs normal-case font-normal text-on-primary-fixed/70 mt-1">Add a second glass layer</span>
                 </th>
 
                 {/* Full Replacement — clean white */}
@@ -143,6 +144,7 @@ export function ComparisonTable({
                   >
                     Full Replacement
                   </span>
+                  <span className="block font-sans text-xs normal-case font-normal text-on-surface/70 mt-1">Whole new window + frame</span>
                 </th>
               </tr>
             </thead>
@@ -201,11 +203,12 @@ export function ComparisonTable({
               Most popular choice
             </p>
             <h3
-              className="font-display uppercase text-on-primary-fixed leading-none mb-6"
+              className="font-display uppercase text-on-primary-fixed leading-none mb-1"
               style={{ fontSize: '1.75rem' }}
             >
               Retrofit With Us
             </h3>
+            <p className="font-sans text-xs normal-case font-normal text-on-primary-fixed/70 mb-5">Add a second glass layer</p>
             <dl className="space-y-3">
               {rows.map(row => (
                 <div key={row.feature} className="flex justify-between gap-4">
@@ -229,11 +232,12 @@ export function ComparisonTable({
               New builds &amp; old frames
             </p>
             <h3
-              className="font-display uppercase text-on-surface leading-none mb-6"
+              className="font-display uppercase text-on-surface leading-none mb-1"
               style={{ fontSize: '1.75rem' }}
             >
               Full Replacement
             </h3>
+            <p className="font-sans text-xs normal-case font-normal text-on-surface/70 mb-5">Whole new window + frame</p>
             <dl className="space-y-3">
               {rows.map(row => (
                 <div key={row.feature} className="flex justify-between gap-4">
