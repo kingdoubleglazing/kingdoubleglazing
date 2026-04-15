@@ -32,7 +32,7 @@ export const retrofitFaqs: FAQ[] = [
   },
   {
     question: 'What is the warranty on retrofit double glazing?',
-    answer: 'We offer a 10-year warranty on all retrofit double glazing installations, covering glass and workmanship with no conditions or fine print.',
+    answer: 'We offer a 10-year warranty on all retrofit double glazing installations, covering glass and workmanship with no conditions or fine print. See full warranty terms at kingdoubleglazing.com.au/warranty/',
   },
   {
     question: 'Can you beat a competitor quote on double glazing?',
@@ -70,7 +70,7 @@ export const generalFaqs: FAQ[] = [
   },
   {
     question: 'What warranty does King Double Glazing offer?',
-    answer: 'We offer a 10-year warranty on all retrofit double glazing installations, covering glass and workmanship. No conditions, no fine print.',
+    answer: 'We offer a 10-year warranty on all retrofit double glazing installations, covering glass and workmanship. No conditions, no fine print. See full warranty terms at kingdoubleglazing.com.au/warranty/',
   },
   {
     question: 'Who is Tas Markou and why does that matter?',

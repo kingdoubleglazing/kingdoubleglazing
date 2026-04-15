@@ -13,7 +13,7 @@ export const homepageFaq = [
   },
   {
     q: 'What\'s the warranty?',
-    a: '10 years on glass and workmanship. Guaranteed in writing on every job, no conditions.',
+    a: '10 years on glass and workmanship. Guaranteed in writing on every job, no conditions. See full warranty terms →',
   },
   {
     q: 'What if I already have a quote from someone else?',

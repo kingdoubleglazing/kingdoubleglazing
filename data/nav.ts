@@ -24,6 +24,7 @@ export const footerNav = {
     { label: 'About Us',               href: '/about/' },
     { label: 'Gallery',                href: '/gallery/' },
     { label: 'Contact',                href: '/contact/' },
+    { label: 'Warranty',               href: '/warranty/' },
     { label: 'Get an Instant Estimate', href: '/instant-estimate/' },
   ],
 } as const
