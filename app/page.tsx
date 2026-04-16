@@ -35,13 +35,13 @@ export default function HomePage() {
       {/* 1. Hero */}
       <HeroSection
         badge="Stop. Don't Overpay. · 10-Year Warranty · Beat Any Quote 30%"
-        headlineWhite="Retrofit Double Glazing"
-        headlineYellow="Melbourne."
-        subtext="We upgrade your existing windows with a second layer of glass. Up to 70% quieter. Up to 50% warmer. Half the price of full replacement. Custom adaptors fit timber, aluminium, and steel frames."
+        headlineWhite="Quieter Home. Lower Bills."
+        headlineYellow="Without Replacing Your Windows."
+        subtext="We add a second layer of glass to the windows you already have — no ripping them out, no scaffolding, no mess. Your home gets up to 70% quieter and up to 50% warmer, at half the cost of full window replacement. It works on timber, aluminium, and steel frames."
         primaryCta={{ label: 'Get My Instant Price →', href: '/instant-estimate/' }}
         secondaryCta={{ label: `Or call ${siteConfig.phone}`, href: siteConfig.phoneHref }}
         imageSrc="/hero/hero-double-glazing.webp"
-        imageAlt="Retrofit double glazing installation — existing timber window being upgraded"
+        imageAlt="Double glazing upgrade on an existing window in a Melbourne home"
         showWarrantyBadge
       />
 

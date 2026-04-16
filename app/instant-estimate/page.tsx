@@ -6,6 +6,7 @@ import { FAQ } from '@/components/sections/FAQ'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { estimateFaq } from '@/data/estimate-faq'
 import { siteConfig } from '@/data/site'
+import Image from 'next/image'
 import { Eye, ShieldCheck, PhoneOff, Clock, Calculator } from 'lucide-react'
 import { GlassComparisonTable } from '@/components/sections/GlassComparisonTable'
 
@@ -70,28 +71,37 @@ export default function InstantEstimatePage() {
       />
 
       {/* Hero */}
-      <section className="bg-primary-container py-16 md:py-20 overflow-hidden relative">
-        <span
-          className="pointer-events-none select-none absolute -bottom-4 -right-6 font-display uppercase leading-none text-on-primary-fixed/6"
-          style={{ fontSize: 'clamp(8rem, 22vw, 18rem)' }}
+      <section className="relative flex flex-col overflow-hidden bg-[#111318] min-h-[50vh]">
+        <Image
+          src="/hero/hero-double-glazing.webp"
+          alt="Double glazing upgrade in progress on a Melbourne home"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(105deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.50) 55%, rgba(0,0,0,0.30) 100%)',
+          }}
           aria-hidden="true"
-        >
-          PRICE
-        </span>
-        <div className="relative max-w-5xl mx-auto px-4">
+        />
+        <div className="relative z-10 flex flex-col justify-end flex-1 max-w-5xl mx-auto w-full px-4 pb-14 md:pb-18 pt-30">
           <div className="flex flex-col gap-5 max-w-3xl">
-            <span className="inline-block w-fit bg-on-primary-fixed text-primary-container font-headline text-xs font-semibold uppercase tracking-widest px-3 py-1">
+            <span className="inline-block w-fit bg-primary-container text-on-primary-fixed font-headline text-xs font-semibold uppercase tracking-widest px-3 py-1">
               Instant Estimate Tool
             </span>
             <h1
-              className="font-display uppercase leading-none text-on-primary-fixed"
-              style={{ fontSize: 'clamp(3rem, 9vw, 7rem)' }}
+              className="font-display uppercase leading-none text-white"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
             >
               Get Your Price in 60 Seconds.
               <br />
-              <span className="bg-on-primary-fixed text-primary-container px-2 inline-block leading-tight">No Email Needed to See Your Number.</span>
+              <span className="text-primary-container">No Email Needed.</span>
             </h1>
-            <p className="font-sans text-base text-on-primary-fixed/70 max-w-lg leading-relaxed">
+            <p className="font-sans text-lg md:text-xl text-white/90 max-w-xl leading-relaxed">
               We&apos;ll beat any genuine quote by 30%. That&apos;s a promise in writing.
             </p>
             <ul className="flex flex-wrap gap-x-6 gap-y-2 mt-1">
@@ -101,7 +111,7 @@ export default function InstantEstimatePage() {
                 'See your range instantly',
                 'No email needed',
               ].map(item => (
-                <li key={item} className="font-headline text-xs font-semibold uppercase tracking-widest text-on-primary-fixed">
+                <li key={item} className="font-headline text-xs font-semibold uppercase tracking-widest text-white/80">
                   ✓ {item}
                 </li>
               ))}
@@ -109,7 +119,7 @@ export default function InstantEstimatePage() {
             <div className="mt-3">
               <a
                 href="#estimate-form"
-                className="inline-flex items-center gap-3 bg-on-primary-fixed text-primary-container font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-on-primary-fixed/80 transition-colors duration-150 w-fit"
+                className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 w-fit"
               >
                 Start My Free Estimate →
               </a>

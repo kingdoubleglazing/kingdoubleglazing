@@ -64,20 +64,20 @@ export function HeroSection({
         <h1 className="font-display uppercase leading-[0.9] mb-6 md:mb-8">
           <span
             className="block text-white"
-            style={{ fontSize: 'clamp(3.5rem, 9vw, 8.5rem)' }}
+            style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
           >
             {headlineWhite}
           </span>{' '}
           <span
             className="block text-primary-container"
-            style={{ fontSize: 'clamp(3.5rem, 9vw, 8.5rem)' }}
+            style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
           >
             {headlineYellow}
           </span>
         </h1>
 
         {/* Subtext */}
-        <p className="font-sans text-base text-white/85 mb-8 max-w-xl leading-relaxed">
+        <p className="font-sans text-lg md:text-xl text-white/90 mb-8 max-w-2xl leading-relaxed">
           {subtext}
         </p>
 

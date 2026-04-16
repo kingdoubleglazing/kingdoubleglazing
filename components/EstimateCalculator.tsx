@@ -116,10 +116,10 @@ export function EstimateCalculator() {
   }
 
   return (
-    <div className="lg:grid lg:grid-cols-[1fr_300px]">
+    <div>
 
       {/* ── Steps column ───────────────────────────────────────────────────── */}
-      <div>
+      <div className="max-w-2xl mx-auto">
         {/* Progress bar — 4 segments, no rounded corners */}
         <div className="px-6 pt-7 pb-5 md:px-10" aria-hidden="true">
           <div className="flex gap-1">
@@ -295,14 +295,12 @@ export function EstimateCalculator() {
         )}
       </div>
 
-      {/* ── Estimate panel ─────────────────────────────────────────────────────
-          Desktop: right column, sticky.
-          Mobile: appears below all steps once propertyType is answered. ───── */}
+      {/* ── Estimate panel — appears below steps ────────────────────────────── */}
       <div className={[
-        'lg:sticky lg:top-0 lg:self-start lg:border-l lg:border-white/10',
+        'max-w-2xl mx-auto',
         calc.propertyType
-          ? 'border-t border-white/10 lg:border-t-0'
-          : 'hidden lg:block',
+          ? 'border-t border-white/10'
+          : 'hidden',
       ].join(' ')}>
         <EstimatePanel {...panelProps} />
       </div>
