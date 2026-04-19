@@ -4,20 +4,25 @@ import { eq } from 'drizzle-orm'
 import { randomUUID } from 'crypto'
 import { getDb } from '@/db'
 import { quotes } from '@/db/schema'
-import { calculateEstimate, WINDOW_BAND_MIDPOINT } from '@/data/pricing'
+import { calculateQuote, OPTIONS, type OptionKey, type WindowRow } from '@/data/pricing'
 import { sendQuoteNotification, sendQuoteConfirmation } from '@/lib/email'
 
+const windowRowSchema = z.object({
+  heightMm:     z.number().min(200).max(3500),
+  widthMm:      z.number().min(200).max(3500),
+  quantity:     z.number().min(1).max(50),
+  secondStorey: z.boolean(),
+})
+
 const schema = z.object({
-  name:           z.string().min(2).max(100),
-  email:          z.string().email(),
-  phone:          z.string().min(8).max(20),
-  propertyType:   z.enum(['house', 'apartment', 'townhouse']),
-  windowBand:     z.enum(['1-3', '4-7', '8-12', '12+']),
-  glassType:      z.enum(['standard', 'lowe', 'acoustic']),
-  orientation:    z.enum(['north', 'east', 'west', 'south', 'mixed']),
-  storeys:        z.coerce.number().min(1).max(3),
-  frameCondition: z.enum(['good', 'needs-work']),
-  priority:       z.enum(['noise', 'warmth', 'both']),
+  name:        z.string().min(2).max(100),
+  email:       z.string().email(),
+  phone:       z.string().min(8).max(20),
+  address:     z.string().max(200).optional(),
+  option:      z.enum(['A', 'B', 'C', 'D']),
+  windows:     z.string().transform(s => JSON.parse(s)).pipe(z.array(windowRowSchema)),
+  total:       z.coerce.number().min(0),
+  windowCount: z.coerce.number().min(1),
 })
 
 export type QuoteState =
@@ -37,49 +42,54 @@ export async function submitQuote(
   }
 
   try {
-    const data = parsed.data
-    const estimate = calculateEstimate({
-      propertyType:   data.propertyType,
-      windowBand:     data.windowBand,
-      glassType:      data.glassType,
-      storeys:        data.storeys as 1 | 2 | 3,
-      frameCondition: data.frameCondition,
-    })
+    const { name, email, phone, address, option, windows, total, windowCount } = parsed.data
+    const opt = OPTIONS[option as OptionKey]
+
+    // Revalidate total server-side
+    const serverTotal = Math.round(calculateQuote(option as OptionKey, windows as WindowRow[]) / 10) * 10
+    if (Math.abs(serverTotal - total) > total * 0.05) {
+      return { status: 'error', message: 'Quote total mismatch — please recalculate and try again.' }
+    }
+
     const confirmToken = randomUUID()
-    const windowCount  = WINDOW_BAND_MIDPOINT[data.windowBand]
 
     const db = getDb()
     const [quote] = await db.insert(quotes).values({
-      name:           data.name,
-      email:          data.email,
-      phone:          data.phone,
-      propertyType:   data.propertyType,
+      name,
+      email,
+      phone,
+      propertyType:   'residential',
       windowCount,
-      glassType:      data.glassType,
-      orientation:    data.orientation,
-      storeys:        data.storeys,
-      frameCondition: data.frameCondition,
-      priority:       data.priority,
-      estimateLow:    estimate.low,
-      estimateHigh:   estimate.high,
+      glassType:      option,
+      orientation:    address ?? 'not provided',
+      storeys:        1,
+      frameCondition: 'good',
+      priority:       'both',
+      estimateLow:    serverTotal,
+      estimateHigh:   serverTotal,
       confirmToken,
       status: 'pending',
     }).returning()
 
+    // Format window summary for email
+    const windowSummary = (windows as WindowRow[])
+      .map((r, i) => `Win ${i + 1}: ${r.heightMm}×${r.widthMm}mm qty ${r.quantity}${r.secondStorey ? ' (2nd floor)' : ''}`)
+      .join(' | ')
+
     await sendQuoteNotification({
-      name:           data.name,
-      email:          data.email,
-      phone:          data.phone,
-      propertyType:   data.propertyType,
-      windowBand:     data.windowBand,
-      glassType:      data.glassType,
-      orientation:    data.orientation,
-      storeys:        data.storeys,
-      frameCondition: data.frameCondition,
-      priority:       data.priority,
-      low:            estimate.low,
-      mid:            estimate.mid,
-      high:           estimate.high,
+      name,
+      email,
+      phone,
+      propertyType:   'residential',
+      windowBand:     `${windowCount} windows — ${windowSummary}`,
+      glassType:      `${opt.label} (${opt.spec})`,
+      orientation:    address ?? 'not provided',
+      storeys:        1,
+      frameCondition: 'good',
+      priority:       'both',
+      low:            serverTotal,
+      mid:            serverTotal,
+      high:           serverTotal,
       quoteId:        quote.id,
       confirmToken,
     })
