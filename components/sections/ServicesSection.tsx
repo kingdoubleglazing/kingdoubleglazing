@@ -15,7 +15,7 @@ interface ServiceCard {
 const defaultServices: ServiceCard[] = [
   {
     title: 'Retrofit\nDouble Glazing',
-    description: `We add a second layer of glass to the windows you already have. Same frames. Up to 70% quieter. Up to 50% warmer. ${siteConfig.pricing.retrofitFromDisplay}.`,
+    description: `We add a second layer of glass to the windows you already have. Same frames. Up to 70% quieter. Up to 70% less heat loss. ${siteConfig.pricing.retrofitFromDisplay}.`,
     href: '/services/#retrofit',
     image: '/hero/hero-double-glazing.webp',
     imageAlt: 'Retrofit double glazing installation Melbourne',

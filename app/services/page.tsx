@@ -12,6 +12,7 @@ import { TrustBar } from '@/components/sections/TrustBar'
 import { FAQ } from '@/components/sections/FAQ'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { AdaptorDisclosure } from '@/components/AdaptorDisclosure'
+import { FreeAdviceBlock } from '@/components/FreeAdviceBlock'
 import { siteConfig } from '@/data/site'
 
 export const metadata: Metadata = buildMetadata({
@@ -33,7 +34,7 @@ const servicesPageSchemas = [
   }),
   buildServiceSchema({
     name: 'Retrofit Double Glazing Melbourne',
-    description: 'We add a second layer of glass to your existing windows. Works on timber, aluminium, and steel frames. Installed in one day. Up to 70% quieter, up to 50% warmer. From $595/m².',
+    description: 'We add a second layer of glass to your existing windows. Works on timber, aluminium, and steel frames. Installed in one day. Up to 70% quieter, up to 70% less heat loss. From $595/m².',
     url: `${BASE_URL}/services/#retrofit`,
     priceRange: siteConfig.pricing.retrofitFromDisplay,
   }),
@@ -113,7 +114,7 @@ export default function ServicesPage() {
       >
         <p className="font-sans text-base text-on-surface/70 leading-relaxed mb-6">
           We add a second layer of glass to the windows you already have.
-          Same frames. Same look. Up to 70% quieter. Up to 50% warmer in winter.
+          Same frames. Same look. Up to 70% quieter. Up to 70% less heat loss in winter.
           Half the price of full replacement.
         </p>
         <ul className="space-y-3 mb-8">
@@ -134,7 +135,7 @@ export default function ServicesPage() {
           href="/instant-estimate/"
           className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150"
         >
-          Get My Instant Price →
+          Generate My Quote →
         </Link>
       </ServiceSection>
 
@@ -326,10 +327,12 @@ export default function ServicesPage() {
         items={servicesFaqItems}
       />
 
+      <FreeAdviceBlock />
+
       <CtaBanner
         heading={"Ready to Get\nStarted?"}
-        subtext="Get your free estimate in 60 seconds, or call Tas directly for any service."
-        primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
+        subtext="Generate your own quote in 60 seconds, or call Tas directly for any service."
+        primaryCta={{ label: 'Generate My Quote', href: '/instant-estimate/' }}
         secondaryCta={{ label: siteConfig.phone, href: siteConfig.phoneHref }}
       />
     </>
