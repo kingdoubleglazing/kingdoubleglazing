@@ -1,135 +1,58 @@
-// PLACEHOLDER PRICES — pending Tas confirmation
+// TODO: All pricePerSqm values are PLACEHOLDERS pending Tas's final confirmation.
+// Calculator must not go live until Tas signs off on exact per-sqm rates per option.
 
-export type GlassType      = 'standard' | 'lowe' | 'acoustic'
-export type PropertyType   = 'house' | 'apartment' | 'townhouse'
-export type Orientation    = 'north' | 'east' | 'west' | 'south' | 'mixed'
-export type FrameCondition = 'good' | 'needs-work'
-export type WindowBand     = '1-3' | '4-7' | '8-12' | '12+'
-export type Priority       = 'noise' | 'warmth' | 'both'
-
-export const GLASS_OPTIONS: Record<GlassType, { label: string; pricePerSqm: number; description: string }> = {
-  standard: {
-    label:       'Standard Double Glazing',
-    pricePerSqm: 495, // PLACEHOLDER — pending Tas confirmation
-    description: 'Reduces heat loss and cold draughts. Best for south and north-facing windows.',
+export const OPTIONS = {
+  A: {
+    label: 'Option A',
+    sublabel: 'Basic warmth',
+    spec: '4mm clear + 12mm spacer + 4mm clear',
+    pricePerSqm: 595,
+    heatPct: 55,
+    noisePct: 5,
   },
-  lowe: {
-    label:       'Tinted Low-E Glass',
-    pricePerSqm: 595, // PLACEHOLDER — pending Tas confirmation
-    description: 'Blocks up to 40% of heat gain. Best for east and west-facing windows.',
+  B: {
+    label: 'Option B',
+    sublabel: 'Noise + warmth',
+    spec: '4mm clear + 12mm spacer + 6mm laminated',
+    pricePerSqm: 645,
+    heatPct: 50,
+    noisePct: 35,
   },
-  acoustic: {
-    label:       'Acoustic Laminated Glass',
-    pricePerSqm: 645, // PLACEHOLDER — pending Tas confirmation
-    description: 'Cuts traffic and tram noise by up to 60%. Best for busy roads or rail lines.',
+  C: {
+    label: 'Option C',
+    sublabel: 'Serious noise + warmth',
+    spec: '4mm clear + 10mm spacer + 6mm acoustic PVB',
+    pricePerSqm: 695,
+    heatPct: 55,
+    noisePct: 65,
   },
-}
-
-export const AVG_WINDOW_SQM: Record<PropertyType, number> = {
-  house:     1.2,
-  apartment: 0.9,
-  townhouse: 1.0,
-}
-
-export const WINDOW_BAND_MIDPOINT: Record<WindowBand, number> = {
-  '1-3':  2,
-  '4-7':  5,
-  '8-12': 10,
-  '12+':  14,
-}
-
-export const WINDOW_BAND_DISCOUNT: Record<WindowBand, number> = {
-  '1-3':  0,
-  '4-7':  0.05,
-  '8-12': 0.10,
-  '12+':  0.15,
-}
-
-export const STOREY_MULTIPLIER: Record<number, number> = {
-  1: 1.00,
-  2: 1.12,
-  3: 1.20,
-}
-
-export const FRAME_MULTIPLIER: Record<FrameCondition, number> = {
-  'good':       1.00,
-  'needs-work': 1.15,
-}
-
-export const ORIENTATION_GLASS_MAP: Record<Orientation, { recommended: GlassType; reason: string }> = {
-  north: {
-    recommended: 'standard',
-    reason: 'North-facing windows get good winter sun. Standard glass keeps the warmth in without blocking it.',
+  D: {
+    label: 'Option D',
+    sublabel: 'Top tier — heat, sun, noise',
+    spec: '4mm tinted Low-E + 10mm spacer + 6mm acoustic PVB',
+    pricePerSqm: 795,
+    heatPct: 70,
+    noisePct: 65,
   },
-  east: {
-    recommended: 'lowe',
-    reason: 'East-facing windows get morning sun and glare. Low-E cuts heat gain without darkening the room.',
-  },
-  west: {
-    recommended: 'lowe',
-    reason: 'West-facing windows get the hottest afternoon sun. Low-E blocks up to 40% of that heat.',
-  },
-  south: {
-    recommended: 'standard',
-    reason: 'South-facing windows get little direct sun. Standard glass is the right call — it stops cold draughts.',
-  },
-  mixed: {
-    recommended: 'lowe',
-    reason: 'Mixed exposure means some windows face the sun hard. Low-E handles all of them well.',
-  },
+} as const
+
+export const SECOND_STOREY_SURCHARGE = 150 // flat per window
+
+export type OptionKey = keyof typeof OPTIONS
+
+export interface WindowRow {
+  heightMm: number
+  widthMm: number
+  quantity: number
+  secondStorey: boolean
 }
 
-export interface EstimateInputs {
-  propertyType:   PropertyType
-  windowBand:     WindowBand
-  glassType:      GlassType
-  storeys:        1 | 2 | 3
-  frameCondition: FrameCondition
-}
-
-export interface EstimateResult {
-  low:         number
-  mid:         number
-  high:        number
-  windowCount: number
-  pricePerSqm: number
-  discount:    number
-}
-
-export const GLASS_OVERRIDE_REASON: Record<GlassType, string> = {
-  standard: 'Standard double glazing cuts heat loss and draughts. Solid all-rounder.',
-  lowe:     'Low-E has a coating that blocks heat gain in summer and keeps warmth in during winter.',
-  acoustic: 'Acoustic laminated glass cuts traffic, tram and aircraft noise by up to 65%.',
-}
-
-export function calculateEstimate(inputs: EstimateInputs): EstimateResult {
-  const { propertyType, windowBand, glassType, storeys, frameCondition } = inputs
-
-  const pricePerSqm = GLASS_OPTIONS[glassType].pricePerSqm
-  const avgSqm      = AVG_WINDOW_SQM[propertyType]
-  const windowCount = WINDOW_BAND_MIDPOINT[windowBand]
-  const storeyMult  = STOREY_MULTIPLIER[storeys] ?? 1.0
-  const frameMult   = FRAME_MULTIPLIER[frameCondition]
-  const discount    = WINDOW_BAND_DISCOUNT[windowBand]
-
-  const raw  = pricePerSqm * avgSqm * windowCount * storeyMult * frameMult * (1 - discount)
-  const mid  = Math.round(raw / 100) * 100
-  const low  = Math.round((mid * 0.85) / 100) * 100
-  const high = Math.round((mid * 1.15) / 100) * 100
-
-  return { low, mid, high, windowCount, pricePerSqm, discount }
-}
-
-// Partial calculation — uses sensible defaults for any missing fields.
-// Requires propertyType at minimum (returns null if absent).
-export function calculatePartialEstimate(
-  inputs: Partial<EstimateInputs> & { propertyType: PropertyType },
-): EstimateResult {
-  return calculateEstimate({
-    propertyType:   inputs.propertyType,
-    windowBand:     inputs.windowBand     ?? '4-7',
-    glassType:      inputs.glassType      ?? 'standard',
-    storeys:        inputs.storeys        ?? 1,
-    frameCondition: inputs.frameCondition ?? 'good',
-  })
+export function calculateQuote(option: OptionKey, rows: WindowRow[]): number {
+  const { pricePerSqm } = OPTIONS[option]
+  return rows.reduce((total, row) => {
+    const sqm = (row.heightMm / 1000) * (row.widthMm / 1000)
+    const rowBase = sqm * pricePerSqm * row.quantity
+    const surcharge = row.secondStorey ? SECOND_STOREY_SURCHARGE * row.quantity : 0
+    return total + rowBase + surcharge
+  }, 0)
 }
