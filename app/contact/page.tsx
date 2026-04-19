@@ -8,6 +8,7 @@ import { TrustBar } from '@/components/sections/TrustBar'
 import { ContactForm } from '@/components/sections/ContactForm'
 import { FAQ } from '@/components/sections/FAQ'
 import { CtaBanner } from '@/components/sections/CtaBanner'
+import { PaymentTerms } from '@/components/PaymentTerms'
 import { contactFaq } from '@/data/contact-faq'
 import { siteConfig } from '@/data/site'
 
@@ -74,12 +75,7 @@ export default async function ContactPage({
                 <span className="text-primary-container">No Pressure.</span>
               </h1>
               <p className="font-sans text-base text-white/85 max-w-md leading-relaxed">
-                Fill in the form, call, or email. We respond within one business day.
-                Or use the{' '}
-                <Link href="/instant-estimate/" className="text-primary-container underline underline-offset-2 hover:no-underline">
-                  Instant Estimate Tool
-                </Link>{' '}
-                to see your price right now.
+                Price yourself online first. Call us when you&apos;d like to proceed — not before.
               </p>
             </div>
 
@@ -169,6 +165,9 @@ export default async function ContactPage({
           </p>
         </div>
       </section>
+
+      {/* C2: Payment terms — below form, before FAQ */}
+      <PaymentTerms />
 
       {/* 3 FAQs max */}
       <FAQ

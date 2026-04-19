@@ -11,6 +11,7 @@ import { SchemaScript } from '@/components/SchemaScript'
 import { TrustBar } from '@/components/sections/TrustBar'
 import { FAQ } from '@/components/sections/FAQ'
 import { CtaBanner } from '@/components/sections/CtaBanner'
+import { AdaptorDisclosure } from '@/components/AdaptorDisclosure'
 import { siteConfig } from '@/data/site'
 
 export const metadata: Metadata = buildMetadata({
@@ -136,6 +137,9 @@ export default function ServicesPage() {
           Get My Instant Price →
         </Link>
       </ServiceSection>
+
+      {/* D2.1: Adaptor disclosure — after retrofit section */}
+      <AdaptorDisclosure />
 
       {/* ── #emergency ── */}
       <ServiceSection

@@ -5,6 +5,7 @@ import { processSteps } from '@/data/process-steps'
 interface StepItem {
   title: string
   body: string
+  callout?: string
   imageSrc?: string
   imageAlt?: string
 }
@@ -93,6 +94,11 @@ export function ProcessSteps({
                   <p className="font-sans text-base text-inverse-on-surface/75 leading-relaxed">
                     {step.body}
                   </p>
+                  {step.callout && (
+                    <p className="mt-3 font-sans text-xs text-primary-container/80 leading-relaxed border-l-2 border-primary-container/40 pl-3">
+                      {step.callout}
+                    </p>
+                  )}
                   <div className="mt-5 h-0.5 w-8 bg-primary-container" aria-hidden="true" />
                 </div>
               </li>

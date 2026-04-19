@@ -479,11 +479,31 @@ function EstimatePanel({
         </p>
       )}
 
+      {/* F1: Accuracy disclosure — shows as soon as any estimate is available */}
+      {estimate && (
+        <div className="border-l-4 border-primary-container pl-4 mt-5">
+          <p className="font-sans text-sm font-semibold text-inverse-on-surface/90">
+            Your price is accurate within 10%.
+          </p>
+          <p className="font-sans text-xs text-inverse-on-surface/55 leading-relaxed mt-1">
+            We&apos;ve priced thousands of Melbourne retrofit jobs. If your inputs are correct, your final quote will land within 10% of the number above. No surprise blowouts.
+          </p>
+        </div>
+      )}
+
       {isComplete && (
         <>
           <p className="font-sans text-xs text-inverse-on-surface/30 mt-4 leading-relaxed">
             ✱ Final price confirmed after free home visit. No obligation.
           </p>
+
+          {/* B4: Budget sub-caption above Send button */}
+          <div className="mt-5 bg-primary-container text-on-primary-fixed px-5 py-3">
+            <p className="font-sans text-sm font-medium leading-snug">
+              If this is within your budget, send your quote through and Tas will call to confirm.
+            </p>
+          </div>
+
           <button
             type="button"
             onClick={onSendQuote}

@@ -9,6 +9,7 @@ interface HeroSectionProps {
   headlineWhite: string
   headlineYellow: string
   subtext: string
+  filterMessage?: string
   primaryCta: { label: string; href: string }
   secondaryCta?: { label: string; href: string }
   imageSrc?: string
@@ -22,6 +23,7 @@ export function HeroSection({
   headlineWhite,
   headlineYellow,
   subtext,
+  filterMessage,
   primaryCta,
   secondaryCta,
   imageSrc = '/hero-main.webp',
@@ -77,9 +79,16 @@ export function HeroSection({
         </h1>
 
         {/* Subtext */}
-        <p className="font-sans text-lg md:text-xl text-white/90 mb-8 max-w-2xl leading-relaxed">
+        <p className="font-sans text-lg md:text-xl text-white/90 mb-6 max-w-2xl leading-relaxed">
           {subtext}
         </p>
+
+        {/* Filter message — anti-time-waster callout */}
+        {filterMessage && (
+          <p className="font-sans text-sm font-medium text-white/90 border-l-2 border-primary-container pl-3 mb-7 max-w-xl leading-snug">
+            {filterMessage}
+          </p>
+        )}
 
         {/* CTAs + Warranty Badge */}
         <div className="flex flex-wrap items-center gap-3 md:gap-4">

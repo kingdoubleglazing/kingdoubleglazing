@@ -12,7 +12,7 @@ export function EmergencyBanner() {
       <div className="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4 flex-wrap">
         <span className="font-headline text-xs font-semibold uppercase tracking-wide">
           <strong>Stop — Don&apos;t Overpay.</strong>{' '}
-          We&apos;ll beat any genuine quote by 30%. 10-year warranty on every job.
+          We&apos;ll beat any genuine quote by 30%. Backed by 10-year warranty.
         </span>
         <Link
           href="/instant-estimate/"

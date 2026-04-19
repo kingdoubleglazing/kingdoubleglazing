@@ -9,7 +9,7 @@ const defaultItems: TrustItem[] = [
   { icon: Clock,       label: '50+ Years Combined Experience' },
   { icon: Star,        label: 'Beat Any Quote by 30%' },
   { icon: ShieldCheck, label: '10-Year Warranty' },
-  { icon: Wrench,      label: '100+ Adaptors for All Frame Types' },
+  { icon: Wrench,      label: 'Fits Most Existing Frames' },
 ]
 
 interface TrustBarProps {

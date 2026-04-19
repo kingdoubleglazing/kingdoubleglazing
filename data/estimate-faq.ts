@@ -1,7 +1,31 @@
 export const estimateFaq = [
   {
-    q: 'How accurate is the estimate?',
-    a: 'Within ±10% of the final invoice for standard jobs. The free on-site measure confirms the exact price before any work begins.',
+    q: 'How accurate is the online price?',
+    a: 'Within about 10%, as long as your inputs are correct. We price retrofit jobs the same way every time — there\'s no margin padding or sales markup. When we visit your home for final measurements, the number rarely moves by more than 10%.',
+  },
+  {
+    q: 'Why do I need to price myself first?',
+    a: 'We keep our prices low by running lean. The calculator means no sales visits, no chasing, and no time wasted on either side. You see the price. If it works, we move forward. If not, we don\'t chase.',
+  },
+  {
+    q: 'What about the deposit?',
+    a: 'We ask for a 50% deposit to start fabrication — your glass is custom-made for your exact windows. The remaining 50% is due once materials are ready and your install is scheduled. No surprise fees.',
+  },
+  {
+    q: 'Will the adaptor change how my window looks?',
+    a: 'Our adaptor adds about 20mm to your existing frame width — so a 40mm frame becomes around 60mm. This is how we fit insulated glass into your existing frames without replacing them. Most customers don\'t notice the difference after install, and it saves you thousands compared to full replacement.',
+  },
+  {
+    q: 'What\'s covered by the warranty?',
+    a: 'Our 10-year warranty covers the glass unit, the seals, and our workmanship. If anything fails within that time, we come back and fix it — no charge.',
+  },
+  {
+    q: 'How long from quote to install?',
+    a: 'Once your deposit is in, fabrication typically takes 2–3 weeks. We\'ll confirm your install date as soon as materials are ready.',
+  },
+  {
+    q: 'What if I want changes after install?',
+    a: 'We stand behind our workmanship. Any installation-related adjustments are typically handled within 2–3 weeks.',
   },
   {
     q: 'Do I have to give my email to see the estimate?',

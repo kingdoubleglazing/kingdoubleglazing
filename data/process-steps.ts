@@ -14,6 +14,7 @@ export const processSteps = [
   {
     title: 'We Install in a Day',
     body: 'No mess. No frame damage. Done in a single day. 10-year warranty from the moment we leave.',
+    callout: 'Adds ~20mm to your frame width. We\'ll confirm exact measurements at your free home check.',
     imageSrc: '/process-steps/step-3-finish.webp',
     imageAlt: 'Glazier completing a retrofit double glazing installation',
   },

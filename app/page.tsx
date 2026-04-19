@@ -11,6 +11,8 @@ import { WhyRetrofit } from '@/components/sections/WhyRetrofit'
 import { ProcessSteps } from '@/components/sections/ProcessSteps'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { FAQ } from '@/components/sections/FAQ'
+import { PaymentTerms } from '@/components/PaymentTerms'
+import { AdaptorDisclosure } from '@/components/AdaptorDisclosure'
 import { homepageFaq } from '@/data/homepage-faq'
 import { siteConfig } from '@/data/site'
 
@@ -38,6 +40,7 @@ export default function HomePage() {
         headlineWhite="Quieter Home. Lower Bills."
         headlineYellow="Without Replacing Your Windows."
         subtext="We add a second layer of glass to the windows you already have — no ripping them out, no scaffolding, no mess. Your home gets up to 70% quieter and up to 50% warmer, at half the cost of full window replacement. It works on timber, aluminium, and steel frames."
+        filterMessage="Price yourself online first. Call us when you'd like to proceed — not before."
         primaryCta={{ label: 'Get My Instant Price →', href: '/instant-estimate/' }}
         secondaryCta={{ label: `Or call ${siteConfig.phone}`, href: siteConfig.phoneHref }}
         imageSrc="/hero/hero-double-glazing.webp"
@@ -57,8 +60,14 @@ export default function HomePage() {
       {/* 5. Why retrofit — 6 best reasons (merged grid) */}
       <WhyRetrofit />
 
+      {/* D2.1: Adaptor disclosure — after WhyRetrofit */}
+      <AdaptorDisclosure />
+
       {/* 6. How it works — 3 steps */}
       <ProcessSteps />
+
+      {/* C2: Payment terms — after 3-step process, before final CTA */}
+      <PaymentTerms />
 
       {/* 7. Big CTA — the 60-second estimate push */}
       <EstimateCTABlock />

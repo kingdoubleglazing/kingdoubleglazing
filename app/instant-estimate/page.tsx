@@ -4,6 +4,9 @@ import { TrustBar } from '@/components/sections/TrustBar'
 import { EstimateCalculator } from '@/components/EstimateCalculator'
 import { FAQ } from '@/components/sections/FAQ'
 import { CtaBanner } from '@/components/sections/CtaBanner'
+import { PaymentTerms } from '@/components/PaymentTerms'
+import { ClientFitNote } from '@/components/ClientFitNote'
+import { AdaptorDisclosure } from '@/components/AdaptorDisclosure'
 import { estimateFaq } from '@/data/estimate-faq'
 import { siteConfig } from '@/data/site'
 import Image from 'next/image'
@@ -101,6 +104,10 @@ export default function InstantEstimatePage() {
               <br />
               <span className="text-primary-container">No Email Needed.</span>
             </h1>
+            {/* B3: Anti-time-waster subtitle */}
+            <p className="font-sans text-sm font-medium text-white/90 border-l-2 border-primary-container pl-3 max-w-xl leading-snug">
+              Price yourself online first. Call us when you&apos;d like to proceed — not before.
+            </p>
             <p className="font-sans text-lg md:text-xl text-white/90 max-w-xl leading-relaxed">
               We&apos;ll beat any genuine quote by 30%. That&apos;s a promise in writing.
             </p>
@@ -141,6 +148,15 @@ export default function InstantEstimatePage() {
           Estimate is indicative only. Free on-site measure confirms exact dimensions and final price before any work begins.
         </p>
       </section>
+
+      {/* C2: Payment terms — below estimate output card */}
+      <PaymentTerms />
+
+      {/* G1: Anti-time-waster disclaimer */}
+      <ClientFitNote />
+
+      {/* D2.2: Adaptor disclosure in FAQ area */}
+      <AdaptorDisclosure />
 
       <FAQ
         heading="Estimate FAQ"
