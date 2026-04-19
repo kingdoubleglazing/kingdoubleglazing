@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo/generateMetadata'
 import { TrustBar } from '@/components/sections/TrustBar'
@@ -142,7 +143,9 @@ export default function InstantEstimatePage() {
       {/* The tool */}
       <section className="bg-inverse-surface" id="estimate-form">
         <div className="max-w-4xl mx-auto">
-          <EstimateCalculator />
+          <Suspense fallback={<div className="h-64" />}>
+            <EstimateCalculator />
+          </Suspense>
         </div>
         <p className="max-w-4xl mx-auto px-6 py-6 md:px-10 font-sans text-xs text-inverse-on-surface/30 leading-relaxed text-center">
           Estimate is indicative only. Free on-site measure confirms exact dimensions and final price before any work begins.

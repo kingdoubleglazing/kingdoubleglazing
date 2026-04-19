@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useActionState } from 'react'
+import { useState, useActionState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Phone } from 'lucide-react'
 import { siteConfig } from '@/data/site'
 import { OPTIONS, calculateQuote, SECOND_STOREY_SURCHARGE, type OptionKey, type WindowRow } from '@/data/pricing'
@@ -47,11 +48,19 @@ function parseRow(r: RowDraft): WindowRow | null {
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export function EstimateCalculator() {
+  const searchParams = useSearchParams()
   const [calc, setCalc] = useState<CalcState>(initial)
   const [quoteState, quoteAction, quotePending] = useActionState(
     submitQuote,
     { status: 'idle' } as QuoteState,
   )
+
+  useEffect(() => {
+    const opt = searchParams.get('option') as OptionKey
+    if (OPTION_KEYS.includes(opt)) {
+      setCalc(prev => prev.option === opt ? prev : { ...prev, option: opt })
+    }
+  }, [searchParams])
 
   function selectOption(o: OptionKey) {
     setCalc(prev => ({ ...prev, option: o }))

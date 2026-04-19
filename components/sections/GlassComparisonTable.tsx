@@ -1,17 +1,26 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { OPTIONS, type OptionKey } from '@/data/pricing'
 
 const OPTION_KEYS = Object.keys(OPTIONS) as OptionKey[]
 
 export function GlassComparisonTable() {
+  const router = useRouter()
   const [revealed, setRevealed] = useState<Record<OptionKey, boolean>>({
     A: false, B: false, C: false, D: false,
   })
 
   function toggle(key: OptionKey) {
     setRevealed(prev => ({ ...prev, [key]: !prev[key] }))
+  }
+
+  function handleSelect(key: OptionKey) {
+    router.replace(`?option=${key}`, { scroll: false })
+    requestAnimationFrame(() => {
+      document.getElementById('estimate-form')?.scrollIntoView({ behavior: 'smooth' })
+    })
   }
 
   return (
@@ -47,11 +56,16 @@ export function GlassComparisonTable() {
             return (
               <div
                 key={key}
+                role="button"
+                tabIndex={0}
+                onClick={() => handleSelect(key)}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleSelect(key) } }}
                 className={[
-                  'relative flex flex-col p-4 md:p-5',
+                  'relative flex flex-col p-4 md:p-5 cursor-pointer transition-all duration-150 group',
+                  'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
                   isTop
-                    ? 'bg-inverse-surface border border-primary-container'
-                    : 'bg-surface border border-surface-container-high',
+                    ? 'bg-inverse-surface border border-primary-container hover:bg-white/5 hover:border-primary-container active:scale-[0.98]'
+                    : 'bg-surface border border-surface-container-high hover:border-primary/60 hover:bg-surface-container active:scale-[0.98]',
                 ].join(' ')}
               >
                 {/* Option letter */}
@@ -117,12 +131,24 @@ export function GlassComparisonTable() {
                   </div>
                 </div>
 
+                {/* Select CTA */}
+                <p
+                  className={[
+                    'mt-auto font-headline text-[0.65rem] font-semibold uppercase tracking-[0.15em] transition-colors duration-150',
+                    isTop
+                      ? 'text-primary-container group-hover:text-primary-fixed-dim'
+                      : 'text-primary/60 group-hover:text-primary',
+                  ].join(' ')}
+                >
+                  Get my price →
+                </p>
+
                 {/* Spec toggle */}
                 <button
                   type="button"
-                  onClick={() => toggle(key)}
+                  onClick={e => { e.stopPropagation(); toggle(key) }}
                   className={[
-                    'mt-auto text-left font-sans text-xs underline underline-offset-2 transition-colors duration-150',
+                    'mt-2 text-left font-sans text-xs underline underline-offset-2 transition-colors duration-150',
                     isTop
                       ? 'text-inverse-on-surface/40 hover:text-inverse-on-surface/70'
                       : 'text-on-surface/40 hover:text-on-surface/70',
@@ -137,6 +163,7 @@ export function GlassComparisonTable() {
                       'mt-2 font-sans text-[0.65rem] leading-snug',
                       isTop ? 'text-inverse-on-surface/60' : 'text-on-surface/60',
                     ].join(' ')}
+                    onClick={e => e.stopPropagation()}
                   >
                     {opt.spec}
                   </p>
@@ -145,6 +172,11 @@ export function GlassComparisonTable() {
             )
           })}
         </div>
+
+        {/* Hint */}
+        <p className="mt-5 text-center font-sans text-sm text-on-surface/60">
+          Press any option above to jump straight to Step 1 and get your full quote.
+        </p>
 
         {/* East/west warning */}
         <div className="mt-6 border-l-4 border-primary-container pl-4">
