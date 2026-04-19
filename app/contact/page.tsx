@@ -9,6 +9,7 @@ import { ContactForm } from '@/components/sections/ContactForm'
 import { FAQ } from '@/components/sections/FAQ'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { PaymentTerms } from '@/components/PaymentTerms'
+import { FreeAdviceBlock } from '@/components/FreeAdviceBlock'
 import { contactFaq } from '@/data/contact-faq'
 import { siteConfig } from '@/data/site'
 
@@ -176,10 +177,12 @@ export default async function ContactPage({
         items={contactFaq}
       />
 
+      <FreeAdviceBlock />
+
       <CtaBanner
         heading={"Want the\nNumber First?"}
-        subtext="Use the Instant Estimate Tool — see your price in 60 seconds, no email required. Then contact us when you're ready."
-        primaryCta={{ label: 'Get Instant Estimate', href: '/instant-estimate/' }}
+        subtext="Use the Quote Generator — see your price in 60 seconds, no email required. Then contact us when you're ready."
+        primaryCta={{ label: 'Generate My Quote', href: '/instant-estimate/' }}
         secondaryCta={{ label: siteConfig.phone, href: siteConfig.phoneHref }}
       />
     </>
