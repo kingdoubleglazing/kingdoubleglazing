@@ -1,164 +1,161 @@
-interface GlassOption {
-  name: string
-  quieter: string
-  lessHeat: string
-  recommended?: boolean
-}
+'use client'
 
-const options: GlassOption[] = [
-  {
-    name: 'Standard Retrofit',
-    quieter: 'Up to 50%',
-    lessHeat: '50–55%',
-    recommended: true,
-  },
-  {
-    name: 'Acoustic Retrofit',
-    quieter: 'Up to 65%',
-    lessHeat: '50–55%',
-  },
-  {
-    name: 'Premium Acoustic + Low-E',
-    quieter: 'Up to 70%',
-    lessHeat: 'Up to 60%',
-  },
-]
+import { useState } from 'react'
+import { OPTIONS, type OptionKey } from '@/data/pricing'
 
-const metrics: { label: string; key: keyof Pick<GlassOption, 'quieter' | 'lessHeat'> }[] = [
-  { label: 'Quieter', key: 'quieter' },
-  { label: 'Less heat lost', key: 'lessHeat' },
-]
+const OPTION_KEYS = Object.keys(OPTIONS) as OptionKey[]
 
 export function GlassComparisonTable() {
+  const [revealed, setRevealed] = useState<Record<OptionKey, boolean>>({
+    A: false, B: false, C: false, D: false,
+  })
+
+  function toggle(key: OptionKey) {
+    setRevealed(prev => ({ ...prev, [key]: !prev[key] }))
+  }
+
   return (
-    <section className="bg-surface-container-low py-16 md:py-20">
+    <section className="bg-surface-container-low py-14 md:py-18">
       <div className="max-w-5xl mx-auto px-4">
 
-        {/* Section header */}
-        <div className="mb-8 md:mb-12">
+        {/* Header */}
+        <div className="text-center mb-8 md:mb-10">
           <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-            GLASS OPTIONS
+            Glass Options
           </p>
           <h2
-            className="font-display uppercase leading-[0.88] text-on-surface"
-            style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
+            className="font-display uppercase leading-[0.9] text-on-surface"
+            style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}
           >
-            Three Glass Choices.
-            <br />
-            <span className="text-primary-container">All Better Than What You&apos;ve Got.</span>
+            What do I want to achieve?
           </h2>
-          <p className="font-sans text-sm text-on-surface/70 mt-4 max-w-xl leading-relaxed">
-            All percentages show how much better each option performs compared to standard 3mm clear house glass.
+          <p className="font-sans text-sm text-on-surface/70 mt-3">
+            Less noise, less heat, or a bit of both?
+          </p>
+          <p className="font-sans text-xs text-on-surface/50 mt-1">
+            Pick the option that matches what matters most.
           </p>
         </div>
 
-        {/* ── Desktop table ─────────────────────────────────────────────────── */}
-        <div className="hidden md:block overflow-x-auto -mx-4 px-4">
-          <table className="w-full min-w-[580px] border-collapse">
-            <thead>
-              <tr>
-                {/* Empty label cell */}
-                <th
-                  scope="col"
-                  className="text-left px-5 py-4 bg-surface-container-low border border-surface-container-high"
-                />
-                {options.map(opt => (
-                  <th
-                    key={opt.name}
-                    scope="col"
-                    className={`text-center px-5 py-5 min-w-[170px] ${opt.recommended ? 'bg-primary-container' : 'bg-surface'}`}
-                    style={{ border: opt.recommended ? '1px solid #c9a800' : '1px solid #E5E5E5' }}
-                  >
-                    {opt.recommended && (
-                      <span className="inline-block font-headline text-[0.65rem] font-semibold uppercase tracking-[0.18em] bg-black text-primary-container px-2 py-0.5 mb-2">
-                        Good starting point
-                      </span>
-                    )}
-                    <span
-                      className={`font-display uppercase leading-none block ${opt.recommended ? 'text-on-primary-fixed' : 'text-on-surface'}`}
-                      style={{ fontSize: 'clamp(1rem, 2vw, 1.3rem)' }}
-                    >
-                      {opt.name}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {metrics.map(({ label, key }) => (
-                <tr key={label}>
-                  <td
-                    className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface px-5 py-5"
-                    style={{ backgroundColor: '#FAFAFA', border: '1px solid #E8E8E8' }}
-                  >
-                    {label}
-                  </td>
-                  {options.map(opt => (
-                    <td
-                      key={opt.name}
-                      className={`text-center px-5 py-6 ${opt.recommended ? 'bg-primary-container' : 'bg-surface'}`}
-                      style={{ border: opt.recommended ? '1px solid #c9a800' : '1px solid #E5E5E5' }}
-                    >
-                      <span
-                        className={`font-display uppercase leading-none block ${opt.recommended ? 'text-on-primary-fixed' : 'text-on-surface'}`}
-                        style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
-                      >
-                        {opt[key]}
-                      </span>
-                      <span
-                        className={`font-headline text-xs uppercase tracking-wide block mt-1.5 ${opt.recommended ? 'text-on-primary-fixed/70' : 'text-on-surface/70'}`}
-                      >
-                        {label}
-                      </span>
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        {/* 2×2 grid on mobile, 4-column on desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {OPTION_KEYS.map(key => {
+            const opt = OPTIONS[key]
+            const isRevealed = revealed[key]
+            const isTop = key === 'D'
 
-        {/* ── Mobile cards — stacked vertically ─────────────────────────────── */}
-        <div className="md:hidden space-y-4">
-          {options.map(opt => (
-            <div
-              key={opt.name}
-              className={`p-6 ${opt.recommended ? 'bg-primary-container' : 'bg-surface'}`}
-              style={{ border: opt.recommended ? '1px solid #c9a800' : '1px solid #E5E5E5' }}
-            >
-              {opt.recommended && (
-                <p className="inline-block font-headline text-[0.65rem] font-semibold uppercase tracking-[0.18em] bg-black text-primary-container px-2 py-0.5 mb-3">
-                  Good starting point
-                </p>
-              )}
-              <h3
-                className={`font-display uppercase leading-none mb-5 ${opt.recommended ? 'text-on-primary-fixed' : 'text-on-surface'}`}
-                style={{ fontSize: '1.5rem' }}
+            return (
+              <div
+                key={key}
+                className={[
+                  'relative flex flex-col p-4 md:p-5',
+                  isTop
+                    ? 'bg-inverse-surface border border-primary-container'
+                    : 'bg-surface border border-surface-container-high',
+                ].join(' ')}
               >
-                {opt.name}
-              </h3>
-              <dl className="space-y-4">
-                {metrics.map(({ label, key }) => (
-                  <div key={label} className="flex items-end justify-between gap-4">
-                    <dt className={`font-headline text-xs font-semibold uppercase tracking-wide ${opt.recommended ? 'text-on-primary-fixed/70' : 'text-on-surface/70'}`}>
-                      {label}
-                    </dt>
-                    <dd
-                      className={`font-display uppercase leading-none ${opt.recommended ? 'text-on-primary-fixed' : 'text-on-surface'}`}
-                      style={{ fontSize: 'clamp(1.75rem, 8vw, 2.5rem)' }}
+                {/* Option letter */}
+                <span
+                  className={[
+                    'font-display uppercase leading-none mb-2',
+                    isTop ? 'text-primary-container' : 'text-primary',
+                  ].join(' ')}
+                  style={{ fontSize: 'clamp(2rem,5vw,3rem)' }}
+                >
+                  {key}
+                </span>
+
+                {/* Sublabel */}
+                <p
+                  className={[
+                    'font-headline text-xs font-semibold uppercase tracking-wide leading-tight mb-3',
+                    isTop ? 'text-inverse-on-surface/80' : 'text-on-surface/80',
+                  ].join(' ')}
+                >
+                  {opt.sublabel}
+                </p>
+
+                {/* Metrics */}
+                <div className="space-y-2 mb-3">
+                  <div>
+                    <p
+                      className={[
+                        'font-display uppercase leading-none',
+                        isTop ? 'text-primary-container' : 'text-on-surface',
+                      ].join(' ')}
+                      style={{ fontSize: 'clamp(1.5rem,4vw,2.25rem)' }}
                     >
-                      {opt[key]}
-                    </dd>
+                      {opt.noisePct}%
+                    </p>
+                    <p
+                      className={[
+                        'font-headline text-[0.6rem] font-semibold uppercase tracking-wide',
+                        isTop ? 'text-inverse-on-surface/50' : 'text-on-surface/50',
+                      ].join(' ')}
+                    >
+                      quieter
+                    </p>
                   </div>
-                ))}
-              </dl>
-            </div>
-          ))}
+                  <div>
+                    <p
+                      className={[
+                        'font-display uppercase leading-none',
+                        isTop ? 'text-primary-container' : 'text-on-surface',
+                      ].join(' ')}
+                      style={{ fontSize: 'clamp(1.5rem,4vw,2.25rem)' }}
+                    >
+                      {opt.heatPct}%
+                    </p>
+                    <p
+                      className={[
+                        'font-headline text-[0.6rem] font-semibold uppercase tracking-wide',
+                        isTop ? 'text-inverse-on-surface/50' : 'text-on-surface/50',
+                      ].join(' ')}
+                    >
+                      less heat
+                    </p>
+                  </div>
+                </div>
+
+                {/* Spec toggle */}
+                <button
+                  type="button"
+                  onClick={() => toggle(key)}
+                  className={[
+                    'mt-auto text-left font-sans text-xs underline underline-offset-2 transition-colors duration-150',
+                    isTop
+                      ? 'text-inverse-on-surface/40 hover:text-inverse-on-surface/70'
+                      : 'text-on-surface/40 hover:text-on-surface/70',
+                  ].join(' ')}
+                >
+                  {isRevealed ? 'Hide spec ↑' : "What's this made of? ↓"}
+                </button>
+
+                {isRevealed && (
+                  <p
+                    className={[
+                      'mt-2 font-sans text-[0.65rem] leading-snug',
+                      isTop ? 'text-inverse-on-surface/60' : 'text-on-surface/60',
+                    ].join(' ')}
+                  >
+                    {opt.spec}
+                  </p>
+                )}
+              </div>
+            )
+          })}
         </div>
 
-        {/* Caption below */}
-        <p className="mt-6 font-sans text-sm text-on-surface/70 leading-relaxed max-w-xl">
-          Heat numbers compared to standard 3mm single glazing. Real homes vary slightly — the free home visit gives you the exact numbers for your windows.
+        {/* East/west warning */}
+        <div className="mt-6 border-l-4 border-primary-container pl-4">
+          <p className="font-sans text-sm text-on-surface/75 leading-relaxed">
+            <strong className="text-on-surface">Heads up:</strong> East and west-facing windows usually get more heat than north or south. If those are the rooms you're upgrading, consider Option C or D.
+          </p>
+        </div>
+
+        {/* Footer caption */}
+        <p className="mt-4 font-sans text-xs text-on-surface/50 leading-relaxed">
+          All percentages compared to standard 3mm clear house glass — what's in most Melbourne homes today.
         </p>
 
       </div>
