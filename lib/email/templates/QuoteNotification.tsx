@@ -3,82 +3,128 @@ import {
   Heading, Text, Button, Hr, Preview,
 } from '@react-email/components'
 
+interface WindowRow {
+  heightMm: number
+  widthMm: number
+  quantity: number
+  secondStorey: boolean
+}
+
 interface Props {
   name: string
   email: string
   phone: string
-  propertyType: string
-  windowBand: string
-  glassType: string
-  orientation: string
-  storeys: number
-  frameCondition: string
-  priority: string
-  low: number
-  high: number
-  confirmUrl: string
+  suburb?: string
+  glassOption: string
+  glassLabel: string
+  glassSubLabel: string
+  glassSpec: string
+  noisePct: number
+  heatPct: number
+  windows: WindowRow[]
+  windowCount: number
+  total: number
   quoteId: number
-}
-
-const GLASS_LABELS: Record<string, string> = {
-  standard: 'Standard Double Glazing',
-  lowe:     'Tinted Low-E Glass',
-  acoustic: 'Acoustic Laminated Glass',
-}
-
-const PRIORITY_LABELS: Record<string, string> = {
-  noise:   'Reduce noise',
-  warmth:  'Stay warmer',
-  both:    'Noise + warmth',
+  confirmUrl: string
 }
 
 export function QuoteNotificationEmail({
-  name, email, phone, propertyType, windowBand, glassType,
-  orientation, storeys, frameCondition, priority,
-  low, high, confirmUrl, quoteId,
+  name, email, phone, suburb,
+  glassOption, glassLabel, glassSubLabel, glassSpec, noisePct, heatPct,
+  windows, windowCount, total,
+  quoteId, confirmUrl,
 }: Props) {
   return (
     <Html lang="en">
       <Head />
-      <Preview>New quote from {name} · Est. ${low.toLocaleString()}–${high.toLocaleString()}</Preview>
+      <Preview>New quote from {name} · ${total.toLocaleString()} · Option {glassOption}</Preview>
       <Body style={body}>
-        {/* Header */}
         <Section style={header}>
           <Text style={brandText}>KING DOUBLE GLAZING</Text>
           <Text style={crownAccent}>◆</Text>
         </Section>
 
         <Container style={container}>
-          {/* Heading */}
           <Section style={headingSection}>
-            <Heading style={h1}>New Quote Request #{quoteId}</Heading>
+            <Heading style={h1}>New Quote #{quoteId}</Heading>
           </Section>
 
-          {/* Estimate range */}
-          <Section style={estimateSection}>
-            <Text style={estimateLabel}>Estimate range</Text>
-            <Text style={estimateValue}>
-              ${low.toLocaleString()} – ${high.toLocaleString()}
-            </Text>
+          {/* Total */}
+          <Section style={totalSection}>
+            <Text style={totalLabel}>Quote total</Text>
+            <Text style={totalValue}>${total.toLocaleString()}</Text>
           </Section>
 
-          {/* Data rows */}
+          {/* Contact */}
           <Section style={dataSection}>
-            <Row label="Name"            value={name} />
-            <Row label="Phone"           value={phone} />
-            <Row label="Email"           value={email} />
-            <Row label="Property type"   value={capitalise(propertyType)} />
-            <Row label="Windows"         value={`${windowBand} windows`} />
-            <Row label="Glass type"      value={GLASS_LABELS[glassType] ?? glassType} />
-            <Row label="Orientation"     value={capitalise(orientation)} />
-            <Row label="Storeys"         value={String(storeys)} />
-            <Row label="Frame condition" value={frameCondition === 'good' ? 'Good' : 'Needs work'} />
-            <Row label="Priority"        value={PRIORITY_LABELS[priority] ?? priority} />
+            <SectionHeading>Customer</SectionHeading>
+            <Row label="Name"   value={name} />
+            <Row label="Phone"  value={phone} />
+            <Row label="Email"  value={email} />
+            {suburb && <Row label="Suburb" value={suburb} />}
           </Section>
 
           <Hr style={divider} />
 
-          {/* CTA */}
+          {/* Glass option — explicit */}
+          <Section style={dataSection}>
+            <SectionHeading>Glass Selection</SectionHeading>
+
+            {/* Option badge */}
+            <table width="100%" cellPadding={0} cellSpacing={0} style={{ marginBottom: 12 }}>
+              <tbody>
+                <tr>
+                  <td style={optionBadge}>{glassOption}</td>
+                  <td style={{ paddingLeft: 14, verticalAlign: 'middle' }}>
+                    <span style={optionLabelStyle}>{glassLabel}</span>
+                    <br />
+                    <span style={optionSubLabel}>{glassSubLabel}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <Row label="Spec"        value={glassSpec} />
+            <Row label="Noise"       value={`${noisePct}% quieter than single glazing`} />
+            <Row label="Heat loss"   value={`${heatPct}% less heat loss`} />
+            <Row label="Windows"     value={`${windowCount} window${windowCount !== 1 ? 's' : ''}`} />
+          </Section>
+
+          <Hr style={divider} />
+
+          {/* Window breakdown table */}
+          <Section style={dataSection}>
+            <SectionHeading>Window Breakdown</SectionHeading>
+            <table width="100%" cellPadding={0} cellSpacing={0} style={breakdownTable}>
+              <thead>
+                <tr>
+                  <th style={thStyle}>#</th>
+                  <th style={thStyle}>Size (mm)</th>
+                  <th style={thStyle}>Qty</th>
+                  <th style={thStyle}>2nd floor</th>
+                  <th style={{ ...thStyle, textAlign: 'right' }}>Area (m²)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {windows.map((w, i) => {
+                  const sqm = (w.heightMm / 1000) * (w.widthMm / 1000) * w.quantity
+                  const isEven = i % 2 === 0
+                  return (
+                    <tr key={i} style={isEven ? trEven : trOdd}>
+                      <td style={tdStyle}>{i + 1}</td>
+                      <td style={tdStyle}>{w.heightMm} × {w.widthMm}</td>
+                      <td style={tdStyle}>{w.quantity}</td>
+                      <td style={tdStyle}>{w.secondStorey ? 'Yes' : '—'}</td>
+                      <td style={{ ...tdStyle, textAlign: 'right' }}>{sqm.toFixed(2)}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </Section>
+
+          <Hr style={divider} />
+
           <Section style={{ textAlign: 'center' }}>
             <Button href={confirmUrl} style={ctaButton}>
               ✓ Confirm This Quote
@@ -89,7 +135,6 @@ export function QuoteNotificationEmail({
           </Section>
         </Container>
 
-        {/* Footer */}
         <Section style={footer}>
           <Text style={footerText}>kingdoubleglazing.com.au</Text>
         </Section>
@@ -98,9 +143,15 @@ export function QuoteNotificationEmail({
   )
 }
 
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <Text style={sectionHeadingStyle}>{children}</Text>
+  )
+}
+
 function Row({ label, value }: { label: string; value: string }) {
   return (
-    <table width="100%" cellPadding={0} cellSpacing={0} style={{ marginBottom: 10 }}>
+    <table width="100%" cellPadding={0} cellSpacing={0} style={{ marginBottom: 8 }}>
       <tbody>
         <tr>
           <td style={rowLabel}>{label}</td>
@@ -109,10 +160,6 @@ function Row({ label, value }: { label: string; value: string }) {
       </tbody>
     </table>
   )
-}
-
-function capitalise(s: string) {
-  return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
 // ── Styles ─────────────────────────────────────────────────────────────────────
@@ -164,13 +211,13 @@ const h1: React.CSSProperties = {
   margin: 0,
 }
 
-const estimateSection: React.CSSProperties = {
+const totalSection: React.CSSProperties = {
   backgroundColor: '#000000',
   padding: '16px 20px',
   marginBottom: 24,
 }
 
-const estimateLabel: React.CSSProperties = {
+const totalLabel: React.CSSProperties = {
   color: '#AAAAAA',
   fontSize: 11,
   fontWeight: 600,
@@ -179,7 +226,7 @@ const estimateLabel: React.CSSProperties = {
   margin: '0 0 6px',
 }
 
-const estimateValue: React.CSSProperties = {
+const totalValue: React.CSSProperties = {
   color: '#F5C518',
   fontSize: 32,
   fontWeight: 700,
@@ -191,13 +238,22 @@ const dataSection: React.CSSProperties = {
   marginTop: 8,
 }
 
+const sectionHeadingStyle: React.CSSProperties = {
+  color: '#777777',
+  fontSize: 10,
+  fontWeight: 700,
+  textTransform: 'uppercase',
+  letterSpacing: '0.15em',
+  margin: '0 0 10px',
+}
+
 const rowLabel: React.CSSProperties = {
   color: '#555555',
   fontSize: 12,
   fontWeight: 600,
   textTransform: 'uppercase',
   letterSpacing: '0.08em',
-  width: 140,
+  width: 110,
   paddingRight: 12,
   verticalAlign: 'top',
   paddingTop: 2,
@@ -206,6 +262,57 @@ const rowLabel: React.CSSProperties = {
 const rowValue: React.CSSProperties = {
   color: '#111111',
   fontSize: 14,
+}
+
+const optionBadge: React.CSSProperties = {
+  backgroundColor: '#F5C518',
+  color: '#000000',
+  fontSize: 28,
+  fontWeight: 900,
+  width: 52,
+  height: 52,
+  textAlign: 'center',
+  verticalAlign: 'middle',
+  lineHeight: '52px',
+}
+
+const optionLabelStyle: React.CSSProperties = {
+  color: '#111111',
+  fontSize: 15,
+  fontWeight: 700,
+}
+
+const optionSubLabel: React.CSSProperties = {
+  color: '#666666',
+  fontSize: 12,
+}
+
+const breakdownTable: React.CSSProperties = {
+  borderCollapse: 'collapse',
+  width: '100%',
+  fontSize: 13,
+}
+
+const thStyle: React.CSSProperties = {
+  backgroundColor: '#111111',
+  color: '#FFFFFF',
+  fontSize: 10,
+  fontWeight: 700,
+  textTransform: 'uppercase',
+  letterSpacing: '0.08em',
+  padding: '8px 10px',
+  textAlign: 'left',
+}
+
+const trEven: React.CSSProperties = { backgroundColor: '#FAFAFA' }
+const trOdd:  React.CSSProperties = { backgroundColor: '#FFFFFF' }
+
+const tdStyle: React.CSSProperties = {
+  color: '#111111',
+  fontSize: 13,
+  padding: '8px 10px',
+  borderBottom: '1px solid #EEEEEE',
+  verticalAlign: 'middle',
 }
 
 const divider: React.CSSProperties = {

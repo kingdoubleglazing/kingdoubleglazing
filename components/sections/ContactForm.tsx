@@ -22,11 +22,11 @@ export function ContactForm() {
           <p className="font-headline text-sm font-semibold uppercase tracking-wide text-success mb-1">
             ✓ Message Received
           </p>
-          <p className="font-sans text-sm text-on-surface/70 leading-relaxed">
+          <p className="font-sans text-sm text-on-surface leading-relaxed">
             Got it, {state.name}. Tas will call you within 2 hours.
           </p>
         </div>
-        <p className="font-sans text-xs text-on-surface/60 leading-relaxed">
+        <p className="font-sans text-xs text-on-surface leading-relaxed">
           If it&apos;s urgent, call directly on{' '}
           <a href={siteConfig.phoneHref} className="text-primary font-semibold underline">
             {siteConfig.phone}
@@ -55,7 +55,7 @@ export function ContactForm() {
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="cf-name"
-          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
+          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface"
         >
           Full Name <RequiredMark />
         </label>
@@ -75,7 +75,7 @@ export function ContactForm() {
         <div className="flex flex-col gap-1.5">
           <label
             htmlFor="cf-phone"
-            className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
+            className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface"
           >
             Phone Number <RequiredMark />
           </label>
@@ -92,7 +92,7 @@ export function ContactForm() {
         <div className="flex flex-col gap-1.5">
           <label
             htmlFor="cf-email"
-            className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
+            className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface"
           >
             Email Address <RequiredMark />
           </label>
@@ -112,9 +112,9 @@ export function ContactForm() {
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="cf-suburb"
-          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
+          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface"
         >
-          Suburb <span className="normal-case tracking-normal font-sans font-normal text-on-surface/60">(optional)</span>
+          Suburb <span className="normal-case tracking-normal font-sans font-normal text-on-surface">(optional)</span>
         </label>
         <input
           id="cf-suburb"
@@ -130,9 +130,9 @@ export function ContactForm() {
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="cf-message"
-          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75"
+          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface"
         >
-          Message <span className="normal-case tracking-normal font-sans font-normal text-on-surface/60">(optional)</span>
+          Message <span className="normal-case tracking-normal font-sans font-normal text-on-surface">(optional)</span>
         </label>
         <textarea
           id="cf-message"
@@ -145,14 +145,14 @@ export function ContactForm() {
 
       {/* ── Preferred time ── */}
       <fieldset>
-        <legend className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/75 mb-3 block">
-          Preferred contact time <span className="normal-case tracking-normal font-sans font-normal text-on-surface/60">(optional)</span>
+        <legend className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface mb-3 block">
+          Preferred contact time <span className="normal-case tracking-normal font-sans font-normal text-on-surface">(optional)</span>
         </legend>
         <div className="flex gap-2 flex-wrap">
           {TIME_OPTIONS.map(({ value, label }) => (
             <label key={value} className="cursor-pointer select-none">
               <input type="radio" name="preferredTime" value={value} className="sr-only peer" />
-              <span className="inline-flex items-center px-4 py-2 font-headline text-xs font-semibold uppercase tracking-[0.12em] bg-surface-container text-on-surface/70 peer-checked:bg-primary-container peer-checked:text-on-primary-fixed transition-colors duration-150">
+              <span className="inline-flex items-center px-4 py-2 font-headline text-xs font-semibold uppercase tracking-[0.12em] bg-surface-container text-on-surface peer-checked:bg-primary-container peer-checked:text-on-primary-fixed transition-colors duration-150">
                 {label}
               </span>
             </label>
@@ -169,7 +169,7 @@ export function ContactForm() {
         {pending ? 'Sending…' : 'Send Enquiry →'}
       </button>
 
-      <p className="text-center font-sans text-xs text-on-surface/60">
+      <p className="text-center font-sans text-xs text-on-surface">
         Tas will call within 2 hours. No spam, no pressure.
       </p>
 
@@ -177,13 +177,13 @@ export function ContactForm() {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 pt-2 border-t border-surface-container-high">
         <a
           href={siteConfig.phoneHref}
-          className="font-headline text-xs font-semibold uppercase tracking-widest text-on-surface/70 hover:text-primary transition-colors duration-150"
+          className="font-headline text-xs font-semibold uppercase tracking-widest text-on-surface hover:text-primary transition-colors duration-150"
         >
           ☎ {siteConfig.phone}
         </a>
         <a
           href={`mailto:${siteConfig.email}`}
-          className="font-headline text-xs font-semibold uppercase tracking-widest text-on-surface/70 hover:text-primary transition-colors duration-150"
+          className="font-headline text-xs font-semibold uppercase tracking-widest text-on-surface hover:text-primary transition-colors duration-150"
         >
           ✉ {siteConfig.email}
         </a>

@@ -18,7 +18,7 @@ const schema = z.object({
   name:        z.string().min(2).max(100),
   email:       z.string().email(),
   phone:       z.string().min(8).max(20),
-  address:     z.string().max(200).optional(),
+  suburb:      z.string().max(100).optional(),
   option:      z.enum(['A', 'B', 'C', 'D']),
   windows:     z.string().transform(s => JSON.parse(s)).pipe(z.array(windowRowSchema)),
   total:       z.coerce.number().min(0),
@@ -42,7 +42,7 @@ export async function submitQuote(
   }
 
   try {
-    const { name, email, phone, address, option, windows, total, windowCount } = parsed.data
+    const { name, email, phone, suburb, option, windows, total, windowCount } = parsed.data
     const opt = OPTIONS[option as OptionKey]
 
     // Revalidate total server-side
@@ -58,38 +58,28 @@ export async function submitQuote(
       name,
       email,
       phone,
-      propertyType:   'residential',
       windowCount,
-      glassType:      option,
-      orientation:    address ?? 'not provided',
-      storeys:        1,
-      frameCondition: 'good',
-      priority:       'both',
-      estimateLow:    serverTotal,
-      estimateHigh:   serverTotal,
+      glassType:   option,
+      estimateLow: serverTotal,
+      estimateHigh: serverTotal,
       confirmToken,
       status: 'pending',
     }).returning()
-
-    // Format window summary for email
-    const windowSummary = (windows as WindowRow[])
-      .map((r, i) => `Win ${i + 1}: ${r.heightMm}×${r.widthMm}mm qty ${r.quantity}${r.secondStorey ? ' (2nd floor)' : ''}`)
-      .join(' | ')
 
     await sendQuoteNotification({
       name,
       email,
       phone,
-      propertyType:   'residential',
-      windowBand:     `${windowCount} windows — ${windowSummary}`,
-      glassType:      `${opt.label} (${opt.spec})`,
-      orientation:    address ?? 'not provided',
-      storeys:        1,
-      frameCondition: 'good',
-      priority:       'both',
-      low:            serverTotal,
-      mid:            serverTotal,
-      high:           serverTotal,
+      suburb,
+      glassOption:    option,
+      glassLabel:     opt.label,
+      glassSubLabel:  opt.sublabel,
+      glassSpec:      opt.spec,
+      noisePct:       opt.noisePct,
+      heatPct:        opt.heatPct,
+      windows:        windows as WindowRow[],
+      windowCount,
+      total:          serverTotal,
       quoteId:        quote.id,
       confirmToken,
     })

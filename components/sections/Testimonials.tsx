@@ -31,7 +31,7 @@ export function Testimonials({
                 <span key={i} className="block">{line}</span>
               ))}
             </h2>
-            <p className="font-sans text-base text-on-surface/70 mt-4">
+            <p className="font-sans text-base text-on-surface mt-4">
               {subheading}
             </p>
           </div>
@@ -44,12 +44,12 @@ export function Testimonials({
                 href={siteConfig.social.google}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/80 hover:text-primary underline underline-offset-4"
+                className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface hover:text-primary underline underline-offset-4"
               >
                 {siteConfig.reviews.averageRating.toFixed(1)} · {siteConfig.reviews.totalCount} Reviews · Google →
               </a>
             ) : (
-              <p className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/80">
+              <p className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface">
                 {siteConfig.reviews.averageRating.toFixed(1)} · {siteConfig.reviews.totalCount} Reviews · Google
               </p>
             )}
@@ -73,7 +73,7 @@ export function Testimonials({
 
         {/* Mobile swipe hint */}
         <p
-          className="mt-4 text-center font-headline text-[0.8125rem] uppercase tracking-[0.2em] text-on-surface/55 md:hidden"
+          className="mt-4 text-center font-headline text-[0.8125rem] uppercase tracking-[0.2em] text-on-surface/80 md:hidden"
           aria-hidden="true"
         >
           Swipe to read more
@@ -139,7 +139,7 @@ function TestimonialCard({
       </span>
 
       {/* Review text */}
-      <p className="font-sans text-base text-on-surface/70 leading-relaxed flex-1 mb-6">
+      <p className="font-sans text-base text-on-surface leading-relaxed flex-1 mb-6">
         {t.text}
       </p>
 
@@ -160,7 +160,7 @@ function TestimonialCard({
           <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface leading-none mb-1">
             {t.name}
           </p>
-          <p className="font-headline text-[0.8125rem] font-semibold uppercase tracking-[0.15em] text-on-surface/80">
+          <p className="font-headline text-[0.8125rem] font-semibold uppercase tracking-[0.15em] text-on-surface">
             {t.suburb} · {t.source}
           </p>
           </div>

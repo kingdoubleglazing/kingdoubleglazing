@@ -55,7 +55,7 @@ export default function OGImage() {
           maxWidth: 900,
         }}
       >
-        Get a Free Quote Melbourne
+        Get Your Quote Melbourne
       </h1>
 
       <p
@@ -97,7 +97,7 @@ export default function OGImage() {
             textTransform: 'uppercase',
           }}
         >
-          No Pressure · Free Quote
+          No Pressure · Price Online First
         </span>
       </div>
     </div>,

@@ -107,13 +107,13 @@ export function EstimateCalculator() {
         >
           Tas will call you soon.
         </p>
-        <p className="font-sans text-sm text-inverse-on-surface/60 leading-relaxed mb-8 max-w-xs mx-auto">
+        <p className="font-sans text-sm text-inverse-on-surface leading-relaxed mb-8 max-w-xs mx-auto">
           Once Tas confirms your quote you'll receive an email with your price locked in.
         </p>
         <button
           type="button"
           onClick={reset}
-          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-inverse-on-surface/45 hover:text-inverse-on-surface transition-colors duration-150 underline underline-offset-4"
+          className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-inverse-on-surface hover:text-inverse-on-surface transition-colors duration-150 underline underline-offset-4"
         >
           Start a new quote
         </button>
@@ -126,7 +126,7 @@ export function EstimateCalculator() {
     return (
       <div className="px-6 py-8 md:px-10 max-w-2xl mx-auto">
         <div className="mb-5">
-          <p className="font-headline text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-inverse-on-surface/40 mb-1">
+          <p className="font-headline text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-inverse-on-surface mb-1">
             Your quote
           </p>
           <p
@@ -135,12 +135,12 @@ export function EstimateCalculator() {
           >
             ${total?.toLocaleString()}
           </p>
-          <p className="font-sans text-xs text-inverse-on-surface/50 mt-1">
+          <p className="font-sans text-xs text-inverse-on-surface mt-1">
             {calc.option ? OPTIONS[calc.option].label : ''} · {totalWindows} {totalWindows === 1 ? 'window' : 'windows'}
           </p>
         </div>
 
-        <p className="font-sans text-sm text-inverse-on-surface/85 mb-5 max-w-md leading-relaxed">
+        <p className="font-sans text-sm text-inverse-on-surface mb-5 max-w-md leading-relaxed">
           If this is within your budget, send your quote through — Tas will call to confirm and book the install.
         </p>
 
@@ -175,7 +175,7 @@ export function EstimateCalculator() {
             <Phone size={16} aria-hidden="true" />
             Or Call Tas — {siteConfig.phone}
           </a>
-          <p className="text-center font-sans text-xs text-inverse-on-surface/40">
+          <p className="text-center font-sans text-xs text-inverse-on-surface">
             Not ready? Close the tab. We won't chase.
           </p>
         </form>
@@ -183,7 +183,7 @@ export function EstimateCalculator() {
         <button
           type="button"
           onClick={() => setCalc(prev => ({ ...prev, panelState: 'form' }))}
-          className="mt-5 font-headline text-xs font-semibold uppercase tracking-[0.2em] text-inverse-on-surface/45 hover:text-inverse-on-surface transition-colors duration-150"
+          className="mt-5 font-headline text-xs font-semibold uppercase tracking-[0.2em] text-inverse-on-surface hover:text-inverse-on-surface transition-colors duration-150"
         >
           ← Back
         </button>
@@ -209,7 +209,7 @@ export function EstimateCalculator() {
 
       {/* Step 1: Option */}
       <div className="px-6 py-6 md:px-10 max-w-2xl mx-auto">
-        <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-inverse-on-surface/35 mb-2">
+        <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-inverse-on-surface mb-2">
           Step 1 of 3
         </p>
         <p
@@ -227,17 +227,12 @@ export function EstimateCalculator() {
                 selected={calc.option === key}
                 onClick={() => selectOption(key)}
               >
-                <span
-                  className="font-display uppercase leading-none block mb-1"
-                  style={{ fontSize: 'clamp(1.5rem,4vw,2rem)' }}
-                >
+                {/* Mobile: row layout — letter left, text right */}
+                <span className="font-display uppercase leading-none text-2xl md:text-[clamp(1.5rem,4vw,2rem)] shrink-0">
                   {key}
                 </span>
-                <span className="font-headline text-xs font-semibold uppercase tracking-wide block leading-snug">
+                <span className="font-headline text-[0.65rem] md:text-xs font-semibold uppercase tracking-wide leading-snug md:mt-1 ml-2 md:ml-0 text-left md:text-center">
                   {opt.sublabel}
-                </span>
-                <span className="font-sans text-[0.65rem] mt-1.5 block opacity-55">
-                  {opt.heatPct}% less heat · {opt.noisePct}% quieter
                 </span>
               </TapCard>
             )
@@ -248,7 +243,7 @@ export function EstimateCalculator() {
       {/* Step 2: Windows */}
       {calc.option && (
         <div className="px-6 py-6 md:px-10 max-w-2xl mx-auto border-t border-white/10">
-          <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-inverse-on-surface/35 mb-2">
+          <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-inverse-on-surface mb-2">
             Step 2 of 3
           </p>
           <p
@@ -259,11 +254,11 @@ export function EstimateCalculator() {
           </p>
 
           <div className="mb-5 border-l-2 border-primary-container pl-3">
-            <p className="font-sans text-sm text-inverse-on-surface/85 leading-relaxed">
-              Write the height and width of each piece of glass.
+            <p className="font-sans text-sm text-inverse-on-surface leading-relaxed">
+              Measure the glass, not the frame. Enter height and width in millimetres.
             </p>
-            <p className="font-sans text-xs text-inverse-on-surface/55 mt-1 leading-relaxed">
-              Example: A fixed window that's 1000mm tall × 500mm wide = one row. If you have three the same size, put 3 in quantity.
+            <p className="font-sans text-xs text-inverse-on-surface mt-1 leading-relaxed">
+              Same size three times? Enter one row and set quantity to 3.
             </p>
           </div>
 
@@ -287,7 +282,7 @@ export function EstimateCalculator() {
           <button
             type="button"
             onClick={addRow}
-            className="mt-4 w-full py-3 border border-dashed border-white/20 text-inverse-on-surface/50 hover:border-primary-container hover:text-primary-container font-headline text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-150"
+            className="mt-4 w-full py-3 border border-dashed border-white/20 text-inverse-on-surface hover:border-primary-container hover:text-primary-container font-headline text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-150"
           >
             + Add another window
           </button>
@@ -297,10 +292,10 @@ export function EstimateCalculator() {
       {/* Step 3: Total */}
       {calc.option && (
         <div className="px-6 py-6 md:px-10 max-w-2xl mx-auto border-t border-white/10">
-          <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-inverse-on-surface/35 mb-2">
+          <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-inverse-on-surface mb-2">
             Step 3 of 3
           </p>
-          <p className="font-headline text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-inverse-on-surface/40 mb-2">
+          <p className="font-headline text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-inverse-on-surface mb-2">
             Your quote
           </p>
 
@@ -314,7 +309,7 @@ export function EstimateCalculator() {
           </p>
 
           {!total && (
-            <p className="font-sans text-xs text-inverse-on-surface/30 mt-2">
+            <p className="font-sans text-xs text-inverse-on-surface mt-2">
               Updates as you enter your windows above.
             </p>
           )}
@@ -328,7 +323,7 @@ export function EstimateCalculator() {
                   const opt = OPTIONS[calc.option!]
                   const rowCost = sqm * opt.pricePerSqm * r.quantity + (r.secondStorey ? SECOND_STOREY_SURCHARGE * r.quantity : 0)
                   return (
-                    <div key={i} className="flex justify-between gap-4 font-sans text-xs text-inverse-on-surface/55">
+                    <div key={i} className="flex justify-between gap-4 font-sans text-xs text-inverse-on-surface">
                       <span>
                         {r.heightMm}×{r.widthMm}mm · qty {r.quantity}
                         {r.secondStorey ? ' · 2nd floor' : ''}
@@ -340,10 +335,10 @@ export function EstimateCalculator() {
               </div>
 
               <div className="border-l-4 border-primary-container pl-4 mt-5">
-                <p className="font-sans text-sm font-semibold text-inverse-on-surface/90">
+                <p className="font-sans text-sm font-semibold text-inverse-on-surface">
                   If you've filled this out correctly, your price is accurate to within 10%.
                 </p>
-                <p className="font-sans text-xs text-inverse-on-surface/55 leading-relaxed mt-1">
+                <p className="font-sans text-xs text-inverse-on-surface leading-relaxed mt-1">
                   If your measurements are off, the final quote may adjust slightly. We confirm everything on site before any work starts.
                 </p>
               </div>
@@ -395,14 +390,14 @@ function WindowRowInput({
   return (
     <div className="bg-white/5 border border-white/10 p-4">
       <div className="flex items-center justify-between mb-3">
-        <span className="font-headline text-xs font-semibold uppercase tracking-wide text-inverse-on-surface/50">
+        <span className="font-headline text-xs font-semibold uppercase tracking-wide text-inverse-on-surface">
           Window {index + 1}
         </span>
         {canRemove && (
           <button
             type="button"
             onClick={onRemove}
-            className="font-sans text-xs text-inverse-on-surface/30 hover:text-inverse-on-surface/60 transition-colors duration-150"
+            className="font-sans text-xs text-inverse-on-surface hover:text-inverse-on-surface transition-colors duration-150"
           >
             Remove
           </button>
@@ -446,13 +441,13 @@ function WindowRowInput({
           onChange={e => onChange('secondStorey', e.target.checked)}
           className="w-4 h-4 accent-yellow-400"
         />
-        <span className="font-sans text-xs text-inverse-on-surface/70">
+        <span className="font-sans text-xs text-inverse-on-surface">
           Second storey? (+${SECOND_STOREY_SURCHARGE} per window)
         </span>
       </label>
 
       {sqm && q >= 1 && q <= 50 && (
-        <p className="mt-2 font-sans text-xs text-primary-container/70">
+        <p className="mt-2 font-sans text-xs text-primary-container">
           ✓ {sqm} m² × {row.quantity} = {(Number(sqm) * (q || 1)).toFixed(2)} m² total
         </p>
       )}
@@ -470,11 +465,11 @@ function TapCard({ selected, onClick, children }: {
       type="button"
       onClick={onClick}
       className={[
-        'flex flex-col items-center justify-center text-center min-h-[90px] px-3 py-4',
+        'flex flex-row md:flex-col items-center md:justify-center text-left md:text-center min-h-[52px] md:min-h-[90px] px-3 py-2.5 md:py-4',
         'transition-all duration-150 active:scale-[0.97] cursor-pointer',
         selected
           ? 'border-2 border-primary-container bg-white/10 text-inverse-on-surface'
-          : 'border border-white/15 bg-white/5 text-inverse-on-surface/80 hover:border-white/25 hover:bg-white/10',
+          : 'border border-white/15 bg-white/5 text-inverse-on-surface hover:border-white/25 hover:bg-white/10',
       ].join(' ')}
     >
       {children}
@@ -493,7 +488,7 @@ function NumberField({ id, label, value, onChange, min, max, placeholder }: {
     <div className="flex flex-col gap-1">
       <label
         htmlFor={id}
-        className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-inverse-on-surface/50"
+        className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-inverse-on-surface"
       >
         {label}
       </label>
@@ -529,7 +524,7 @@ function DarkField({ id, name, label, type, autoComplete, placeholder }: {
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={id}
-        className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-inverse-on-surface/55"
+        className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-inverse-on-surface"
       >
         {label}
         {label !== 'Suburb (optional)' && (
@@ -543,7 +538,7 @@ function DarkField({ id, name, label, type, autoComplete, placeholder }: {
         autoComplete={autoComplete}
         placeholder={placeholder}
         required={label !== 'Suburb (optional)'}
-        className="bg-white/10 border border-white/15 px-4 py-3 font-sans text-base text-inverse-on-surface placeholder:text-inverse-on-surface/30 focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
+        className="bg-white/10 border border-white/15 px-4 py-3 font-sans text-base text-inverse-on-surface placeholder:text-inverse-on-surface focus-visible:outline-2 focus-visible:outline-primary-container focus-visible:outline-offset-2"
       />
     </div>
   )

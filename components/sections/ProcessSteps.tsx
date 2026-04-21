@@ -36,7 +36,7 @@ export function ProcessSteps({
             >
               {heading}
             </h2>
-            <p className="font-sans text-base text-inverse-on-surface/85 mt-4 max-w-md leading-relaxed">
+            <p className="font-sans text-base text-inverse-on-surface mt-4 max-w-md leading-relaxed">
               {subheading}
             </p>
           </div>
@@ -91,11 +91,11 @@ export function ProcessSteps({
                   <h3 className="font-headline text-lg font-semibold uppercase tracking-wide text-inverse-on-surface leading-snug mb-3">
                     {step.title}
                   </h3>
-                  <p className="font-sans text-base text-inverse-on-surface/75 leading-relaxed">
+                  <p className="font-sans text-base text-inverse-on-surface leading-relaxed">
                     {step.body}
                   </p>
                   {step.callout && (
-                    <p className="mt-3 font-sans text-xs text-primary-container/80 leading-relaxed border-l-2 border-primary-container/40 pl-3">
+                    <p className="mt-3 font-sans text-xs text-primary-container leading-relaxed border-l-2 border-primary-container/40 pl-3">
                       {step.callout}
                     </p>
                   )}

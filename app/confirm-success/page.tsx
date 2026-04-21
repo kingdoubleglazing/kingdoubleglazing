@@ -23,7 +23,7 @@ export default async function ConfirmSuccessPage({
           Quote confirmed.
         </h1>
 
-        <p className="font-sans text-base text-white/65 leading-relaxed mb-10">
+        <p className="font-sans text-base text-white leading-relaxed mb-10">
           {name ? `${name} has` : 'The client has'} received their confirmation email.
           They&apos;re expecting your call.
         </p>

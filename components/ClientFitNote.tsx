@@ -9,15 +9,15 @@ export function ClientFitNote() {
           >
             Why we ask you to price yourself first
           </h2>
-          <div className="space-y-4 font-sans text-base text-white/85 leading-relaxed">
+          <div className="space-y-4 font-sans text-base text-white leading-relaxed">
             <p>
-              Our pricing reflects streamlined processes and lower overheads. The calculator lets us quote efficiently, so we can focus on clients who are ready to move forward.
+              We keep our prices low by quoting efficiently. The calculator lets you check your number without a sales call.
             </p>
             <p>
-              If the price works for you and you&apos;d like to proceed, send your quote through — Tas will call to confirm details and book your install.
+              If the price works, send your quote through — Tas will call to confirm and book your install.
             </p>
             <p>
-              If the price isn&apos;t right for you, no pressure. Close the tab. We won&apos;t chase.
+              If the price isn&apos;t right, no pressure. Close the tab. We won&apos;t chase.
             </p>
           </div>
         </div>

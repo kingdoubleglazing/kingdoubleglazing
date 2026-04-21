@@ -17,8 +17,8 @@ export function FreeAdviceBlock() {
             <br />
             <span className="text-primary-container">we haven't covered?</span>
           </h2>
-          <p className="font-sans text-base text-inverse-on-surface/80 leading-relaxed mb-6 max-w-lg">
-            For any other questions not answered on this website, feel free to call Tas for free advice. No quote pitch, no sales — just straight answers from someone who's been in glazing for 25+ years.
+          <p className="font-sans text-base text-inverse-on-surface leading-relaxed mb-6 max-w-lg">
+            Call Tas directly. Free advice, no sales pitch. 25+ years in glazing — he'll give you a straight answer.
           </p>
           <a
             href={siteConfig.phoneHref}

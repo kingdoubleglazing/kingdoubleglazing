@@ -81,7 +81,7 @@ export function HeroSection({
         </h1>
 
         {/* Subtext */}
-        <p className="font-sans text-lg md:text-xl text-white/90 mb-6 max-w-2xl leading-relaxed">
+        <p className="font-sans text-lg md:text-xl text-white mb-6 max-w-2xl leading-relaxed">
           {subtext}
         </p>
 
@@ -96,7 +96,7 @@ export function HeroSection({
 
         {/* Filter message — anti-time-waster callout */}
         {filterMessage && (
-          <p className="font-sans text-sm font-medium text-white/90 border-l-2 border-primary-container pl-3 mb-7 max-w-xl leading-snug">
+          <p className="font-sans text-sm font-medium text-white border-l-2 border-primary-container pl-3 mb-7 max-w-xl leading-snug">
             {filterMessage}
           </p>
         )}

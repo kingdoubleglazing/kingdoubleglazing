@@ -93,10 +93,8 @@ export default function ServicesPage() {
             <br />
             <span className="text-primary-container">Every Job.</span>
           </h1>
-          <p className="font-sans text-base text-white/85 max-w-lg leading-relaxed">
-            Retrofit double glazing — adding a second layer of glass to the windows you already have — is our main business.
-            We also do emergency repairs, shower screens, splashbacks, mirrors, and commercial glazing across Melbourne.
-            10-year warranty on every job.
+          <p className="font-sans text-base text-white max-w-lg leading-relaxed">
+            Retrofit double glazing is our main business — we add a second pane to your existing windows. We also do emergency repairs, shower screens, splashbacks, mirrors, and commercial glazing. 10-year warranty on every job.
           </p>
         </div>
       </section>
@@ -112,10 +110,8 @@ export default function ServicesPage() {
         image="/stock/double-glazed-2000px.webp"
         imageAlt="Double glazed window close-up — retrofit installation Melbourne"
       >
-        <p className="font-sans text-base text-on-surface/70 leading-relaxed mb-6">
-          We add a second layer of glass to the windows you already have.
-          Same frames. Same look. Up to 70% quieter. Up to 70% less heat loss in winter.
-          Half the price of full replacement.
+        <p className="font-sans text-base text-on-surface leading-relaxed mb-6">
+          We add a second pane to your existing windows. Same frames, same look. Up to 70% quieter. Up to 70% less heat loss. Half the price of full replacement.
         </p>
         <ul className="space-y-3 mb-8">
           {[
@@ -125,7 +121,7 @@ export default function ServicesPage() {
             '10-year warranty on glass and workmanship',
             'No council approval required in most cases',
           ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-sm text-on-surface/70">
+            <li key={b} className="flex items-start gap-3 font-sans text-sm text-on-surface">
               <span className="text-primary-container font-bold mt-0.5 shrink-0">✓</span>
               {b}
             </li>
@@ -151,9 +147,8 @@ export default function ServicesPage() {
         image="/stock/AdobeStock_323273938.webp"
         imageAlt="Emergency glass repair — glazier on site in Melbourne"
       >
-        <p className="font-sans text-base text-white/85 leading-relaxed mb-6">
-          Broken window right now? We do same-day emergency glass repair across Melbourne.
-          Shopfronts, residential, sliding doors, skylights.
+        <p className="font-sans text-base text-white leading-relaxed mb-6">
+          Broken window right now? We do same-day emergency glass repair across Melbourne — shopfronts, homes, sliding doors, skylights.
         </p>
         <ul className="space-y-3 mb-8">
           {[
@@ -162,7 +157,7 @@ export default function ServicesPage() {
             'All glass types — safety, toughened, laminated',
             'Insurance reports available on request',
           ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-sm text-white/85">
+            <li key={b} className="flex items-start gap-3 font-sans text-sm text-white">
               <span className="text-white font-bold mt-0.5 shrink-0">✓</span>
               {b}
             </li>
@@ -185,10 +180,8 @@ export default function ServicesPage() {
         image="/stock/shower-pane-1000x667-1.webp"
         imageAlt="Semi-frameless shower screen installation Melbourne"
       >
-        <p className="font-sans text-base text-on-surface/70 leading-relaxed mb-6">
-          Frameless, semi-frameless, and framed shower screens.
-          Toughened safety glass. One-day installation.
-          We supply and fit across Melbourne.
+        <p className="font-sans text-base text-on-surface leading-relaxed mb-6">
+          Frameless, semi-frameless, or framed. Toughened safety glass. We supply and install across Melbourne, usually in one day.
         </p>
         <ul className="space-y-3 mb-8">
           {[
@@ -199,7 +192,7 @@ export default function ServicesPage() {
             'Measure-it-yourself quote available — accurate within 10% if you measure carefully',
             '10-year warranty on every screen',
           ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-sm text-on-surface/70">
+            <li key={b} className="flex items-start gap-3 font-sans text-sm text-on-surface">
               <span className="text-primary-container font-bold mt-0.5 shrink-0">✓</span>
               {b}
             </li>
@@ -216,7 +209,7 @@ export default function ServicesPage() {
             href="/contact/?service=shower-visit"
             className="inline-flex items-center gap-3 bg-transparent text-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 border border-on-surface/30 hover:bg-on-surface/10 transition-colors duration-150"
           >
-            Or Book a Free Measure →
+            Or Get in Touch →
           </Link>
         </div>
       </ServiceSection>
@@ -230,9 +223,8 @@ export default function ServicesPage() {
         image="/stock/splashback-2.webp"
         imageAlt="Kitchen glass splashback installation Melbourne"
       >
-        <p className="font-sans text-base text-inverse-on-surface/85 leading-relaxed mb-6">
-          Custom-cut glass splashbacks in any colour. Easy to clean.
-          Heat-resistant. We measure, cut, and install.
+        <p className="font-sans text-base text-inverse-on-surface leading-relaxed mb-6">
+          Custom-cut glass splashbacks in any colour. Easy to clean, heat-resistant. We measure, cut, and install.
         </p>
         <ul className="space-y-3 mb-8">
           {[
@@ -241,7 +233,7 @@ export default function ServicesPage() {
             'Hygienic — no grout to clean',
             'Custom sizes, no standard-size limitations',
           ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-sm text-inverse-on-surface/85">
+            <li key={b} className="flex items-start gap-3 font-sans text-sm text-inverse-on-surface">
               <span className="text-primary-container font-bold mt-0.5 shrink-0">✓</span>
               {b}
             </li>
@@ -261,9 +253,8 @@ export default function ServicesPage() {
         eyebrow="Custom"
         heading="Custom Mirrors"
       >
-        <p className="font-sans text-base text-on-surface/70 leading-relaxed mb-6">
-          Bespoke mirrors cut to any size. Bathrooms, gyms, hallways, studios.
-          We supply and install across Melbourne.
+        <p className="font-sans text-base text-on-surface leading-relaxed mb-6">
+          Bespoke mirrors cut to any size. Bathrooms, gyms, hallways, studios. We supply and install across Melbourne.
         </p>
         <ul className="space-y-3 mb-8">
           {[
@@ -272,7 +263,7 @@ export default function ServicesPage() {
             'Wall-mounted or free-standing',
             'Commercial and residential',
           ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-sm text-on-surface/70">
+            <li key={b} className="flex items-start gap-3 font-sans text-sm text-on-surface">
               <span className="text-primary-container font-bold mt-0.5 shrink-0">✓</span>
               {b}
             </li>
@@ -295,9 +286,8 @@ export default function ServicesPage() {
         image="/hero/hero-commercial-glazing.webp"
         imageAlt="Commercial glazing — shopfront and office glass Melbourne"
       >
-        <p className="font-sans text-base text-inverse-on-surface/85 leading-relaxed mb-6">
-          Offices, retail, shopfronts, strata — we handle commercial glazing jobs of all sizes
-          across Melbourne. Same transparent pricing, same 10-year warranty.
+        <p className="font-sans text-base text-inverse-on-surface leading-relaxed mb-6">
+          Offices, retail, shopfronts, strata. Same transparent pricing, same 10-year warranty.
         </p>
         <ul className="space-y-3 mb-8">
           {[
@@ -307,7 +297,7 @@ export default function ServicesPage() {
             'Strata and body corporate work',
             'All project sizes — call to discuss yours',
           ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-base text-inverse-on-surface/85">
+            <li key={b} className="flex items-start gap-3 font-sans text-base text-inverse-on-surface">
               <span className="text-primary-container font-bold mt-0.5 shrink-0">✓</span>
               {b}
             </li>
@@ -371,7 +361,7 @@ function ServiceSection({
       <div className="max-w-5xl mx-auto px-4">
         <div className={`grid grid-cols-1 ${image ? 'lg:grid-cols-2 gap-12 lg:gap-20 items-center' : ''}`}>
           <div className={`${border} ${border ? 'pl-8' : ''}`}>
-            <p className={`font-headline text-xs font-semibold uppercase tracking-[0.2em] mb-4 ${onDark ? 'text-white/60' : 'text-primary'}`}>
+            <p className={`font-headline text-xs font-semibold uppercase tracking-[0.2em] mb-4 ${onDark ? 'text-white/80' : 'text-primary'}`}>
               {eyebrow}
             </p>
             <h2

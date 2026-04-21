@@ -37,9 +37,8 @@ export default function GalleryPage() {
             <br />
             <span className="text-primary-container">Real Melbourne Homes.</span>
           </h1>
-          <p className="font-sans text-base text-inverse-on-surface/85 max-w-xl mx-auto leading-relaxed">
-            Every job in this gallery was completed with the existing frames kept intact.
-            No permits. No demolition. Done in a day.
+          <p className="font-sans text-base text-inverse-on-surface max-w-xl mx-auto leading-relaxed">
+            Every job shown here was done with the existing frames kept intact. No permits, no demolition, done in a day.
           </p>
         </div>
       </section>
@@ -54,7 +53,7 @@ export default function GalleryPage() {
             {galleryCategories.map((cat) => (
               <span
                 key={cat.id}
-                className="font-headline text-xs uppercase tracking-wide border border-current px-3 py-1 text-on-surface/70"
+                className="font-headline text-xs uppercase tracking-wide border border-current px-3 py-1 text-on-surface"
               >
                 {cat.label}
               </span>

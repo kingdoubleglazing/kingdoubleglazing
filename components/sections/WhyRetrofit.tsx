@@ -76,7 +76,7 @@ export function WhyRetrofit() {
                 <h3 className="font-headline text-sm lg:text-base font-semibold uppercase tracking-wide text-on-surface leading-snug lg:mb-1">
                   {headline}
                 </h3>
-                <p className="hidden lg:block font-sans text-sm text-on-surface/75 leading-snug">
+                <p className="hidden lg:block font-sans text-sm text-on-surface leading-snug">
                   {sub}
                 </p>
               </div>

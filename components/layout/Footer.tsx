@@ -21,12 +21,12 @@ export function Footer() {
                 className="h-20 w-auto"
               />
             </Link>
-            <p className="text-sm text-white/80 mb-4 leading-relaxed">
+            <p className="text-sm text-white mb-4 leading-relaxed">
               Stop. Don&apos;t Overpay.<br />
               Melbourne&apos;s retrofit window specialists.<br />
               We&apos;ll beat any genuine quote by 30%.
             </p>
-            <ul className="space-y-2 text-sm text-white/85">
+            <ul className="space-y-2 text-sm text-white">
               <li>
                 <a
                   href={siteConfig.phoneHref}
@@ -56,13 +56,13 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white/65 mb-4">Services</h3>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-white/80 mb-4">Services</h3>
             <ul className="space-y-2">
               {footerNav.services.map(({ label, href }) => (
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-sm text-white/85 hover:text-primary-container transition-colors duration-150"
+                    className="text-sm text-white hover:text-primary-container transition-colors duration-150"
                   >
                     {label}
                   </Link>
@@ -73,13 +73,13 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white/65 mb-4">Company</h3>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-white/80 mb-4">Company</h3>
             <ul className="space-y-2">
               {footerNav.company.map(({ label, href }) => (
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-sm text-white/85 hover:text-primary-container transition-colors duration-150"
+                    className="text-sm text-white hover:text-primary-container transition-colors duration-150"
                   >
                     {label}
                   </Link>
@@ -90,7 +90,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-white/65">
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-white/80">
           <p>
             © {new Date().getFullYear()} Brooklyn Glass Pty Ltd t/a King Double Glazing. ABN {siteConfig.abn}. All rights reserved.
           </p>

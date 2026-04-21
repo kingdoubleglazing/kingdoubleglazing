@@ -6,7 +6,7 @@ export function PaymentTerms() {
       <div className="max-w-5xl mx-auto px-4">
         <div className="border border-black">
           <div className="px-6 py-6 md:px-8 border-b border-black/10">
-            <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-black/40 mb-1">
+            <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-black mb-1">
               How payment works
             </p>
             <h2
@@ -33,8 +33,8 @@ export function PaymentTerms() {
                 </h3>
               </div>
               <div className="h-0.5 w-6 bg-primary-container mb-3" aria-hidden="true" />
-              <p className="font-sans text-sm text-black/70 leading-relaxed">
-                A 50% deposit is required to commence fabrication.
+              <p className="font-sans text-sm text-black leading-relaxed">
+                Pay 50% to get your glass made.
               </p>
             </div>
 
@@ -52,8 +52,8 @@ export function PaymentTerms() {
                 </h3>
               </div>
               <div className="h-0.5 w-6 bg-primary-container mb-3" aria-hidden="true" />
-              <p className="font-sans text-sm text-black/70 leading-relaxed">
-                The remaining 50% is due once materials are ready and your installation is scheduled.
+              <p className="font-sans text-sm text-black leading-relaxed">
+                Pay the other 50% when the job is done.
               </p>
             </div>
           </div>
@@ -63,8 +63,8 @@ export function PaymentTerms() {
             <h3 className="font-headline text-sm font-semibold uppercase tracking-wide text-black mb-2">
               Made for You, Backed for 10 Years
             </h3>
-            <p className="font-sans text-sm text-black/70 leading-relaxed">
-              All materials are custom-made for your project. We stand behind our workmanship and promptly address any installation-related adjustments, typically within 2&ndash;3 weeks if required.
+            <p className="font-sans text-sm text-black leading-relaxed">
+              All glass is made to measure for your home. If anything needs adjusting after install, we fix it — typically within 2–3 weeks.
             </p>
           </div>
         </div>

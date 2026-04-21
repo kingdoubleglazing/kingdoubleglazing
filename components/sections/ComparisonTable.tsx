@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { siteConfig } from '@/data/site'
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -7,57 +6,33 @@ interface ComparisonRow {
   feature: string
   doNothing: string
   retrofit: string
-  fullReplacement: string
 }
 
 const rows: ComparisonRow[] = [
   {
-    feature:        'Upfront cost',
-    doNothing:      '$0',
-    retrofit:       siteConfig.pricing.retrofitFromDisplay,
-    fullReplacement: 'From $1,200/m²',
+    feature:   'Noise reduction',
+    doNothing: 'None',
+    retrofit:  'Up to 70% quieter',
   },
   {
-    feature:        'Noise reduction',
-    doNothing:      'None',
-    retrofit:       'Up to 70% quieter',
-    fullReplacement:'Up to 70% quieter',
+    feature:   'Winter warmth',
+    doNothing: 'None',
+    retrofit:  'Up to 70% less heat loss',
   },
   {
-    feature:        'Winter warmth',
-    doNothing:      'None',
-    retrofit:       'Up to 70% less heat loss',
-    fullReplacement:'Up to 70% less heat loss',
+    feature:   'Disruption',
+    doNothing: 'None',
+    retrofit:  'Minimal',
   },
   {
-    feature:        'Time to install',
-    doNothing:      '—',
-    retrofit:       '1 day',
-    fullReplacement:'2–4 weeks',
+    feature:   'Keep existing frames?',
+    doNothing: 'Yes',
+    retrofit:  'Yes — no replacement needed',
   },
   {
-    feature:        'Disruption',
-    doNothing:      'None',
-    retrofit:       'Minimal',
-    fullReplacement:'Frames replaced, minor wall work',
-  },
-  {
-    feature:        'Keep existing frames?',
-    doNothing:      'Yes',
-    retrofit:       'Yes',
-    fullReplacement:'New frames installed',
-  },
-  {
-    feature:        'Warranty',
-    doNothing:      '—',
-    retrofit:       '10 Years',
-    fullReplacement:'Manufacturer warranty',
-  },
-  {
-    feature:        'Energy bill savings',
-    doNothing:      'None',
-    retrofit:       'Up to 40% less heating',
-    fullReplacement:'Up to 40% less heating',
+    feature:   'Energy bill savings',
+    doNothing: 'None',
+    retrofit:  'Up to 40% less heating',
   },
 ]
 
@@ -68,7 +43,7 @@ interface ComparisonTableProps {
 }
 
 export function ComparisonTable({
-  heading = 'Add a Second Glass Layer, Replace the Whole Window, or Live With It — How They Compare',
+  heading = "Upgrade Your Windows or Live With It — Here's the Difference",
 }: ComparisonTableProps) {
   return (
     <section className="bg-surface-container-low py-16 md:py-24">
@@ -86,123 +61,75 @@ export function ComparisonTable({
 
         {/* ── Desktop table ─────────────────────────────────────────────────── */}
         <div className="hidden md:block overflow-x-auto -mx-4 px-4">
-          <table className="w-full min-w-[640px] border-collapse">
+          <table className="w-full min-w-[480px] border-collapse">
             <thead>
               <tr>
-                {/* Feature label */}
                 <th
                   scope="col"
                   className="bg-surface-container-low text-left px-6 py-4 border border-surface-container-high"
                 />
 
-                {/* Do Nothing — muted */}
+                {/* Do Nothing */}
                 <th
                   scope="col"
                   className="text-center px-6 py-5 min-w-[150px]"
                   style={{ backgroundColor: '#F5F5F5', border: '1px solid #E8E8E8' }}
                 >
                   <span
-                    className="font-display uppercase text-on-surface/60 leading-none block"
-                    style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)' }}
+                    className="font-display uppercase text-on-surface leading-none block"
+                    style={{ fontSize: 'clamp(1.5rem, 2.5vw, 1.8rem)' }}
                   >
                     Do Nothing
                   </span>
                 </th>
 
-                {/* Retrofit — brand yellow */}
+                {/* Retrofit */}
                 <th
                   scope="col"
                   className="bg-primary-container text-center px-6 py-5 min-w-[200px]"
                   style={{ border: '1px solid #c9a800' }}
                 >
-                  <span className="inline-block font-headline text-[0.65rem] font-semibold uppercase tracking-[0.18em] bg-black text-primary-container px-2 py-0.5 mb-2">
-                    Most popular choice
+                  <span className="inline-block font-headline text-[15px] font-semibold uppercase tracking-[0.18em] bg-black text-primary-container px-2 py-0.5 mb-2">
+                    What we do
                   </span>
                   <span
                     className="font-display uppercase text-on-primary-fixed leading-none block"
-                    style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)' }}
+                    style={{ fontSize: 'clamp(1.5rem, 2.5vw, 1.9rem)' }}
                   >
                     Retrofit With Us
                   </span>
-                  <span className="block font-sans text-xs normal-case font-normal text-on-primary-fixed/70 mt-1">Add a second glass layer</span>
-                </th>
-
-                {/* Full Replacement — clean white */}
-                <th
-                  scope="col"
-                  className="text-center px-6 py-5 min-w-[180px]"
-                  style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5E5' }}
-                >
-                  <span
-                    className="inline-block font-headline text-[0.65rem] font-semibold uppercase tracking-[0.18em] px-2 py-0.5 mb-2"
-                    style={{ backgroundColor: '#F0F0F0', color: '#555' }}
-                  >
-                    New builds &amp; old frames
+                  <span className="block font-sans text-[17px] normal-case font-normal text-on-primary-fixed mt-1">
+                    Add a second glass layer
                   </span>
-                  <span
-                    className="font-display uppercase text-on-surface leading-none block"
-                    style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)' }}
-                  >
-                    Full Replacement
-                  </span>
-                  <span className="block font-sans text-xs normal-case font-normal text-on-surface/70 mt-1">Whole new window + frame</span>
                 </th>
               </tr>
             </thead>
             <tbody>
               {rows.map(row => (
                 <tr key={row.feature}>
-                  {/* Feature label */}
                   <td
-                    className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface px-6 py-4"
+                    className="font-headline font-semibold uppercase tracking-wide text-on-surface px-6 py-4 text-[19px]"
                     style={{ backgroundColor: '#FAFAFA', border: '1px solid #E8E8E8' }}
                   >
                     {row.feature}
                   </td>
 
-                  {/* Do Nothing — grey, muted */}
                   <td
                     className="text-center px-6 py-4"
                     style={{ backgroundColor: '#F5F5F5', border: '1px solid #E8E8E8' }}
                   >
-                    <span
-                      className={row.feature === 'Upfront cost' ? 'font-display text-2xl leading-none' : 'font-sans text-base'}
-                      style={{ color: '#3f3f46' }}
-                    >
+                    <span className="font-sans text-[21px]" style={{ color: '#3f3f46' }}>
                       {row.doNothing}
                     </span>
                   </td>
 
-                  {/* Retrofit — solid yellow */}
                   <td
                     className="bg-primary-container text-center px-6 py-4"
                     style={{ border: '1px solid #c9a800' }}
                   >
-                    {row.feature === 'Upfront cost' ? (
-                      <span className="font-display text-2xl leading-none uppercase text-on-primary-fixed">
-                        {row.retrofit}
-                      </span>
-                    ) : (
-                      <span className="font-headline text-sm font-bold uppercase tracking-wide text-on-primary-fixed">
-                        {row.retrofit}
-                      </span>
-                    )}
-                  </td>
-
-                  {/* Full Replacement — white, full contrast */}
-                  <td
-                    className="text-center px-6 py-4"
-                    style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5E5' }}
-                  >
-                    {row.feature === 'Upfront cost' ? (
-                      <span className="font-display text-2xl leading-none uppercase text-on-surface">
-                        {row.fullReplacement}
-                      </span>
-                    ) : (
-                      <span className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface">
-                        {row.fullReplacement}
-                      </span>
-                    )}
+                    <span className="font-headline text-[19px] font-bold uppercase tracking-wide text-on-primary-fixed">
+                      {row.retrofit}
+                    </span>
                   </td>
                 </tr>
               ))}
@@ -210,91 +137,61 @@ export function ComparisonTable({
           </table>
         </div>
 
-        {/* ── Mobile cards: Retrofit → Full Replacement → Do Nothing ──────── */}
-        <div className="md:hidden space-y-4">
+        {/* ── Mobile: compact side-by-side grid ────────────────────────────── */}
+        <div className="md:hidden border border-surface-container-high overflow-hidden">
 
-          {/* Retrofit — solid brand yellow */}
-          <div className="bg-primary-container p-6" style={{ border: '1px solid #c9a800' }}>
-            <p className="inline-block font-headline text-[0.65rem] font-semibold uppercase tracking-[0.18em] bg-black text-primary-container px-2 py-0.5 mb-3">
-              Most popular choice
-            </p>
-            <h3
-              className="font-display uppercase text-on-primary-fixed leading-none mb-1"
-              style={{ fontSize: '1.75rem' }}
-            >
-              Retrofit With Us
-            </h3>
-            <p className="font-sans text-xs normal-case font-normal text-on-primary-fixed/70 mb-5">Add a second glass layer</p>
-            <dl className="space-y-3">
-              {rows.map(row => (
-                <div key={row.feature} className="flex justify-between gap-4">
-                  <dt className="font-headline text-xs font-semibold uppercase tracking-wide text-on-primary-fixed/60 shrink-0">
-                    {row.feature}
-                  </dt>
-                  <dd className={row.feature === 'Upfront cost' ? 'font-display text-2xl leading-none uppercase text-on-primary-fixed text-right' : 'font-headline text-sm font-bold uppercase tracking-wide text-on-primary-fixed text-right'}>
-                    {row.retrofit}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+          {/* Column headers */}
+          <div className="grid grid-cols-2">
+            <div className="p-3 border-b border-r border-surface-container-high" style={{ backgroundColor: '#F5F5F5' }}>
+              <p className="font-headline text-[15px] font-semibold uppercase tracking-wide" style={{ color: '#555' }}>
+                Do Nothing
+              </p>
+            </div>
+            <div className="bg-primary-container p-3 border-b" style={{ borderBottomColor: '#c9a800' }}>
+              <p className="font-headline text-[14px] font-semibold uppercase tracking-[0.15em] bg-black text-primary-container inline px-1.5 py-0.5">
+                What we do
+              </p>
+              <p className="font-headline text-[15px] font-semibold uppercase tracking-wide text-on-primary-fixed mt-1">
+                Retrofit With Us
+              </p>
+            </div>
           </div>
 
-          {/* Full Replacement — white, full contrast */}
-          <div className="p-6" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5E5' }}>
-            <p
-              className="inline-block font-headline text-[0.65rem] font-semibold uppercase tracking-[0.18em] px-2 py-0.5 mb-3"
-              style={{ backgroundColor: '#F0F0F0', color: '#555' }}
-            >
-              New builds &amp; old frames
-            </p>
-            <h3
-              className="font-display uppercase text-on-surface leading-none mb-1"
-              style={{ fontSize: '1.75rem' }}
-            >
-              Full Replacement
-            </h3>
-            <p className="font-sans text-xs normal-case font-normal text-on-surface/70 mb-5">Whole new window + frame</p>
-            <dl className="space-y-3">
-              {rows.map(row => (
-                <div key={row.feature} className="flex justify-between gap-4">
-                  <dt className="font-headline text-xs font-semibold uppercase tracking-wide text-on-surface/60 shrink-0">
+          {/* Data rows */}
+          {rows.map((row, i) => {
+            const isLast = i === rows.length - 1
+            return (
+              <div key={row.feature} className="grid grid-cols-2">
+                <div
+                  className={['p-3 border-r border-surface-container-high', !isLast ? 'border-b' : ''].join(' ')}
+                  style={{ backgroundColor: '#F5F5F5', borderBottomColor: '#E8E8E8' }}
+                >
+                  <p className="font-headline text-[14px] font-semibold uppercase tracking-wide mb-0.5" style={{ color: '#888' }}>
                     {row.feature}
-                  </dt>
-                  <dd className={row.feature === 'Upfront cost' ? 'font-display text-2xl leading-none uppercase text-on-surface text-right' : 'font-headline text-sm font-semibold uppercase tracking-wide text-on-surface text-right'}>
-                    {row.fullReplacement}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          {/* Do Nothing — greyed out */}
-          <div className="p-6" style={{ backgroundColor: '#F5F5F5', border: '1px solid #E8E8E8' }}>
-            <h3 className="font-headline text-sm font-semibold uppercase tracking-wide mb-4" style={{ color: '#555' }}>
-              Do Nothing
-            </h3>
-            <dl className="space-y-3">
-              {rows.map(row => (
-                <div key={row.feature} className="flex justify-between gap-4">
-                  <dt className="font-headline text-xs font-semibold uppercase tracking-wide shrink-0" style={{ color: '#555' }}>
-                    {row.feature}
-                  </dt>
-                  <dd className="font-sans text-base text-right" style={{ color: '#3f3f46' }}>
+                  </p>
+                  <p className="font-sans text-[19px] leading-snug" style={{ color: '#3f3f46' }}>
                     {row.doNothing}
-                  </dd>
+                  </p>
                 </div>
-              ))}
-            </dl>
-          </div>
+                <div
+                  className={['bg-primary-container p-3', !isLast ? 'border-b' : ''].join(' ')}
+                  style={{ borderBottomColor: '#c9a800' }}
+                >
+                  <p className="font-headline text-[14px] font-semibold uppercase tracking-wide text-on-primary-fixed/70 mb-0.5">
+                    {row.feature}
+                  </p>
+                  <p className="font-headline text-[17px] font-bold uppercase tracking-wide text-on-primary-fixed leading-snug">
+                    {row.retrofit}
+                  </p>
+                </div>
+              </div>
+            )
+          })}
+
         </div>
 
-        {/* Note */}
-        <p className="mt-8 text-center font-sans text-base text-on-surface/75 italic">
-          Retrofit is what King Double Glazing does. If your frames need replacing, that&apos;s a job for a different trade — we&apos;ll tell you honestly at the free home visit.
-        </p>
-
         {/* CTA */}
-        <div className="mt-4 text-center">
+        <div className="mt-8 text-center">
           <Link
             href="/instant-estimate/"
             className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150"

@@ -65,7 +65,7 @@ export function EmergencyHero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-danger opacity-75" />
               <span className="relative inline-flex size-3 rounded-full bg-danger" />
             </span>
-            <span className="font-headline text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
+            <span className="font-headline text-sm font-semibold uppercase tracking-[0.2em] text-white">
               Glazier on call — average 30 min response
             </span>
           </div>
@@ -90,7 +90,7 @@ export function EmergencyHero() {
                 {siteConfig.phone}
               </span>
             </span>
-            <span className="font-headline text-sm font-semibold uppercase tracking-[0.25em] text-white/85 mt-1">
+            <span className="font-headline text-sm font-semibold uppercase tracking-[0.25em] text-white mt-1">
               Available 24 hours, 7 days
             </span>
           </a>
@@ -105,7 +105,7 @@ export function EmergencyHero() {
                   aria-hidden="true"
                   className="text-primary-container shrink-0"
                 />
-                <span className="font-headline text-sm font-semibold uppercase tracking-[0.15em] text-white/85">
+                <span className="font-headline text-sm font-semibold uppercase tracking-[0.15em] text-white">
                   {item}
                 </span>
               </li>

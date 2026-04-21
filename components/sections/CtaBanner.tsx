@@ -39,7 +39,7 @@ export function CtaBanner({
                 <span key={i} className="block">{line}</span>
               ))}
             </h2>
-            <p className="font-sans text-base text-on-primary-fixed/80 mt-5 max-w-md leading-relaxed mx-auto">
+            <p className="font-sans text-base text-on-primary-fixed mt-5 max-w-md leading-relaxed mx-auto">
               {subtext}
             </p>
           </div>
@@ -74,7 +74,7 @@ export function CtaBanner({
             ].map((item) => (
               <p
                 key={item}
-                className="font-headline text-[0.8125rem] font-semibold uppercase tracking-[0.2em] text-on-primary-fixed/50"
+                className="font-headline text-[0.8125rem] font-semibold uppercase tracking-[0.2em] text-on-primary-fixed/80"
               >
                 ✓ {item}
               </p>

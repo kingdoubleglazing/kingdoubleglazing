@@ -8,7 +8,7 @@ function getResend() {
 }
 
 import { siteConfig } from '@/data/site'
-const TAS_EMAIL = siteConfig.notificationEmail
+const TAS_EMAIL = 'clupaio4@gmail.com' // TEMP: testing — revert to siteConfig.notificationEmail
 const FROM_EMAIL = 'King Double Glazing <noreply@kingdoubleglazing.com.au>'
 
 export async function sendContactNotification(data: {
@@ -28,28 +28,20 @@ export async function sendContactNotification(data: {
   })
 }
 
-// Reverse-map from DB midpoint → display band (matches WINDOW_BAND_MIDPOINT in data/pricing.ts)
-const MIDPOINT_TO_BAND: Record<number, string> = {
-  2:  '1–3',
-  5:  '4–7',
-  10: '8–12',
-  14: '12+',
-}
-
 export async function sendQuoteNotification(data: {
   name: string
   email: string
   phone: string
-  windowBand: string
-  glassType: string
-  orientation: string
-  propertyType: string
-  storeys: number
-  frameCondition: string
-  priority: string
-  low: number
-  high: number
-  mid: number
+  suburb?: string
+  glassOption: string
+  glassLabel: string
+  glassSubLabel: string
+  glassSpec: string
+  noisePct: number
+  heatPct: number
+  windows: { heightMm: number; widthMm: number; quantity: number; secondStorey: boolean }[]
+  windowCount: number
+  total: number
   quoteId: number
   confirmToken: string
 }) {
@@ -58,7 +50,7 @@ export async function sendQuoteNotification(data: {
     from:    FROM_EMAIL,
     to:      TAS_EMAIL,
     replyTo: data.email,
-    subject: `New quote — ${data.name} · Est. $${data.low.toLocaleString()}–$${data.high.toLocaleString()}`,
+    subject: `New quote — ${data.name} · $${data.total.toLocaleString()} · Option ${data.glassOption}`,
     react:   QuoteNotificationEmail({ ...data, confirmUrl }),
   })
 }
@@ -71,11 +63,10 @@ export async function sendQuoteConfirmation(quote: {
   windowCount: number | null
   glassType: string | null
 }) {
-  const windowBand = quote.windowCount != null ? (MIDPOINT_TO_BAND[quote.windowCount] ?? null) : null
   await getResend().emails.send({
     from:    FROM_EMAIL,
     to:      quote.email,
     subject: 'Your King Double Glazing quote is confirmed',
-    react:   QuoteConfirmationEmail({ ...quote, windowBand }),
+    react:   QuoteConfirmationEmail({ ...quote, windowBand: null }),
   })
 }

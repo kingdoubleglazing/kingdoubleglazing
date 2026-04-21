@@ -67,10 +67,8 @@ export default function AboutPage() {
                 <br />
                 <span className="text-primary-container">of Melbourne Glaziers</span>
               </h1>
-              <p className="font-sans text-base text-inverse-on-surface/85 max-w-lg leading-relaxed mb-8">
-                Tas Markou ran two double glazing factories. He found a way to drop the price —
-                because most companies charge more than most Melbourne households can afford.
-                40+ staff at peak. 25+ years in the trade.
+              <p className="font-sans text-base text-inverse-on-surface max-w-lg leading-relaxed mb-8">
+                Tas Markou ran two double glazing factories. He found a way to drop the price — because most companies charge more than families can afford. 40+ staff at peak. 25+ years in the trade.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -120,21 +118,16 @@ export default function AboutPage() {
                 <span className="block">Stop.</span>
                 <span className="block text-primary-container">Don&apos;t Overpay.</span>
               </h2>
-              <div className="space-y-5 font-sans text-base text-on-surface/70 leading-relaxed max-w-xl">
+              <div className="space-y-5 font-sans text-base text-on-surface leading-relaxed max-w-xl">
                 <p>
-                  I grew up in glass. My father was a glazier and I was doing installs as a kid.
-                  I ran two factories in double glazing. Along the way I found a way to drop the price,
-                  because most companies are way too expensive to suit most household budgets.
+                  I grew up in glass. My father was a glazier and I was doing installs as a kid. I ran two factories. Along the way I found a way to drop the price — most companies charge way more than families can afford.
                 </p>
                 <p>
-                  Most Melbourne homeowners want quieter, warmer windows. They don't want to spend $15,000
-                  ripping out frames that work fine. We add a second layer of glass to the windows you
-                  already have. No replacement. No mess. One day, done.
+                  You want quieter, warmer windows. You don't want to spend $15,000 ripping out frames that work fine. We add a second pane to what you already have. No mess. One day, done.
                 </p>
                 <p>
-                  That's why every quote from us is in plain numbers. No hidden extras. No markup.
-                  If I can't beat any real competitor quote by 30%, I'll tell you straight.{' '}
-                  <strong className="text-on-surface">Stop. Don&apos;t overpay.</strong>
+                  Every quote is in plain numbers. No hidden extras. If we can't beat any real competitor quote by 30%, I'll say so.{' '}
+                  <strong>Stop. Don&apos;t overpay.</strong>
                 </p>
                 <blockquote className="border-l-4 border-primary-container pl-5 not-italic">
                   <p className="font-sans text-base font-semibold text-on-surface leading-relaxed">
@@ -167,7 +160,7 @@ export default function AboutPage() {
                     >
                       {value}
                     </p>
-                    <p className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/80">
+                    <p className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface">
                       {label}
                     </p>
                   </div>
@@ -191,7 +184,7 @@ export default function AboutPage() {
         <div className="relative max-w-5xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div>
-              <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-primary-fixed/50 mb-4">
+              <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-primary-fixed/80 mb-4">
                 Our Promises
               </p>
               <h2
@@ -201,19 +194,19 @@ export default function AboutPage() {
                 <span className="block">What We</span>
                 <span className="block">Guarantee</span>
               </h2>
-              <p className="font-sans text-base text-on-primary-fixed/70 leading-relaxed max-w-md">
-                These aren&apos;t marketing promises. They&apos;re in writing on every job.
+              <p className="font-sans text-base text-on-primary-fixed leading-relaxed max-w-md">
+                These are in writing on every job.
               </p>
             </div>
             <div className="space-y-0 ghost-border">
               {[
                 {
                   label: 'We beat any genuine quote by 30%',
-                  detail: 'Send us a real competitor quote. We\'ll come in 30% cheaper — guaranteed in writing, same 10-year warranty.',
+                  detail: 'Send us a real competitor quote. We come in 30% cheaper, in writing.',
                 },
                 {
                   label: 'Fits most existing windows',
-                  detail: 'Custom adaptors are made to suit timber, aluminium, and steel frames. If your frames can\'t take a retrofit, we\'ll tell you at the free home visit — no charge, no pressure.',
+                  detail: 'Custom fittings for timber, aluminium, and steel frames. If it won\'t work, we\'ll tell you before any work begins.',
                 },
                 {
                   label: '10-year warranty on every job',
@@ -221,11 +214,11 @@ export default function AboutPage() {
                 },
                 {
                   label: 'Transparent pricing',
-                  detail: 'No vague estimates. No hidden charges. The quote we give you is the invoice you receive.',
+                  detail: 'The quote you get is the price you pay. No hidden extras.',
                 },
                 {
                   label: '50+ years combined experience',
-                  detail: 'Tas learned from his father. Our team has worked on thousands of Melbourne homes.',
+                  detail: 'Tas learned from his father. Our team has done thousands of Melbourne homes.',
                 },
               ].map(({ label, detail }, i) => (
                 <div
@@ -235,14 +228,14 @@ export default function AboutPage() {
                   style={{ '--i': i } as any}
                 >
                   <div className="flex items-start gap-4">
-                    <span className="shrink-0 font-display text-on-primary-fixed/30 leading-none" style={{ fontSize: '2rem' }}>
+                    <span className="shrink-0 font-display text-on-primary-fixed/60 leading-none" style={{ fontSize: '2rem' }}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <div>
                       <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-primary-fixed mb-2">
                         {label}
                       </p>
-                      <p className="font-sans text-sm text-on-primary-fixed/60 leading-relaxed">
+                      <p className="font-sans text-sm text-on-primary-fixed leading-relaxed">
                         {detail}
                       </p>
                     </div>

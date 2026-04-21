@@ -87,13 +87,13 @@ export function ServicesSection({
                     <span key={j} className="block">{line}</span>
                   ))}
                 </h3>
-                <p className="font-sans text-base text-inverse-on-surface/80 leading-relaxed flex-1 mb-8">
+                <p className="font-sans text-base text-inverse-on-surface leading-relaxed flex-1 mb-8">
                   {description}
                 </p>
                 <ArrowRight
                   size={20}
                   aria-hidden="true"
-                  className="text-inverse-on-surface/80 group-hover:text-primary-container transition-colors duration-150 group-hover:translate-x-1 motion-safe:transition-transform"
+                  className="text-inverse-on-surface group-hover:text-primary-container transition-colors duration-150 group-hover:translate-x-1 motion-safe:transition-transform"
                 />
               </div>
             </Link>

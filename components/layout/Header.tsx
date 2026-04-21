@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -20,14 +21,36 @@ import { cn } from '@/lib/utils'
 export function Header() {
   const pathname = usePathname()
   const isTransparent = transparentNavRoutes.includes(pathname)
+  const [isHidden, setIsHidden] = useState(false)
+  const lastScrollY = useRef(0)
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY
+
+    const handleScroll = () => {
+      const currentY = window.scrollY
+      if (currentY < 80) {
+        setIsHidden(false)
+      } else if (currentY > lastScrollY.current) {
+        setIsHidden(true)
+      } else {
+        setIsHidden(false)
+      }
+      lastScrollY.current = currentY
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <header
       className={cn(
-        'z-40 w-full',
+        'z-40 w-full transition-transform duration-300 ease-in-out',
         isTransparent
           ? 'absolute top-0 left-0 right-0 bg-transparent border-transparent'
-          : 'sticky top-0 bg-surface border-b border-surface-container-high'
+          : 'sticky top-0 bg-surface border-b border-surface-container-high',
+        isHidden && 'lg:translate-y-0 -translate-y-full'
       )}
     >
       <div className="max-w-5xl mx-auto px-4">
@@ -58,8 +81,8 @@ export function Header() {
                 className={cn(
                   'font-headline text-sm font-semibold uppercase tracking-wide px-3 py-2 transition-colors duration-150',
                   isTransparent
-                    ? 'text-white/80 hover:text-white'
-                    : 'text-on-surface/70 hover:text-on-surface hover:bg-surface-container-low'
+                    ? 'text-white hover:text-white'
+                    : 'text-on-surface hover:text-on-surface hover:bg-surface-container-low'
                 )}
               >
                 {label}
@@ -74,8 +97,8 @@ export function Header() {
               className={cn(
                 'hidden xl:inline-flex items-center gap-1.5 font-headline text-sm font-semibold uppercase tracking-wide transition-colors duration-150',
                 isTransparent
-                  ? 'text-white/80 hover:text-white'
-                  : 'text-on-surface/70 hover:text-on-surface'
+                  ? 'text-white hover:text-white'
+                  : 'text-on-surface hover:text-on-surface'
               )}
               aria-label={`Call us: ${siteConfig.phone}`}
             >
@@ -97,8 +120,8 @@ export function Header() {
                 className={cn(
                   'lg:hidden inline-flex items-center justify-center p-2 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-container',
                   isTransparent
-                    ? 'text-white/80 hover:text-white'
-                    : 'text-on-surface/70 hover:text-on-surface hover:bg-surface-container-low'
+                    ? 'text-white hover:text-white'
+                    : 'text-on-surface hover:text-on-surface hover:bg-surface-container-low'
                 )}
                 aria-label="Open navigation menu"
               >
@@ -131,7 +154,7 @@ export function Header() {
                           <SheetClose asChild>
                             <Link
                               href={href}
-                              className="font-headline text-base font-semibold uppercase tracking-wide px-3 py-2.5 block transition-colors duration-150 text-inverse-on-surface/80 hover:text-primary-container"
+                              className="font-headline text-base font-semibold uppercase tracking-wide px-3 py-2.5 block transition-colors duration-150 text-inverse-on-surface hover:text-primary-container"
                             >
                               {label}
                             </Link>
@@ -153,7 +176,7 @@ export function Header() {
                     </SheetClose>
                     <a
                       href={siteConfig.phoneHref}
-                      className="font-headline inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-inverse-on-surface/85 hover:text-primary-container transition-colors duration-150"
+                      className="font-headline inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-inverse-on-surface hover:text-primary-container transition-colors duration-150"
                     >
                       <Phone size={14} aria-hidden="true" />
                       {siteConfig.phone}

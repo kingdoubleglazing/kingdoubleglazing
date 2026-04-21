@@ -48,7 +48,7 @@ export function FAQ({
               {heading}
             </h2>
           </div>
-          <p className="font-sans text-base text-on-surface/75 max-w-sm leading-relaxed lg:text-right">
+          <p className="font-sans text-base text-on-surface max-w-sm leading-relaxed lg:text-right">
             {subheading}
           </p>
         </div>
@@ -66,7 +66,7 @@ export function FAQ({
                 {/* Number + question */}
                 <div className="flex items-start gap-5">
                   <span
-                    className="font-display uppercase text-on-surface/20 leading-none shrink-0 mt-0.5"
+                    className="font-display uppercase text-on-surface/50 leading-none shrink-0 mt-0.5"
                     aria-hidden="true"
                     style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}
                   >
@@ -93,7 +93,7 @@ export function FAQ({
               {/* Answer */}
               <div className="px-7 pb-7 pl-[calc(1.75rem+2rem+1.25rem)]">
                 <div className="h-px w-8 bg-primary-container mb-5" aria-hidden="true" />
-                <p className="font-sans text-base text-on-surface/65 leading-relaxed">
+                <p className="font-sans text-base text-on-surface leading-relaxed">
                   {item.a}
                 </p>
               </div>

@@ -1,7 +1,7 @@
 export const homepageFaq = [
   {
     q: 'Will this fit my existing windows?',
-    a: 'Almost always yes. We retrofit timber, aluminium, and steel frames. If your frames can\'t take a retrofit, we\'ll tell you during the free home visit — no charge.',
+    a: 'Almost always yes. We retrofit timber, aluminium, and steel frames. If your frames can\'t take a retrofit, we\'ll tell you before any work begins — no charge.',
   },
   {
     q: 'How long does it take?',

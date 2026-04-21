@@ -2,7 +2,6 @@ import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo/generateMetadata'
 import { TrustBar } from '@/components/sections/TrustBar'
-import { EstimateCalculator } from '@/components/EstimateCalculator'
 import { FAQ } from '@/components/sections/FAQ'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { PaymentTerms } from '@/components/PaymentTerms'
@@ -13,6 +12,7 @@ import { siteConfig } from '@/data/site'
 import Image from 'next/image'
 import { Eye, ShieldCheck, PhoneOff, Clock, Calculator } from 'lucide-react'
 import { GlassComparisonTable } from '@/components/sections/GlassComparisonTable'
+import { GlassTechSpecs } from '@/components/sections/GlassTechSpecs'
 import { FreeAdviceBlock } from '@/components/FreeAdviceBlock'
 
 export const metadata: Metadata = buildMetadata({
@@ -54,11 +54,11 @@ const faqSchema = {
 }
 
 const estimateTrustItems = [
-  { icon: Eye,         label: 'See Your Price First'   },
-  { icon: PhoneOff,    label: 'No Sales Calls'         },
-  { icon: Calculator,  label: 'Accurate Within ±10%'   },
+  { icon: Eye,         label: 'See Your Price First'  },
+  { icon: PhoneOff,    label: 'No Sales Calls'        },
+  { icon: Calculator,  label: 'Accurate Within ±10%'  },
   { icon: ShieldCheck, label: '10-Year Warranty'      },
-  { icon: Clock,       label: 'Takes 60 Seconds'       },
+  { icon: Clock,       label: 'Takes 60 Seconds'      },
 ]
 
 export default function InstantEstimatePage() {
@@ -106,10 +106,10 @@ export default function InstantEstimatePage() {
               <br />
               <span className="text-primary-container">See Your Price in 60 Seconds.</span>
             </h1>
-            <p className="font-sans text-sm font-medium text-white/90 border-l-2 border-primary-container pl-3 max-w-xl leading-snug">
+            <p className="font-sans text-sm font-medium text-white border-l-2 border-primary-container pl-3 max-w-xl leading-snug">
               Price yourself online first. Call us when you&apos;d like to proceed.
             </p>
-            <p className="font-sans text-lg md:text-xl text-white/90 max-w-xl leading-relaxed">
+            <p className="font-sans text-lg md:text-xl text-white max-w-xl leading-relaxed">
               We&apos;ll beat any genuine quote by 30%. That&apos;s a promise in writing.
             </p>
             <ul className="flex flex-wrap gap-x-6 gap-y-2 mt-1">
@@ -119,7 +119,7 @@ export default function InstantEstimatePage() {
                 'No email needed',
                 '10-year warranty',
               ].map(item => (
-                <li key={item} className="font-headline text-xs font-semibold uppercase tracking-widest text-white/80">
+                <li key={item} className="font-headline text-xs font-semibold uppercase tracking-widest text-white">
                   ✓ {item}
                 </li>
               ))}
@@ -138,21 +138,14 @@ export default function InstantEstimatePage() {
 
       <TrustBar items={estimateTrustItems} />
 
-      <GlassComparisonTable />
+      {/* Option cards + inline calculator (gray section) */}
+      <Suspense fallback={<div className="bg-surface-container-low h-96" />}>
+        <GlassComparisonTable />
+      </Suspense>
 
-      {/* The tool */}
-      <section className="bg-inverse-surface" id="estimate-form">
-        <div className="max-w-4xl mx-auto">
-          <Suspense fallback={<div className="h-64" />}>
-            <EstimateCalculator />
-          </Suspense>
-        </div>
-        <p className="max-w-4xl mx-auto px-6 py-6 md:px-10 font-sans text-xs text-inverse-on-surface/30 leading-relaxed text-center">
-          Estimate is indicative only. Free on-site measure confirms exact dimensions and final price before any work begins.
-        </p>
-      </section>
+      <GlassTechSpecs />
 
-      {/* C2: Payment terms — below estimate output card */}
+      {/* C2: Payment terms */}
       <PaymentTerms />
 
       {/* G1: Anti-time-waster disclaimer */}
@@ -163,10 +156,10 @@ export default function InstantEstimatePage() {
 
       {/* Commercial note */}
       <div className="max-w-4xl mx-auto px-6 md:px-10 py-4">
-        <p className="font-sans text-sm text-on-surface/55 leading-relaxed">
-          <strong className="text-on-surface/70">Commercial glazing?</strong>{' '}
+        <p className="font-sans text-sm text-on-surface leading-relaxed">
+          <strong>Commercial glazing?</strong>{' '}
           The calculator is built for homes. For offices, retail, and commercial jobs, call Tas directly on{' '}
-          <a href="tel:+61406470595" className="underline hover:text-on-surface/80 transition-colors duration-150">
+          <a href="tel:+61406470595" className="underline hover:text-primary transition-colors duration-150">
             0406 470 595
           </a>.
         </p>
@@ -183,8 +176,8 @@ export default function InstantEstimatePage() {
 
       <CtaBanner
         heading={"Ready for the\nFormal Quote?"}
-        subtext="Once you have an estimate, book a free on-site check. A King glazier measures precisely and issues a contractual quote — price locked, no surprises."
-        primaryCta={{ label: 'Book Free Home Visit', href: '/contact/' }}
+        subtext="Once you have an estimate, call Tas to confirm and book the install."
+        primaryCta={{ label: 'Contact Us', href: '/contact/' }}
         secondaryCta={{ label: siteConfig.phone, href: siteConfig.phoneHref }}
       />
     </>

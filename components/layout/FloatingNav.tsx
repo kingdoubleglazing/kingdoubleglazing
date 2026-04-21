@@ -92,7 +92,7 @@ export function FloatingNav() {
                 <Link
                   key={href}
                   href={href}
-                  className="font-headline text-xs font-semibold uppercase tracking-wide px-3 py-2 text-white/85 hover:text-white transition-colors duration-150"
+                  className="font-headline text-xs font-semibold uppercase tracking-wide px-3 py-2 text-white hover:text-white transition-colors duration-150"
                 >
                   {label}
                 </Link>
@@ -103,7 +103,7 @@ export function FloatingNav() {
             <div className="hidden sm:flex items-center gap-3 shrink-0">
               <Link
                 href={siteConfig.phoneHref}
-                className="hidden xl:inline-flex items-center gap-1.5 font-headline text-xs font-semibold uppercase tracking-wide text-white/85 hover:text-white transition-colors duration-150"
+                className="hidden xl:inline-flex items-center gap-1.5 font-headline text-xs font-semibold uppercase tracking-wide text-white hover:text-white transition-colors duration-150"
                 aria-label={`Call us: ${siteConfig.phone}`}
               >
                 <Phone size={13} aria-hidden="true" />

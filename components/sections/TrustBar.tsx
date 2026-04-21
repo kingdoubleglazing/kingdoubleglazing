@@ -28,7 +28,7 @@ export function TrustBar({ items = defaultItems }: TrustBarProps) {
               aria-hidden="true"
               className="text-primary-container shrink-0"
             />
-            <span className="font-headline text-xs font-semibold uppercase tracking-widest text-inverse-on-surface/80 whitespace-nowrap">
+            <span className="font-headline text-xs font-semibold uppercase tracking-widest text-inverse-on-surface whitespace-nowrap">
               {label}
             </span>
           </li>

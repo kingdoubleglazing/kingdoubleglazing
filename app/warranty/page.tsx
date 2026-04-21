@@ -50,8 +50,8 @@ export default function WarrantyPage() {
             Our 10-Year{' '}
             <span className="text-primary-container">Warranty</span>
           </h1>
-          <p className="font-sans text-base text-inverse-on-surface/75 max-w-xl leading-relaxed">
-            Every King Double Glazing installation is backed by a 10-year warranty on glass and workmanship. No conditions, no fine print. Here is exactly what is covered.
+          <p className="font-sans text-base text-inverse-on-surface max-w-xl leading-relaxed">
+            Every installation is backed by a 10-year warranty on glass and workmanship. No conditions, no fine print.
           </p>
         </div>
       </section>
@@ -79,15 +79,15 @@ export default function WarrantyPage() {
                   },
                   {
                     item: 'Installation workmanship',
-                    detail: 'If it was fitted by us and it fails because of how it was fitted, we fix it free of charge.',
+                    detail: 'If it fails because of how we fitted it, we fix it free.',
                   },
                   {
                     item: 'Frame adaptors',
-                    detail: 'Custom adaptors machined to fit your existing timber, aluminium, or steel frames.',
+                    detail: 'The fittings we use to attach new glass to your existing frame.',
                   },
                   {
                     item: 'Seals and edge spacers',
-                    detail: 'The perimeter seal and internal spacer bar that keep moisture and air out of the unit.',
+                    detail: 'The seal and spacer bar that keep moisture and air out of the unit.',
                   },
                 ].map(({ item, detail }) => (
                   <li key={item} className="ghost-border p-6 flex items-start gap-4">
@@ -98,7 +98,7 @@ export default function WarrantyPage() {
                       <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface mb-1">
                         {item}
                       </p>
-                      <p className="font-sans text-sm text-on-surface/65 leading-relaxed">
+                      <p className="font-sans text-sm text-on-surface leading-relaxed">
                         {detail}
                       </p>
                     </div>
@@ -108,7 +108,7 @@ export default function WarrantyPage() {
             </div>
 
             <div>
-              <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface/40 mb-4">
+              <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface/70 mb-4">
                 What&apos;s Not Covered
               </p>
               <h2
@@ -129,18 +129,18 @@ export default function WarrantyPage() {
                   },
                   {
                     item: 'Building structural movement',
-                    detail: 'If the building itself shifts or settles and distorts the frame beyond the adaptor tolerance.',
+                    detail: 'If the building settles and distorts the frame beyond the fitting\'s tolerance.',
                   },
                 ].map(({ item, detail }) => (
                   <li key={item} className="ghost-border p-6 flex items-start gap-4">
-                    <span className="shrink-0 w-5 h-5 mt-0.5 bg-on-surface/10 text-on-surface/40 flex items-center justify-center font-headline text-xs font-bold">
+                    <span className="shrink-0 w-5 h-5 mt-0.5 bg-on-surface/10 text-on-surface/70 flex items-center justify-center font-headline text-xs font-bold">
                       ✕
                     </span>
                     <div>
                       <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface mb-1">
                         {item}
                       </p>
-                      <p className="font-sans text-sm text-on-surface/65 leading-relaxed">
+                      <p className="font-sans text-sm text-on-surface leading-relaxed">
                         {detail}
                       </p>
                     </div>
@@ -152,7 +152,7 @@ export default function WarrantyPage() {
                 <p className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-primary mb-2">
                   How to Make a Claim
                 </p>
-                <ol className="space-y-2 font-sans text-sm text-on-surface/70 leading-relaxed list-decimal list-inside">
+                <ol className="space-y-2 font-sans text-sm text-on-surface leading-relaxed list-decimal list-inside">
                   <li>Call or email Tas with your job reference and a brief description.</li>
                   <li>We inspect within 7 business days — no charge for the visit.</li>
                   <li>If it&apos;s covered, we repair or replace at no cost to you.</li>
@@ -194,8 +194,8 @@ export default function WarrantyPage() {
           >
             Ready to Get Your Price?
           </h2>
-          <p className="font-sans text-base text-on-primary-fixed/70 mb-8 max-w-lg mx-auto leading-relaxed">
-            Get your instant estimate in 60 seconds. Every job comes with this 10-year warranty, in writing.
+          <p className="font-sans text-base text-on-primary-fixed mb-8 max-w-lg mx-auto leading-relaxed">
+            Get your price in 60 seconds. Every job comes with this warranty, in writing.
           </p>
           <Link
             href="/instant-estimate/"
