@@ -16,7 +16,7 @@ import { siteConfig } from '@/data/site'
 export const metadata: Metadata = buildMetadata({
   title: 'Contact King Double Glazing | Double Glazing Quote Melbourne',
   description:
-    'Get your double glazing estimate online in 60 seconds. Call or send a message when you\'re ready to book. We beat any genuine quote by 30%. 10-year warranty.',
+    'Get your double glazing estimate online in minutes. Call or send a message when you\'re ready to book. We beat any genuine quote by 30%. 10-year warranty.',
   path: '/contact/',
 })
 
@@ -27,7 +27,7 @@ const contactPageSchemas = [
     '@id': `${BASE_URL}/contact/#webpage`,
     url: `${siteConfig.domain}/contact/`,
     name: 'Contact King Double Glazing | Double Glazing Quote Melbourne',
-    description: 'Get your double glazing estimate online in 60 seconds. Call or send a message when you\'re ready to book. We beat any genuine competitor quote by 30%.',
+    description: 'Get your double glazing estimate online in minutes. Call or send a message when you\'re ready to book. We beat any genuine competitor quote by 30%.',
     isPartOf: { '@id': `${siteConfig.domain}/#website` },
     about: { '@id': `${siteConfig.domain}/#business` },
   },
@@ -181,7 +181,7 @@ export default async function ContactPage({
 
       <CtaBanner
         heading={"Want the\nNumber First?"}
-        subtext="Use the Quote Generator — see your price in 60 seconds, no email required. Then contact us when you're ready."
+        subtext="Use the Quote Generator — see your price in minutes, no email required. Then contact us when you're ready."
         primaryCta={{ label: 'Generate My Quote', href: '/instant-estimate/' }}
         secondaryCta={{ label: siteConfig.phone, href: siteConfig.phoneHref }}
       />

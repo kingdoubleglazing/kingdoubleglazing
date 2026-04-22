@@ -9,7 +9,7 @@ export const homepageFaq = [
   },
   {
     q: 'How much does it cost?',
-    a: 'Most Melbourne homes land between $2,400 and $6,000 depending on how many windows you upgrade. Use our Instant Estimate to get your exact range in 60 seconds.',
+    a: 'Most Melbourne homes land between $2,400 and $6,000 depending on how many windows you upgrade. Use our Instant Estimate to get your exact range in minutes.',
   },
   {
     q: 'What\'s the warranty?',

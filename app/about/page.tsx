@@ -253,7 +253,7 @@ export default function AboutPage() {
 
       <CtaBanner
         heading={"Ready to\nGet Started?"}
-        subtext="Generate your own quote in 60 seconds. Or call Tas directly — no call centres, no middlemen."
+        subtext="Generate your own quote in minutes. Or call Tas directly — no call centres, no middlemen."
         primaryCta={{ label: 'Generate My Quote →', href: '/instant-estimate/' }}
         secondaryCta={{ label: siteConfig.phone, href: siteConfig.phoneHref }}
       />

@@ -18,7 +18,7 @@ import { FreeAdviceBlock } from '@/components/FreeAdviceBlock'
 export const metadata: Metadata = buildMetadata({
   title: 'Instant Double Glazing Estimate Melbourne | See Your Price First',
   description:
-    'Get an instant double glazing estimate in 60 seconds. No email required to see your number. We beat any genuine quote by 30%. 10-year warranty on every job.',
+    'Get an instant double glazing estimate in minutes. No email required to see your number. We beat any genuine quote by 30%. 10-year warranty on every job.',
   path: '/instant-estimate/',
 })
 
@@ -58,7 +58,7 @@ const estimateTrustItems = [
   { icon: PhoneOff,    label: 'No Sales Calls'        },
   { icon: Calculator,  label: 'Accurate Within ±10%'  },
   { icon: ShieldCheck, label: '10-Year Warranty'      },
-  { icon: Clock,       label: 'Takes 60 Seconds'      },
+  { icon: Clock,       label: 'Takes Minutes'      },
 ]
 
 export default function InstantEstimatePage() {
@@ -104,7 +104,7 @@ export default function InstantEstimatePage() {
             >
               Generate Your Own Quote.
               <br />
-              <span className="text-primary-container">See Your Price in 60 Seconds.</span>
+              <span className="text-primary-container">See Your Price in Minutes.</span>
             </h1>
             <p className="font-sans text-sm font-medium text-white border-l-2 border-primary-container pl-3 max-w-xl leading-snug">
               Price yourself online first. Call us when you&apos;d like to proceed.

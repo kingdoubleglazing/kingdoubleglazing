@@ -5,7 +5,7 @@ export const contactFaq = [
   },
   {
     q: 'Do I need a site visit to get a price?',
-    a: 'No. Use the Quote Generator to get your price in 60 seconds — no email required to see your number. Call us when you\'ve seen the price and you\'re ready to go ahead. Tas comes to your home once, confirms the exact measurements, and installs the same day.',
+    a: 'No. Use the Quote Generator to get your price in minutes — no email required to see your number. Call us when you\'ve seen the price and you\'re ready to go ahead. Tas comes to your home once, confirms the exact measurements, and installs the same day.',
   },
   {
     q: 'What areas do you service?',

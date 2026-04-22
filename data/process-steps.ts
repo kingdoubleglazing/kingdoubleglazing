@@ -1,7 +1,7 @@
 export const processSteps = [
   {
     title: 'Get Your Price Online',
-    body: 'Use the instant estimate tool — 60 seconds, no email needed. See your number first. If it works for your budget, move to step 2.',
+    body: 'Use the instant estimate tool — minutes, no email needed. See your number first. If it works for your budget, move to step 2.',
     imageSrc: '/process-steps/step-1-measure.webp',
     imageAlt: 'Homeowner using the online estimate tool on a phone',
   },

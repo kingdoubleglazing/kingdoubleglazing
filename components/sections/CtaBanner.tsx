@@ -10,7 +10,7 @@ interface CtaBannerProps {
 
 export function CtaBanner({
   heading = "Stop.\nDon't Overpay.",
-  subtext = 'Get a transparent, itemised estimate in 60 seconds. No sales calls. No site visit required.',
+  subtext = 'Get a transparent, itemised estimate in minutes. No sales calls. No site visit required.',
   primaryCta = { label: 'Get Instant Estimate', href: '/instant-estimate/' },
   secondaryCta = { label: siteConfig.phone, href: siteConfig.phoneHref },
 }: CtaBannerProps) {

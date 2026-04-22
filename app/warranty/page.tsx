@@ -195,7 +195,7 @@ export default function WarrantyPage() {
             Ready to Get Your Price?
           </h2>
           <p className="font-sans text-base text-on-primary-fixed mb-8 max-w-lg mx-auto leading-relaxed">
-            Get your price in 60 seconds. Every job comes with this warranty, in writing.
+            Get your price in minutes. Every job comes with this warranty, in writing.
           </p>
           <Link
             href="/instant-estimate/"

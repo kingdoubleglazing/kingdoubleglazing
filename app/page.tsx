@@ -67,7 +67,7 @@ primaryCta={{ label: 'Generate My Quote →', href: '/instant-estimate/' }}
       {/* C2: Payment terms — after 3-step process, before final CTA */}
       <PaymentTerms />
 
-      {/* 7. Big CTA — the 60-second estimate push */}
+      {/* 7. Big CTA — the minute estimate push */}
       <EstimateCTABlock />
 
       {/* 8. Social proof */}
@@ -111,7 +111,7 @@ function EstimateCTABlock() {
         >
           Get Your Price.
           <br />
-          60 Seconds Online.
+          In Minutes Online.
         </h2>
         <p className="font-sans text-base text-on-primary-fixed mb-8 max-w-lg mx-auto leading-relaxed">
           We beat any genuine quote by 30%. That&apos;s a promise in writing.
