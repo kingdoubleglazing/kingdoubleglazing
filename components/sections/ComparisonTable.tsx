@@ -22,7 +22,7 @@ const rows: ComparisonRow[] = [
   {
     feature:   'Energy bill savings',
     doNothing: '0%',
-    retrofit:  'Up to 40% less heating',
+    retrofit:  'Save up to 40% on bills',
   },
 ]
 
@@ -48,7 +48,7 @@ export function ComparisonTable({
             {heading}
           </h2>
           <p className="font-sans text-base md:text-lg text-on-surface/70 max-w-2xl leading-relaxed">
-            We remove your single standard glazing with our adaptor and double glaze it.
+            We remove your existing single glazed windows and, using our adaptors, double glaze them.
           </p>
         </div>
 
