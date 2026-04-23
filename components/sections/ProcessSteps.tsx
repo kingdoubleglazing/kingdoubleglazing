@@ -18,7 +18,7 @@ interface ProcessStepsProps {
 }
 
 export function ProcessSteps({
-  heading = 'How It Works',
+  heading = 'Our Process',
   subheading = 'Simple and transparent — from quote to installation.',
   cta = { label: 'Get Instant Estimate', href: '/instant-estimate/' },
   steps = processSteps,

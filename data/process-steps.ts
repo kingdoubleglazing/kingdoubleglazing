@@ -8,13 +8,13 @@ export const processSteps = [
   {
     title: 'Review & Proceed',
     body: "If you're happy with the estimate, simply email your quote through to us to proceed.",
-    imageSrc: '/process-steps/step-2-install.webp',
+    imageSrc: '/stock/window-house.webp',
     imageAlt: 'Homeowner reviewing a double glazing quote online',
   },
   {
     title: 'Site Visit',
     body: "We'll contact you to arrange a convenient time for a site inspection and final measure.",
-    imageSrc: '/process-steps/step-3-finish.webp',
+    imageSrc: '/process-steps/step-2-install.webp',
     imageAlt: 'Glazier conducting a site inspection and measuring windows',
   },
   {
