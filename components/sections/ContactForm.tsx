@@ -23,7 +23,7 @@ export function ContactForm() {
             ✓ Message Received
           </p>
           <p className="font-sans text-sm text-on-surface leading-relaxed">
-            Got it, {state.name}. Tas will call you within 2 hours.
+            Got it, {state.name}. We'll call you within 2 hours.
           </p>
         </div>
         <p className="font-sans text-xs text-on-surface leading-relaxed">
@@ -170,7 +170,7 @@ export function ContactForm() {
       </button>
 
       <p className="text-center font-sans text-xs text-on-surface">
-        Tas will call within 2 hours. No spam, no pressure.
+        We'll call within 2 hours. No spam, no pressure.
       </p>
 
       {/* Alternatives */}

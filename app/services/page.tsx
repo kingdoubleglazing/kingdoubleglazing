@@ -321,7 +321,7 @@ export default function ServicesPage() {
 
       <CtaBanner
         heading={"Ready to Get\nStarted?"}
-        subtext="Generate your own quote in minutes, or call Tas directly for any service."
+        subtext="Generate your own quote in minutes, or call us directly for any service."
         primaryCta={{ label: 'Generate My Quote', href: '/instant-estimate/' }}
         secondaryCta={{ label: siteConfig.phone, href: siteConfig.phoneHref }}
       />

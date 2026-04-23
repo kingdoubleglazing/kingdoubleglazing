@@ -18,14 +18,14 @@ export function FreeAdviceBlock() {
             <span className="text-primary-container">we haven't covered?</span>
           </h2>
           <p className="font-sans text-base text-inverse-on-surface leading-relaxed mb-6 max-w-lg">
-            Call Tas directly. Free advice, no sales pitch. 25+ years in glazing — he'll give you a straight answer.
+            Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.
           </p>
           <a
             href={siteConfig.phoneHref}
             className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-base font-semibold uppercase tracking-[0.1em] px-8 py-5 hover:bg-primary-fixed-dim transition-colors duration-150"
           >
             <Phone size={18} aria-hidden="true" />
-            Call Tas — {siteConfig.phone}
+            Call Us — {siteConfig.phone}
           </a>
         </div>
       </div>

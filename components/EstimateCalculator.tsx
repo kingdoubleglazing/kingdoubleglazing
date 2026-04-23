@@ -105,10 +105,10 @@ export function EstimateCalculator() {
           className="font-display uppercase text-inverse-on-surface leading-none mb-4"
           style={{ fontSize: 'clamp(2rem,6vw,3.5rem)' }}
         >
-          Tas will call you soon.
+          We'll be in touch soon.
         </p>
         <p className="font-sans text-sm text-inverse-on-surface leading-relaxed mb-8 max-w-xs mx-auto">
-          Once Tas confirms your quote you'll receive an email with your price locked in.
+          Once we confirm your quote you'll receive an email with your price locked in.
         </p>
         <button
           type="button"
@@ -166,14 +166,14 @@ export function EstimateCalculator() {
             disabled={quotePending}
             className="w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 disabled:opacity-60 disabled:cursor-not-allowed mt-2"
           >
-            {quotePending ? 'Sending…' : 'Send Quote to Tas →'}
+            {quotePending ? 'Sending…' : 'Send Us Your Quote →'}
           </button>
           <a
             href={siteConfig.phoneHref}
             className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-primary-container/40 text-primary-container font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-container/10 transition-colors duration-150"
           >
             <Phone size={16} aria-hidden="true" />
-            Or Call Tas — {siteConfig.phone}
+            Or Call Us — {siteConfig.phone}
           </a>
           <p className="text-center font-sans text-xs text-inverse-on-surface">
             Not ready? Close the tab. We won't chase.
@@ -354,14 +354,14 @@ export function EstimateCalculator() {
                 onClick={() => setCalc(prev => ({ ...prev, panelState: 'contact' }))}
                 className="mt-6 w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 active:scale-[0.98]"
               >
-                Send Quote to Tas →
+                Send Us Your Quote →
               </button>
               <a
                 href={siteConfig.phoneHref}
                 className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-primary-container/40 text-primary-container font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-container/10 transition-colors duration-150"
               >
                 <Phone size={16} aria-hidden="true" />
-                Or Call Tas — {siteConfig.phone}
+                Or Call Us — {siteConfig.phone}
               </a>
             </>
           )}

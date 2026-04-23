@@ -158,7 +158,7 @@ export default function InstantEstimatePage() {
       <div className="max-w-4xl mx-auto px-6 md:px-10 py-4">
         <p className="font-sans text-sm text-on-surface leading-relaxed">
           <strong>Commercial glazing?</strong>{' '}
-          The calculator is built for homes. For offices, retail, and commercial jobs, call Tas directly on{' '}
+          The calculator is built for homes. For offices, retail, and commercial jobs, call us directly on{' '}
           <a href="tel:+61406470595" className="underline hover:text-primary transition-colors duration-150">
             0406 470 595
           </a>.
@@ -176,7 +176,7 @@ export default function InstantEstimatePage() {
 
       <CtaBanner
         heading={"Ready for the\nFormal Quote?"}
-        subtext="Once you have an estimate, call Tas to confirm and book the install."
+        subtext="Once you have an estimate, call us to confirm and book the installation."
         primaryCta={{ label: 'Contact Us', href: '/contact/' }}
         secondaryCta={{ label: siteConfig.phone, href: siteConfig.phoneHref }}
       />

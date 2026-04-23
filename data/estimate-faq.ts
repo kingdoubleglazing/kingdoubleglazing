@@ -33,7 +33,7 @@ export const estimateFaq = [
   },
   {
     q: 'Do I have to give my email to see the price?',
-    a: 'No. Your price appears as you enter your windows — no email, no phone number, no obligation. You can optionally send your quote through to Tas when you\'re ready to proceed.',
+    a: 'No. Your price appears as you enter your windows — no email, no phone number, no obligation. You can optionally send your quote through to us when you\'re ready to proceed.',
   },
   {
     q: 'Does the price include installation?',

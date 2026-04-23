@@ -19,7 +19,7 @@ interface ProcessStepsProps {
 
 export function ProcessSteps({
   heading = 'How It Works',
-  subheading = 'Three steps. One day. 10-year warranty.',
+  subheading = 'Simple and transparent — from quote to installation.',
   cta = { label: 'Get Instant Estimate', href: '/instant-estimate/' },
   steps = processSteps,
 }: ProcessStepsProps) {
@@ -50,7 +50,7 @@ export function ProcessSteps({
         </div>
 
         {/* Steps */}
-        <ol className="relative grid grid-cols-1 md:grid-cols-3 gap-0">
+        <ol className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
           {steps.map((step, i) => {
             const num = String(i + 1).padStart(2, '0')
             const isLast = i === steps.length - 1

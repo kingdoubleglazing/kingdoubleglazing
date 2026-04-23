@@ -138,7 +138,7 @@ export default async function ContactPage({
           {isShowerVisit && (
             <div className="mb-8 max-w-2xl bg-primary-container/20 border-l-4 border-primary-container px-5 py-4">
               <p className="font-sans text-base text-on-surface leading-relaxed">
-                <strong>Booking a shower screen measure?</strong> Tell us your suburb and a good time. Tas will be in touch within one business day.
+                <strong>Booking a shower screen measure?</strong> Tell us your suburb and a good time. We'll be in touch within one business day.
               </p>
             </div>
           )}

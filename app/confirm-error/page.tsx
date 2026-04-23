@@ -11,7 +11,7 @@ export default function ConfirmErrorPage() {
           Something went wrong.
         </h1>
         <p className="font-sans text-base text-white leading-relaxed max-w-md mx-auto mb-8">
-          This link may have already been used, or it&apos;s expired. Call Tas directly if you need to confirm.
+          This link may have already been used, or it&apos;s expired. Call us directly if you need to confirm.
         </p>
         <a
           href={siteConfig.phoneHref}

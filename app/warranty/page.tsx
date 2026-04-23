@@ -153,7 +153,7 @@ export default function WarrantyPage() {
                   How to Make a Claim
                 </p>
                 <ol className="space-y-2 font-sans text-sm text-on-surface leading-relaxed list-decimal list-inside">
-                  <li>Call or email Tas with your job reference and a brief description.</li>
+                  <li>Call or email us with your job reference and a brief description.</li>
                   <li>We inspect within 7 business days — no charge for the visit.</li>
                   <li>If it&apos;s covered, we repair or replace at no cost to you.</li>
                 </ol>
@@ -168,7 +168,7 @@ export default function WarrantyPage() {
                     href={`mailto:${siteConfig.email}`}
                     className="inline-flex items-center gap-2 border border-on-surface/20 text-on-surface font-headline text-xs font-semibold uppercase tracking-[0.12em] px-5 py-3 hover:bg-on-surface/5 transition-colors duration-150"
                   >
-                    Email Tas
+                    Email Us
                   </a>
                 </div>
               </div>

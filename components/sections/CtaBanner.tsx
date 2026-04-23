@@ -10,7 +10,7 @@ interface CtaBannerProps {
 
 export function CtaBanner({
   heading = "Stop.\nDon't Overpay.",
-  subtext = 'Get a transparent, itemised estimate in minutes. No sales calls. No site visit required.',
+  subtext = 'Get a transparent, itemised estimate in minutes. No sales calls.',
   primaryCta = { label: 'Get Instant Estimate', href: '/instant-estimate/' },
   secondaryCta = { label: siteConfig.phone, href: siteConfig.phoneHref },
 }: CtaBannerProps) {
@@ -67,7 +67,6 @@ export function CtaBanner({
           {/* Trust footnote */}
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-2">
             {[
-              'No site visit required',
               'Price locked at quote',
               '10-year warranty',
               'We beat any quote by 30%',

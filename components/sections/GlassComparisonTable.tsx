@@ -398,7 +398,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
 
                   <div className="mt-5 bg-primary-container text-on-primary-fixed px-5 py-3">
                     <p className="font-sans text-sm font-medium leading-snug">
-                      If this is within your budget, send your quote through — Tas will call to
+                      If this is within your budget, send your quote through — we'll call to
                       confirm and book the install.
                     </p>
                   </div>
@@ -408,14 +408,14 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                     onClick={() => setDialogOpen(true)}
                     className="mt-6 w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 active:scale-[0.98]"
                   >
-                    Send Quote to Tas →
+                    Send Us Your Quote →
                   </button>
                   <a
                     href={siteConfig.phoneHref}
                     className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-primary/40 text-primary font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary/10 transition-colors duration-150"
                   >
                     <Phone size={16} aria-hidden="true" />
-                    Or Call Tas — {siteConfig.phone}
+                    Or Call Us — {siteConfig.phone}
                   </a>
                 </>
               )}
@@ -437,10 +437,10 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                 className="font-display uppercase text-on-surface leading-none mb-3"
                 style={{ fontSize: 'clamp(1.8rem,5vw,2.8rem)' }}
               >
-                Tas will call you soon.
+                We'll be in touch soon.
               </DialogTitle>
               <p className="font-sans text-sm text-on-surface/70 leading-relaxed mb-8 max-w-xs mx-auto">
-                Once Tas confirms your quote you&apos;ll receive an email with your price locked in.
+                Once we confirm your quote you&apos;ll receive an email with your price locked in.
               </p>
               <button
                 type="button"
@@ -461,10 +461,10 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
               <div className="px-6 pt-8 pb-6">
                 <DialogHeader className="mb-6">
                   <DialogTitle style={{ fontSize: 'clamp(1.4rem,4vw,2rem)' }}>
-                    Send Your Quote to Tas
+                    Send Us Your Quote
                   </DialogTitle>
                   <DialogDescription className="mt-1">
-                    Tas will call to confirm and book your install.
+                    We'll call to confirm and book your install.
                   </DialogDescription>
                 </DialogHeader>
 
@@ -502,7 +502,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                   disabled={quotePending || !total}
                   className="mt-6 w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {quotePending ? 'Sending…' : 'Send to Tas →'}
+                  {quotePending ? 'Sending…' : 'Send Us Your Quote →'}
                 </button>
 
                 <a
@@ -510,7 +510,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                   className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-primary/40 text-primary font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-3 hover:bg-primary/10 transition-colors duration-150"
                 >
                   <Phone size={16} aria-hidden="true" />
-                  Or Call Tas — {siteConfig.phone}
+                  Or Call Us — {siteConfig.phone}
                 </a>
               </div>
             </form>

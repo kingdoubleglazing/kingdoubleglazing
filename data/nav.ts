@@ -2,7 +2,7 @@ export const mainNav = [
   { label: 'Home',     href: '/' },
   { label: 'Services', href: '/services/' },
   { label: 'Gallery',  href: '/gallery/' },
-  { label: 'About',    href: '/about/' },
+  { label: 'Who We Are', href: '/about/' },
   { label: 'Contact',  href: '/contact/' },
 ] as const
 
@@ -21,7 +21,7 @@ export const footerNav = {
     { label: 'Commercial Glazing',      href: '/services/#commercial' },
   ],
   company: [
-    { label: 'About Us',               href: '/about/' },
+    { label: 'Who We Are',              href: '/about/' },
     { label: 'Gallery',                href: '/gallery/' },
     { label: 'Contact',                href: '/contact/' },
     { label: 'Warranty',               href: '/warranty/' },
