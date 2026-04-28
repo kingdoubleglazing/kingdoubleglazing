@@ -1,6 +1,5 @@
-import { OPTIONS, type OptionKey } from '@/data/pricing'
-
-const OPTION_KEYS = Object.keys(OPTIONS) as OptionKey[]
+import type { PricingOption } from '@/sanity/types'
+import type { OptionKey } from '@/data/pricing'
 
 const YES = (
   <span className="text-primary-container font-bold" aria-label="Yes">✓</span>
@@ -9,7 +8,10 @@ const NO = (
   <span className="text-on-surface/40" aria-label="No">—</span>
 )
 
-export function GlassTechSpecs() {
+export function GlassTechSpecs({ options }: { options: PricingOption[] }) {
+  const OPTION_KEYS = options.map(o => o.optionKey) as OptionKey[]
+  const OPTIONS = Object.fromEntries(options.map(o => [o.optionKey, o])) as Record<OptionKey, PricingOption>
+
   return (
     <section id="tech-specs" className="bg-surface-container-low py-14 md:py-18">
       <div className="max-w-5xl mx-auto px-4">

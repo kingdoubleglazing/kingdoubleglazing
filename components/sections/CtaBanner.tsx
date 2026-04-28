@@ -1,5 +1,7 @@
 import Link from 'next/link'
-import { siteConfig } from '@/data/site'
+import { sanityFetch } from '@/sanity/lib/fetch'
+import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
+import type { SiteSettings } from '@/sanity/types'
 
 interface CtaBannerProps {
   heading?: string
@@ -8,12 +10,16 @@ interface CtaBannerProps {
   secondaryCta?: { label: string; href: string }
 }
 
-export function CtaBanner({
+export async function CtaBanner({
   heading = "Stop.\nDon't Overpay.",
   subtext = 'Get a transparent, itemised estimate in minutes. No sales calls.',
   primaryCta = { label: 'Get Instant Estimate', href: '/instant-estimate/' },
-  secondaryCta = { label: siteConfig.phone, href: siteConfig.phoneHref },
+  secondaryCta,
 }: CtaBannerProps) {
+  if (!secondaryCta) {
+    const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
+    secondaryCta = { label: settings.phone, href: settings.phoneHref }
+  }
   return (
     <section className="bg-primary-container py-16 md:py-24 overflow-hidden relative">
 

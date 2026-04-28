@@ -1,7 +1,10 @@
 import { Phone } from 'lucide-react'
-import { siteConfig } from '@/data/site'
+import { sanityFetch } from '@/sanity/lib/fetch'
+import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
+import type { SiteSettings } from '@/sanity/types'
 
-export function FreeAdviceBlock() {
+export async function FreeAdviceBlock() {
+  const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
   return (
     <section className="bg-inverse-surface py-12 md:py-16">
       <div className="max-w-5xl mx-auto px-4">
@@ -21,11 +24,11 @@ export function FreeAdviceBlock() {
             Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.
           </p>
           <a
-            href={siteConfig.phoneHref}
+            href={settings.phoneHref}
             className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-base font-semibold uppercase tracking-[0.1em] px-8 py-5 hover:bg-primary-fixed-dim transition-colors duration-150"
           >
             <Phone size={18} aria-hidden="true" />
-            Call Us — {siteConfig.phone}
+            Call Us — {settings.phone}
           </a>
         </div>
       </div>

@@ -5,9 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, Phone } from 'lucide-react'
-import { mainNav, ctaNav } from '@/data/nav'
-import { siteConfig } from '@/data/site'
-import { transparentNavRoutes } from '@/data/site'
 import {
   Sheet,
   SheetClose,
@@ -18,7 +15,18 @@ import {
 } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 
-export function Header() {
+const transparentNavRoutes = ['/']
+
+export interface HeaderProps {
+  mainNav: Array<{ label: string; href: string }>
+  ctaNav: { label: string; href: string }
+  phone: string
+  phoneHref: string
+  logoLight: string
+  logoDark: string
+}
+
+export function Header({ mainNav, ctaNav, phone, phoneHref, logoLight, logoDark }: HeaderProps) {
   const pathname = usePathname()
   const isTransparent = transparentNavRoutes.includes(pathname)
   const [isHidden, setIsHidden] = useState(false)
@@ -57,13 +65,9 @@ export function Header() {
         <div className="flex items-center justify-between h-16 gap-4">
 
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center shrink-0"
-            aria-label="King Double Glazing — home"
-          >
+          <Link href="/" className="flex items-center shrink-0" aria-label="King Double Glazing — home">
             <Image
-              src={isTransparent ? siteConfig.logos.dark : siteConfig.logos.light}
+              src={isTransparent ? logoDark : logoLight}
               alt="King Double Glazing"
               width={160}
               height={50}
@@ -90,23 +94,20 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Right side: phone + Get Quote CTA + mobile hamburger */}
+          {/* Right side */}
           <div className="flex items-center gap-3 shrink-0">
             <Link
-              href={siteConfig.phoneHref}
+              href={phoneHref}
               className={cn(
                 'hidden xl:inline-flex items-center gap-1.5 font-headline text-sm font-semibold uppercase tracking-wide transition-colors duration-150',
-                isTransparent
-                  ? 'text-white hover:text-white'
-                  : 'text-on-surface hover:text-on-surface'
+                isTransparent ? 'text-white hover:text-white' : 'text-on-surface hover:text-on-surface'
               )}
-              aria-label={`Call us: ${siteConfig.phone}`}
+              aria-label={`Call us: ${phone}`}
             >
               <Phone size={15} aria-hidden="true" />
-              {siteConfig.phone}
+              {phone}
             </Link>
 
-            {/* Get Quote CTA — desktop */}
             <Link
               href={ctaNav.href}
               className="hidden lg:inline-flex items-center font-headline text-sm font-bold uppercase tracking-wide px-5 py-2 bg-primary-container text-on-primary-fixed hover:bg-primary-fixed-dim transition-colors duration-150"
@@ -131,22 +132,12 @@ export function Header() {
               <SheetContent side="right">
                 <SheetTitle className="sr-only">Navigation</SheetTitle>
                 <SheetDescription>Site navigation menu</SheetDescription>
-
                 <div className="flex flex-col h-full overflow-y-auto pt-12 pb-8 px-6">
-                  {/* Logo */}
                   <SheetClose asChild>
                     <Link href="/" className="mb-8 inline-block" aria-label="King Double Glazing — home">
-                      <Image
-                        src={siteConfig.logos.dark}
-                        alt="King Double Glazing"
-                        width={120}
-                        height={47}
-                        className="h-10 w-auto"
-                      />
+                      <Image src={logoDark} alt="King Double Glazing" width={120} height={47} className="h-10 w-auto" />
                     </Link>
                   </SheetClose>
-
-                  {/* Nav links */}
                   <nav aria-label="Mobile navigation">
                     <ul className="space-y-1 mb-6">
                       {mainNav.map(({ label, href }) => (
@@ -163,8 +154,6 @@ export function Header() {
                       ))}
                     </ul>
                   </nav>
-
-                  {/* Bottom CTAs */}
                   <div className="mt-auto space-y-3 pt-6 border-t border-white/10">
                     <SheetClose asChild>
                       <Link
@@ -175,11 +164,11 @@ export function Header() {
                       </Link>
                     </SheetClose>
                     <a
-                      href={siteConfig.phoneHref}
+                      href={phoneHref}
                       className="font-headline inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-inverse-on-surface hover:text-primary-container transition-colors duration-150"
                     >
                       <Phone size={14} aria-hidden="true" />
-                      {siteConfig.phone}
+                      {phone}
                     </a>
                   </div>
                 </div>

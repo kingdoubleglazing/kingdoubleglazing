@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { siteConfig } from '@/data/site'
 
 /**
  * Discount announcement bar — top of every page.

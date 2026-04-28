@@ -1,4 +1,4 @@
-import { siteConfig } from '@/data/site'
+import type { SiteSettings } from '@/sanity/types'
 
 const AREA_SERVED_SUBURBS = [
   'Melbourne', 'South Yarra', 'Richmond', 'Fitzroy', 'Carlton', 'St Kilda',
@@ -7,78 +7,74 @@ const AREA_SERVED_SUBURBS = [
   'Northcote', 'Brunswick', 'Coburg', 'Williamstown', 'Footscray',
 ]
 
-export const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
-  '@id': `${siteConfig.domain}/#business`,
-  name: siteConfig.name,
-  legalName: siteConfig.legalName,
-  description: 'King Double Glazing installs retrofit double glazing across Melbourne homes and businesses. We reuse your existing frames to deliver acoustic and thermal performance at 30–50% less than full window replacement, backed by a 10-year warranty.',
-  slogan: "Stop — Don't Overpay",
-  url: siteConfig.domain,
-  telephone: siteConfig.phoneTel,
-  email: siteConfig.email,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: siteConfig.address.street,
-    addressLocality: siteConfig.address.suburb,
-    addressRegion: siteConfig.address.state,
-    postalCode: siteConfig.address.postcode,
-    addressCountry: siteConfig.address.country,
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: siteConfig.geo.latitude,
-    longitude: siteConfig.geo.longitude,
-  },
-  areaServed: AREA_SERVED_SUBURBS.map(suburb => ({
-    '@type': 'City',
-    name: suburb,
-    containedInPlace: { '@type': 'State', name: 'Victoria', containedInPlace: { '@type': 'Country', name: 'Australia' } },
-  })),
-  priceRange: '$$',
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '07:00',
-      closes: '17:00',
+export function buildLocalBusinessSchema(settings: SiteSettings) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
+    '@id': `${settings.domain}/#business`,
+    name: settings.name,
+    legalName: settings.legalName,
+    description: 'King Double Glazing installs retrofit double glazing across Melbourne homes and businesses. We reuse your existing frames to deliver acoustic and thermal performance at 30–50% less than full window replacement, backed by a 10-year warranty.',
+    slogan: "Stop — Don't Overpay",
+    url: settings.domain,
+    telephone: settings.phoneTel,
+    email: settings.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: settings.address.street,
+      addressLocality: settings.address.suburb,
+      addressRegion: settings.address.state,
+      postalCode: settings.address.postcode,
+      addressCountry: settings.address.country,
     },
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Saturday'],
-      opens: '08:00',
-      closes: '14:00',
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: settings.geo.latitude,
+      longitude: settings.geo.longitude,
     },
-  ],
-  knowsAbout: [
-    'retrofit double glazing',
-    'acoustic double glazing',
-    'double glazing Melbourne',
-    'emergency glass repair',
-    'shower screens',
-    'kitchen glass splashbacks',
-    'commercial glazing',
-    'energy efficient windows',
-    'soundproofing windows',
-  ],
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Glazing Services',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Retrofit Double Glazing' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Emergency Glass Repair' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Shower Screens & Splashbacks' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Commercial Glazing' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom Mirrors' } },
+    areaServed: AREA_SERVED_SUBURBS.map(suburb => ({
+      '@type': 'City',
+      name: suburb,
+      containedInPlace: { '@type': 'State', name: 'Victoria', containedInPlace: { '@type': 'Country', name: 'Australia' } },
+    })),
+    priceRange: '$$',
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '07:00',
+        closes: '17:00',
+      },
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Saturday'],
+        opens: '08:00',
+        closes: '14:00',
+      },
     ],
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: siteConfig.reviews.averageRating.toFixed(1),
-    reviewCount: siteConfig.reviews.totalCount,
-    bestRating: '5',
-    worstRating: '1',
-  },
-  sameAs: Object.values(siteConfig.social).filter(Boolean), // TODO: add GBP, Facebook, ProductReview, hipages URLs to siteConfig.social
+    knowsAbout: [
+      'retrofit double glazing', 'acoustic double glazing', 'double glazing Melbourne',
+      'emergency glass repair', 'shower screens', 'kitchen glass splashbacks',
+      'commercial glazing', 'energy efficient windows', 'soundproofing windows',
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Glazing Services',
+      itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Retrofit Double Glazing' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Emergency Glass Repair' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Shower Screens & Splashbacks' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Commercial Glazing' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom Mirrors' } },
+      ],
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: settings.reviews.averageRating.toFixed(1),
+      reviewCount: settings.reviews.totalCount,
+      bestRating: '5',
+      worstRating: '1',
+    },
+    sameAs: Object.values(settings.social).filter(Boolean),
+  }
 }

@@ -1,106 +1,65 @@
 # Components
 
-All components are Server Components unless marked **[client]**. All copy passed via props — no hardcoded text. Tailwind only.
+All components are Server Components unless marked **[client]**. All copy passed via props. Tailwind only — no CSS-in-JS, no runtime UI library.
 
 ## Layout
 
 | Component | Location | Notes |
 |---|---|---|
 | Header | `components/layout/Header.tsx` | Nav, logo, CTA button |
-| Footer | `components/layout/Footer.tsx` | NAP, links, schema |
-| EmergencyBanner | `components/layout/EmergencyBanner.tsx` | Sticky top, click-to-call, global |
+| Footer | `components/layout/Footer.tsx` | NAP, links, licence number |
+| EmergencyBanner | `components/layout/EmergencyBanner.tsx` | Sticky top bar, click-to-call |
+| FloatingNav | `components/layout/FloatingNav.tsx` | Mobile floating navigation |
 
-## Blocks
+## Sections
 
-### Hero
-- **Variants:** `full-width` (home), `compact` (service pages), `urgent` (emergency)
-- **Props:** heading, subheading, ctaPrimary, ctaSecondary, badges[], backgroundImage?, variant
-- **Used on:** every page
+| Component | Props | Used on |
+|---|---|---|
+| HeroSection | heading, subheading, cta, badges[] | Home |
+| TrustBar | items[] (icon, label) | Home, services, estimate, contact |
+| CtaBanner | heading, description, cta | Every page (1–2×) |
+| FAQ | items[] (question, answer), pageUrl | Services, estimate, contact, warranty |
+| Testimonials | items[] | Home, about |
+| ProcessSteps | steps[] (number, title, description) | Home |
+| ContactForm | — | Contact page |
+| WhyRetrofit | — | Home |
+| GlassComparisonTable | — | Instant estimate page |
+| GlassTechSpecs | — | Instant estimate page |
 
-### TrustBar
-- **Props:** items[] (icon, label)
-- **Default items:** "Melbourne Owned & Operated", "From $495/m²", "4.9★ Google Reviews", "Free Measure & Quote", "No Hidden Costs"
-- **Used on:** home, all service pages, estimate, contact
+## Shared blocks
 
-### ServiceCards
-- **Props:** services[] (title, description, href, icon)
-- **Data source:** `data/services/index.ts`
-- **Used on:** home, about, suburb pages
-
-### BenefitsGrid
-- **Props:** benefits[] (icon, title, description), columns?: 2 | 3
-- **Content:** unique per page (thermal on energy, acoustic on noise, etc.)
-- **Used on:** home, retrofit, energy, noise, heritage
-
-### ProcessSteps
-- **Props:** steps[] (number, title, description)
-- **Used on:** home, retrofit, emergency, showers, estimate, contact
-
-### CTABanner
-- **Variants:** `primary` (estimate), `secondary` (call now), `soft` (consultation)
-- **Props:** heading, description, cta, variant
-- **Used on:** every page, 1-2 per page
-
-### FAQ
-- **Props:** items[] (question, answer), pageUrl (for schema)
-- **Implementation:** native `<details>` for zero-JS baseline
-- **Schema:** auto-injects FAQPage JSON-LD
-- **Used on:** every service page, pricing, blog posts
-
-### ComparisonTable
-- **Props:** headers[], rows[], highlightColumn?
-- **Design:** responsive, highlighted "recommended" column, snippet-eligible
-- **Used on:** glass types, pricing, retrofit, noise, energy, heritage
-
-### TestimonialCarousel **[client]**
-- **Props:** testimonials[] (filtered by page), autoPlay?
-- **Data source:** `data/testimonials.ts`
-- **Used on:** home, retrofit, noise, heritage, suburb pages, about, contact
-
-### GlassOptions
-- **Props:** options[] (name, uValue, rwRating, heatReduction, price, description)
-- **Options:** Standard Clear DG, Tinted Low-E, Clear Non-Tinted DG, Premium Acoustic PVB + Low-E
-- **Used on:** home (preview), retrofit, glass types, estimate
-
-### SuburbIntro
-- **Props:** suburb (name, intro, landmarks[], postcode)
-- **Used on:** all suburb pages
-
-### BeforeAfter **[client]**
-- **Props:** before (image, alt), after (image, alt), caption?
-- **Implementation:** draggable slider
-- **Used on:** retrofit, noise, heritage, suburb pages, blog
-
-### CostRangeCards
-- **Props:** ranges[] (label, priceRange, description)
-- **Used on:** home, pricing
-
-## Estimate (all client)
-
-| Component | Purpose |
-|---|---|
-| EstimateForm | Multi-step form, server actions for submission |
-| EstimateResult | Shows estimate range BEFORE lead capture |
-| steps/*.tsx | Individual form steps |
+| Component | Purpose | Used on |
+|---|---|---|
+| AdaptorDisclosure | Disclosure copy for adaptor eligibility | Estimate, services, warranty |
+| ClientFitNote | Note about who the service suits | Estimate |
+| FreeAdviceBlock | "Free advice" callout block | Home, services, estimate, contact, warranty |
+| PaymentTerms | Payment terms blurb | Estimate, services, warranty |
+| SchemaScript | Renders `schemas: object[]` as JSON-LD `<script>` tags | Every page |
 
 ## UI Primitives
 
-Button, Input, Accordion — minimal, typed, Tailwind only.
+| Component | Notes |
+|---|---|
+| Button | Typed variants: primary, secondary, ghost |
+| WarrantyBadge | Badge displaying warranty period |
+| dialog | Radix-based modal (shadcn source) |
+| sheet | Radix-based slide-over (shadcn source) |
 
 ## Component reuse map
 
-| Component | Count | Key pages |
-|---|---|---|
-| Hero | 18+ | every page |
-| CTABanner | 25+ | every page (1-2x) |
-| FAQ | 15+ | every service page |
-| TrustBar | 12+ | home, services, estimate |
-| ProcessSteps | 8+ | home, retrofit, emergency |
-| TestimonialCarousel | 8+ | home, retrofit, suburb |
-| ComparisonTable | 7+ | pricing, retrofit, energy |
-| BenefitsGrid | 5+ | home, retrofit, energy |
-| BeforeAfter | 5+ | retrofit, heritage, suburb |
-| GlassOptions | 3+ | home, retrofit, glass types |
-| CostRangeCards | 2+ | home, pricing |
-| EmergencyBanner | 1 | global (root layout) |
-| SuburbIntro | 15+ | all suburb pages |
+| Component | Pages |
+|---|---|
+| TrustBar | Home, services, estimate, contact, warranty |
+| CtaBanner | Every page |
+| FreeAdviceBlock | Home, services, estimate, contact, warranty |
+| FAQ | Services, estimate, contact, warranty |
+| SchemaScript | Every page |
+| AdaptorDisclosure | Estimate, services, warranty |
+| PaymentTerms | Estimate, services, warranty |
+| Testimonials | Home, about |
+| GlassComparisonTable | Instant estimate |
+| GlassTechSpecs | Instant estimate |
+| HeroSection | Home |
+| ProcessSteps | Home |
+| WhyRetrofit | Home |
+| ContactForm | Contact |

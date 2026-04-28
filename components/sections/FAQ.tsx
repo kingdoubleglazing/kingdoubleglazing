@@ -1,4 +1,3 @@
-import { homepageFaq } from '@/data/homepage-faq'
 import { buildFaqSchema } from '@/lib/seo/schema/faqPage'
 
 interface FaqItem {
@@ -9,7 +8,7 @@ interface FaqItem {
 interface FAQProps {
   heading?: string
   subheading?: string
-  items?: readonly FaqItem[]
+  items: readonly FaqItem[]
   /** Emit FAQPage JSON-LD schema. Set false if the parent page already emits it. */
   emitSchema?: boolean
 }
@@ -17,7 +16,7 @@ interface FAQProps {
 export function FAQ({
   heading = 'Common Questions',
   subheading = 'Everything Melbourne homeowners ask before booking.',
-  items = homepageFaq,
+  items,
   emitSchema = true,
 }: FAQProps) {
   const schema = emitSchema

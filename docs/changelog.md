@@ -4,6 +4,44 @@ Track significant changes, decisions, and milestones. Most recent first.
 
 ---
 
+## 2026-04-28 — Sanity CMS migration (full)
+
+**Sanity Studio embedded at `/studio`** (route group isolated from site layout).
+
+**All content migrated from static TypeScript data files to Sanity:**
+- Singleton documents: `siteSettings`, `navigation`, `homePage`, `servicesPage`, `aboutPage`, `contactPage`, `warrantyPage`, `estimatePage`
+- Collection documents: 42 testimonials, 10 gallery items, 36 FAQ items (7 groups), 4 pricing options, 4 process steps
+- All images uploaded to Sanity CDN via migration script (`scripts/migrate-to-sanity.ts`)
+
+**Architecture changes:**
+- `app/(site)/` route group: site pages share layout (Header/Footer/EmergencyBanner/FloatingNav); `/studio` gets minimal root layout
+- `sanity/schemas/` — 13 schemas with singleton structure tool config
+- `sanity/lib/` — `client.ts`, `fetch.ts` (ISR with tags), `queries.ts`, `image.ts`
+- `sanity/types.ts` — TypeScript interfaces for all document types
+- `components/layout/HeaderWrapper.tsx`, `FloatingNavWrapper.tsx` — async server wrappers for client layout components
+- `Footer`, `CtaBanner`, `FreeAdviceBlock` — converted to async server components
+- `GlassComparisonTable`, `GlassTechSpecs` — now accept `options: PricingOption[]` as props
+- `data/pricing.ts` — `OPTIONS` removed (now in Sanity); `calculateQuote` updated to accept `pricePerSqm: number`
+- `app/api/revalidate/` — webhook endpoint for on-demand ISR revalidation from Sanity
+- OG image routes remain on edge runtime with static `siteConfig` pricing data
+
+---
+
+## 2026-04-28 — Dead code removal + doc refresh
+
+**Deleted unused components (9 files, ~58 KB):**
+- `components/EstimateCalculator.tsx` + `EstimateCalculator.legacy.tsx` — never imported
+- `components/sections/ComparisonTable.tsx`, `EmergencyHero.tsx`, `ProblemSolutionSection.tsx`, `ServicesSection.tsx` — leftovers from pre-migration
+- `components/ui/Breadcrumb.tsx`, `navigation-menu.tsx`, `ZoomableImage.tsx` — never imported
+
+**Deleted empty directory:** `content/` (blog removed in April migration, directory left behind)
+
+**Updated docs:**
+- `docs/architecture.md` — rewrote to reflect actual current routes, file layout, and stack (old doc described 27-route structure)
+- `docs/components.md` — rewrote to list only components that exist and are in use
+
+---
+
 ## 2026-04-15 — Full site migration: 27-route SEO site → 5-page conversion funnel
 
 Executed full migration per `references/migration/migration.md`, `homepage-funnel.md`, and `copy-voice.md`.

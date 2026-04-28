@@ -4,15 +4,17 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Phone } from 'lucide-react'
-import { siteConfig } from '@/data/site'
-import { mainNav, ctaNav } from '@/data/nav'
 import { cn } from '@/lib/utils'
 
-/**
- * FloatingNav — appears on upward scroll only, after the main header has left
- * the viewport. Hides instantly whenever the user scrolls down.
- */
-export function FloatingNav() {
+interface FloatingNavProps {
+  logoSrc: string
+  mainNav: Array<{ label: string; href: string }>
+  ctaNav: { label: string; href: string }
+  phone: string
+  phoneHref: string
+}
+
+export function FloatingNav({ logoSrc, mainNav, ctaNav, phone, phoneHref }: FloatingNavProps) {
   const [show, setShow] = useState(false)
   const lastScrollY = useRef(0)
   const headerVisible = useRef(true)
@@ -78,7 +80,7 @@ export function FloatingNav() {
               aria-label="King Double Glazing — home"
             >
               <Image
-                src={siteConfig.logos.dark}
+                src={logoSrc}
                 alt="King Double Glazing"
                 width={130}
                 height={41}
@@ -102,12 +104,12 @@ export function FloatingNav() {
             {/* Right: phone + Get Quote */}
             <div className="hidden sm:flex items-center gap-3 shrink-0">
               <Link
-                href={siteConfig.phoneHref}
+                href={phoneHref}
                 className="hidden xl:inline-flex items-center gap-1.5 font-headline text-xs font-semibold uppercase tracking-wide text-white hover:text-white transition-colors duration-150"
-                aria-label={`Call us: ${siteConfig.phone}`}
+                aria-label={`Call us: ${phone}`}
               >
                 <Phone size={13} aria-hidden="true" />
-                {siteConfig.phone}
+                {phone}
               </Link>
               <Link
                 href={ctaNav.href}

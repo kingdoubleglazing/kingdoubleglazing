@@ -1,33 +1,24 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { processSteps } from '@/data/process-steps'
-
-interface StepItem {
-  title: string
-  body: string
-  callout?: string
-  imageSrc?: string
-  imageAlt?: string
-}
+import type { ProcessStep } from '@/sanity/types'
 
 interface ProcessStepsProps {
+  steps: ProcessStep[]
   heading?: string
   subheading?: string
   cta?: { label: string; href: string }
-  steps?: readonly StepItem[]
 }
 
 export function ProcessSteps({
+  steps,
   heading = 'Our Process',
   subheading = 'Simple and transparent — from quote to installation.',
   cta = { label: 'Get Instant Estimate', href: '/instant-estimate/' },
-  steps = processSteps,
 }: ProcessStepsProps) {
   return (
     <section className="bg-inverse-surface py-16 md:py-24">
       <div className="max-w-5xl mx-auto px-4">
 
-        {/* Header */}
         <div className="mb-12 md:mb-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
           <div>
             <h2
@@ -49,14 +40,13 @@ export function ProcessSteps({
           </Link>
         </div>
 
-        {/* Steps */}
         <ol className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
           {steps.map((step, i) => {
             const num = String(i + 1).padStart(2, '0')
             const isLast = i === steps.length - 1
             return (
               <li
-                key={step.title}
+                key={step._id}
                 className="relative flex gap-6 md:flex-col md:gap-0 md:pr-8 animate-stagger-child"
                 // biome-ignore lint/suspicious/noExplicitAny: CSS custom prop
                 style={{ '--i': i } as any}

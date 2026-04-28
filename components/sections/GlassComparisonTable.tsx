@@ -3,15 +3,9 @@
 import { useState, useActionState, useEffect, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Phone } from 'lucide-react'
-import {
-  OPTIONS,
-  calculateQuote,
-  SECOND_STOREY_SURCHARGE,
-  type OptionKey,
-  type WindowRow,
-} from '@/data/pricing'
-import { submitQuote, type QuoteState } from '@/app/actions/quote'
-import { siteConfig } from '@/data/site'
+import { calculateQuote, type OptionKey, type WindowRow } from '@/data/pricing'
+import { submitQuote, type QuoteState } from '@/app/(site)/actions/quote'
+import type { PricingOption } from '@/sanity/types'
 import {
   Dialog,
   DialogContent,
@@ -19,8 +13,6 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog'
-
-const OPTION_KEYS = Object.keys(OPTIONS) as OptionKey[]
 
 interface RowDraft {
   heightMm: string
@@ -40,7 +32,17 @@ function parseRow(r: RowDraft): WindowRow | null {
   return { heightMm: h, widthMm: w, quantity: q, secondStorey: r.secondStorey }
 }
 
-export function GlassComparisonTable() {
+interface GlassComparisonTableProps {
+  options: PricingOption[]
+  secondStoreySurcharge: number
+  phone: string
+  phoneHref: string
+}
+
+export function GlassComparisonTable({ options, secondStoreySurcharge, phone, phoneHref }: GlassComparisonTableProps) {
+  const optionsMap = Object.fromEntries(options.map(o => [o.optionKey, o])) as Record<OptionKey, PricingOption>
+  const optionKeys = options.map(o => o.optionKey) as OptionKey[]
+
   const router = useRouter()
   const searchParams = useSearchParams()
 const [selectedOption, setSelectedOption] = useState<OptionKey | null>(null)
@@ -56,7 +58,7 @@ const [selectedOption, setSelectedOption] = useState<OptionKey | null>(null)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const opt = searchParams.get('option') as OptionKey
-    if (OPTION_KEYS.includes(opt) && !selectedOption) {
+    if (optionKeys.includes(opt) && !selectedOption) {
       setSelectedOption(opt)
     }
   }, [searchParams])
@@ -97,8 +99,9 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
   }
 
   const validRows = rows.map(parseRow).filter(Boolean) as WindowRow[]
+  const selectedOpt = selectedOption ? optionsMap[selectedOption] : null
   const rawTotal =
-    selectedOption && validRows.length > 0 ? calculateQuote(selectedOption, validRows) : null
+    selectedOpt && validRows.length > 0 ? calculateQuote(selectedOpt.pricePerSqm, validRows, secondStoreySurcharge) : null
   const total = rawTotal ? Math.round(rawTotal / 10) * 10 : null
   const totalWindows = validRows.reduce((s, r) => s + r.quantity, 0)
 
@@ -125,8 +128,8 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
 
         {/* 2×2 grid on mobile, 4-column on desktop */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {OPTION_KEYS.map(key => {
-            const opt = OPTIONS[key]
+          {optionKeys.map(key => {
+            const opt = optionsMap[key]
             const isTop = key === 'D'
             const isSelected = selectedOption === key
 
@@ -279,7 +282,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
             {/* Selected option summary + change link */}
             <div className="flex items-center justify-between mb-6 pb-4 border-b border-surface-container-high">
               <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface">
-                {OPTIONS[selectedOption].label}: {OPTIONS[selectedOption].sublabel}
+                {optionsMap[selectedOption].label}: {optionsMap[selectedOption].sublabel}
               </p>
               <button
                 type="button"
@@ -324,6 +327,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                     onChange={(field, val) => updateRow(i, field, val)}
                     onRemove={() => removeRow(i)}
                     canRemove={rows.length > 1}
+                    secondStoreySurcharge={secondStoreySurcharge}
                   />
                 ))}
               </div>
@@ -370,10 +374,10 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                   <div className="mt-4 space-y-1">
                     {validRows.map((r, i) => {
                       const sqm = (r.heightMm / 1000) * (r.widthMm / 1000)
-                      const opt = OPTIONS[selectedOption!]
+                      const opt = optionsMap[selectedOption!]
                       const rowCost =
                         sqm * opt.pricePerSqm * r.quantity +
-                        (r.secondStorey ? SECOND_STOREY_SURCHARGE * r.quantity : 0)
+                        (r.secondStorey ? secondStoreySurcharge * r.quantity : 0)
                       return (
                         <div key={i} className="flex justify-between gap-4 font-sans text-xs text-on-surface/60">
                           <span>
@@ -411,11 +415,11 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                     Send Us Your Quote →
                   </button>
                   <a
-                    href={siteConfig.phoneHref}
+                    href={phoneHref}
                     className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-primary/40 text-primary font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary/10 transition-colors duration-150"
                   >
                     <Phone size={16} aria-hidden="true" />
-                    Or Call Us — {siteConfig.phone}
+                    Or Call Us — {phone}
                   </a>
                 </>
               )}
@@ -478,7 +482,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                       ${total.toLocaleString()}
                     </p>
                     <p className="font-sans text-xs text-on-surface/60 mt-1">
-                      {OPTIONS[selectedOption].label} · {totalWindows} window{totalWindows !== 1 ? 's' : ''}
+                      {optionsMap[selectedOption].label} · {totalWindows} window{totalWindows !== 1 ? 's' : ''}
                     </p>
                   </div>
                 )}
@@ -506,11 +510,11 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                 </button>
 
                 <a
-                  href={siteConfig.phoneHref}
+                  href={phoneHref}
                   className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-primary/40 text-primary font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-3 hover:bg-primary/10 transition-colors duration-150"
                 >
                   <Phone size={16} aria-hidden="true" />
-                  Or Call Us — {siteConfig.phone}
+                  Or Call Us — {phone}
                 </a>
               </div>
             </form>
@@ -525,13 +529,14 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
 // ── Window row input ───────────────────────────────────────────────────────────
 
 function WindowRowInput({
-  index, row, onChange, onRemove, canRemove,
+  index, row, onChange, onRemove, canRemove, secondStoreySurcharge,
 }: {
   index: number
   row: RowDraft
   onChange: (field: keyof RowDraft, val: string | boolean) => void
   onRemove: () => void
   canRemove: boolean
+  secondStoreySurcharge: number
 }) {
   const h = Number(row.heightMm)
   const w = Number(row.widthMm)
@@ -593,7 +598,7 @@ function WindowRowInput({
           className="w-4 h-4 accent-yellow-400"
         />
         <span className="font-sans text-xs text-on-surface/70">
-          Second storey? (+${SECOND_STOREY_SURCHARGE} per window)
+          Second storey? (+${secondStoreySurcharge} per window)
         </span>
       </label>
 

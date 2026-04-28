@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { Phone } from 'lucide-react'
-import { siteConfig } from '@/data/site'
 import { Button } from '@/components/ui/Button'
 import { WarrantyBadge } from '@/components/ui/WarrantyBadge'
 
@@ -108,7 +107,7 @@ export function HeroSection({
           </Button>
 
           <a
-            href={secondaryCta?.href ?? siteConfig.phoneHref}
+            href={secondaryCta?.href ?? '#'}
             className="inline-flex items-center gap-2 font-headline font-semibold uppercase tracking-wide text-white border-2 border-white px-8 py-4 text-lg hover:bg-white/10 transition-colors duration-150"
           >
             <Phone size={16} aria-hidden="true" />

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { confirmQuote } from '@/app/actions/quote'
+import { confirmQuote } from '@/app/(site)/actions/quote'
 
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get('token')

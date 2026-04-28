@@ -1,8 +1,7 @@
 'use client'
 
 import { useActionState } from 'react'
-import { siteConfig } from '@/data/site'
-import { submitContact, type ContactState } from '@/app/actions/contact'
+import { submitContact, type ContactState } from '@/app/(site)/actions/contact'
 
 const initial: ContactState = { status: 'idle' }
 
@@ -12,7 +11,13 @@ const TIME_OPTIONS = [
   { value: 'evening',   label: 'Evening' },
 ] as const
 
-export function ContactForm() {
+interface ContactFormProps {
+  phone: string
+  phoneHref: string
+  email: string
+}
+
+export function ContactForm({ phone, phoneHref, email }: ContactFormProps) {
   const [state, action, pending] = useActionState(submitContact, initial)
 
   if (state.status === 'success') {
@@ -28,8 +33,8 @@ export function ContactForm() {
         </div>
         <p className="font-sans text-xs text-on-surface leading-relaxed">
           If it&apos;s urgent, call directly on{' '}
-          <a href={siteConfig.phoneHref} className="text-primary font-semibold underline">
-            {siteConfig.phone}
+          <a href={phoneHref} className="text-primary font-semibold underline">
+            {phone}
           </a>
           .
         </p>
@@ -176,16 +181,16 @@ export function ContactForm() {
       {/* Alternatives */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 pt-2 border-t border-surface-container-high">
         <a
-          href={siteConfig.phoneHref}
+          href={phoneHref}
           className="font-headline text-xs font-semibold uppercase tracking-widest text-on-surface hover:text-primary transition-colors duration-150"
         >
-          ☎ {siteConfig.phone}
+          ☎ {phone}
         </a>
         <a
-          href={`mailto:${siteConfig.email}`}
+          href={`mailto:${email}`}
           className="font-headline text-xs font-semibold uppercase tracking-widest text-on-surface hover:text-primary transition-colors duration-150"
         >
-          ✉ {siteConfig.email}
+          ✉ {email}
         </a>
       </div>
     </form>
