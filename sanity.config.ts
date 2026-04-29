@@ -35,7 +35,6 @@ export default defineConfig({
             S.listItem().title('Estimate Page').id('estimatePage')
               .child(S.document().schemaType('estimatePage').documentId('estimatePage')),
             S.divider(),
-            S.documentTypeListItem('testimonial').title('Testimonials'),
             S.documentTypeListItem('galleryItem').title('Gallery'),
             S.documentTypeListItem('faqItem').title('FAQs'),
             S.documentTypeListItem('pricingOption').title('Pricing Options'),
