@@ -15,10 +15,11 @@ import { FreeAdviceBlock } from '@/components/FreeAdviceBlock'
 import { sanityFetch } from '@/sanity/lib/fetch'
 import {
   SITE_SETTINGS_QUERY,
+  HOME_PAGE_QUERY,
   PROCESS_STEPS_QUERY,
   FAQS_QUERY,
 } from '@/sanity/lib/queries'
-import type { SiteSettings, ProcessStep, FaqItem } from '@/sanity/types'
+import type { SiteSettings, HomePage, ProcessStep, FaqItem } from '@/sanity/types'
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
@@ -31,8 +32,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [settings, steps, faqs] = await Promise.all([
+  const [settings, homePage, steps, faqs] = await Promise.all([
     sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
+    sanityFetch<HomePage>({ query: HOME_PAGE_QUERY, tags: ['homePage'] }),
     sanityFetch<ProcessStep[]>({ query: PROCESS_STEPS_QUERY, tags: ['processStep'] }),
     sanityFetch<FaqItem[]>({ query: FAQS_QUERY, params: { group: 'homepage' }, tags: ['faqItem'] }),
   ])
@@ -49,12 +51,12 @@ export default async function HomePage() {
       <SchemaScript schemas={[homePageSchema]} />
       {/* 1. Hero */}
       <HeroSection
-        badge="Stop. Don't Overpay. · 10-Year Warranty · Beat Any Quote 30%"
-        headlineWhite="Quieter Home. Lower Bills."
-        headlineYellow="Without Replacing Your Windows."
-        subtext="We add a second pane to your existing windows. No ripping out, no mess. Up to 70% quieter."
-        adaptorCaption="Our standard adapters are engineered to suit a wide range of window configurations."
-        primaryCta={{ label: 'Generate My Quote →', href: '/instant-estimate/' }}
+        badge={homePage?.badge ?? "Stop. Don't Overpay. · 10-Year Warranty · Beat Any Quote 30%"}
+        headlineWhite={homePage?.headlineWhite ?? 'Quieter Home. Lower Bills.'}
+        headlineYellow={homePage?.headlineYellow ?? 'Without Replacing Your Windows.'}
+        subtext={homePage?.subtext ?? 'We add a second pane to your existing windows. No ripping out, no mess. Up to 70% quieter.'}
+        adaptorCaption={homePage?.adaptorCaption ?? 'Our standard adapters are engineered to suit a wide range of window configurations.'}
+        primaryCta={{ label: homePage?.primaryCtaLabel ?? 'Generate My Quote →', href: '/instant-estimate/' }}
         secondaryCta={{ label: `Or call ${settings.phone}`, href: settings.phoneHref }}
         imageSrc="/hero/hero-double-glazing.webp"
         imageAlt="Double glazing upgrade on an existing window in a Melbourne home"
@@ -77,12 +79,17 @@ export default async function HomePage() {
       <PaymentTerms />
 
       {/* 7. Big CTA — the minute estimate push */}
-      <EstimateCTABlock />
+      <EstimateCTABlock
+        headline={homePage?.estimateCtaHeadline ?? 'Get Your Price.\nIn Minutes Online.'}
+        subtext={homePage?.estimateCtaSubtext ?? "We beat any genuine quote by 30%. That's a promise in writing."}
+        buttonLabel={homePage?.estimateCtaButtonLabel ?? 'Start My Quote →'}
+        caption={homePage?.estimateCtaCaption ?? 'Enter your window sizes · See your price instantly'}
+      />
 
       {/* 9. FAQ */}
       <FAQ
-        heading="Common Questions"
-        subheading="Plain answers, no jargon."
+        heading={homePage?.faqHeading ?? 'Common Questions'}
+        subheading={homePage?.faqSubheading ?? 'Plain answers, no jargon.'}
         items={faqs.map(f => ({ q: f.q, a: f.a }))}
       />
 
@@ -100,7 +107,18 @@ export default async function HomePage() {
 
 // ── Estimate CTA block ───────────────────────────────────────────────────────
 
-function EstimateCTABlock() {
+function EstimateCTABlock({
+  headline,
+  subtext,
+  buttonLabel,
+  caption,
+}: {
+  headline: string
+  subtext: string
+  buttonLabel: string
+  caption: string
+}) {
+  const [line1, line2] = headline.split('\n')
   return (
     <section className="bg-primary-container py-16 md:py-20 overflow-hidden relative">
       <span
@@ -115,21 +133,20 @@ function EstimateCTABlock() {
           className="font-display uppercase leading-[0.88] text-on-primary-fixed mb-4"
           style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)' }}
         >
-          Get Your Price.
-          <br />
-          In Minutes Online.
+          {line1}
+          {line2 && <><br />{line2}</>}
         </h2>
         <p className="font-sans text-base text-on-primary-fixed mb-8 max-w-lg mx-auto leading-relaxed">
-          We beat any genuine quote by 30%. That&apos;s a promise in writing.
+          {subtext}
         </p>
         <Link
           href="/instant-estimate/"
           className="inline-flex items-center gap-3 bg-on-primary-fixed text-primary-container font-headline text-sm font-semibold uppercase tracking-[0.12em] px-10 py-5 hover:bg-on-primary-fixed/80 transition-colors duration-150"
         >
-          Start My Quote →
+          {buttonLabel}
         </Link>
         <p className="mt-4 font-headline text-xs font-semibold uppercase tracking-widest text-on-primary-fixed/80">
-          Enter your window sizes · See your price instantly
+          {caption}
         </p>
       </div>
     </section>

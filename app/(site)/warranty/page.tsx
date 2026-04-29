@@ -4,8 +4,8 @@ import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
 import { buildWebPageSchema } from '@/lib/seo/schema/webpage'
 import { SchemaScript } from '@/components/SchemaScript'
 import { sanityFetch } from '@/sanity/lib/fetch'
-import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
-import type { SiteSettings } from '@/sanity/types'
+import { SITE_SETTINGS_QUERY, WARRANTY_PAGE_QUERY } from '@/sanity/lib/queries'
+import type { SiteSettings, WarrantyPage } from '@/sanity/types'
 
 export const metadata: Metadata = buildMetadata({
   title: '10-Year Warranty on Double Glazing | King Double Glazing Melbourne',
@@ -28,7 +28,10 @@ const warrantyPageSchemas = [
 ]
 
 export default async function WarrantyPage() {
-  const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
+  const [settings, warrantyPage] = await Promise.all([
+    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
+    sanityFetch<WarrantyPage>({ query: WARRANTY_PAGE_QUERY, tags: ['warrantyPage'] }),
+  ])
   return (
     <>
       <SchemaScript schemas={warrantyPageSchemas} />
@@ -50,11 +53,11 @@ export default async function WarrantyPage() {
             className="font-display uppercase leading-none text-inverse-on-surface mb-6"
             style={{ fontSize: 'clamp(3rem, 9vw, 7rem)' }}
           >
-            Our 10-Year{' '}
-            <span className="text-primary-container">Warranty</span>
+            {warrantyPage?.heroHeadline ?? 'Our 10-Year'}{' '}
+            <span className="text-primary-container">{warrantyPage?.heroHeadlineYellow ?? 'Warranty'}</span>
           </h1>
           <p className="font-sans text-base text-inverse-on-surface max-w-xl leading-relaxed">
-            Every installation is backed by a 10-year warranty on glass and workmanship. No conditions, no fine print.
+            {warrantyPage?.heroSubtext ?? 'Every installation is backed by a 10-year warranty on glass and workmanship. No conditions, no fine print.'}
           </p>
         </div>
       </section>
@@ -75,24 +78,12 @@ export default async function WarrantyPage() {
                 10 Years. Full Stop.
               </h2>
               <ul className="space-y-0 ghost-border">
-                {[
-                  {
-                    item: 'Glass units',
-                    detail: 'Any seal failure, fogging, or manufacturing defect in the glass itself.',
-                  },
-                  {
-                    item: 'Installation workmanship',
-                    detail: 'If it fails because of how we fitted it, we fix it free.',
-                  },
-                  {
-                    item: 'Frame adaptors',
-                    detail: 'The fittings we use to attach new glass to your existing frame.',
-                  },
-                  {
-                    item: 'Seals and edge spacers',
-                    detail: 'The seal and spacer bar that keep moisture and air out of the unit.',
-                  },
-                ].map(({ item, detail }) => (
+                {(warrantyPage?.coveredItems ?? [
+                  { item: 'Glass units', detail: 'Any seal failure, fogging, or manufacturing defect in the glass itself.' },
+                  { item: 'Installation workmanship', detail: 'If it fails because of how we fitted it, we fix it free.' },
+                  { item: 'Frame adaptors', detail: 'The fittings we use to attach new glass to your existing frame.' },
+                  { item: 'Seals and edge spacers', detail: 'The seal and spacer bar that keep moisture and air out of the unit.' },
+                ]).map(({ item, detail }) => (
                   <li key={item} className="ghost-border p-6 flex items-start gap-4">
                     <span className="shrink-0 w-5 h-5 mt-0.5 bg-primary-container text-on-primary-fixed flex items-center justify-center font-headline text-xs font-bold">
                       ✓
@@ -121,20 +112,11 @@ export default async function WarrantyPage() {
                 The Short List
               </h2>
               <ul className="space-y-0 ghost-border">
-                {[
-                  {
-                    item: 'Intentional damage',
-                    detail: 'Breakage caused by deliberate impact or misuse.',
-                  },
-                  {
-                    item: 'Storm or weather damage',
-                    detail: 'Damage caused by hail, fallen debris, or extreme weather events.',
-                  },
-                  {
-                    item: 'Building structural movement',
-                    detail: 'If the building settles and distorts the frame beyond the fitting\'s tolerance.',
-                  },
-                ].map(({ item, detail }) => (
+                {(warrantyPage?.notCoveredItems ?? [
+                  { item: 'Intentional damage', detail: 'Breakage caused by deliberate impact or misuse.' },
+                  { item: 'Storm or weather damage', detail: 'Damage caused by hail, fallen debris, or extreme weather events.' },
+                  { item: 'Building structural movement', detail: "If the building settles and distorts the frame beyond the fitting's tolerance." },
+                ]).map(({ item, detail }) => (
                   <li key={item} className="ghost-border p-6 flex items-start gap-4">
                     <span className="shrink-0 w-5 h-5 mt-0.5 bg-on-surface/10 text-on-surface/70 flex items-center justify-center font-headline text-xs font-bold">
                       ✕
@@ -156,9 +138,13 @@ export default async function WarrantyPage() {
                   How to Make a Claim
                 </p>
                 <ol className="space-y-2 font-sans text-sm text-on-surface leading-relaxed list-decimal list-inside">
-                  <li>Call or email us with your job reference and a brief description.</li>
-                  <li>We inspect within 7 business days — no charge for the visit.</li>
-                  <li>If it&apos;s covered, we repair or replace at no cost to you.</li>
+                  {(warrantyPage?.claimSteps ?? [
+                    'Call or email us with your job reference and a brief description.',
+                    'We inspect within 7 business days — no charge for the visit.',
+                    "If it's covered, we repair or replace at no cost to you.",
+                  ]).map((step, i) => (
+                    <li key={i}>{step}</li>
+                  ))}
                 </ol>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <a
@@ -195,10 +181,10 @@ export default async function WarrantyPage() {
             className="font-display uppercase leading-[0.88] text-on-primary-fixed mb-4"
             style={{ fontSize: 'clamp(2.5rem, 7vw, 5rem)' }}
           >
-            Ready to Get Your Price?
+            {warrantyPage?.ctaHeadline ?? 'Ready to Get Your Price?'}
           </h2>
           <p className="font-sans text-base text-on-primary-fixed mb-8 max-w-lg mx-auto leading-relaxed">
-            Get your price in minutes. Every job comes with this warranty, in writing.
+            {warrantyPage?.ctaSubtext ?? 'Get your price in minutes. Every job comes with this warranty, in writing.'}
           </p>
           <Link
             href="/instant-estimate/"

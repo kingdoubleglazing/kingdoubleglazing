@@ -1,6 +1,19 @@
-import { DollarSign, CheckCircle } from 'lucide-react'
+import { CheckCircle, DollarSign } from 'lucide-react'
+import { sanityFetch } from '@/sanity/lib/fetch'
+import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
+import type { SiteSettings } from '@/sanity/types'
 
-export function PaymentTerms() {
+export async function PaymentTerms() {
+  const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
+  const pt = settings.paymentTerms
+
+  const depositTitle    = pt?.depositTitle    ?? '50% Deposit to Start'
+  const depositBody     = pt?.depositBody     ?? 'Pay 50% to get your glass made.'
+  const completionTitle = pt?.completionTitle ?? '50% on Completion'
+  const completionBody  = pt?.completionBody  ?? 'Pay the other 50% when the job is done.'
+  const warrantyTitle   = pt?.warrantyTitle   ?? 'Made for You, Backed for 10 Years'
+  const warrantyBody    = pt?.warrantyBody    ?? 'All glass is made to measure for your home. If anything needs adjusting after install, we fix it — typically within 2–3 weeks.'
+
   return (
     <section className="bg-white py-12 md:py-16">
       <div className="max-w-5xl mx-auto px-4">
@@ -17,55 +30,35 @@ export function PaymentTerms() {
             </h2>
           </div>
 
-          {/* Two-column payment grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-black/10">
-            {/* Deposit block */}
             <div className="px-6 py-6 md:px-8">
               <div className="flex items-center gap-2 mb-3">
-                <DollarSign
-                  size={16}
-                  strokeWidth={2}
-                  className="text-primary-container shrink-0"
-                  aria-hidden="true"
-                />
+                <DollarSign size={16} strokeWidth={2} className="text-primary-container shrink-0" aria-hidden="true" />
                 <h3 className="font-headline text-sm font-semibold uppercase tracking-wide text-black">
-                  50% Deposit to Start
+                  {depositTitle}
                 </h3>
               </div>
               <div className="h-0.5 w-6 bg-primary-container mb-3" aria-hidden="true" />
-              <p className="font-sans text-sm text-black leading-relaxed">
-                Pay 50% to get your glass made.
-              </p>
+              <p className="font-sans text-sm text-black leading-relaxed">{depositBody}</p>
             </div>
 
-            {/* Completion block */}
             <div className="px-6 py-6 md:px-8">
               <div className="flex items-center gap-2 mb-3">
-                <CheckCircle
-                  size={16}
-                  strokeWidth={2}
-                  className="text-primary-container shrink-0"
-                  aria-hidden="true"
-                />
+                <CheckCircle size={16} strokeWidth={2} className="text-primary-container shrink-0" aria-hidden="true" />
                 <h3 className="font-headline text-sm font-semibold uppercase tracking-wide text-black">
-                  50% on Completion
+                  {completionTitle}
                 </h3>
               </div>
               <div className="h-0.5 w-6 bg-primary-container mb-3" aria-hidden="true" />
-              <p className="font-sans text-sm text-black leading-relaxed">
-                Pay the other 50% when the job is done.
-              </p>
+              <p className="font-sans text-sm text-black leading-relaxed">{completionBody}</p>
             </div>
           </div>
 
-          {/* Workmanship footer */}
           <div className="px-6 py-6 md:px-8 border-t border-black/10 bg-black/[0.02]">
             <h3 className="font-headline text-sm font-semibold uppercase tracking-wide text-black mb-2">
-              Made for You, Backed for 10 Years
+              {warrantyTitle}
             </h3>
-            <p className="font-sans text-sm text-black leading-relaxed">
-              All glass is made to measure for your home. If anything needs adjusting after install, we fix it — typically within 2–3 weeks.
-            </p>
+            <p className="font-sans text-sm text-black leading-relaxed">{warrantyBody}</p>
           </div>
         </div>
       </div>

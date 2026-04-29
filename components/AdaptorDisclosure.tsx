@@ -1,6 +1,17 @@
 import { Ruler } from 'lucide-react'
+import { sanityFetch } from '@/sanity/lib/fetch'
+import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
+import type { SiteSettings } from '@/sanity/types'
 
-export function AdaptorDisclosure() {
+export async function AdaptorDisclosure() {
+  const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
+  const ad = settings.adaptorDisclosure
+
+  const heading         = ad?.heading         ?? 'About our adaptors'
+  const mobileSubtitle  = ad?.mobileSubtitle  ?? 'Adds ~20mm to your frame. Tap to read more.'
+  const body1           = ad?.body1           ?? 'We use special fittings to attach new glass to your existing frame. Your frame gets about 20mm wider — that is the only visible change. No ripping out, no plastering, no mess.'
+  const body2           = ad?.body2           ?? 'This saves you thousands compared to full window replacement.'
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 md:py-10">
       <div className="border border-black/10 bg-white">
@@ -11,14 +22,10 @@ export function AdaptorDisclosure() {
           </div>
           <div>
             <h3 className="font-headline text-sm font-semibold uppercase tracking-wide text-black mb-3">
-              About our adaptors
+              {heading}
             </h3>
-            <p className="font-sans text-sm text-black leading-relaxed">
-              We use special fittings to attach new glass to your existing frame. Your frame gets about 20mm wider — that is the only visible change. No ripping out, no plastering, no mess.
-            </p>
-            <p className="font-sans text-sm text-black leading-relaxed mt-3">
-              This saves you thousands compared to full window replacement.
-            </p>
+            <p className="font-sans text-sm text-black leading-relaxed">{body1}</p>
+            <p className="font-sans text-sm text-black leading-relaxed mt-3">{body2}</p>
           </div>
         </div>
 
@@ -29,20 +36,16 @@ export function AdaptorDisclosure() {
               <Ruler size={14} strokeWidth={1.5} className="text-black/70" aria-hidden="true" />
             </div>
             <span className="font-headline text-sm font-semibold uppercase tracking-wide text-black flex-1 leading-snug">
-              About our adaptors
+              {heading}
               <span className="block font-sans text-xs font-normal normal-case tracking-normal text-black/70 mt-0.5">
-                Adds ~20mm to your frame. Tap to read more.
+                {mobileSubtitle}
               </span>
             </span>
             <span className="text-black/70 text-lg leading-none shrink-0" aria-hidden="true">+</span>
           </summary>
           <div className="px-5 pb-6 pt-1 border-t border-black/8">
-            <p className="font-sans text-sm text-black leading-relaxed">
-              We use special fittings to attach new glass to your existing frame. Your frame gets about 20mm wider — that is the only visible change. No ripping out, no plastering, no mess.
-            </p>
-            <p className="font-sans text-sm text-black leading-relaxed mt-3">
-              This saves you thousands compared to full window replacement.
-            </p>
+            <p className="font-sans text-sm text-black leading-relaxed">{body1}</p>
+            <p className="font-sans text-sm text-black leading-relaxed mt-3">{body2}</p>
           </div>
         </details>
       </div>

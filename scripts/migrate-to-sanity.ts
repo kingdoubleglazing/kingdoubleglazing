@@ -3,7 +3,8 @@
  * Run with: npx tsx scripts/migrate-to-sanity.ts
  */
 
-import 'dotenv/config'
+import { config } from 'dotenv'
+config({ path: '.env.local' })
 import fs from 'node:fs'
 import path from 'node:path'
 import { createClient } from '@sanity/client'
@@ -65,6 +66,33 @@ async function migrateSiteSettings() {
     reviews: { totalCount: 36, averageRating: 5.0 },
     logos: { light: '/logo-light.png', dark: '/logo-dark.png', icon: '/icon-small.png' },
     pricing: { retrofitFromPerSqm: 595, retrofitFromDisplay: 'From $595/m²' },
+    trustBarItems: [
+      { iconKey: 'clock',       label: '50+ Years Combined Experience' },
+      { iconKey: 'star',        label: 'Beat Any Quote by 30%' },
+      { iconKey: 'shieldCheck', label: '10-Year Warranty' },
+      { iconKey: 'wrench',      label: 'Fits Most Existing Frames' },
+    ],
+    paymentTerms: {
+      depositTitle:    '50% Deposit to Start',
+      depositBody:     'Pay 50% to get your glass made.',
+      completionTitle: '50% on Completion',
+      completionBody:  'Pay the other 50% when the job is done.',
+      warrantyTitle:   'Made for You, Backed for 10 Years',
+      warrantyBody:    'All glass is made to measure for your home. If anything needs adjusting after install, we fix it — typically within 2–3 weeks.',
+    },
+    adaptorDisclosure: {
+      heading:        'About our adaptors',
+      mobileSubtitle: 'Adds ~20mm to your frame. Tap to read more.',
+      body1: 'We use special fittings to attach new glass to your existing frame. Your frame gets about 20mm wider — that is the only visible change. No ripping out, no plastering, no mess.',
+      body2: 'This saves you thousands compared to full window replacement.',
+    },
+    freeAdviceBlock: {
+      eyebrow:      'Free Advice',
+      headingLine1: 'Got a question',
+      headingLine2: "we haven't covered?",
+      body:         "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.",
+      buttonLabel:  'Call Us',
+    },
   })
 }
 
@@ -120,6 +148,17 @@ async function migratePageDocuments() {
     estimateCtaCaption: 'Enter your window sizes · See your price instantly',
     faqHeading: 'Common Questions',
     faqSubheading: 'Plain answers, no jargon.',
+    whyRetrofitEyebrow:  'WHY RETROFIT?',
+    whyRetrofitHeading1: "Stop. Don't Overpay.",
+    whyRetrofitHeading2: 'Upgrade What You Already Have.',
+    whyRetrofitItems: [
+      { iconKey: 'hammer',       headline: 'No Structural Work',         sub: 'No demolition, no painting, no plastering. Your frames stay where they are.' },
+      { iconKey: 'layers',       headline: 'Suits Most Domestic Frames',  sub: 'Custom adaptors fit timber, aluminium, and steel windows.' },
+      { iconKey: 'zap',          headline: 'Installed in One Day',        sub: 'Most Melbourne homes done by sundown.' },
+      { iconKey: 'volume2',      headline: 'Up to 70% Quieter',           sub: 'Acoustic glass cuts traffic and tram noise.' },
+      { iconKey: 'thermometer',  headline: '50–55% Less Heat Loss',       sub: 'Compared to standard single glazing — lower bills, warmer rooms.' },
+      { iconKey: 'badgePercent', headline: 'We Beat Any Quote by 30%',    sub: 'Send us a real competitor quote. We come in 30% cheaper, in writing, with the 10-year warranty.' },
+    ],
   })
 
   // Services Page
@@ -362,69 +401,7 @@ async function migrateFaqs() {
   console.log()
 }
 
-// ─── 5. TESTIMONIALS ─────────────────────────────────────────────────────────
-async function migrateTestimonials() {
-  console.log('\n[5] Testimonials (42 items — uploading customer images first)')
-
-  const img1 = await uploadImage('testimonial-founder/customer-1.webp')
-  const img2 = await uploadImage('testimonial-founder/customer-2.webp')
-
-  const testimonials = [
-    { name: 'Sarah M.', suburb: 'Brunswick', source: 'Google', rating: 5, tag: 'noise', text: 'Tram noise cut in half — we actually sleep now.', img: img1 },
-    { name: 'David K.', suburb: 'Glen Waverley', source: 'Google', rating: 5, tag: 'energy', text: 'Heating bill dropped 30% last winter. Paid for itself already.', img: img2 },
-    { name: 'Priya R.', suburb: 'Camberwell', source: 'Google', rating: 5, tag: 'retrofit', text: 'Quoted $18k by a big name. King did it for $6k with a 10-year warranty.', img: null },
-    { name: 'Michael A.', suburb: 'St Kilda', source: 'Google', rating: 5, tag: 'retrofit', text: 'Was sceptical about retrofit vs full replacement. A friend told me to just do the full windows. Glad I ignored him. You cannot tell the difference visually, and the performance specs are identical.', img: null },
-    { name: 'Anna P.', suburb: 'Camberwell', source: 'Google', rating: 5, tag: 'energy', text: 'West-facing bedroom was genuinely unusable in summer — 34°C at 9pm. Tinted Low-E glass has fixed it completely. Air con barely runs now. The estimate tool online gave me the exact price before anyone even came out.', img: null },
-    { name: 'Chris L.', suburb: 'Brighton', source: 'Google', rating: 5, tag: 'retrofit', text: "Used the instant estimate tool to budget before committing. No sales call, no pressure. The price they quoted was the price I paid. That kind of transparency is rare in the trades.", img: null },
-    { name: 'Marcus & Priya N.', suburb: 'Brunswick', source: 'Google', rating: 5, tag: 'noise', text: "Our bedroom faces Sydney Road. Friday and Saturday nights were unusable — we were wearing earplugs to sleep. The acoustic laminated glass has completely changed the situation. The tram noise that used to wake us at 6 am is now barely audible. I genuinely did not think glass could make that much difference.", img: null },
-    { name: 'Helen C.', suburb: 'Port Melbourne', source: 'Google', rating: 5, tag: 'noise', text: "Flight path noise was the main reason we almost moved. A friend suggested acoustic glazing as a last resort before we listed the house. We're not moving. The difference in the front rooms is night and day — my daughter actually sleeps through now. Worth every cent.", img: null },
-    { name: 'Rob & Diane F.', suburb: 'Glen Waverley', source: 'Google', rating: 5, tag: 'energy', text: "Our gas bills were brutal every winter — the old single-pane windows were just radiating cold into the rooms. We went with Low-E double glazing throughout. First winter after: $380 less on gas over the quarter. The house holds heat in a way it never did before. We wished we'd done it when we bought the place.", img: null },
-    { name: 'Yasmin T.', suburb: 'Northcote', source: 'Google', rating: 5, tag: 'energy', text: "I was skeptical about the energy saving claims — they always sound too good. But the condensation alone proved the point: zero condensation on the inner pane since installation, where before it was streaming every winter morning. The heating runs half as often. The numbers are real.", img: null },
-    { name: 'Oliver & Kate B.', suburb: 'Carlton', source: 'Google', rating: 5, tag: 'heritage', text: "We were told by two other glaziers that we'd need council approval and a heritage consultant before touching the windows. King told us that a glass-only retrofit is permit-exempt — kept the frames, just replaced the glass. They were right. No permit, no consultant, done in one day. The house looks exactly the same from the street, and the draughts are completely gone.", img: null },
-    { name: 'Fiona M.', suburb: 'Fitzroy', source: 'Google', rating: 5, tag: 'heritage', text: "Our Victorian terrace is on the Heritage Overlay and I was nervous about any window work. King assessed the frames, confirmed the retrofit was permit-free, and did the whole house in a day. The original sash windows still look original — you'd never know the glass had changed. Warmer, quieter, no heritage headache.", img: null },
-    { name: 'Paul & Sandra O.', suburb: 'Hawthorn', source: 'Google', rating: 5, tag: 'emergency', text: "Woke up to a burglary at 3am — back door glass completely smashed. Called King at 6am, glazier was here by 7:45am, property secured before we left for work. Didn't expect anyone to show up that fast. They boarded it properly, not just cardboard, and came back two days later with the permanent glass. Exactly what you need when you're in shock.", img: null },
-    { name: 'Rental Manager — South Yarra', suburb: 'South Yarra', source: 'Google', rating: 5, tag: 'emergency', text: "Tenant called me at 7pm on a Friday — kitchen window smashed. King had a glazier there by 9pm and replaced the glass permanently on the same visit. No board-up, no return trip, no landlord nightmare over the weekend. I've used them for three emergency jobs now and the response is always the same.", img: null },
-    { name: 'Diane K.', suburb: 'Footscray', source: 'Google', rating: 5, tag: 'emergency', text: "Storm took out my lounge window at 11pm on a Wednesday. I expected to be told someone would come in the morning. King had a glazier here within the hour. He cleaned up the glass, boarded the frame properly, and the permanent replacement was fitted two days later. Professional job, not a handyman with a piece of wood.", img: null },
-    { name: 'James R. — Strata Manager', suburb: 'South Melbourne', source: 'Google', rating: 5, tag: 'commercial', text: "We manage 14 strata buildings across Melbourne. King handles all our glazing — routine replacements, double glazing retrofits on older blocks, and emergency call-outs. The invoicing is clean, the pricing is consistent, and they show up when they say they will. That last part is rarer than it should be.", img: null },
-    { name: 'Natalie W. — Retail Fitout', suburb: 'Collingwood', source: 'Google', rating: 5, tag: 'commercial', text: "Needed a full shopfront glass installation done over a weekend so we could open Monday. King confirmed the timeline, showed up Saturday morning, and were done by Sunday afternoon. The glass is immaculate — not a mark on it. Every trade we brought in for the fitout delivered late except these guys.", img: null },
-    { name: 'Tom B. — Property Developer', suburb: 'Richmond', source: 'Google', rating: 5, tag: 'commercial', text: "Used King on a 12-unit apartment project — double glazing throughout plus frameless balustrades on the upper levels. Scope was substantial and they handled it without the project management headaches I've had with other glaziers. Itemised quotes, predictable scheduling, zero defects at handover. We're using them on the next project.", img: null },
-    { name: 'Margaret & Peter S.', suburb: 'Kew', source: 'Google', rating: 5, tag: 'heritage', text: "Our Kew home is on the Heritage Overlay and we'd been told by two builders that any window work required council sign-off. Tas explained that a glass-only retrofit is permit-exempt — you replace the glass unit inside the existing frame, not the frame itself. He was right. No planning permit, job done in a day, and the original timber sashes look exactly as they did before. The draught problem we'd lived with for twenty years is gone.", img: null },
-    { name: 'Caroline B.', suburb: 'Malvern', source: 'Google', rating: 5, tag: 'heritage', text: "My Malvern Edwardian is in a heritage precinct and I was very anxious about any alteration to the original windows. Tas came out, assessed the frames, and confirmed the retrofit was 100% permit-free — the glass changes but the frames stay completely intact. The installation took one day and left no trace. The cold draughts from the bay window are completely gone.", img: null },
-    { name: 'James & Louise W.', suburb: 'Canterbury', source: 'Google', rating: 5, tag: 'energy', text: "We'd been putting off doing anything about the windows in our Canterbury home for years because we assumed it meant replacing the original frames. The retrofit option was a revelation — the frames stay, only the glass is upgraded. Our heating bills dropped by over $300 last winter and there's no more condensation on the inside of the glass in the mornings.", img: null },
-    { name: 'Nick A.', suburb: 'Glen Iris', source: 'Google', rating: 5, tag: 'noise', text: "We're half a block from the High Street tram line in Glen Iris. The noise through our original Victorian windows was constant — trams every few minutes during peak hour. The acoustic laminated glass has made an enormous difference. You can still hear them faintly if you listen, but the intrusive rattling and bell noise is gone. Sleep quality has improved noticeably.", img: null },
-    { name: 'Sandra T.', suburb: 'Doncaster', source: 'Google', rating: 5, tag: 'noise', text: "Our property backs onto the Eastern Freeway sound corridor. We used to hear constant traffic through the back bedrooms — a low-frequency rumble that made it hard to get to sleep. The double glazing with acoustic PVB glass has been the single biggest quality-of-life improvement we've made to this house. Genuinely quiet back there now.", img: null },
-    { name: 'Wei & Mei C.', suburb: 'Box Hill', source: 'Google', rating: 5, tag: 'noise', text: "Our Box Hill unit is right near the station and rail noise at 6am was our daily alarm clock whether we wanted it or not. Acoustic laminated double glazing in the bedroom windows has fixed it. The trains are still there, but you no longer hear them through the glass. The difference from the first night was dramatic.", img: null },
-    { name: 'Stephen & Anne R.', suburb: 'Burwood', source: 'Google', rating: 5, tag: 'energy', text: "Our 1960s brick veneer in Burwood was genuinely cold in winter — single-pane windows radiating cold air into every room. Tas quoted a fair price, the job was done in one day, and the results were immediate. First cold snap after installation the house stayed at temperature without the heater running constantly. Paid for itself within two winters.", img: null },
-    { name: 'Rachel H.', suburb: 'Caulfield', source: 'Google', rating: 5, tag: 'noise', text: "I live near the Caulfield station corridor and tram noise on Hawthorn Road was a persistent problem. Acoustic laminated glass in the front-facing windows has been well worth it. The installation was clean, the pricing matched the online estimate exactly, and the noise reduction is genuine — not marginal. I'd recommend King to anyone in Caulfield dealing with the same issue.", img: null },
-    { name: 'Andrew & Lyn P.', suburb: 'Ringwood', source: 'Google', rating: 5, tag: 'energy', text: "We'd had quotes from two other glaziers and both came back with full window replacement recommendations. Tas told us our aluminium frames were structurally sound and all that needed changing was the glass unit inside — saving us nearly $8,000. The thermal performance is the same as a full replacement. Can't understand why no one else mentioned the retrofit option.", img: null },
-    { name: 'Patricia M.', suburb: 'Toorak', source: 'Google', rating: 5, tag: 'energy', text: "Our Toorak home has original inter-war leadlight and timber windows throughout — many irreplaceable. I was worried that improving thermal performance meant compromising the original fabric of the house. Tas was very clear that the retrofit keeps every original frame in place and only changes the glazed unit. The house is noticeably warmer this winter without any alteration to its character.", img: null },
-    { name: 'Greg & Sarah D.', suburb: 'Templestowe', source: 'Google', rating: 5, tag: 'energy', text: "Templestowe winters are noticeably colder than the inner suburbs and our west-facing rooms were getting punished every summer afternoon as well. Low-E double glazing has solved both problems — the west rooms are usable in summer now and we've cut our heating runtime in winter by roughly half. Exactly what it said on the tin.", img: null },
-    { name: 'Deborah K.', suburb: 'Mitcham', source: 'Google', rating: 5, tag: 'noise', text: "Our Mitcham home is close enough to the Belgrave line that train noise used to be a constant in the front rooms. I'd assumed double glazing would be a minor improvement — the change was bigger than I expected. The acoustic laminated units have made the front study genuinely usable again as a workspace. Would recommend without hesitation.", img: null },
-    { name: 'John & Trudy F.', suburb: 'Nunawading', source: 'Google', rating: 5, tag: 'noise', text: "Whitehorse Road traffic noise was something we'd just accepted as part of living here. A neighbour mentioned King after getting their glazing done and the difference in their place was obvious. We had ours done two months ago — the Whitehorse Road rumble that used to come straight through is now barely noticeable. The instant estimate tool online gave us a quote within a few minutes and it was accurate to the dollar.", img: null },
-    { name: 'David & Carol M.', suburb: 'Vermont', source: 'Google', rating: 5, tag: 'energy', text: "Our Vermont home from the 1960s had terrible condensation every winter morning — streaming down the inside of every window. We'd been told it was 'just what older homes do'. It's not — it's a symptom of heat loss through single-pane glass. No condensation since the retrofit. The heating bills have dropped meaningfully and the house feels genuinely different.", img: null },
-    { name: 'Tony & Barb N.', suburb: 'Wantirna', source: 'Google', rating: 5, tag: 'energy', text: "We bought our Wantirna place knowing the windows needed attention but kept deferring it. When we finally got Tas out he gave us a straight assessment — aluminium frames in good condition, just needs the glass upgraded. The retrofit was far cheaper than what we'd mentally budgeted for full replacement. The house is warmer, and the electricity bill this winter confirmed it.", img: null },
-    { name: 'Liz & Michael C.', suburb: 'Wheelers Hill', source: 'Google', rating: 5, tag: 'energy', text: "Wheelers Hill gets genuinely cold in July and August and our family home was losing heat fast through original single glazing. King retrofitted the entire house — 14 windows — in one long day. The first month's gas bill after installation was $210 less than the same month the year before. That kind of direct cost saving makes the job feel like an easy decision in hindsight.", img: null },
-    { name: 'Eleanor V.', suburb: 'Mont Albert', source: 'Google', rating: 5, tag: 'heritage', text: "Mont Albert's Union Road tram runs right past my Victorian cottage and the noise was something I'd just lived with. Getting double glazing was always on the to-do list but I was worried about heritage complications given the precinct rules here. Tas confirmed the glass-only retrofit is permit-exempt — no council involvement, no heritage consultant. One day's work, no tram noise through the bedroom window. Wish I'd done it years ago.", img: null },
-    { name: 'Robert & Kim A.', suburb: 'Balwyn North', source: 'Google', rating: 5, tag: 'retrofit', text: "Our large Balwyn North home had 22 windows — we expected a major disruption. King completed the whole job in two days, working systematically through each room. The pricing was itemised and transparent upfront — no variations, no surprises. Final invoice matched the estimate exactly. You'd expect that to be standard but it isn't with most trades.", img: null },
-  ]
-
-  for (const [i, t] of testimonials.entries()) {
-    const doc: Record<string, unknown> = {
-      _id: `testimonial-${i + 1}`,
-      _type: 'testimonial',
-      name: t.name,
-      suburb: t.suburb,
-      source: t.source,
-      rating: t.rating,
-      tag: t.tag,
-      text: t.text,
-    }
-    if (t.img) doc.customerImage = t.img
-    await upsert(doc)
-  }
-}
-
-// ─── 6. GALLERY ──────────────────────────────────────────────────────────────
+// ─── 5. GALLERY ──────────────────────────────────────────────────────────────
 async function migrateGallery() {
   console.log('\n[6] Gallery (uploading images)')
 
@@ -607,7 +584,6 @@ async function main() {
   await migrateNavigation()
   await migratePageDocuments()
   await migrateFaqs()
-  await migrateTestimonials()
   await migrateGallery()
   await migrateProcessSteps()
   await migratePricingOptions()

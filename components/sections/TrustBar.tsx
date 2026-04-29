@@ -1,26 +1,63 @@
-import { Clock, ShieldCheck, Star, Wrench, type LucideIcon } from 'lucide-react'
+import {
+  BadgePercent,
+  Clock,
+  Hammer,
+  ShieldCheck,
+  Star,
+  Thermometer,
+  Volume2,
+  Wrench,
+  Zap,
+  type LucideIcon,
+} from 'lucide-react'
+import { sanityFetch } from '@/sanity/lib/fetch'
+import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
+import type { SiteSettings } from '@/sanity/types'
 
-interface TrustItem {
-  icon: LucideIcon
-  label: string
+const ICON_MAP: Record<string, LucideIcon> = {
+  clock: Clock,
+  star: Star,
+  shieldCheck: ShieldCheck,
+  wrench: Wrench,
+  hammer: Hammer,
+  zap: Zap,
+  badgePercent: BadgePercent,
+  thermometer: Thermometer,
+  volume2: Volume2,
 }
 
-const defaultItems: TrustItem[] = [
+const FALLBACK_ITEMS: TrustItem[] = [
   { icon: Clock,       label: '50+ Years Combined Experience' },
   { icon: Star,        label: 'Beat Any Quote by 30%' },
   { icon: ShieldCheck, label: '10-Year Warranty' },
   { icon: Wrench,      label: 'Fits Most Existing Frames' },
 ]
 
+interface TrustItem {
+  icon: LucideIcon
+  label: string
+}
+
 interface TrustBarProps {
   items?: TrustItem[]
 }
 
-export function TrustBar({ items = defaultItems }: TrustBarProps) {
+export async function TrustBar({ items }: TrustBarProps) {
+  let resolvedItems = items
+  if (!resolvedItems) {
+    const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
+    resolvedItems = settings.trustBarItems?.length
+      ? settings.trustBarItems.map(({ iconKey, label }) => ({
+          icon: ICON_MAP[iconKey] ?? Clock,
+          label,
+        }))
+      : FALLBACK_ITEMS
+  }
+
   return (
     <div className="bg-inverse-surface">
       <ul className="flex flex-col md:flex-row md:items-stretch md:justify-between max-w-5xl mx-auto divide-y md:divide-y-0 md:divide-x divide-white/10">
-        {items.map(({ icon: Icon, label }) => (
+        {resolvedItems.map(({ icon: Icon, label }) => (
           <li key={label} className="flex items-center gap-2.5 px-6 py-3.5 md:flex-1 md:justify-center">
             <Icon
               size={16}

@@ -9,8 +9,8 @@ import { TrustBar } from '@/components/sections/TrustBar'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { FreeAdviceBlock } from '@/components/FreeAdviceBlock'
 import { sanityFetch } from '@/sanity/lib/fetch'
-import { SITE_SETTINGS_QUERY, FAQS_QUERY } from '@/sanity/lib/queries'
-import type { SiteSettings, FaqItem } from '@/sanity/types'
+import { SITE_SETTINGS_QUERY, ABOUT_PAGE_QUERY, FAQS_QUERY } from '@/sanity/lib/queries'
+import type { SiteSettings, AboutPage, FaqItem } from '@/sanity/types'
 
 export const metadata: Metadata = buildMetadata({
   title: "About King Double Glazing | Melbourne's Anti-Ripoff Glaziers | Tas Markou",
@@ -20,8 +20,9 @@ export const metadata: Metadata = buildMetadata({
 })
 
 export default async function AboutPage() {
-  const [settings, generalFaqs] = await Promise.all([
+  const [settings, aboutPage, generalFaqs] = await Promise.all([
     sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
+    sanityFetch<AboutPage>({ query: ABOUT_PAGE_QUERY, tags: ['aboutPage'] }),
     sanityFetch<FaqItem[]>({ query: FAQS_QUERY, params: { group: 'general' }, tags: ['faqItem'] }),
   ])
 
@@ -68,12 +69,12 @@ export default async function AboutPage() {
                 className="font-display uppercase leading-none text-inverse-on-surface mb-6"
                 style={{ fontSize: 'clamp(3rem, 9vw, 7rem)' }}
               >
-                Built by a Family
+                {aboutPage?.heroHeadline ?? 'Built by a Family'}
                 <br />
-                <span className="text-primary-container">of Melbourne Glaziers</span>
+                <span className="text-primary-container">{aboutPage?.heroHeadlineYellow ?? 'of Melbourne Glaziers'}</span>
               </h1>
               <p className="font-sans text-base text-inverse-on-surface max-w-lg leading-relaxed mb-8">
-                Tas Markou ran two double glazing factories. He found a way to drop the price — because most companies charge more than families can afford. 40+ staff at peak. 25+ years in the trade.
+                {aboutPage?.heroSubtext ?? 'Tas Markou ran two double glazing factories. He found a way to drop the price — because most companies charge more than families can afford. 40+ staff at peak. 25+ years in the trade.'}
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -114,7 +115,7 @@ export default async function AboutPage() {
             {/* Left — story */}
             <div className="lg:col-span-7">
               <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">
-                The Origin Story
+                {aboutPage?.storyEyebrow ?? 'The Origin Story'}
               </p>
               <h2
                 className="font-display uppercase leading-[0.88] text-on-surface mb-8"
@@ -124,20 +125,16 @@ export default async function AboutPage() {
                 <span className="block text-primary-container">Don&apos;t Overpay.</span>
               </h2>
               <div className="space-y-5 font-sans text-base text-on-surface leading-relaxed max-w-xl">
-                <p>
-                  I grew up in glass. My father was a glazier and I was doing installs as a kid. I ran two factories. Along the way I found a way to drop the price — most companies charge way more than families can afford.
-                </p>
-                <p>
-                  You want quieter, warmer windows. You don't want to spend $15,000 ripping out frames that work fine. We add a second pane to what you already have. No mess. One day, done.
-                </p>
-                <p>
-                  Every quote is in plain numbers. No hidden extras. If we can't beat any real competitor quote by 30%, I'll say so.{' '}
-                  <strong>Stop. Don&apos;t overpay.</strong>
-                </p>
+                {(aboutPage?.storyParagraphs ?? [
+                  'I grew up in glass. My father was a glazier and I was doing installs as a kid. I ran two factories. Along the way I found a way to drop the price — most companies charge way more than families can afford.',
+                  "You want quieter, warmer windows. You don't want to spend $15,000 ripping out frames that work fine. We add a second pane to what you already have. No mess. One day, done.",
+                  "Every quote is in plain numbers. No hidden extras. If we can't beat any real competitor quote by 30%, I'll say so. Stop. Don't overpay.",
+                ]).map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
                 <blockquote className="border-l-4 border-primary-container pl-5 not-italic">
                   <p className="font-sans text-base font-semibold text-on-surface leading-relaxed">
-                    Transparent quoting. Fair pricing. 10-year warranty.
-                    That&apos;s the King promise. — Tas
+                    {aboutPage?.storyQuote ?? "Transparent quoting. Fair pricing. 10-year warranty. That's the King promise. — Tas"}
                   </p>
                 </blockquote>
               </div>
@@ -146,12 +143,12 @@ export default async function AboutPage() {
             {/* Right — stats */}
             <aside className="lg:col-span-5">
               <div className="grid grid-cols-2 gap-0 ghost-border">
-                {[
+                {(aboutPage?.stats ?? [
                   { value: '50+', label: 'Years combined experience' },
                   { value: '40+', label: 'Staff at peak commercial operation' },
                   { value: '30%', label: 'Cheaper than any genuine quote' },
                   { value: '1 day', label: 'Typical install time' },
-                ].map(({ value, label }, i) => (
+                ]).map(({ value, label }, i) => (
                   <div
                     key={label}
                     className="ghost-border p-6 md:p-8 animate-stagger-child"
@@ -204,28 +201,13 @@ export default async function AboutPage() {
               </p>
             </div>
             <div className="space-y-0 ghost-border">
-              {[
-                {
-                  label: 'We beat any genuine quote by 30%',
-                  detail: 'Send us a real competitor quote. We come in 30% cheaper, in writing.',
-                },
-                {
-                  label: 'Fits most existing windows',
-                  detail: 'Custom fittings for timber, aluminium, and steel frames. If it won\'t work, we\'ll tell you before any work begins.',
-                },
-                {
-                  label: '10-year warranty on every job',
-                  detail: 'Glass and workmanship covered. No conditions, no fine print.',
-                },
-                {
-                  label: 'Transparent pricing',
-                  detail: 'The quote you get is the price you pay. No hidden extras.',
-                },
-                {
-                  label: '50+ years combined experience',
-                  detail: 'Tas learned from his father. Our team has done thousands of Melbourne homes.',
-                },
-              ].map(({ label, detail }, i) => (
+              {(aboutPage?.guarantees ?? [
+                { label: 'We beat any genuine quote by 30%', detail: 'Send us a real competitor quote. We come in 30% cheaper, in writing.' },
+                { label: 'Fits most existing windows', detail: "Custom fittings for timber, aluminium, and steel frames. If it won't work, we'll tell you before any work begins." },
+                { label: '10-year warranty on every job', detail: 'Glass and workmanship covered. No conditions, no fine print.' },
+                { label: 'Transparent pricing', detail: 'The quote you get is the price you pay. No hidden extras.' },
+                { label: '50+ years combined experience', detail: 'Tas learned from his father. Our team has done thousands of Melbourne homes.' },
+              ]).map(({ label, detail }, i) => (
                 <div
                   key={label}
                   className="ghost-border p-7 bg-on-primary-fixed/5 hover:bg-on-primary-fixed/9 transition-colors duration-150 animate-stagger-child"

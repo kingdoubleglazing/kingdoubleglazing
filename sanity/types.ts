@@ -21,6 +21,28 @@ export interface SiteSettings {
   social: { facebook: string; instagram: string; google: string }
   logos: { light: string; dark: string; icon: string }
   pricing: { retrofitFromPerSqm: number; retrofitFromDisplay: string }
+  trustBarItems?: Array<{ iconKey: string; label: string }>
+  paymentTerms?: {
+    depositTitle: string
+    depositBody: string
+    completionTitle: string
+    completionBody: string
+    warrantyTitle: string
+    warrantyBody: string
+  }
+  adaptorDisclosure?: {
+    heading: string
+    mobileSubtitle: string
+    body1: string
+    body2: string
+  }
+  freeAdviceBlock?: {
+    eyebrow: string
+    headingLine1: string
+    headingLine2: string
+    body: string
+    buttonLabel: string
+  }
 }
 
 export interface Navigation {
@@ -91,6 +113,10 @@ export interface HomePage {
   estimateCtaCaption: string
   faqHeading: string
   faqSubheading: string
+  whyRetrofitEyebrow?: string
+  whyRetrofitHeading1?: string
+  whyRetrofitHeading2?: string
+  whyRetrofitItems?: Array<{ iconKey: string; headline: string; sub: string }>
 }
 
 export interface ServiceSection {

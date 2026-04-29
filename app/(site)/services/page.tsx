@@ -13,8 +13,8 @@ import { CtaBanner } from '@/components/sections/CtaBanner'
 import { AdaptorDisclosure } from '@/components/AdaptorDisclosure'
 import { FreeAdviceBlock } from '@/components/FreeAdviceBlock'
 import { sanityFetch } from '@/sanity/lib/fetch'
-import { SITE_SETTINGS_QUERY, FAQS_QUERY } from '@/sanity/lib/queries'
-import type { SiteSettings, FaqItem } from '@/sanity/types'
+import { SITE_SETTINGS_QUERY, FAQS_QUERY, SERVICES_PAGE_QUERY } from '@/sanity/lib/queries'
+import type { SiteSettings, FaqItem, ServicesPage } from '@/sanity/types'
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
@@ -26,26 +26,28 @@ export async function generateMetadata(): Promise<Metadata> {
   })
 }
 
-const servicesFaqItems = [
-  {
-    q: 'Do you do all these services or just double glazing?',
-    a: 'All of them. King Double Glazing handles retrofit double glazing, shower screens, splashbacks, mirrors, emergency repairs, and commercial jobs. One team, one price promise, one warranty.',
-  },
-  {
-    q: "What's the fastest service you offer?",
-    a: 'Emergency glass repair — we aim to be on site within 2–4 hours in metropolitan Melbourne. Call us directly for fastest response.',
-  },
-  {
-    q: 'Do shower screens and splashbacks include installation?',
-    a: 'Yes. Every job includes supply, installation, and cleanup. We leave the site in the same condition we found it.',
-  },
-]
+const SECTION_VISUAL: Record<string, {
+  featured?: boolean
+  dark?: boolean
+  danger?: boolean
+  image?: string
+  imageAlt?: string
+}> = {
+  retrofit: { featured: true, image: '/stock/double-glazed-2000px.webp', imageAlt: 'Double glazed window close-up — retrofit installation Melbourne' },
+  emergency: { danger: true, image: '/stock/AdobeStock_323273938.webp', imageAlt: 'Emergency glass repair — glazier on site in Melbourne' },
+  'shower-screens': { image: '/stock/shower-pane-1000x667-1.webp', imageAlt: 'Semi-frameless shower screen installation Melbourne' },
+  splashbacks: { dark: true, image: '/stock/splashback-2.webp', imageAlt: 'Kitchen glass splashback installation Melbourne' },
+  mirrors: {},
+  commercial: { dark: true, image: '/hero/hero-commercial-glazing.webp', imageAlt: 'Commercial glazing — shopfront and office glass Melbourne' },
+}
 
 export default async function ServicesPage() {
-  const [settings, retrofitFaqs, emergencyFaqs] = await Promise.all([
+  const [settings, servicesPage, retrofitFaqs, emergencyFaqs, servicesFaqs] = await Promise.all([
     sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
+    sanityFetch<ServicesPage>({ query: SERVICES_PAGE_QUERY, tags: ['servicesPage'] }),
     sanityFetch<FaqItem[]>({ query: FAQS_QUERY, params: { group: 'retrofit' }, tags: ['faqItem'] }),
     sanityFetch<FaqItem[]>({ query: FAQS_QUERY, params: { group: 'emergency' }, tags: ['faqItem'] }),
+    sanityFetch<FaqItem[]>({ query: FAQS_QUERY, params: { group: 'services' }, tags: ['faqItem'] }),
   ])
 
   const servicesPageSchemas = [
@@ -102,232 +104,95 @@ export default async function ServicesPage() {
             className="font-display uppercase leading-none text-white mb-5"
             style={{ fontSize: 'clamp(3rem, 9vw, 7rem)' }}
           >
-            One Team.
-            <br />
-            <span className="text-primary-container">Every Job.</span>
+            {(() => {
+              const [line1, line2] = (servicesPage?.heroHeading ?? 'One Team.\nEvery Job.').split('\n')
+              return <>{line1}{line2 && <><br /><span className="text-primary-container">{line2}</span></>}</>
+            })()}
           </h1>
           <p className="font-sans text-base text-white max-w-lg leading-relaxed">
-            Retrofit double glazing is our main business — we add a second pane to your existing windows. We also do emergency repairs, shower screens, splashbacks, mirrors, and commercial glazing. 10-year warranty on every job.
+            {servicesPage?.heroSubtext ?? 'Retrofit double glazing is our main business — we add a second pane to your existing windows. We also do emergency repairs, shower screens, splashbacks, mirrors, and commercial glazing. 10-year warranty on every job.'}
           </p>
         </div>
       </section>
 
       <TrustBar />
 
-      {/* ── #retrofit ── */}
-      <ServiceSection
-        id="retrofit"
-        eyebrow="Hero Service"
-        heading="Retrofit Double Glazing"
-        featured
-        image="/stock/double-glazed-2000px.webp"
-        imageAlt="Double glazed window close-up — retrofit installation Melbourne"
-      >
-        <p className="font-sans text-base text-on-surface leading-relaxed mb-6">
-          We add a second pane to your existing windows. Same frames, same look. Up to 70% quieter. Up to 70% less heat loss. Half the price of full replacement.
-        </p>
-        <ul className="space-y-3 mb-8">
-          {[
-            'Works on timber, aluminium, and steel frames',
-            'Installed in one day — most Melbourne homes',
-            `${settings.pricing.retrofitFromDisplay} — we beat any genuine quote by 30%`,
-            '10-year warranty on glass and workmanship',
-            'No council approval required in most cases',
-          ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-sm text-on-surface">
-              <span className="text-primary-container font-bold mt-0.5 shrink-0">✓</span>
-              {b}
-            </li>
-          ))}
-        </ul>
-        <Link
-          href="/instant-estimate/"
-          className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150"
-        >
-          Generate My Quote →
-        </Link>
-      </ServiceSection>
+      {(servicesPage?.serviceSections ?? []).map((section, idx) => {
+        const visual = SECTION_VISUAL[section.id] ?? {}
+        const onDark = visual.danger || visual.dark
+        const textClass = visual.danger ? 'text-white' : onDark ? 'text-inverse-on-surface' : 'text-on-surface'
+        const checkClass = visual.danger ? 'text-white' : 'text-primary-container'
+        const isEmergency = section.id === 'emergency'
+        const isMirrors = section.id === 'mirrors'
 
-      {/* D2.1: Adaptor disclosure — after retrofit section */}
-      <AdaptorDisclosure />
-
-      {/* ── #emergency ── */}
-      <ServiceSection
-        id="emergency"
-        eyebrow="Rapid Response"
-        heading="Emergency Glass Repair"
-        danger
-        image="/stock/AdobeStock_323273938.webp"
-        imageAlt="Emergency glass repair — glazier on site in Melbourne"
-      >
-        <p className="font-sans text-base text-white leading-relaxed mb-6">
-          Broken window right now? We do same-day emergency glass repair across Melbourne — shopfronts, homes, sliding doors, skylights.
-        </p>
-        <ul className="space-y-3 mb-8">
-          {[
-            'Same-day response in metropolitan Melbourne',
-            'Temporary boarding while glass is ordered',
-            'All glass types — safety, toughened, laminated',
-            'Insurance reports available on request',
-          ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-sm text-white">
-              <span className="text-white font-bold mt-0.5 shrink-0">✓</span>
-              {b}
-            </li>
-          ))}
-        </ul>
-        <a
-          href={settings.phoneHref}
-          className="inline-flex items-center gap-2 bg-black text-white font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-black/80 transition-colors duration-150"
-        >
-          <Phone size={16} aria-hidden="true" />
-          Call {settings.phone} Now
-        </a>
-      </ServiceSection>
-
-      {/* ── #shower-screens ── */}
-      <ServiceSection
-        id="shower-screens"
-        eyebrow="Bathroom"
-        heading="Shower Screens"
-        image="/stock/shower-pane-1000x667-1.webp"
-        imageAlt="Semi-frameless shower screen installation Melbourne"
-      >
-        <p className="font-sans text-base text-on-surface leading-relaxed mb-6">
-          Frameless, semi-frameless, or framed. Toughened safety glass. We supply and install across Melbourne, usually in one day.
-        </p>
-        <ul className="space-y-3 mb-8">
-          {[
-            'Frameless — no metal frame, looks like a single sheet of glass',
-            'Semi-frameless — cleaner look, lower cost',
-            'Framed — most affordable, very durable',
-            'Custom sizes cut to your exact dimensions',
-            'Measure-it-yourself quote available — accurate within 10% if you measure carefully',
-            '10-year warranty on every screen',
-          ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-sm text-on-surface">
-              <span className="text-primary-container font-bold mt-0.5 shrink-0">✓</span>
-              {b}
-            </li>
-          ))}
-        </ul>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href="/contact/?service=shower-diy"
-            className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150"
-          >
-            Send My Measurements →
-          </Link>
-          <Link
-            href="/contact/?service=shower-visit"
-            className="inline-flex items-center gap-3 bg-transparent text-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 border border-on-surface/30 hover:bg-on-surface/10 transition-colors duration-150"
-          >
-            Or Get in Touch →
-          </Link>
-        </div>
-      </ServiceSection>
-
-      {/* ── #splashbacks ── */}
-      <ServiceSection
-        id="splashbacks"
-        eyebrow="Kitchen & Bathroom"
-        heading="Kitchen Glass Splashbacks"
-        dark
-        image="/stock/splashback-2.webp"
-        imageAlt="Kitchen glass splashback installation Melbourne"
-      >
-        <p className="font-sans text-base text-inverse-on-surface leading-relaxed mb-6">
-          Custom-cut glass splashbacks in any colour. Easy to clean, heat-resistant. We measure, cut, and install.
-        </p>
-        <ul className="space-y-3 mb-8">
-          {[
-            'Any colour — match your kitchen exactly',
-            'Heat and steam resistant',
-            'Hygienic — no grout to clean',
-            'Custom sizes, no standard-size limitations',
-          ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-sm text-inverse-on-surface">
-              <span className="text-primary-container font-bold mt-0.5 shrink-0">✓</span>
-              {b}
-            </li>
-          ))}
-        </ul>
-        <Link
-          href="/contact/"
-          className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150"
-        >
-          Get a Quote →
-        </Link>
-      </ServiceSection>
-
-      {/* ── #mirrors ── */}
-      <ServiceSection
-        id="mirrors"
-        eyebrow="Custom"
-        heading="Custom Mirrors"
-      >
-        <p className="font-sans text-base text-on-surface leading-relaxed mb-6">
-          Bespoke mirrors cut to any size. Bathrooms, gyms, hallways, studios. We supply and install across Melbourne.
-        </p>
-        <ul className="space-y-3 mb-8">
-          {[
-            'Cut to exact dimensions',
-            'Bevelled edge or straight cut',
-            'Wall-mounted or free-standing',
-            'Commercial and residential',
-          ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-sm text-on-surface">
-              <span className="text-primary-container font-bold mt-0.5 shrink-0">✓</span>
-              {b}
-            </li>
-          ))}
-        </ul>
-        <Link
-          href="/contact/"
-          className="inline-flex items-center gap-3 bg-inverse-surface text-inverse-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-on-surface/80 transition-colors duration-150"
-        >
-          Get a Quote →
-        </Link>
-      </ServiceSection>
-
-      {/* ── #commercial ── */}
-      <ServiceSection
-        id="commercial"
-        eyebrow="Commercial"
-        heading="Commercial Glazing"
-        dark
-        image="/hero/hero-commercial-glazing.webp"
-        imageAlt="Commercial glazing — shopfront and office glass Melbourne"
-      >
-        <p className="font-sans text-base text-inverse-on-surface leading-relaxed mb-6">
-          Offices, retail, shopfronts, strata. Same transparent pricing, same 10-year warranty.
-        </p>
-        <ul className="space-y-3 mb-8">
-          {[
-            'Retrofit double glazing for offices and apartments',
-            'Shopfront glass supply and installation',
-            'Office partitions and internal glazing',
-            'Strata and body corporate work',
-            'All project sizes — call to discuss yours',
-          ].map(b => (
-            <li key={b} className="flex items-start gap-3 font-sans text-base text-inverse-on-surface">
-              <span className="text-primary-container font-bold mt-0.5 shrink-0">✓</span>
-              {b}
-            </li>
-          ))}
-        </ul>
-        <Link
-          href="/contact/"
-          className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150"
-        >
-          Get a Quote →
-        </Link>
-      </ServiceSection>
+        return (
+          <div key={section.id}>
+            <ServiceSection
+              id={section.id}
+              eyebrow={section.eyebrow}
+              heading={section.heading}
+              featured={visual.featured}
+              dark={visual.dark}
+              danger={visual.danger}
+              image={visual.image}
+              imageAlt={visual.imageAlt}
+            >
+              <p className={`font-sans text-base ${textClass} leading-relaxed mb-6`}>
+                {section.bodyText}
+              </p>
+              <ul className="space-y-3 mb-8">
+                {(section.bullets ?? []).map(b => (
+                  <li key={b} className={`flex items-start gap-3 font-sans text-sm ${textClass}`}>
+                    <span className={`${checkClass} font-bold mt-0.5 shrink-0`}>✓</span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+              {isEmergency ? (
+                <a
+                  href={settings.phoneHref}
+                  className="inline-flex items-center gap-2 bg-black text-white font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-black/80 transition-colors duration-150"
+                >
+                  <Phone size={16} aria-hidden="true" />
+                  Call {settings.phone} Now
+                </a>
+              ) : isMirrors ? (
+                <Link
+                  href={section.primaryCta?.href ?? '/contact/'}
+                  className="inline-flex items-center gap-3 bg-inverse-surface text-inverse-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-on-surface/80 transition-colors duration-150"
+                >
+                  {section.primaryCta?.label ?? 'Get a Quote →'}
+                </Link>
+              ) : (
+                <div className="flex flex-wrap gap-3">
+                  {section.primaryCta && (
+                    <Link
+                      href={section.primaryCta.href}
+                      className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150"
+                    >
+                      {section.primaryCta.label}
+                    </Link>
+                  )}
+                  {section.secondaryCta && (
+                    <Link
+                      href={section.secondaryCta.href}
+                      className="inline-flex items-center gap-3 bg-transparent text-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 border border-on-surface/30 hover:bg-on-surface/10 transition-colors duration-150"
+                    >
+                      {section.secondaryCta.label}
+                    </Link>
+                  )}
+                </div>
+              )}
+            </ServiceSection>
+            {idx === 0 && <AdaptorDisclosure />}
+          </div>
+        )
+      })}
 
       <FAQ
-        heading="Service Questions"
-        subheading="Common questions about what we do."
-        items={servicesFaqItems}
+        heading={servicesPage?.faqHeading ?? 'Service Questions'}
+        subheading={servicesPage?.faqSubheading ?? 'Common questions about what we do.'}
+        items={servicesFaqs.map(f => ({ q: f.q, a: f.a }))}
       />
 
       <FreeAdviceBlock />
