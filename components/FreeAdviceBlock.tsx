@@ -1,10 +1,8 @@
 import { Phone } from 'lucide-react'
-import { sanityFetch } from '@/sanity/lib/fetch'
-import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
-import type { SiteSettings } from '@/sanity/types'
+import { getSiteSettings } from '@/lib/site-settings'
 
-export async function FreeAdviceBlock() {
-  const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
+export function FreeAdviceBlock() {
+  const settings = getSiteSettings()
   const fab = settings.freeAdviceBlock
 
   const eyebrow     = fab?.eyebrow      ?? 'Free Advice'

@@ -10,9 +10,7 @@ import {
   Zap,
   type LucideIcon,
 } from 'lucide-react'
-import { sanityFetch } from '@/sanity/lib/fetch'
-import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
-import type { SiteSettings } from '@/sanity/types'
+import { getSiteSettings } from '@/lib/site-settings'
 
 const ICON_MAP: Record<string, LucideIcon> = {
   clock: Clock,
@@ -42,10 +40,10 @@ interface TrustBarProps {
   items?: TrustItem[]
 }
 
-export async function TrustBar({ items }: TrustBarProps) {
+export function TrustBar({ items }: TrustBarProps) {
   let resolvedItems = items
   if (!resolvedItems) {
-    const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
+    const settings = getSiteSettings()
     resolvedItems = settings.trustBarItems?.length
       ? settings.trustBarItems.map(({ iconKey, label }) => ({
           icon: ICON_MAP[iconKey] ?? Clock,

@@ -1,8 +1,6 @@
 import { buildLocalBusinessSchema } from '@/lib/seo/schema/localBusiness'
 import { buildWebSiteSchema } from '@/lib/seo/schema/website'
-import { sanityFetch } from '@/sanity/lib/fetch'
-import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
-import type { SiteSettings } from '@/sanity/types'
+import { getSiteSettings } from '@/lib/content'
 import { HeaderWrapper } from '@/components/layout/HeaderWrapper'
 import { Footer } from '@/components/layout/Footer'
 import { EmergencyBanner } from '@/components/layout/EmergencyBanner'
@@ -11,10 +9,7 @@ import { FloatingNavWrapper } from '@/components/layout/FloatingNavWrapper'
 const GTM_ID = 'GTM-KDRL294K'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const settings = await sanityFetch<SiteSettings>({
-    query: SITE_SETTINGS_QUERY,
-    tags: ['siteSettings'],
-  })
+  const settings = getSiteSettings()
 
   const localBusinessSchema = buildLocalBusinessSchema(settings)
   const webSiteSchema = buildWebSiteSchema(settings)

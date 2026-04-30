@@ -1,4 +1,4 @@
-import type { SiteSettings } from '@/sanity/types'
+import type { SiteSettings } from '@/lib/types'
 
 export function buildWebSiteSchema(settings: SiteSettings) {
   return {

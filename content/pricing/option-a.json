@@ -1,0 +1,20 @@
+{
+  "id": "option-a",
+  "optionKey": "A",
+  "label": "Option A",
+  "sublabel": "Basic warmth",
+  "spec": "4mm clear + 12mm air + 4mm clear",
+  "pricePerSqm": 595,
+  "heatPct": 50,
+  "noisePct": 40,
+  "tech": {
+    "composition": ["4mm clear", "12mm air gap", "4mm clear"],
+    "spacerMm": 12,
+    "lowE": false,
+    "acousticPVB": false,
+    "tinted": false,
+    "bestFor": "Budget-conscious upgrade — noticeable improvement in warmth and noise",
+    "rwRating": "28",
+    "notes": "Entry-level double glazing. Significant improvement over single pane."
+  }
+}

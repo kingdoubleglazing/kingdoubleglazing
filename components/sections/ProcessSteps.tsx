@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import type { ProcessStep } from '@/sanity/types'
+import type { ProcessStep } from '@/lib/types'
 
 interface ProcessStepsProps {
   steps: ProcessStep[]
   heading?: string
   subheading?: string
   cta?: { label: string; href: string }
+  tinaFields?: ReadonlyArray<{ title?: string; body?: string; callout?: string } | undefined>
 }
 
 export function ProcessSteps({
@@ -14,6 +15,7 @@ export function ProcessSteps({
   heading = 'Our Process',
   subheading = 'Simple and transparent — from quote to installation.',
   cta = { label: 'Get Instant Estimate', href: '/instant-estimate/' },
+  tinaFields,
 }: ProcessStepsProps) {
   return (
     <section className="bg-inverse-surface py-16 md:py-24">
@@ -46,7 +48,7 @@ export function ProcessSteps({
             const isLast = i === steps.length - 1
             return (
               <li
-                key={step._id}
+                key={step.id}
                 className="relative flex gap-6 md:flex-col md:gap-0 md:pr-8 animate-stagger-child"
                 // biome-ignore lint/suspicious/noExplicitAny: CSS custom prop
                 style={{ '--i': i } as any}
@@ -78,14 +80,23 @@ export function ProcessSteps({
                       />
                     </div>
                   )}
-                  <h3 className="font-headline text-lg font-semibold uppercase tracking-wide text-inverse-on-surface leading-snug mb-3">
+                  <h3
+                    data-tina-field={tinaFields?.[i]?.title || undefined}
+                    className="font-headline text-lg font-semibold uppercase tracking-wide text-inverse-on-surface leading-snug mb-3"
+                  >
                     {step.title}
                   </h3>
-                  <p className="font-sans text-base text-inverse-on-surface leading-relaxed">
+                  <p
+                    data-tina-field={tinaFields?.[i]?.body || undefined}
+                    className="font-sans text-base text-inverse-on-surface leading-relaxed"
+                  >
                     {step.body}
                   </p>
                   {step.callout && (
-                    <p className="mt-3 font-sans text-xs text-primary-container leading-relaxed border-l-2 border-primary-container/40 pl-3">
+                    <p
+                      data-tina-field={tinaFields?.[i]?.callout || undefined}
+                      className="mt-3 font-sans text-xs text-primary-container leading-relaxed border-l-2 border-primary-container/40 pl-3"
+                    >
                       {step.callout}
                     </p>
                   )}

@@ -10,9 +10,7 @@ import { FAQ } from '@/components/sections/FAQ'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { PaymentTerms } from '@/components/PaymentTerms'
 import { FreeAdviceBlock } from '@/components/FreeAdviceBlock'
-import { sanityFetch } from '@/sanity/lib/fetch'
-import { SITE_SETTINGS_QUERY, FAQS_QUERY } from '@/sanity/lib/queries'
-import type { SiteSettings, FaqItem } from '@/sanity/types'
+import { getSiteSettings, getContactPage } from '@/lib/content'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Contact King Double Glazing | Double Glazing Quote Melbourne',
@@ -31,10 +29,9 @@ export default async function ContactPage({
   const isShowerDiy = params.service === 'shower-diy'
   const isShowerVisit = params.service === 'shower-visit'
 
-  const [settings, contactFaq] = await Promise.all([
-    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
-    sanityFetch<FaqItem[]>({ query: FAQS_QUERY, params: { group: 'contact' }, tags: ['faqItem'] }),
-  ])
+  const settings = getSiteSettings()
+  const contactPage = getContactPage()
+  const contactFaq = contactPage.faqs ?? []
 
   const contactPageSchemas = [
     {
@@ -181,7 +178,7 @@ export default async function ContactPage({
       <FAQ
         heading="Common Questions"
         subheading="Quick answers before you get in touch."
-        items={contactFaq.map(f => ({ q: f.q, a: f.a }))}
+        items={contactFaq.map(f => ({ q: (f.q ?? '') as string, a: (f.a ?? '') as string }))}
       />
 
       <FreeAdviceBlock />

@@ -1,4 +1,4 @@
-import type { PricingOption } from '@/sanity/types'
+import type { PricingOption } from '@/lib/types'
 import type { OptionKey } from '@/data/pricing'
 
 const YES = (
