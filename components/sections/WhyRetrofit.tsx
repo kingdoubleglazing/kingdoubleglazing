@@ -11,7 +11,6 @@ import {
   Zap,
   type LucideIcon,
 } from 'lucide-react'
-import { getHomePage } from '@/lib/site-settings'
 
 const ICON_MAP: Record<string, LucideIcon> = {
   hammer: Hammer,
@@ -35,15 +34,20 @@ const FALLBACK_ITEMS = [
   { icon: BadgePercent, headline: 'We Beat Any Quote by 30%',   sub: 'Send us a real competitor quote. We come in 30% cheaper, in writing, with the 10-year warranty.' },
 ]
 
-export function WhyRetrofit() {
-  const page = getHomePage()
+interface WhyRetrofitProps {
+  eyebrow?: string
+  heading1?: string
+  heading2?: string
+  items?: Array<{ iconKey: string; headline: string; sub: string }>
+}
 
-  const eyebrow  = page.whyRetrofitEyebrow  ?? 'WHY RETROFIT?'
-  const heading1 = page.whyRetrofitHeading1 ?? "Stop. Don’t Overpay."
-  const heading2 = page.whyRetrofitHeading2 ?? 'Upgrade What You Already Have.'
+export function WhyRetrofit({ eyebrow, heading1, heading2, items }: WhyRetrofitProps) {
+  const resolvedEyebrow  = eyebrow  ?? 'WHY RETROFIT?'
+  const resolvedHeading1 = heading1 ?? "Stop. Don't Overpay."
+  const resolvedHeading2 = heading2 ?? 'Upgrade What You Already Have.'
 
-  const items = page.whyRetrofitItems?.length
-    ? page.whyRetrofitItems.map(({ iconKey, headline, sub }) => ({
+  const resolvedItems = items?.length
+    ? items.map(({ iconKey, headline, sub }) => ({
         icon: ICON_MAP[iconKey] ?? Hammer,
         headline,
         sub,
@@ -56,19 +60,19 @@ export function WhyRetrofit() {
 
         <div className="mb-8">
           <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-            {eyebrow}
+            {resolvedEyebrow}
           </p>
           <h2
             className="font-display uppercase leading-[0.88] text-on-surface"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
           >
-            <span className="block">{heading1}</span>
-            <span className="block text-primary-container">{heading2}</span>
+            <span className="block">{resolvedHeading1}</span>
+            <span className="block text-primary-container">{resolvedHeading2}</span>
           </h2>
         </div>
 
         <ul className="flex flex-col divide-y divide-on-surface/10 lg:divide-y-0 lg:grid lg:grid-cols-3 lg:ghost-border">
-          {items.map(({ icon: Icon, headline, sub }) => (
+          {resolvedItems.map(({ icon: Icon, headline, sub }) => (
             <li
               key={headline}
               className="flex items-center gap-3 py-3

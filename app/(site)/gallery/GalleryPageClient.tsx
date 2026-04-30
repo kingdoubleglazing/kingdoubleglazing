@@ -28,12 +28,14 @@ export function GalleryPageClient({
 }) {
   const { data } = useTina(tinaGallery as TinaGalleryResult)
 
+  // biome-ignore lint/suspicious/noExplicitAny: tinaField property type is narrower than string
   const tf = (obj: object, field: string) => {
-    try { return tinaField(obj, field) || undefined } catch { return undefined }
+    try { return tinaField(obj as any, field as any) || undefined } catch { return undefined }
   }
 
   const galleryItems: TinaGalleryNode[] = (data.galleryConnection.edges ?? [])
-    .map((e: { node?: TinaGalleryNode | null }) => e?.node)
+    // biome-ignore lint/suspicious/noExplicitAny: edge type may be null
+    .map((e: any) => e?.node)
     .filter((n): n is TinaGalleryNode => n != null)
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
 

@@ -56,136 +56,139 @@ fragment NavigationParts on Navigation {
   }
 }
 
-fragment HomePageParts on HomePage {
+fragment PageParts on Page {
   __typename
-  badge
-  headlineWhite
-  headlineYellow
-  subtext
-  primaryCtaLabel
-  adaptorCaption
-  estimateCtaHeadline
-  estimateCtaSubtext
-  estimateCtaButtonLabel
-  estimateCtaCaption
-  faqHeading
-  faqSubheading
-  whyRetrofitEyebrow
-  whyRetrofitHeading1
-  whyRetrofitHeading2
-  whyRetrofitItems {
+  blocks {
     __typename
-    iconKey
-    headline
-    sub
-  }
-  processSteps {
-    __typename
-    title
-    body
-    callout
-    imageSrc
-    imageAlt
-  }
-  faqs {
-    __typename
-    q
-    a
-  }
-}
-
-fragment ServicesPageParts on ServicesPage {
-  __typename
-  heroHeading
-  heroSubtext
-  serviceSections {
-    __typename
-    id
-    eyebrow
-    heading
-    bodyText
-    bullets
-    primaryCta {
-      __typename
-      label
-      href
+    ... on PageBlocksHero {
+      variant
+      badge
+      headlineWhite
+      headlineYellow
+      subtext
+      primaryCtaLabel
+      primaryCtaHref
+      imageSrc
+      imageAlt
+      showWarrantyBadge
+      adaptorCaption
+      accentWord
     }
-    secondaryCta {
-      __typename
-      label
-      href
+    ... on PageBlocksTrustBar {
+      placeholder
     }
-  }
-  faqHeading
-  faqSubheading
-  faqs {
-    __typename
-    q
-    a
-  }
-}
-
-fragment AboutPageParts on AboutPage {
-  __typename
-  heroHeadline
-  heroHeadlineYellow
-  heroSubtext
-  stats {
-    __typename
-    value
-    label
-  }
-  storyEyebrow
-  storyParagraphs
-  storyQuote
-  guarantees {
-    __typename
-    label
-    detail
-  }
-}
-
-fragment ContactPageParts on ContactPage {
-  __typename
-  heroHeadline
-  heroSubtext
-  formHeading
-  faqs {
-    __typename
-    q
-    a
-  }
-}
-
-fragment WarrantyPageParts on WarrantyPage {
-  __typename
-  heroHeadline
-  heroHeadlineYellow
-  heroSubtext
-  coveredItems {
-    __typename
-    item
-    detail
-  }
-  notCoveredItems {
-    __typename
-    item
-    detail
-  }
-  claimSteps
-  ctaHeadline
-  ctaSubtext
-}
-
-fragment EstimatePageParts on EstimatePage {
-  __typename
-  heroHeadline
-  heroSubtext
-  secondStoreySurcharge
-  faqs {
-    __typename
-    q
-    a
+    ... on PageBlocksWhyRetrofit {
+      eyebrow
+      heading1
+      heading2
+      items {
+        __typename
+        iconKey
+        headline
+        sub
+      }
+    }
+    ... on PageBlocksProcessSteps {
+      steps {
+        __typename
+        title
+        body
+        callout
+        imageSrc
+        imageAlt
+      }
+    }
+    ... on PageBlocksEstimateCta {
+      headline
+      subtext
+      buttonLabel
+      caption
+    }
+    ... on PageBlocksFaq {
+      heading
+      subheading
+      faqs {
+        __typename
+        q
+        a
+      }
+    }
+    ... on PageBlocksServiceSection {
+      id
+      eyebrow
+      heading
+      bodyText
+      bullets
+      variant
+      imageSrc
+      imageAlt
+      primaryCta {
+        __typename
+        label
+        href
+      }
+      secondaryCta {
+        __typename
+        label
+        href
+      }
+    }
+    ... on PageBlocksStoryWithStats {
+      eyebrow
+      paragraphs
+      quote
+      stats {
+        __typename
+        value
+        label
+      }
+    }
+    ... on PageBlocksWarrantyCoverage {
+      coveredItems {
+        __typename
+        item
+        detail
+      }
+      notCoveredItems {
+        __typename
+        item
+        detail
+      }
+      claimSteps
+    }
+    ... on PageBlocksContactCards {
+      placeholder
+    }
+    ... on PageBlocksContactForm {
+      heading
+    }
+    ... on PageBlocksCtaBanner {
+      heading
+      subtext
+      primaryCtaLabel
+      primaryCtaHref
+    }
+    ... on PageBlocksGlassComparison {
+      placeholder
+    }
+    ... on PageBlocksGlassTechSpecs {
+      placeholder
+    }
+    ... on PageBlocksAdaptorDisclosure {
+      placeholder
+    }
+    ... on PageBlocksPaymentTerms {
+      placeholder
+    }
+    ... on PageBlocksFreeAdvice {
+      placeholder
+    }
+    ... on PageBlocksWhatElseStrip {
+      placeholder
+    }
+    ... on PageBlocksEmergencyStrip {
+      placeholder
+    }
   }
 }
 

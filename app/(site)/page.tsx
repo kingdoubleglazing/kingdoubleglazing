@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
 import { buildWebPageSchema } from '@/lib/seo/schema/webpage'
 import { SchemaScript } from '@/components/SchemaScript'
-import { getSiteSettings, getHomePage } from '@/lib/content'
+import { getSiteSettings } from '@/lib/content'
 import { client } from '@/tina/__generated__/client'
-import { HomePageClient } from './HomePageClient'
+import { PageClient } from '@/components/PageClient'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = getSiteSettings()
@@ -18,7 +19,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function HomePage() {
   const settings = getSiteSettings()
-  const homePage = getHomePage()
 
   const homePageSchema = buildWebPageSchema({
     url: `${BASE_URL}/`,
@@ -27,23 +27,23 @@ export default async function HomePage() {
     breadcrumb: [{ name: 'Home', url: `${BASE_URL}/` }],
   })
 
-  let tinaHome: Awaited<ReturnType<typeof client.queries.homePage>>
   try {
-    tinaHome = await client.queries.homePage({ relativePath: 'home.json' })
+    const tinaPage = await client.queries.page({ relativePath: 'home.json' })
+    return (
+      <>
+        <SchemaScript schemas={[homePageSchema]} />
+        <PageClient tinaPage={tinaPage} />
+      </>
+    )
   } catch {
-    tinaHome = { data: { homePage: homePage as never }, query: '', variables: { relativePath: 'home.json' } }
+    // Fallback when TinaCMS is unavailable (static build without CMS)
+    const homeJson = await import('@/content/pages/home.json')
+    const blocks = (homeJson as { blocks: unknown[] }).blocks ?? []
+    return (
+      <>
+        <SchemaScript schemas={[homePageSchema]} />
+        <BlockRenderer blocks={blocks as never[]} />
+      </>
+    )
   }
-
-  return (
-    <>
-      <SchemaScript schemas={[homePageSchema]} />
-      <HomePageClient
-        tinaHome={tinaHome}
-        steps={homePage.processSteps ?? []}
-        faqs={homePage.faqs ?? []}
-        phone={settings.phone}
-        phoneHref={settings.phoneHref}
-      />
-    </>
-  )
 }

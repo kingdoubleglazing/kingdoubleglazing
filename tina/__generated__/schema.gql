@@ -58,18 +58,8 @@ type Query {
   siteSettingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SiteSettingsFilter): SiteSettingsConnection!
   navigation(relativePath: String): Navigation!
   navigationConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavigationFilter): NavigationConnection!
-  homePage(relativePath: String): HomePage!
-  homePageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomePageFilter): HomePageConnection!
-  servicesPage(relativePath: String): ServicesPage!
-  servicesPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ServicesPageFilter): ServicesPageConnection!
-  aboutPage(relativePath: String): AboutPage!
-  aboutPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutPageFilter): AboutPageConnection!
-  contactPage(relativePath: String): ContactPage!
-  contactPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactPageFilter): ContactPageConnection!
-  warrantyPage(relativePath: String): WarrantyPage!
-  warrantyPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: WarrantyPageFilter): WarrantyPageConnection!
-  estimatePage(relativePath: String): EstimatePage!
-  estimatePageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: EstimatePageFilter): EstimatePageConnection!
+  page(relativePath: String): Page!
+  pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
   gallery(relativePath: String): Gallery!
   galleryConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GalleryFilter): GalleryConnection!
   pricingOption(relativePath: String): PricingOption!
@@ -79,12 +69,7 @@ type Query {
 input DocumentFilter {
   siteSettings: SiteSettingsFilter
   navigation: NavigationFilter
-  homePage: HomePageFilter
-  servicesPage: ServicesPageFilter
-  aboutPage: AboutPageFilter
-  contactPage: ContactPageFilter
-  warrantyPage: WarrantyPageFilter
-  estimatePage: EstimatePageFilter
+  page: PageFilter
   gallery: GalleryFilter
   pricingOption: PricingOptionFilter
 }
@@ -112,7 +97,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = SiteSettings | Navigation | HomePage | ServicesPage | AboutPage | ContactPage | WarrantyPage | EstimatePage | Gallery | PricingOption | Folder
+union DocumentNode = SiteSettings | Navigation | Page | Gallery | PricingOption | Folder
 
 type SiteSettingsAddress {
   street: String
@@ -285,13 +270,39 @@ type NavigationConnection implements Connection {
   edges: [NavigationConnectionEdges]
 }
 
-type HomePageWhyRetrofitItems {
+type PageBlocksHero {
+  variant: String
+  badge: String
+  headlineWhite: String
+  headlineYellow: String
+  subtext: String
+  primaryCtaLabel: String
+  primaryCtaHref: String
+  imageSrc: String
+  imageAlt: String
+  showWarrantyBadge: Boolean
+  adaptorCaption: String
+  accentWord: String
+}
+
+type PageBlocksTrustBar {
+  placeholder: String
+}
+
+type PageBlocksWhyRetrofitItems {
   iconKey: String
   headline: String
   sub: String
 }
 
-type HomePageProcessSteps {
+type PageBlocksWhyRetrofit {
+  eyebrow: String
+  heading1: String
+  heading2: String
+  items: [PageBlocksWhyRetrofitItems]
+}
+
+type PageBlocksProcessStepsSteps {
   title: String
   body: String
   callout: String
@@ -299,39 +310,129 @@ type HomePageProcessSteps {
   imageAlt: String
 }
 
-type HomePageFaqs {
+type PageBlocksProcessSteps {
+  steps: [PageBlocksProcessStepsSteps]
+}
+
+type PageBlocksEstimateCta {
+  headline: String
+  subtext: String
+  buttonLabel: String
+  caption: String
+}
+
+type PageBlocksFaqFaqs {
   q: String
   a: String
 }
 
-type HomePage implements Node & Document {
-  badge: String
-  headlineWhite: String
-  headlineYellow: String
+type PageBlocksFaq {
+  heading: String
+  subheading: String
+  faqs: [PageBlocksFaqFaqs]
+}
+
+type PageBlocksServiceSectionPrimaryCta {
+  label: String
+  href: String
+}
+
+type PageBlocksServiceSectionSecondaryCta {
+  label: String
+  href: String
+}
+
+type PageBlocksServiceSection {
+  id: String
+  eyebrow: String
+  heading: String
+  bodyText: String
+  bullets: [String]
+  variant: String
+  imageSrc: String
+  imageAlt: String
+  primaryCta: PageBlocksServiceSectionPrimaryCta
+  secondaryCta: PageBlocksServiceSectionSecondaryCta
+}
+
+type PageBlocksStoryWithStatsStats {
+  value: String
+  label: String
+}
+
+type PageBlocksStoryWithStats {
+  eyebrow: String
+  paragraphs: [String]
+  quote: String
+  stats: [PageBlocksStoryWithStatsStats]
+}
+
+type PageBlocksWarrantyCoverageCoveredItems {
+  item: String
+  detail: String
+}
+
+type PageBlocksWarrantyCoverageNotCoveredItems {
+  item: String
+  detail: String
+}
+
+type PageBlocksWarrantyCoverage {
+  coveredItems: [PageBlocksWarrantyCoverageCoveredItems]
+  notCoveredItems: [PageBlocksWarrantyCoverageNotCoveredItems]
+  claimSteps: [String]
+}
+
+type PageBlocksContactCards {
+  placeholder: String
+}
+
+type PageBlocksContactForm {
+  heading: String
+}
+
+type PageBlocksCtaBanner {
+  heading: String
   subtext: String
   primaryCtaLabel: String
-  adaptorCaption: String
-  estimateCtaHeadline: String
-  estimateCtaSubtext: String
-  estimateCtaButtonLabel: String
-  estimateCtaCaption: String
-  faqHeading: String
-  faqSubheading: String
-  whyRetrofitEyebrow: String
-  whyRetrofitHeading1: String
-  whyRetrofitHeading2: String
-  whyRetrofitItems: [HomePageWhyRetrofitItems]
-  processSteps: [HomePageProcessSteps]
-  faqs: [HomePageFaqs]
+  primaryCtaHref: String
+}
+
+type PageBlocksGlassComparison {
+  placeholder: String
+}
+
+type PageBlocksGlassTechSpecs {
+  placeholder: String
+}
+
+type PageBlocksAdaptorDisclosure {
+  placeholder: String
+}
+
+type PageBlocksPaymentTerms {
+  placeholder: String
+}
+
+type PageBlocksFreeAdvice {
+  placeholder: String
+}
+
+type PageBlocksWhatElseStrip {
+  placeholder: String
+}
+
+type PageBlocksEmergencyStrip {
+  placeholder: String
+}
+
+union PageBlocks = PageBlocksHero | PageBlocksTrustBar | PageBlocksWhyRetrofit | PageBlocksProcessSteps | PageBlocksEstimateCta | PageBlocksFaq | PageBlocksServiceSection | PageBlocksStoryWithStats | PageBlocksWarrantyCoverage | PageBlocksContactCards | PageBlocksContactForm | PageBlocksCtaBanner | PageBlocksGlassComparison | PageBlocksGlassTechSpecs | PageBlocksAdaptorDisclosure | PageBlocksPaymentTerms | PageBlocksFreeAdvice | PageBlocksWhatElseStrip | PageBlocksEmergencyStrip
+
+type Page implements Node & Document {
+  blocks: [PageBlocks]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input HomePageWhyRetrofitItemsFilter {
-  iconKey: StringFilter
-  headline: StringFilter
-  sub: StringFilter
 }
 
 input ImageFilter {
@@ -341,7 +442,44 @@ input ImageFilter {
   in: [String]
 }
 
-input HomePageProcessStepsFilter {
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input PageBlocksHeroFilter {
+  variant: StringFilter
+  badge: StringFilter
+  headlineWhite: StringFilter
+  headlineYellow: StringFilter
+  subtext: StringFilter
+  primaryCtaLabel: StringFilter
+  primaryCtaHref: StringFilter
+  imageSrc: ImageFilter
+  imageAlt: StringFilter
+  showWarrantyBadge: BooleanFilter
+  adaptorCaption: StringFilter
+  accentWord: StringFilter
+}
+
+input PageBlocksTrustBarFilter {
+  placeholder: StringFilter
+}
+
+input PageBlocksWhyRetrofitItemsFilter {
+  iconKey: StringFilter
+  headline: StringFilter
+  sub: StringFilter
+}
+
+input PageBlocksWhyRetrofitFilter {
+  eyebrow: StringFilter
+  heading1: StringFilter
+  heading2: StringFilter
+  items: PageBlocksWhyRetrofitItemsFilter
+}
+
+input PageBlocksProcessStepsStepsFilter {
   title: StringFilter
   body: StringFilter
   callout: StringFilter
@@ -349,311 +487,157 @@ input HomePageProcessStepsFilter {
   imageAlt: StringFilter
 }
 
-input HomePageFaqsFilter {
+input PageBlocksProcessStepsFilter {
+  steps: PageBlocksProcessStepsStepsFilter
+}
+
+input PageBlocksEstimateCtaFilter {
+  headline: StringFilter
+  subtext: StringFilter
+  buttonLabel: StringFilter
+  caption: StringFilter
+}
+
+input PageBlocksFaqFaqsFilter {
   q: StringFilter
   a: StringFilter
 }
 
-input HomePageFilter {
-  badge: StringFilter
-  headlineWhite: StringFilter
-  headlineYellow: StringFilter
-  subtext: StringFilter
-  primaryCtaLabel: StringFilter
-  adaptorCaption: StringFilter
-  estimateCtaHeadline: StringFilter
-  estimateCtaSubtext: StringFilter
-  estimateCtaButtonLabel: StringFilter
-  estimateCtaCaption: StringFilter
-  faqHeading: StringFilter
-  faqSubheading: StringFilter
-  whyRetrofitEyebrow: StringFilter
-  whyRetrofitHeading1: StringFilter
-  whyRetrofitHeading2: StringFilter
-  whyRetrofitItems: HomePageWhyRetrofitItemsFilter
-  processSteps: HomePageProcessStepsFilter
-  faqs: HomePageFaqsFilter
+input PageBlocksFaqFilter {
+  heading: StringFilter
+  subheading: StringFilter
+  faqs: PageBlocksFaqFaqsFilter
 }
 
-type HomePageConnectionEdges {
-  cursor: String!
-  node: HomePage
-}
-
-type HomePageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [HomePageConnectionEdges]
-}
-
-type ServicesPageServiceSectionsPrimaryCta {
-  label: String
-  href: String
-}
-
-type ServicesPageServiceSectionsSecondaryCta {
-  label: String
-  href: String
-}
-
-type ServicesPageServiceSections {
-  id: String
-  eyebrow: String
-  heading: String
-  bodyText: String
-  bullets: [String]
-  primaryCta: ServicesPageServiceSectionsPrimaryCta
-  secondaryCta: ServicesPageServiceSectionsSecondaryCta
-}
-
-type ServicesPageFaqs {
-  q: String
-  a: String
-}
-
-type ServicesPage implements Node & Document {
-  heroHeading: String
-  heroSubtext: String
-  serviceSections: [ServicesPageServiceSections]
-  faqHeading: String
-  faqSubheading: String
-  faqs: [ServicesPageFaqs]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input ServicesPageServiceSectionsPrimaryCtaFilter {
+input PageBlocksServiceSectionPrimaryCtaFilter {
   label: StringFilter
   href: StringFilter
 }
 
-input ServicesPageServiceSectionsSecondaryCtaFilter {
+input PageBlocksServiceSectionSecondaryCtaFilter {
   label: StringFilter
   href: StringFilter
 }
 
-input ServicesPageServiceSectionsFilter {
+input PageBlocksServiceSectionFilter {
   id: StringFilter
   eyebrow: StringFilter
   heading: StringFilter
   bodyText: StringFilter
   bullets: StringFilter
-  primaryCta: ServicesPageServiceSectionsPrimaryCtaFilter
-  secondaryCta: ServicesPageServiceSectionsSecondaryCtaFilter
+  variant: StringFilter
+  imageSrc: ImageFilter
+  imageAlt: StringFilter
+  primaryCta: PageBlocksServiceSectionPrimaryCtaFilter
+  secondaryCta: PageBlocksServiceSectionSecondaryCtaFilter
 }
 
-input ServicesPageFaqsFilter {
-  q: StringFilter
-  a: StringFilter
-}
-
-input ServicesPageFilter {
-  heroHeading: StringFilter
-  heroSubtext: StringFilter
-  serviceSections: ServicesPageServiceSectionsFilter
-  faqHeading: StringFilter
-  faqSubheading: StringFilter
-  faqs: ServicesPageFaqsFilter
-}
-
-type ServicesPageConnectionEdges {
-  cursor: String!
-  node: ServicesPage
-}
-
-type ServicesPageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [ServicesPageConnectionEdges]
-}
-
-type AboutPageStats {
-  value: String
-  label: String
-}
-
-type AboutPageGuarantees {
-  label: String
-  detail: String
-}
-
-type AboutPage implements Node & Document {
-  heroHeadline: String
-  heroHeadlineYellow: String
-  heroSubtext: String
-  stats: [AboutPageStats]
-  storyEyebrow: String
-  storyParagraphs: [String]
-  storyQuote: String
-  guarantees: [AboutPageGuarantees]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input AboutPageStatsFilter {
+input PageBlocksStoryWithStatsStatsFilter {
   value: StringFilter
   label: StringFilter
 }
 
-input AboutPageGuaranteesFilter {
-  label: StringFilter
-  detail: StringFilter
+input PageBlocksStoryWithStatsFilter {
+  eyebrow: StringFilter
+  paragraphs: StringFilter
+  quote: StringFilter
+  stats: PageBlocksStoryWithStatsStatsFilter
 }
 
-input AboutPageFilter {
-  heroHeadline: StringFilter
-  heroHeadlineYellow: StringFilter
-  heroSubtext: StringFilter
-  stats: AboutPageStatsFilter
-  storyEyebrow: StringFilter
-  storyParagraphs: StringFilter
-  storyQuote: StringFilter
-  guarantees: AboutPageGuaranteesFilter
-}
-
-type AboutPageConnectionEdges {
-  cursor: String!
-  node: AboutPage
-}
-
-type AboutPageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [AboutPageConnectionEdges]
-}
-
-type ContactPageFaqs {
-  q: String
-  a: String
-}
-
-type ContactPage implements Node & Document {
-  heroHeadline: String
-  heroSubtext: String
-  formHeading: String
-  faqs: [ContactPageFaqs]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input ContactPageFaqsFilter {
-  q: StringFilter
-  a: StringFilter
-}
-
-input ContactPageFilter {
-  heroHeadline: StringFilter
-  heroSubtext: StringFilter
-  formHeading: StringFilter
-  faqs: ContactPageFaqsFilter
-}
-
-type ContactPageConnectionEdges {
-  cursor: String!
-  node: ContactPage
-}
-
-type ContactPageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [ContactPageConnectionEdges]
-}
-
-type WarrantyPageCoveredItems {
-  item: String
-  detail: String
-}
-
-type WarrantyPageNotCoveredItems {
-  item: String
-  detail: String
-}
-
-type WarrantyPage implements Node & Document {
-  heroHeadline: String
-  heroHeadlineYellow: String
-  heroSubtext: String
-  coveredItems: [WarrantyPageCoveredItems]
-  notCoveredItems: [WarrantyPageNotCoveredItems]
-  claimSteps: [String]
-  ctaHeadline: String
-  ctaSubtext: String
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input WarrantyPageCoveredItemsFilter {
+input PageBlocksWarrantyCoverageCoveredItemsFilter {
   item: StringFilter
   detail: StringFilter
 }
 
-input WarrantyPageNotCoveredItemsFilter {
+input PageBlocksWarrantyCoverageNotCoveredItemsFilter {
   item: StringFilter
   detail: StringFilter
 }
 
-input WarrantyPageFilter {
-  heroHeadline: StringFilter
-  heroHeadlineYellow: StringFilter
-  heroSubtext: StringFilter
-  coveredItems: WarrantyPageCoveredItemsFilter
-  notCoveredItems: WarrantyPageNotCoveredItemsFilter
+input PageBlocksWarrantyCoverageFilter {
+  coveredItems: PageBlocksWarrantyCoverageCoveredItemsFilter
+  notCoveredItems: PageBlocksWarrantyCoverageNotCoveredItemsFilter
   claimSteps: StringFilter
-  ctaHeadline: StringFilter
-  ctaSubtext: StringFilter
 }
 
-type WarrantyPageConnectionEdges {
+input PageBlocksContactCardsFilter {
+  placeholder: StringFilter
+}
+
+input PageBlocksContactFormFilter {
+  heading: StringFilter
+}
+
+input PageBlocksCtaBannerFilter {
+  heading: StringFilter
+  subtext: StringFilter
+  primaryCtaLabel: StringFilter
+  primaryCtaHref: StringFilter
+}
+
+input PageBlocksGlassComparisonFilter {
+  placeholder: StringFilter
+}
+
+input PageBlocksGlassTechSpecsFilter {
+  placeholder: StringFilter
+}
+
+input PageBlocksAdaptorDisclosureFilter {
+  placeholder: StringFilter
+}
+
+input PageBlocksPaymentTermsFilter {
+  placeholder: StringFilter
+}
+
+input PageBlocksFreeAdviceFilter {
+  placeholder: StringFilter
+}
+
+input PageBlocksWhatElseStripFilter {
+  placeholder: StringFilter
+}
+
+input PageBlocksEmergencyStripFilter {
+  placeholder: StringFilter
+}
+
+input PageBlocksFilter {
+  hero: PageBlocksHeroFilter
+  trustBar: PageBlocksTrustBarFilter
+  whyRetrofit: PageBlocksWhyRetrofitFilter
+  processSteps: PageBlocksProcessStepsFilter
+  estimateCta: PageBlocksEstimateCtaFilter
+  faq: PageBlocksFaqFilter
+  serviceSection: PageBlocksServiceSectionFilter
+  storyWithStats: PageBlocksStoryWithStatsFilter
+  warrantyCoverage: PageBlocksWarrantyCoverageFilter
+  contactCards: PageBlocksContactCardsFilter
+  contactForm: PageBlocksContactFormFilter
+  ctaBanner: PageBlocksCtaBannerFilter
+  glassComparison: PageBlocksGlassComparisonFilter
+  glassTechSpecs: PageBlocksGlassTechSpecsFilter
+  adaptorDisclosure: PageBlocksAdaptorDisclosureFilter
+  paymentTerms: PageBlocksPaymentTermsFilter
+  freeAdvice: PageBlocksFreeAdviceFilter
+  whatElseStrip: PageBlocksWhatElseStripFilter
+  emergencyStrip: PageBlocksEmergencyStripFilter
+}
+
+input PageFilter {
+  blocks: PageBlocksFilter
+}
+
+type PageConnectionEdges {
   cursor: String!
-  node: WarrantyPage
+  node: Page
 }
 
-type WarrantyPageConnection implements Connection {
+type PageConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [WarrantyPageConnectionEdges]
-}
-
-type EstimatePageFaqs {
-  q: String
-  a: String
-}
-
-type EstimatePage implements Node & Document {
-  heroHeadline: String
-  heroSubtext: String
-  secondStoreySurcharge: Float
-  faqs: [EstimatePageFaqs]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input EstimatePageFaqsFilter {
-  q: StringFilter
-  a: StringFilter
-}
-
-input EstimatePageFilter {
-  heroHeadline: StringFilter
-  heroSubtext: StringFilter
-  secondStoreySurcharge: NumberFilter
-  faqs: EstimatePageFaqsFilter
-}
-
-type EstimatePageConnectionEdges {
-  cursor: String!
-  node: EstimatePage
-}
-
-type EstimatePageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [EstimatePageConnectionEdges]
+  edges: [PageConnectionEdges]
 }
 
 type Gallery implements Node & Document {
@@ -711,11 +695,6 @@ type PricingOption implements Node & Document {
   _values: JSON!
 }
 
-input BooleanFilter {
-  eq: Boolean
-  exists: Boolean
-}
-
 input PricingOptionTechFilter {
   composition: StringFilter
   spacerMm: NumberFilter
@@ -759,18 +738,8 @@ type Mutation {
   createSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
   updateNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
   createNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
-  updateHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
-  createHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
-  updateServicesPage(relativePath: String!, params: ServicesPageMutation!): ServicesPage!
-  createServicesPage(relativePath: String!, params: ServicesPageMutation!): ServicesPage!
-  updateAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
-  createAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
-  updateContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
-  createContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
-  updateWarrantyPage(relativePath: String!, params: WarrantyPageMutation!): WarrantyPage!
-  createWarrantyPage(relativePath: String!, params: WarrantyPageMutation!): WarrantyPage!
-  updateEstimatePage(relativePath: String!, params: EstimatePageMutation!): EstimatePage!
-  createEstimatePage(relativePath: String!, params: EstimatePageMutation!): EstimatePage!
+  updatePage(relativePath: String!, params: PageMutation!): Page!
+  createPage(relativePath: String!, params: PageMutation!): Page!
   updateGallery(relativePath: String!, params: GalleryMutation!): Gallery!
   createGallery(relativePath: String!, params: GalleryMutation!): Gallery!
   updatePricingOption(relativePath: String!, params: PricingOptionMutation!): PricingOption!
@@ -780,12 +749,7 @@ type Mutation {
 input DocumentUpdateMutation {
   siteSettings: SiteSettingsMutation
   navigation: NavigationMutation
-  homePage: HomePageMutation
-  servicesPage: ServicesPageMutation
-  aboutPage: AboutPageMutation
-  contactPage: ContactPageMutation
-  warrantyPage: WarrantyPageMutation
-  estimatePage: EstimatePageMutation
+  page: PageMutation
   gallery: GalleryMutation
   pricingOption: PricingOptionMutation
   relativePath: String
@@ -794,12 +758,7 @@ input DocumentUpdateMutation {
 input DocumentMutation {
   siteSettings: SiteSettingsMutation
   navigation: NavigationMutation
-  homePage: HomePageMutation
-  servicesPage: ServicesPageMutation
-  aboutPage: AboutPageMutation
-  contactPage: ContactPageMutation
-  warrantyPage: WarrantyPageMutation
-  estimatePage: EstimatePageMutation
+  page: PageMutation
   gallery: GalleryMutation
   pricingOption: PricingOptionMutation
 }
@@ -867,13 +826,39 @@ input NavigationMutation {
   footerCompanyNav: [NavigationFooterCompanyNavMutation]
 }
 
-input HomePageWhyRetrofitItemsMutation {
+input PageBlocksHeroMutation {
+  variant: String
+  badge: String
+  headlineWhite: String
+  headlineYellow: String
+  subtext: String
+  primaryCtaLabel: String
+  primaryCtaHref: String
+  imageSrc: String
+  imageAlt: String
+  showWarrantyBadge: Boolean
+  adaptorCaption: String
+  accentWord: String
+}
+
+input PageBlocksTrustBarMutation {
+  placeholder: String
+}
+
+input PageBlocksWhyRetrofitItemsMutation {
   iconKey: String
   headline: String
   sub: String
 }
 
-input HomePageProcessStepsMutation {
+input PageBlocksWhyRetrofitMutation {
+  eyebrow: String
+  heading1: String
+  heading2: String
+  items: [PageBlocksWhyRetrofitItemsMutation]
+}
+
+input PageBlocksProcessStepsStepsMutation {
   title: String
   body: String
   callout: String
@@ -881,130 +866,146 @@ input HomePageProcessStepsMutation {
   imageAlt: String
 }
 
-input HomePageFaqsMutation {
+input PageBlocksProcessStepsMutation {
+  steps: [PageBlocksProcessStepsStepsMutation]
+}
+
+input PageBlocksEstimateCtaMutation {
+  headline: String
+  subtext: String
+  buttonLabel: String
+  caption: String
+}
+
+input PageBlocksFaqFaqsMutation {
   q: String
   a: String
 }
 
-input HomePageMutation {
-  badge: String
-  headlineWhite: String
-  headlineYellow: String
-  subtext: String
-  primaryCtaLabel: String
-  adaptorCaption: String
-  estimateCtaHeadline: String
-  estimateCtaSubtext: String
-  estimateCtaButtonLabel: String
-  estimateCtaCaption: String
-  faqHeading: String
-  faqSubheading: String
-  whyRetrofitEyebrow: String
-  whyRetrofitHeading1: String
-  whyRetrofitHeading2: String
-  whyRetrofitItems: [HomePageWhyRetrofitItemsMutation]
-  processSteps: [HomePageProcessStepsMutation]
-  faqs: [HomePageFaqsMutation]
+input PageBlocksFaqMutation {
+  heading: String
+  subheading: String
+  faqs: [PageBlocksFaqFaqsMutation]
 }
 
-input ServicesPageServiceSectionsPrimaryCtaMutation {
+input PageBlocksServiceSectionPrimaryCtaMutation {
   label: String
   href: String
 }
 
-input ServicesPageServiceSectionsSecondaryCtaMutation {
+input PageBlocksServiceSectionSecondaryCtaMutation {
   label: String
   href: String
 }
 
-input ServicesPageServiceSectionsMutation {
+input PageBlocksServiceSectionMutation {
   id: String
   eyebrow: String
   heading: String
   bodyText: String
   bullets: [String]
-  primaryCta: ServicesPageServiceSectionsPrimaryCtaMutation
-  secondaryCta: ServicesPageServiceSectionsSecondaryCtaMutation
+  variant: String
+  imageSrc: String
+  imageAlt: String
+  primaryCta: PageBlocksServiceSectionPrimaryCtaMutation
+  secondaryCta: PageBlocksServiceSectionSecondaryCtaMutation
 }
 
-input ServicesPageFaqsMutation {
-  q: String
-  a: String
-}
-
-input ServicesPageMutation {
-  heroHeading: String
-  heroSubtext: String
-  serviceSections: [ServicesPageServiceSectionsMutation]
-  faqHeading: String
-  faqSubheading: String
-  faqs: [ServicesPageFaqsMutation]
-}
-
-input AboutPageStatsMutation {
+input PageBlocksStoryWithStatsStatsMutation {
   value: String
   label: String
 }
 
-input AboutPageGuaranteesMutation {
-  label: String
-  detail: String
+input PageBlocksStoryWithStatsMutation {
+  eyebrow: String
+  paragraphs: [String]
+  quote: String
+  stats: [PageBlocksStoryWithStatsStatsMutation]
 }
 
-input AboutPageMutation {
-  heroHeadline: String
-  heroHeadlineYellow: String
-  heroSubtext: String
-  stats: [AboutPageStatsMutation]
-  storyEyebrow: String
-  storyParagraphs: [String]
-  storyQuote: String
-  guarantees: [AboutPageGuaranteesMutation]
-}
-
-input ContactPageFaqsMutation {
-  q: String
-  a: String
-}
-
-input ContactPageMutation {
-  heroHeadline: String
-  heroSubtext: String
-  formHeading: String
-  faqs: [ContactPageFaqsMutation]
-}
-
-input WarrantyPageCoveredItemsMutation {
+input PageBlocksWarrantyCoverageCoveredItemsMutation {
   item: String
   detail: String
 }
 
-input WarrantyPageNotCoveredItemsMutation {
+input PageBlocksWarrantyCoverageNotCoveredItemsMutation {
   item: String
   detail: String
 }
 
-input WarrantyPageMutation {
-  heroHeadline: String
-  heroHeadlineYellow: String
-  heroSubtext: String
-  coveredItems: [WarrantyPageCoveredItemsMutation]
-  notCoveredItems: [WarrantyPageNotCoveredItemsMutation]
+input PageBlocksWarrantyCoverageMutation {
+  coveredItems: [PageBlocksWarrantyCoverageCoveredItemsMutation]
+  notCoveredItems: [PageBlocksWarrantyCoverageNotCoveredItemsMutation]
   claimSteps: [String]
-  ctaHeadline: String
-  ctaSubtext: String
 }
 
-input EstimatePageFaqsMutation {
-  q: String
-  a: String
+input PageBlocksContactCardsMutation {
+  placeholder: String
 }
 
-input EstimatePageMutation {
-  heroHeadline: String
-  heroSubtext: String
-  secondStoreySurcharge: Float
-  faqs: [EstimatePageFaqsMutation]
+input PageBlocksContactFormMutation {
+  heading: String
+}
+
+input PageBlocksCtaBannerMutation {
+  heading: String
+  subtext: String
+  primaryCtaLabel: String
+  primaryCtaHref: String
+}
+
+input PageBlocksGlassComparisonMutation {
+  placeholder: String
+}
+
+input PageBlocksGlassTechSpecsMutation {
+  placeholder: String
+}
+
+input PageBlocksAdaptorDisclosureMutation {
+  placeholder: String
+}
+
+input PageBlocksPaymentTermsMutation {
+  placeholder: String
+}
+
+input PageBlocksFreeAdviceMutation {
+  placeholder: String
+}
+
+input PageBlocksWhatElseStripMutation {
+  placeholder: String
+}
+
+input PageBlocksEmergencyStripMutation {
+  placeholder: String
+}
+
+input PageBlocksMutation {
+  hero: PageBlocksHeroMutation
+  trustBar: PageBlocksTrustBarMutation
+  whyRetrofit: PageBlocksWhyRetrofitMutation
+  processSteps: PageBlocksProcessStepsMutation
+  estimateCta: PageBlocksEstimateCtaMutation
+  faq: PageBlocksFaqMutation
+  serviceSection: PageBlocksServiceSectionMutation
+  storyWithStats: PageBlocksStoryWithStatsMutation
+  warrantyCoverage: PageBlocksWarrantyCoverageMutation
+  contactCards: PageBlocksContactCardsMutation
+  contactForm: PageBlocksContactFormMutation
+  ctaBanner: PageBlocksCtaBannerMutation
+  glassComparison: PageBlocksGlassComparisonMutation
+  glassTechSpecs: PageBlocksGlassTechSpecsMutation
+  adaptorDisclosure: PageBlocksAdaptorDisclosureMutation
+  paymentTerms: PageBlocksPaymentTermsMutation
+  freeAdvice: PageBlocksFreeAdviceMutation
+  whatElseStrip: PageBlocksWhatElseStripMutation
+  emergencyStrip: PageBlocksEmergencyStripMutation
+}
+
+input PageMutation {
+  blocks: [PageBlocksMutation]
 }
 
 input GalleryMutation {

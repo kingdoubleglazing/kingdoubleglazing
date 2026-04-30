@@ -86,18 +86,8 @@ export type Query = {
   siteSettingsConnection: SiteSettingsConnection;
   navigation: Navigation;
   navigationConnection: NavigationConnection;
-  homePage: HomePage;
-  homePageConnection: HomePageConnection;
-  servicesPage: ServicesPage;
-  servicesPageConnection: ServicesPageConnection;
-  aboutPage: AboutPage;
-  aboutPageConnection: AboutPageConnection;
-  contactPage: ContactPage;
-  contactPageConnection: ContactPageConnection;
-  warrantyPage: WarrantyPage;
-  warrantyPageConnection: WarrantyPageConnection;
-  estimatePage: EstimatePage;
-  estimatePageConnection: EstimatePageConnection;
+  page: Page;
+  pageConnection: PageConnection;
   gallery: Gallery;
   galleryConnection: GalleryConnection;
   pricingOption: PricingOption;
@@ -156,93 +146,18 @@ export type QueryNavigationConnectionArgs = {
 };
 
 
-export type QueryHomePageArgs = {
+export type QueryPageArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QueryHomePageConnectionArgs = {
+export type QueryPageConnectionArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<HomePageFilter>;
-};
-
-
-export type QueryServicesPageArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryServicesPageConnectionArgs = {
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<ServicesPageFilter>;
-};
-
-
-export type QueryAboutPageArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryAboutPageConnectionArgs = {
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<AboutPageFilter>;
-};
-
-
-export type QueryContactPageArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryContactPageConnectionArgs = {
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<ContactPageFilter>;
-};
-
-
-export type QueryWarrantyPageArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryWarrantyPageConnectionArgs = {
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<WarrantyPageFilter>;
-};
-
-
-export type QueryEstimatePageArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryEstimatePageConnectionArgs = {
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<EstimatePageFilter>;
+  filter?: InputMaybe<PageFilter>;
 };
 
 
@@ -278,12 +193,7 @@ export type QueryPricingOptionConnectionArgs = {
 export type DocumentFilter = {
   siteSettings?: InputMaybe<SiteSettingsFilter>;
   navigation?: InputMaybe<NavigationFilter>;
-  homePage?: InputMaybe<HomePageFilter>;
-  servicesPage?: InputMaybe<ServicesPageFilter>;
-  aboutPage?: InputMaybe<AboutPageFilter>;
-  contactPage?: InputMaybe<ContactPageFilter>;
-  warrantyPage?: InputMaybe<WarrantyPageFilter>;
-  estimatePage?: InputMaybe<EstimatePageFilter>;
+  page?: InputMaybe<PageFilter>;
   gallery?: InputMaybe<GalleryFilter>;
   pricingOption?: InputMaybe<PricingOptionFilter>;
 };
@@ -325,7 +235,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = SiteSettings | Navigation | HomePage | ServicesPage | AboutPage | ContactPage | WarrantyPage | EstimatePage | Gallery | PricingOption | Folder;
+export type DocumentNode = SiteSettings | Navigation | Page | Gallery | PricingOption | Folder;
 
 export type SiteSettingsAddress = {
   __typename?: 'SiteSettingsAddress';
@@ -511,15 +421,44 @@ export type NavigationConnection = Connection & {
   edges?: Maybe<Array<Maybe<NavigationConnectionEdges>>>;
 };
 
-export type HomePageWhyRetrofitItems = {
-  __typename?: 'HomePageWhyRetrofitItems';
+export type PageBlocksHero = {
+  __typename?: 'PageBlocksHero';
+  variant?: Maybe<Scalars['String']['output']>;
+  badge?: Maybe<Scalars['String']['output']>;
+  headlineWhite?: Maybe<Scalars['String']['output']>;
+  headlineYellow?: Maybe<Scalars['String']['output']>;
+  subtext?: Maybe<Scalars['String']['output']>;
+  primaryCtaLabel?: Maybe<Scalars['String']['output']>;
+  primaryCtaHref?: Maybe<Scalars['String']['output']>;
+  imageSrc?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+  showWarrantyBadge?: Maybe<Scalars['Boolean']['output']>;
+  adaptorCaption?: Maybe<Scalars['String']['output']>;
+  accentWord?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksTrustBar = {
+  __typename?: 'PageBlocksTrustBar';
+  placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksWhyRetrofitItems = {
+  __typename?: 'PageBlocksWhyRetrofitItems';
   iconKey?: Maybe<Scalars['String']['output']>;
   headline?: Maybe<Scalars['String']['output']>;
   sub?: Maybe<Scalars['String']['output']>;
 };
 
-export type HomePageProcessSteps = {
-  __typename?: 'HomePageProcessSteps';
+export type PageBlocksWhyRetrofit = {
+  __typename?: 'PageBlocksWhyRetrofit';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  heading1?: Maybe<Scalars['String']['output']>;
+  heading2?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<PageBlocksWhyRetrofitItems>>>;
+};
+
+export type PageBlocksProcessStepsSteps = {
+  __typename?: 'PageBlocksProcessStepsSteps';
   title?: Maybe<Scalars['String']['output']>;
   body?: Maybe<Scalars['String']['output']>;
   callout?: Maybe<Scalars['String']['output']>;
@@ -527,41 +466,152 @@ export type HomePageProcessSteps = {
   imageAlt?: Maybe<Scalars['String']['output']>;
 };
 
-export type HomePageFaqs = {
-  __typename?: 'HomePageFaqs';
+export type PageBlocksProcessSteps = {
+  __typename?: 'PageBlocksProcessSteps';
+  steps?: Maybe<Array<Maybe<PageBlocksProcessStepsSteps>>>;
+};
+
+export type PageBlocksEstimateCta = {
+  __typename?: 'PageBlocksEstimateCta';
+  headline?: Maybe<Scalars['String']['output']>;
+  subtext?: Maybe<Scalars['String']['output']>;
+  buttonLabel?: Maybe<Scalars['String']['output']>;
+  caption?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksFaqFaqs = {
+  __typename?: 'PageBlocksFaqFaqs';
   q?: Maybe<Scalars['String']['output']>;
   a?: Maybe<Scalars['String']['output']>;
 };
 
-export type HomePage = Node & Document & {
-  __typename?: 'HomePage';
-  badge?: Maybe<Scalars['String']['output']>;
-  headlineWhite?: Maybe<Scalars['String']['output']>;
-  headlineYellow?: Maybe<Scalars['String']['output']>;
+export type PageBlocksFaq = {
+  __typename?: 'PageBlocksFaq';
+  heading?: Maybe<Scalars['String']['output']>;
+  subheading?: Maybe<Scalars['String']['output']>;
+  faqs?: Maybe<Array<Maybe<PageBlocksFaqFaqs>>>;
+};
+
+export type PageBlocksServiceSectionPrimaryCta = {
+  __typename?: 'PageBlocksServiceSectionPrimaryCta';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksServiceSectionSecondaryCta = {
+  __typename?: 'PageBlocksServiceSectionSecondaryCta';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksServiceSection = {
+  __typename?: 'PageBlocksServiceSection';
+  id?: Maybe<Scalars['String']['output']>;
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  heading?: Maybe<Scalars['String']['output']>;
+  bodyText?: Maybe<Scalars['String']['output']>;
+  bullets?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  variant?: Maybe<Scalars['String']['output']>;
+  imageSrc?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+  primaryCta?: Maybe<PageBlocksServiceSectionPrimaryCta>;
+  secondaryCta?: Maybe<PageBlocksServiceSectionSecondaryCta>;
+};
+
+export type PageBlocksStoryWithStatsStats = {
+  __typename?: 'PageBlocksStoryWithStatsStats';
+  value?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksStoryWithStats = {
+  __typename?: 'PageBlocksStoryWithStats';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  paragraphs?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  quote?: Maybe<Scalars['String']['output']>;
+  stats?: Maybe<Array<Maybe<PageBlocksStoryWithStatsStats>>>;
+};
+
+export type PageBlocksWarrantyCoverageCoveredItems = {
+  __typename?: 'PageBlocksWarrantyCoverageCoveredItems';
+  item?: Maybe<Scalars['String']['output']>;
+  detail?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksWarrantyCoverageNotCoveredItems = {
+  __typename?: 'PageBlocksWarrantyCoverageNotCoveredItems';
+  item?: Maybe<Scalars['String']['output']>;
+  detail?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksWarrantyCoverage = {
+  __typename?: 'PageBlocksWarrantyCoverage';
+  coveredItems?: Maybe<Array<Maybe<PageBlocksWarrantyCoverageCoveredItems>>>;
+  notCoveredItems?: Maybe<Array<Maybe<PageBlocksWarrantyCoverageNotCoveredItems>>>;
+  claimSteps?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type PageBlocksContactCards = {
+  __typename?: 'PageBlocksContactCards';
+  placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksContactForm = {
+  __typename?: 'PageBlocksContactForm';
+  heading?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksCtaBanner = {
+  __typename?: 'PageBlocksCtaBanner';
+  heading?: Maybe<Scalars['String']['output']>;
   subtext?: Maybe<Scalars['String']['output']>;
   primaryCtaLabel?: Maybe<Scalars['String']['output']>;
-  adaptorCaption?: Maybe<Scalars['String']['output']>;
-  estimateCtaHeadline?: Maybe<Scalars['String']['output']>;
-  estimateCtaSubtext?: Maybe<Scalars['String']['output']>;
-  estimateCtaButtonLabel?: Maybe<Scalars['String']['output']>;
-  estimateCtaCaption?: Maybe<Scalars['String']['output']>;
-  faqHeading?: Maybe<Scalars['String']['output']>;
-  faqSubheading?: Maybe<Scalars['String']['output']>;
-  whyRetrofitEyebrow?: Maybe<Scalars['String']['output']>;
-  whyRetrofitHeading1?: Maybe<Scalars['String']['output']>;
-  whyRetrofitHeading2?: Maybe<Scalars['String']['output']>;
-  whyRetrofitItems?: Maybe<Array<Maybe<HomePageWhyRetrofitItems>>>;
-  processSteps?: Maybe<Array<Maybe<HomePageProcessSteps>>>;
-  faqs?: Maybe<Array<Maybe<HomePageFaqs>>>;
+  primaryCtaHref?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksGlassComparison = {
+  __typename?: 'PageBlocksGlassComparison';
+  placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksGlassTechSpecs = {
+  __typename?: 'PageBlocksGlassTechSpecs';
+  placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksAdaptorDisclosure = {
+  __typename?: 'PageBlocksAdaptorDisclosure';
+  placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksPaymentTerms = {
+  __typename?: 'PageBlocksPaymentTerms';
+  placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksFreeAdvice = {
+  __typename?: 'PageBlocksFreeAdvice';
+  placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksWhatElseStrip = {
+  __typename?: 'PageBlocksWhatElseStrip';
+  placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocksEmergencyStrip = {
+  __typename?: 'PageBlocksEmergencyStrip';
+  placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageBlocks = PageBlocksHero | PageBlocksTrustBar | PageBlocksWhyRetrofit | PageBlocksProcessSteps | PageBlocksEstimateCta | PageBlocksFaq | PageBlocksServiceSection | PageBlocksStoryWithStats | PageBlocksWarrantyCoverage | PageBlocksContactCards | PageBlocksContactForm | PageBlocksCtaBanner | PageBlocksGlassComparison | PageBlocksGlassTechSpecs | PageBlocksAdaptorDisclosure | PageBlocksPaymentTerms | PageBlocksFreeAdvice | PageBlocksWhatElseStrip | PageBlocksEmergencyStrip;
+
+export type Page = Node & Document & {
+  __typename?: 'Page';
+  blocks?: Maybe<Array<Maybe<PageBlocks>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type HomePageWhyRetrofitItemsFilter = {
-  iconKey?: InputMaybe<StringFilter>;
-  headline?: InputMaybe<StringFilter>;
-  sub?: InputMaybe<StringFilter>;
 };
 
 export type ImageFilter = {
@@ -571,7 +621,44 @@ export type ImageFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type HomePageProcessStepsFilter = {
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type PageBlocksHeroFilter = {
+  variant?: InputMaybe<StringFilter>;
+  badge?: InputMaybe<StringFilter>;
+  headlineWhite?: InputMaybe<StringFilter>;
+  headlineYellow?: InputMaybe<StringFilter>;
+  subtext?: InputMaybe<StringFilter>;
+  primaryCtaLabel?: InputMaybe<StringFilter>;
+  primaryCtaHref?: InputMaybe<StringFilter>;
+  imageSrc?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+  showWarrantyBadge?: InputMaybe<BooleanFilter>;
+  adaptorCaption?: InputMaybe<StringFilter>;
+  accentWord?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksTrustBarFilter = {
+  placeholder?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksWhyRetrofitItemsFilter = {
+  iconKey?: InputMaybe<StringFilter>;
+  headline?: InputMaybe<StringFilter>;
+  sub?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksWhyRetrofitFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  heading1?: InputMaybe<StringFilter>;
+  heading2?: InputMaybe<StringFilter>;
+  items?: InputMaybe<PageBlocksWhyRetrofitItemsFilter>;
+};
+
+export type PageBlocksProcessStepsStepsFilter = {
   title?: InputMaybe<StringFilter>;
   body?: InputMaybe<StringFilter>;
   callout?: InputMaybe<StringFilter>;
@@ -579,338 +666,159 @@ export type HomePageProcessStepsFilter = {
   imageAlt?: InputMaybe<StringFilter>;
 };
 
-export type HomePageFaqsFilter = {
+export type PageBlocksProcessStepsFilter = {
+  steps?: InputMaybe<PageBlocksProcessStepsStepsFilter>;
+};
+
+export type PageBlocksEstimateCtaFilter = {
+  headline?: InputMaybe<StringFilter>;
+  subtext?: InputMaybe<StringFilter>;
+  buttonLabel?: InputMaybe<StringFilter>;
+  caption?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksFaqFaqsFilter = {
   q?: InputMaybe<StringFilter>;
   a?: InputMaybe<StringFilter>;
 };
 
-export type HomePageFilter = {
-  badge?: InputMaybe<StringFilter>;
-  headlineWhite?: InputMaybe<StringFilter>;
-  headlineYellow?: InputMaybe<StringFilter>;
-  subtext?: InputMaybe<StringFilter>;
-  primaryCtaLabel?: InputMaybe<StringFilter>;
-  adaptorCaption?: InputMaybe<StringFilter>;
-  estimateCtaHeadline?: InputMaybe<StringFilter>;
-  estimateCtaSubtext?: InputMaybe<StringFilter>;
-  estimateCtaButtonLabel?: InputMaybe<StringFilter>;
-  estimateCtaCaption?: InputMaybe<StringFilter>;
-  faqHeading?: InputMaybe<StringFilter>;
-  faqSubheading?: InputMaybe<StringFilter>;
-  whyRetrofitEyebrow?: InputMaybe<StringFilter>;
-  whyRetrofitHeading1?: InputMaybe<StringFilter>;
-  whyRetrofitHeading2?: InputMaybe<StringFilter>;
-  whyRetrofitItems?: InputMaybe<HomePageWhyRetrofitItemsFilter>;
-  processSteps?: InputMaybe<HomePageProcessStepsFilter>;
-  faqs?: InputMaybe<HomePageFaqsFilter>;
+export type PageBlocksFaqFilter = {
+  heading?: InputMaybe<StringFilter>;
+  subheading?: InputMaybe<StringFilter>;
+  faqs?: InputMaybe<PageBlocksFaqFaqsFilter>;
 };
 
-export type HomePageConnectionEdges = {
-  __typename?: 'HomePageConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<HomePage>;
-};
-
-export type HomePageConnection = Connection & {
-  __typename?: 'HomePageConnection';
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<HomePageConnectionEdges>>>;
-};
-
-export type ServicesPageServiceSectionsPrimaryCta = {
-  __typename?: 'ServicesPageServiceSectionsPrimaryCta';
-  label?: Maybe<Scalars['String']['output']>;
-  href?: Maybe<Scalars['String']['output']>;
-};
-
-export type ServicesPageServiceSectionsSecondaryCta = {
-  __typename?: 'ServicesPageServiceSectionsSecondaryCta';
-  label?: Maybe<Scalars['String']['output']>;
-  href?: Maybe<Scalars['String']['output']>;
-};
-
-export type ServicesPageServiceSections = {
-  __typename?: 'ServicesPageServiceSections';
-  id?: Maybe<Scalars['String']['output']>;
-  eyebrow?: Maybe<Scalars['String']['output']>;
-  heading?: Maybe<Scalars['String']['output']>;
-  bodyText?: Maybe<Scalars['String']['output']>;
-  bullets?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  primaryCta?: Maybe<ServicesPageServiceSectionsPrimaryCta>;
-  secondaryCta?: Maybe<ServicesPageServiceSectionsSecondaryCta>;
-};
-
-export type ServicesPageFaqs = {
-  __typename?: 'ServicesPageFaqs';
-  q?: Maybe<Scalars['String']['output']>;
-  a?: Maybe<Scalars['String']['output']>;
-};
-
-export type ServicesPage = Node & Document & {
-  __typename?: 'ServicesPage';
-  heroHeading?: Maybe<Scalars['String']['output']>;
-  heroSubtext?: Maybe<Scalars['String']['output']>;
-  serviceSections?: Maybe<Array<Maybe<ServicesPageServiceSections>>>;
-  faqHeading?: Maybe<Scalars['String']['output']>;
-  faqSubheading?: Maybe<Scalars['String']['output']>;
-  faqs?: Maybe<Array<Maybe<ServicesPageFaqs>>>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type ServicesPageServiceSectionsPrimaryCtaFilter = {
+export type PageBlocksServiceSectionPrimaryCtaFilter = {
   label?: InputMaybe<StringFilter>;
   href?: InputMaybe<StringFilter>;
 };
 
-export type ServicesPageServiceSectionsSecondaryCtaFilter = {
+export type PageBlocksServiceSectionSecondaryCtaFilter = {
   label?: InputMaybe<StringFilter>;
   href?: InputMaybe<StringFilter>;
 };
 
-export type ServicesPageServiceSectionsFilter = {
+export type PageBlocksServiceSectionFilter = {
   id?: InputMaybe<StringFilter>;
   eyebrow?: InputMaybe<StringFilter>;
   heading?: InputMaybe<StringFilter>;
   bodyText?: InputMaybe<StringFilter>;
   bullets?: InputMaybe<StringFilter>;
-  primaryCta?: InputMaybe<ServicesPageServiceSectionsPrimaryCtaFilter>;
-  secondaryCta?: InputMaybe<ServicesPageServiceSectionsSecondaryCtaFilter>;
+  variant?: InputMaybe<StringFilter>;
+  imageSrc?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+  primaryCta?: InputMaybe<PageBlocksServiceSectionPrimaryCtaFilter>;
+  secondaryCta?: InputMaybe<PageBlocksServiceSectionSecondaryCtaFilter>;
 };
 
-export type ServicesPageFaqsFilter = {
-  q?: InputMaybe<StringFilter>;
-  a?: InputMaybe<StringFilter>;
-};
-
-export type ServicesPageFilter = {
-  heroHeading?: InputMaybe<StringFilter>;
-  heroSubtext?: InputMaybe<StringFilter>;
-  serviceSections?: InputMaybe<ServicesPageServiceSectionsFilter>;
-  faqHeading?: InputMaybe<StringFilter>;
-  faqSubheading?: InputMaybe<StringFilter>;
-  faqs?: InputMaybe<ServicesPageFaqsFilter>;
-};
-
-export type ServicesPageConnectionEdges = {
-  __typename?: 'ServicesPageConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<ServicesPage>;
-};
-
-export type ServicesPageConnection = Connection & {
-  __typename?: 'ServicesPageConnection';
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<ServicesPageConnectionEdges>>>;
-};
-
-export type AboutPageStats = {
-  __typename?: 'AboutPageStats';
-  value?: Maybe<Scalars['String']['output']>;
-  label?: Maybe<Scalars['String']['output']>;
-};
-
-export type AboutPageGuarantees = {
-  __typename?: 'AboutPageGuarantees';
-  label?: Maybe<Scalars['String']['output']>;
-  detail?: Maybe<Scalars['String']['output']>;
-};
-
-export type AboutPage = Node & Document & {
-  __typename?: 'AboutPage';
-  heroHeadline?: Maybe<Scalars['String']['output']>;
-  heroHeadlineYellow?: Maybe<Scalars['String']['output']>;
-  heroSubtext?: Maybe<Scalars['String']['output']>;
-  stats?: Maybe<Array<Maybe<AboutPageStats>>>;
-  storyEyebrow?: Maybe<Scalars['String']['output']>;
-  storyParagraphs?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  storyQuote?: Maybe<Scalars['String']['output']>;
-  guarantees?: Maybe<Array<Maybe<AboutPageGuarantees>>>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type AboutPageStatsFilter = {
+export type PageBlocksStoryWithStatsStatsFilter = {
   value?: InputMaybe<StringFilter>;
   label?: InputMaybe<StringFilter>;
 };
 
-export type AboutPageGuaranteesFilter = {
-  label?: InputMaybe<StringFilter>;
-  detail?: InputMaybe<StringFilter>;
+export type PageBlocksStoryWithStatsFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  paragraphs?: InputMaybe<StringFilter>;
+  quote?: InputMaybe<StringFilter>;
+  stats?: InputMaybe<PageBlocksStoryWithStatsStatsFilter>;
 };
 
-export type AboutPageFilter = {
-  heroHeadline?: InputMaybe<StringFilter>;
-  heroHeadlineYellow?: InputMaybe<StringFilter>;
-  heroSubtext?: InputMaybe<StringFilter>;
-  stats?: InputMaybe<AboutPageStatsFilter>;
-  storyEyebrow?: InputMaybe<StringFilter>;
-  storyParagraphs?: InputMaybe<StringFilter>;
-  storyQuote?: InputMaybe<StringFilter>;
-  guarantees?: InputMaybe<AboutPageGuaranteesFilter>;
-};
-
-export type AboutPageConnectionEdges = {
-  __typename?: 'AboutPageConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<AboutPage>;
-};
-
-export type AboutPageConnection = Connection & {
-  __typename?: 'AboutPageConnection';
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<AboutPageConnectionEdges>>>;
-};
-
-export type ContactPageFaqs = {
-  __typename?: 'ContactPageFaqs';
-  q?: Maybe<Scalars['String']['output']>;
-  a?: Maybe<Scalars['String']['output']>;
-};
-
-export type ContactPage = Node & Document & {
-  __typename?: 'ContactPage';
-  heroHeadline?: Maybe<Scalars['String']['output']>;
-  heroSubtext?: Maybe<Scalars['String']['output']>;
-  formHeading?: Maybe<Scalars['String']['output']>;
-  faqs?: Maybe<Array<Maybe<ContactPageFaqs>>>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type ContactPageFaqsFilter = {
-  q?: InputMaybe<StringFilter>;
-  a?: InputMaybe<StringFilter>;
-};
-
-export type ContactPageFilter = {
-  heroHeadline?: InputMaybe<StringFilter>;
-  heroSubtext?: InputMaybe<StringFilter>;
-  formHeading?: InputMaybe<StringFilter>;
-  faqs?: InputMaybe<ContactPageFaqsFilter>;
-};
-
-export type ContactPageConnectionEdges = {
-  __typename?: 'ContactPageConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<ContactPage>;
-};
-
-export type ContactPageConnection = Connection & {
-  __typename?: 'ContactPageConnection';
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<ContactPageConnectionEdges>>>;
-};
-
-export type WarrantyPageCoveredItems = {
-  __typename?: 'WarrantyPageCoveredItems';
-  item?: Maybe<Scalars['String']['output']>;
-  detail?: Maybe<Scalars['String']['output']>;
-};
-
-export type WarrantyPageNotCoveredItems = {
-  __typename?: 'WarrantyPageNotCoveredItems';
-  item?: Maybe<Scalars['String']['output']>;
-  detail?: Maybe<Scalars['String']['output']>;
-};
-
-export type WarrantyPage = Node & Document & {
-  __typename?: 'WarrantyPage';
-  heroHeadline?: Maybe<Scalars['String']['output']>;
-  heroHeadlineYellow?: Maybe<Scalars['String']['output']>;
-  heroSubtext?: Maybe<Scalars['String']['output']>;
-  coveredItems?: Maybe<Array<Maybe<WarrantyPageCoveredItems>>>;
-  notCoveredItems?: Maybe<Array<Maybe<WarrantyPageNotCoveredItems>>>;
-  claimSteps?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  ctaHeadline?: Maybe<Scalars['String']['output']>;
-  ctaSubtext?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type WarrantyPageCoveredItemsFilter = {
+export type PageBlocksWarrantyCoverageCoveredItemsFilter = {
   item?: InputMaybe<StringFilter>;
   detail?: InputMaybe<StringFilter>;
 };
 
-export type WarrantyPageNotCoveredItemsFilter = {
+export type PageBlocksWarrantyCoverageNotCoveredItemsFilter = {
   item?: InputMaybe<StringFilter>;
   detail?: InputMaybe<StringFilter>;
 };
 
-export type WarrantyPageFilter = {
-  heroHeadline?: InputMaybe<StringFilter>;
-  heroHeadlineYellow?: InputMaybe<StringFilter>;
-  heroSubtext?: InputMaybe<StringFilter>;
-  coveredItems?: InputMaybe<WarrantyPageCoveredItemsFilter>;
-  notCoveredItems?: InputMaybe<WarrantyPageNotCoveredItemsFilter>;
+export type PageBlocksWarrantyCoverageFilter = {
+  coveredItems?: InputMaybe<PageBlocksWarrantyCoverageCoveredItemsFilter>;
+  notCoveredItems?: InputMaybe<PageBlocksWarrantyCoverageNotCoveredItemsFilter>;
   claimSteps?: InputMaybe<StringFilter>;
-  ctaHeadline?: InputMaybe<StringFilter>;
-  ctaSubtext?: InputMaybe<StringFilter>;
 };
 
-export type WarrantyPageConnectionEdges = {
-  __typename?: 'WarrantyPageConnectionEdges';
+export type PageBlocksContactCardsFilter = {
+  placeholder?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksContactFormFilter = {
+  heading?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksCtaBannerFilter = {
+  heading?: InputMaybe<StringFilter>;
+  subtext?: InputMaybe<StringFilter>;
+  primaryCtaLabel?: InputMaybe<StringFilter>;
+  primaryCtaHref?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksGlassComparisonFilter = {
+  placeholder?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksGlassTechSpecsFilter = {
+  placeholder?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksAdaptorDisclosureFilter = {
+  placeholder?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksPaymentTermsFilter = {
+  placeholder?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksFreeAdviceFilter = {
+  placeholder?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksWhatElseStripFilter = {
+  placeholder?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksEmergencyStripFilter = {
+  placeholder?: InputMaybe<StringFilter>;
+};
+
+export type PageBlocksFilter = {
+  hero?: InputMaybe<PageBlocksHeroFilter>;
+  trustBar?: InputMaybe<PageBlocksTrustBarFilter>;
+  whyRetrofit?: InputMaybe<PageBlocksWhyRetrofitFilter>;
+  processSteps?: InputMaybe<PageBlocksProcessStepsFilter>;
+  estimateCta?: InputMaybe<PageBlocksEstimateCtaFilter>;
+  faq?: InputMaybe<PageBlocksFaqFilter>;
+  serviceSection?: InputMaybe<PageBlocksServiceSectionFilter>;
+  storyWithStats?: InputMaybe<PageBlocksStoryWithStatsFilter>;
+  warrantyCoverage?: InputMaybe<PageBlocksWarrantyCoverageFilter>;
+  contactCards?: InputMaybe<PageBlocksContactCardsFilter>;
+  contactForm?: InputMaybe<PageBlocksContactFormFilter>;
+  ctaBanner?: InputMaybe<PageBlocksCtaBannerFilter>;
+  glassComparison?: InputMaybe<PageBlocksGlassComparisonFilter>;
+  glassTechSpecs?: InputMaybe<PageBlocksGlassTechSpecsFilter>;
+  adaptorDisclosure?: InputMaybe<PageBlocksAdaptorDisclosureFilter>;
+  paymentTerms?: InputMaybe<PageBlocksPaymentTermsFilter>;
+  freeAdvice?: InputMaybe<PageBlocksFreeAdviceFilter>;
+  whatElseStrip?: InputMaybe<PageBlocksWhatElseStripFilter>;
+  emergencyStrip?: InputMaybe<PageBlocksEmergencyStripFilter>;
+};
+
+export type PageFilter = {
+  blocks?: InputMaybe<PageBlocksFilter>;
+};
+
+export type PageConnectionEdges = {
+  __typename?: 'PageConnectionEdges';
   cursor: Scalars['String']['output'];
-  node?: Maybe<WarrantyPage>;
+  node?: Maybe<Page>;
 };
 
-export type WarrantyPageConnection = Connection & {
-  __typename?: 'WarrantyPageConnection';
+export type PageConnection = Connection & {
+  __typename?: 'PageConnection';
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<WarrantyPageConnectionEdges>>>;
-};
-
-export type EstimatePageFaqs = {
-  __typename?: 'EstimatePageFaqs';
-  q?: Maybe<Scalars['String']['output']>;
-  a?: Maybe<Scalars['String']['output']>;
-};
-
-export type EstimatePage = Node & Document & {
-  __typename?: 'EstimatePage';
-  heroHeadline?: Maybe<Scalars['String']['output']>;
-  heroSubtext?: Maybe<Scalars['String']['output']>;
-  secondStoreySurcharge?: Maybe<Scalars['Float']['output']>;
-  faqs?: Maybe<Array<Maybe<EstimatePageFaqs>>>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type EstimatePageFaqsFilter = {
-  q?: InputMaybe<StringFilter>;
-  a?: InputMaybe<StringFilter>;
-};
-
-export type EstimatePageFilter = {
-  heroHeadline?: InputMaybe<StringFilter>;
-  heroSubtext?: InputMaybe<StringFilter>;
-  secondStoreySurcharge?: InputMaybe<NumberFilter>;
-  faqs?: InputMaybe<EstimatePageFaqsFilter>;
-};
-
-export type EstimatePageConnectionEdges = {
-  __typename?: 'EstimatePageConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<EstimatePage>;
-};
-
-export type EstimatePageConnection = Connection & {
-  __typename?: 'EstimatePageConnection';
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<EstimatePageConnectionEdges>>>;
+  edges?: Maybe<Array<Maybe<PageConnectionEdges>>>;
 };
 
 export type Gallery = Node & Document & {
@@ -973,11 +881,6 @@ export type PricingOption = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
-export type BooleanFilter = {
-  eq?: InputMaybe<Scalars['Boolean']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
 export type PricingOptionTechFilter = {
   composition?: InputMaybe<StringFilter>;
   spacerMm?: InputMaybe<NumberFilter>;
@@ -1024,18 +927,8 @@ export type Mutation = {
   createSiteSettings: SiteSettings;
   updateNavigation: Navigation;
   createNavigation: Navigation;
-  updateHomePage: HomePage;
-  createHomePage: HomePage;
-  updateServicesPage: ServicesPage;
-  createServicesPage: ServicesPage;
-  updateAboutPage: AboutPage;
-  createAboutPage: AboutPage;
-  updateContactPage: ContactPage;
-  createContactPage: ContactPage;
-  updateWarrantyPage: WarrantyPage;
-  createWarrantyPage: WarrantyPage;
-  updateEstimatePage: EstimatePage;
-  createEstimatePage: EstimatePage;
+  updatePage: Page;
+  createPage: Page;
   updateGallery: Gallery;
   createGallery: Gallery;
   updatePricingOption: PricingOption;
@@ -1100,75 +993,15 @@ export type MutationCreateNavigationArgs = {
 };
 
 
-export type MutationUpdateHomePageArgs = {
+export type MutationUpdatePageArgs = {
   relativePath: Scalars['String']['input'];
-  params: HomePageMutation;
+  params: PageMutation;
 };
 
 
-export type MutationCreateHomePageArgs = {
+export type MutationCreatePageArgs = {
   relativePath: Scalars['String']['input'];
-  params: HomePageMutation;
-};
-
-
-export type MutationUpdateServicesPageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: ServicesPageMutation;
-};
-
-
-export type MutationCreateServicesPageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: ServicesPageMutation;
-};
-
-
-export type MutationUpdateAboutPageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: AboutPageMutation;
-};
-
-
-export type MutationCreateAboutPageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: AboutPageMutation;
-};
-
-
-export type MutationUpdateContactPageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: ContactPageMutation;
-};
-
-
-export type MutationCreateContactPageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: ContactPageMutation;
-};
-
-
-export type MutationUpdateWarrantyPageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: WarrantyPageMutation;
-};
-
-
-export type MutationCreateWarrantyPageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: WarrantyPageMutation;
-};
-
-
-export type MutationUpdateEstimatePageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: EstimatePageMutation;
-};
-
-
-export type MutationCreateEstimatePageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: EstimatePageMutation;
+  params: PageMutation;
 };
 
 
@@ -1198,12 +1031,7 @@ export type MutationCreatePricingOptionArgs = {
 export type DocumentUpdateMutation = {
   siteSettings?: InputMaybe<SiteSettingsMutation>;
   navigation?: InputMaybe<NavigationMutation>;
-  homePage?: InputMaybe<HomePageMutation>;
-  servicesPage?: InputMaybe<ServicesPageMutation>;
-  aboutPage?: InputMaybe<AboutPageMutation>;
-  contactPage?: InputMaybe<ContactPageMutation>;
-  warrantyPage?: InputMaybe<WarrantyPageMutation>;
-  estimatePage?: InputMaybe<EstimatePageMutation>;
+  page?: InputMaybe<PageMutation>;
   gallery?: InputMaybe<GalleryMutation>;
   pricingOption?: InputMaybe<PricingOptionMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
@@ -1212,12 +1040,7 @@ export type DocumentUpdateMutation = {
 export type DocumentMutation = {
   siteSettings?: InputMaybe<SiteSettingsMutation>;
   navigation?: InputMaybe<NavigationMutation>;
-  homePage?: InputMaybe<HomePageMutation>;
-  servicesPage?: InputMaybe<ServicesPageMutation>;
-  aboutPage?: InputMaybe<AboutPageMutation>;
-  contactPage?: InputMaybe<ContactPageMutation>;
-  warrantyPage?: InputMaybe<WarrantyPageMutation>;
-  estimatePage?: InputMaybe<EstimatePageMutation>;
+  page?: InputMaybe<PageMutation>;
   gallery?: InputMaybe<GalleryMutation>;
   pricingOption?: InputMaybe<PricingOptionMutation>;
 };
@@ -1285,13 +1108,39 @@ export type NavigationMutation = {
   footerCompanyNav?: InputMaybe<Array<InputMaybe<NavigationFooterCompanyNavMutation>>>;
 };
 
-export type HomePageWhyRetrofitItemsMutation = {
+export type PageBlocksHeroMutation = {
+  variant?: InputMaybe<Scalars['String']['input']>;
+  badge?: InputMaybe<Scalars['String']['input']>;
+  headlineWhite?: InputMaybe<Scalars['String']['input']>;
+  headlineYellow?: InputMaybe<Scalars['String']['input']>;
+  subtext?: InputMaybe<Scalars['String']['input']>;
+  primaryCtaLabel?: InputMaybe<Scalars['String']['input']>;
+  primaryCtaHref?: InputMaybe<Scalars['String']['input']>;
+  imageSrc?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+  showWarrantyBadge?: InputMaybe<Scalars['Boolean']['input']>;
+  adaptorCaption?: InputMaybe<Scalars['String']['input']>;
+  accentWord?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksTrustBarMutation = {
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksWhyRetrofitItemsMutation = {
   iconKey?: InputMaybe<Scalars['String']['input']>;
   headline?: InputMaybe<Scalars['String']['input']>;
   sub?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type HomePageProcessStepsMutation = {
+export type PageBlocksWhyRetrofitMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  heading1?: InputMaybe<Scalars['String']['input']>;
+  heading2?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<PageBlocksWhyRetrofitItemsMutation>>>;
+};
+
+export type PageBlocksProcessStepsStepsMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['String']['input']>;
   callout?: InputMaybe<Scalars['String']['input']>;
@@ -1299,130 +1148,146 @@ export type HomePageProcessStepsMutation = {
   imageAlt?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type HomePageFaqsMutation = {
+export type PageBlocksProcessStepsMutation = {
+  steps?: InputMaybe<Array<InputMaybe<PageBlocksProcessStepsStepsMutation>>>;
+};
+
+export type PageBlocksEstimateCtaMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  subtext?: InputMaybe<Scalars['String']['input']>;
+  buttonLabel?: InputMaybe<Scalars['String']['input']>;
+  caption?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksFaqFaqsMutation = {
   q?: InputMaybe<Scalars['String']['input']>;
   a?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type HomePageMutation = {
-  badge?: InputMaybe<Scalars['String']['input']>;
-  headlineWhite?: InputMaybe<Scalars['String']['input']>;
-  headlineYellow?: InputMaybe<Scalars['String']['input']>;
-  subtext?: InputMaybe<Scalars['String']['input']>;
-  primaryCtaLabel?: InputMaybe<Scalars['String']['input']>;
-  adaptorCaption?: InputMaybe<Scalars['String']['input']>;
-  estimateCtaHeadline?: InputMaybe<Scalars['String']['input']>;
-  estimateCtaSubtext?: InputMaybe<Scalars['String']['input']>;
-  estimateCtaButtonLabel?: InputMaybe<Scalars['String']['input']>;
-  estimateCtaCaption?: InputMaybe<Scalars['String']['input']>;
-  faqHeading?: InputMaybe<Scalars['String']['input']>;
-  faqSubheading?: InputMaybe<Scalars['String']['input']>;
-  whyRetrofitEyebrow?: InputMaybe<Scalars['String']['input']>;
-  whyRetrofitHeading1?: InputMaybe<Scalars['String']['input']>;
-  whyRetrofitHeading2?: InputMaybe<Scalars['String']['input']>;
-  whyRetrofitItems?: InputMaybe<Array<InputMaybe<HomePageWhyRetrofitItemsMutation>>>;
-  processSteps?: InputMaybe<Array<InputMaybe<HomePageProcessStepsMutation>>>;
-  faqs?: InputMaybe<Array<InputMaybe<HomePageFaqsMutation>>>;
+export type PageBlocksFaqMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  subheading?: InputMaybe<Scalars['String']['input']>;
+  faqs?: InputMaybe<Array<InputMaybe<PageBlocksFaqFaqsMutation>>>;
 };
 
-export type ServicesPageServiceSectionsPrimaryCtaMutation = {
+export type PageBlocksServiceSectionPrimaryCtaMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
   href?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type ServicesPageServiceSectionsSecondaryCtaMutation = {
+export type PageBlocksServiceSectionSecondaryCtaMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
   href?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type ServicesPageServiceSectionsMutation = {
+export type PageBlocksServiceSectionMutation = {
   id?: InputMaybe<Scalars['String']['input']>;
   eyebrow?: InputMaybe<Scalars['String']['input']>;
   heading?: InputMaybe<Scalars['String']['input']>;
   bodyText?: InputMaybe<Scalars['String']['input']>;
   bullets?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  primaryCta?: InputMaybe<ServicesPageServiceSectionsPrimaryCtaMutation>;
-  secondaryCta?: InputMaybe<ServicesPageServiceSectionsSecondaryCtaMutation>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+  imageSrc?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+  primaryCta?: InputMaybe<PageBlocksServiceSectionPrimaryCtaMutation>;
+  secondaryCta?: InputMaybe<PageBlocksServiceSectionSecondaryCtaMutation>;
 };
 
-export type ServicesPageFaqsMutation = {
-  q?: InputMaybe<Scalars['String']['input']>;
-  a?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type ServicesPageMutation = {
-  heroHeading?: InputMaybe<Scalars['String']['input']>;
-  heroSubtext?: InputMaybe<Scalars['String']['input']>;
-  serviceSections?: InputMaybe<Array<InputMaybe<ServicesPageServiceSectionsMutation>>>;
-  faqHeading?: InputMaybe<Scalars['String']['input']>;
-  faqSubheading?: InputMaybe<Scalars['String']['input']>;
-  faqs?: InputMaybe<Array<InputMaybe<ServicesPageFaqsMutation>>>;
-};
-
-export type AboutPageStatsMutation = {
+export type PageBlocksStoryWithStatsStatsMutation = {
   value?: InputMaybe<Scalars['String']['input']>;
   label?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type AboutPageGuaranteesMutation = {
-  label?: InputMaybe<Scalars['String']['input']>;
-  detail?: InputMaybe<Scalars['String']['input']>;
+export type PageBlocksStoryWithStatsMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  paragraphs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  quote?: InputMaybe<Scalars['String']['input']>;
+  stats?: InputMaybe<Array<InputMaybe<PageBlocksStoryWithStatsStatsMutation>>>;
 };
 
-export type AboutPageMutation = {
-  heroHeadline?: InputMaybe<Scalars['String']['input']>;
-  heroHeadlineYellow?: InputMaybe<Scalars['String']['input']>;
-  heroSubtext?: InputMaybe<Scalars['String']['input']>;
-  stats?: InputMaybe<Array<InputMaybe<AboutPageStatsMutation>>>;
-  storyEyebrow?: InputMaybe<Scalars['String']['input']>;
-  storyParagraphs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  storyQuote?: InputMaybe<Scalars['String']['input']>;
-  guarantees?: InputMaybe<Array<InputMaybe<AboutPageGuaranteesMutation>>>;
-};
-
-export type ContactPageFaqsMutation = {
-  q?: InputMaybe<Scalars['String']['input']>;
-  a?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type ContactPageMutation = {
-  heroHeadline?: InputMaybe<Scalars['String']['input']>;
-  heroSubtext?: InputMaybe<Scalars['String']['input']>;
-  formHeading?: InputMaybe<Scalars['String']['input']>;
-  faqs?: InputMaybe<Array<InputMaybe<ContactPageFaqsMutation>>>;
-};
-
-export type WarrantyPageCoveredItemsMutation = {
+export type PageBlocksWarrantyCoverageCoveredItemsMutation = {
   item?: InputMaybe<Scalars['String']['input']>;
   detail?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type WarrantyPageNotCoveredItemsMutation = {
+export type PageBlocksWarrantyCoverageNotCoveredItemsMutation = {
   item?: InputMaybe<Scalars['String']['input']>;
   detail?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type WarrantyPageMutation = {
-  heroHeadline?: InputMaybe<Scalars['String']['input']>;
-  heroHeadlineYellow?: InputMaybe<Scalars['String']['input']>;
-  heroSubtext?: InputMaybe<Scalars['String']['input']>;
-  coveredItems?: InputMaybe<Array<InputMaybe<WarrantyPageCoveredItemsMutation>>>;
-  notCoveredItems?: InputMaybe<Array<InputMaybe<WarrantyPageNotCoveredItemsMutation>>>;
+export type PageBlocksWarrantyCoverageMutation = {
+  coveredItems?: InputMaybe<Array<InputMaybe<PageBlocksWarrantyCoverageCoveredItemsMutation>>>;
+  notCoveredItems?: InputMaybe<Array<InputMaybe<PageBlocksWarrantyCoverageNotCoveredItemsMutation>>>;
   claimSteps?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  ctaHeadline?: InputMaybe<Scalars['String']['input']>;
-  ctaSubtext?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type EstimatePageFaqsMutation = {
-  q?: InputMaybe<Scalars['String']['input']>;
-  a?: InputMaybe<Scalars['String']['input']>;
+export type PageBlocksContactCardsMutation = {
+  placeholder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type EstimatePageMutation = {
-  heroHeadline?: InputMaybe<Scalars['String']['input']>;
-  heroSubtext?: InputMaybe<Scalars['String']['input']>;
-  secondStoreySurcharge?: InputMaybe<Scalars['Float']['input']>;
-  faqs?: InputMaybe<Array<InputMaybe<EstimatePageFaqsMutation>>>;
+export type PageBlocksContactFormMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksCtaBannerMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  subtext?: InputMaybe<Scalars['String']['input']>;
+  primaryCtaLabel?: InputMaybe<Scalars['String']['input']>;
+  primaryCtaHref?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksGlassComparisonMutation = {
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksGlassTechSpecsMutation = {
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksAdaptorDisclosureMutation = {
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksPaymentTermsMutation = {
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksFreeAdviceMutation = {
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksWhatElseStripMutation = {
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksEmergencyStripMutation = {
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageBlocksMutation = {
+  hero?: InputMaybe<PageBlocksHeroMutation>;
+  trustBar?: InputMaybe<PageBlocksTrustBarMutation>;
+  whyRetrofit?: InputMaybe<PageBlocksWhyRetrofitMutation>;
+  processSteps?: InputMaybe<PageBlocksProcessStepsMutation>;
+  estimateCta?: InputMaybe<PageBlocksEstimateCtaMutation>;
+  faq?: InputMaybe<PageBlocksFaqMutation>;
+  serviceSection?: InputMaybe<PageBlocksServiceSectionMutation>;
+  storyWithStats?: InputMaybe<PageBlocksStoryWithStatsMutation>;
+  warrantyCoverage?: InputMaybe<PageBlocksWarrantyCoverageMutation>;
+  contactCards?: InputMaybe<PageBlocksContactCardsMutation>;
+  contactForm?: InputMaybe<PageBlocksContactFormMutation>;
+  ctaBanner?: InputMaybe<PageBlocksCtaBannerMutation>;
+  glassComparison?: InputMaybe<PageBlocksGlassComparisonMutation>;
+  glassTechSpecs?: InputMaybe<PageBlocksGlassTechSpecsMutation>;
+  adaptorDisclosure?: InputMaybe<PageBlocksAdaptorDisclosureMutation>;
+  paymentTerms?: InputMaybe<PageBlocksPaymentTermsMutation>;
+  freeAdvice?: InputMaybe<PageBlocksFreeAdviceMutation>;
+  whatElseStrip?: InputMaybe<PageBlocksWhatElseStripMutation>;
+  emergencyStrip?: InputMaybe<PageBlocksEmergencyStripMutation>;
+};
+
+export type PageMutation = {
+  blocks?: InputMaybe<Array<InputMaybe<PageBlocksMutation>>>;
 };
 
 export type GalleryMutation = {
@@ -1459,17 +1324,7 @@ export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', name?: str
 
 export type NavigationPartsFragment = { __typename: 'Navigation', mainNav?: Array<{ __typename: 'NavigationMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'NavigationCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'NavigationFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'NavigationFooterCompanyNav', label?: string | null, href?: string | null } | null> | null };
 
-export type HomePagePartsFragment = { __typename: 'HomePage', badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, primaryCtaLabel?: string | null, adaptorCaption?: string | null, estimateCtaHeadline?: string | null, estimateCtaSubtext?: string | null, estimateCtaButtonLabel?: string | null, estimateCtaCaption?: string | null, faqHeading?: string | null, faqSubheading?: string | null, whyRetrofitEyebrow?: string | null, whyRetrofitHeading1?: string | null, whyRetrofitHeading2?: string | null, whyRetrofitItems?: Array<{ __typename: 'HomePageWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null, faqs?: Array<{ __typename: 'HomePageFaqs', q?: string | null, a?: string | null } | null> | null };
-
-export type ServicesPagePartsFragment = { __typename: 'ServicesPage', heroHeading?: string | null, heroSubtext?: string | null, faqHeading?: string | null, faqSubheading?: string | null, serviceSections?: Array<{ __typename: 'ServicesPageServiceSections', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, primaryCta?: { __typename: 'ServicesPageServiceSectionsPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'ServicesPageServiceSectionsSecondaryCta', label?: string | null, href?: string | null } | null } | null> | null, faqs?: Array<{ __typename: 'ServicesPageFaqs', q?: string | null, a?: string | null } | null> | null };
-
-export type AboutPagePartsFragment = { __typename: 'AboutPage', heroHeadline?: string | null, heroHeadlineYellow?: string | null, heroSubtext?: string | null, storyEyebrow?: string | null, storyParagraphs?: Array<string | null> | null, storyQuote?: string | null, stats?: Array<{ __typename: 'AboutPageStats', value?: string | null, label?: string | null } | null> | null, guarantees?: Array<{ __typename: 'AboutPageGuarantees', label?: string | null, detail?: string | null } | null> | null };
-
-export type ContactPagePartsFragment = { __typename: 'ContactPage', heroHeadline?: string | null, heroSubtext?: string | null, formHeading?: string | null, faqs?: Array<{ __typename: 'ContactPageFaqs', q?: string | null, a?: string | null } | null> | null };
-
-export type WarrantyPagePartsFragment = { __typename: 'WarrantyPage', heroHeadline?: string | null, heroHeadlineYellow?: string | null, heroSubtext?: string | null, claimSteps?: Array<string | null> | null, ctaHeadline?: string | null, ctaSubtext?: string | null, coveredItems?: Array<{ __typename: 'WarrantyPageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'WarrantyPageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null };
-
-export type EstimatePagePartsFragment = { __typename: 'EstimatePage', heroHeadline?: string | null, heroSubtext?: string | null, secondStoreySurcharge?: number | null, faqs?: Array<{ __typename: 'EstimatePageFaqs', q?: string | null, a?: string | null } | null> | null };
+export type PagePartsFragment = { __typename: 'Page', blocks?: Array<{ __typename: 'PageBlocksHero', variant?: string | null, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, primaryCtaLabel?: string | null, primaryCtaHref?: string | null, imageSrc?: string | null, imageAlt?: string | null, showWarrantyBadge?: boolean | null, adaptorCaption?: string | null, accentWord?: string | null } | { __typename: 'PageBlocksTrustBar', placeholder?: string | null } | { __typename: 'PageBlocksWhyRetrofit', eyebrow?: string | null, heading1?: string | null, heading2?: string | null, items?: Array<{ __typename: 'PageBlocksWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null } | { __typename: 'PageBlocksProcessSteps', steps?: Array<{ __typename: 'PageBlocksProcessStepsSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null } | { __typename: 'PageBlocksEstimateCta', headline?: string | null, subtext?: string | null, buttonLabel?: string | null, caption?: string | null } | { __typename: 'PageBlocksFaq', heading?: string | null, subheading?: string | null, faqs?: Array<{ __typename: 'PageBlocksFaqFaqs', q?: string | null, a?: string | null } | null> | null } | { __typename: 'PageBlocksServiceSection', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, variant?: string | null, imageSrc?: string | null, imageAlt?: string | null, primaryCta?: { __typename: 'PageBlocksServiceSectionPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksServiceSectionSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksStoryWithStats', eyebrow?: string | null, paragraphs?: Array<string | null> | null, quote?: string | null, stats?: Array<{ __typename: 'PageBlocksStoryWithStatsStats', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWarrantyCoverage', claimSteps?: Array<string | null> | null, coveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } | { __typename: 'PageBlocksContactCards', placeholder?: string | null } | { __typename: 'PageBlocksContactForm', heading?: string | null } | { __typename: 'PageBlocksCtaBanner', heading?: string | null, subtext?: string | null, primaryCtaLabel?: string | null, primaryCtaHref?: string | null } | { __typename: 'PageBlocksGlassComparison', placeholder?: string | null } | { __typename: 'PageBlocksGlassTechSpecs', placeholder?: string | null } | { __typename: 'PageBlocksAdaptorDisclosure', placeholder?: string | null } | { __typename: 'PageBlocksPaymentTerms', placeholder?: string | null } | { __typename: 'PageBlocksFreeAdvice', placeholder?: string | null } | { __typename: 'PageBlocksWhatElseStrip', placeholder?: string | null } | { __typename: 'PageBlocksEmergencyStrip', placeholder?: string | null } | null> | null };
 
 export type GalleryPartsFragment = { __typename: 'Gallery', src?: string | null, alt?: string | null, category?: string | null, caption?: string | null, order?: number | null };
 
@@ -1513,119 +1368,24 @@ export type NavigationConnectionQueryVariables = Exact<{
 
 export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, mainNav?: Array<{ __typename: 'NavigationMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'NavigationCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'NavigationFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'NavigationFooterCompanyNav', label?: string | null, href?: string | null } | null> | null } | null } | null> | null } };
 
-export type HomePageQueryVariables = Exact<{
+export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type HomePageQuery = { __typename?: 'Query', homePage: { __typename: 'HomePage', id: string, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, primaryCtaLabel?: string | null, adaptorCaption?: string | null, estimateCtaHeadline?: string | null, estimateCtaSubtext?: string | null, estimateCtaButtonLabel?: string | null, estimateCtaCaption?: string | null, faqHeading?: string | null, faqSubheading?: string | null, whyRetrofitEyebrow?: string | null, whyRetrofitHeading1?: string | null, whyRetrofitHeading2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, whyRetrofitItems?: Array<{ __typename: 'HomePageWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null, faqs?: Array<{ __typename: 'HomePageFaqs', q?: string | null, a?: string | null } | null> | null } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PageBlocksHero', variant?: string | null, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, primaryCtaLabel?: string | null, primaryCtaHref?: string | null, imageSrc?: string | null, imageAlt?: string | null, showWarrantyBadge?: boolean | null, adaptorCaption?: string | null, accentWord?: string | null } | { __typename: 'PageBlocksTrustBar', placeholder?: string | null } | { __typename: 'PageBlocksWhyRetrofit', eyebrow?: string | null, heading1?: string | null, heading2?: string | null, items?: Array<{ __typename: 'PageBlocksWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null } | { __typename: 'PageBlocksProcessSteps', steps?: Array<{ __typename: 'PageBlocksProcessStepsSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null } | { __typename: 'PageBlocksEstimateCta', headline?: string | null, subtext?: string | null, buttonLabel?: string | null, caption?: string | null } | { __typename: 'PageBlocksFaq', heading?: string | null, subheading?: string | null, faqs?: Array<{ __typename: 'PageBlocksFaqFaqs', q?: string | null, a?: string | null } | null> | null } | { __typename: 'PageBlocksServiceSection', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, variant?: string | null, imageSrc?: string | null, imageAlt?: string | null, primaryCta?: { __typename: 'PageBlocksServiceSectionPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksServiceSectionSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksStoryWithStats', eyebrow?: string | null, paragraphs?: Array<string | null> | null, quote?: string | null, stats?: Array<{ __typename: 'PageBlocksStoryWithStatsStats', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWarrantyCoverage', claimSteps?: Array<string | null> | null, coveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } | { __typename: 'PageBlocksContactCards', placeholder?: string | null } | { __typename: 'PageBlocksContactForm', heading?: string | null } | { __typename: 'PageBlocksCtaBanner', heading?: string | null, subtext?: string | null, primaryCtaLabel?: string | null, primaryCtaHref?: string | null } | { __typename: 'PageBlocksGlassComparison', placeholder?: string | null } | { __typename: 'PageBlocksGlassTechSpecs', placeholder?: string | null } | { __typename: 'PageBlocksAdaptorDisclosure', placeholder?: string | null } | { __typename: 'PageBlocksPaymentTerms', placeholder?: string | null } | { __typename: 'PageBlocksFreeAdvice', placeholder?: string | null } | { __typename: 'PageBlocksWhatElseStrip', placeholder?: string | null } | { __typename: 'PageBlocksEmergencyStrip', placeholder?: string | null } | null> | null } };
 
-export type HomePageConnectionQueryVariables = Exact<{
+export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<HomePageFilter>;
+  filter?: InputMaybe<PageFilter>;
 }>;
 
 
-export type HomePageConnectionQuery = { __typename?: 'Query', homePageConnection: { __typename?: 'HomePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomePageConnectionEdges', cursor: string, node?: { __typename: 'HomePage', id: string, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, primaryCtaLabel?: string | null, adaptorCaption?: string | null, estimateCtaHeadline?: string | null, estimateCtaSubtext?: string | null, estimateCtaButtonLabel?: string | null, estimateCtaCaption?: string | null, faqHeading?: string | null, faqSubheading?: string | null, whyRetrofitEyebrow?: string | null, whyRetrofitHeading1?: string | null, whyRetrofitHeading2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, whyRetrofitItems?: Array<{ __typename: 'HomePageWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null, faqs?: Array<{ __typename: 'HomePageFaqs', q?: string | null, a?: string | null } | null> | null } | null } | null> | null } };
-
-export type ServicesPageQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
-}>;
-
-
-export type ServicesPageQuery = { __typename?: 'Query', servicesPage: { __typename: 'ServicesPage', id: string, heroHeading?: string | null, heroSubtext?: string | null, faqHeading?: string | null, faqSubheading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, serviceSections?: Array<{ __typename: 'ServicesPageServiceSections', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, primaryCta?: { __typename: 'ServicesPageServiceSectionsPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'ServicesPageServiceSectionsSecondaryCta', label?: string | null, href?: string | null } | null } | null> | null, faqs?: Array<{ __typename: 'ServicesPageFaqs', q?: string | null, a?: string | null } | null> | null } };
-
-export type ServicesPageConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<ServicesPageFilter>;
-}>;
-
-
-export type ServicesPageConnectionQuery = { __typename?: 'Query', servicesPageConnection: { __typename?: 'ServicesPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServicesPageConnectionEdges', cursor: string, node?: { __typename: 'ServicesPage', id: string, heroHeading?: string | null, heroSubtext?: string | null, faqHeading?: string | null, faqSubheading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, serviceSections?: Array<{ __typename: 'ServicesPageServiceSections', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, primaryCta?: { __typename: 'ServicesPageServiceSectionsPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'ServicesPageServiceSectionsSecondaryCta', label?: string | null, href?: string | null } | null } | null> | null, faqs?: Array<{ __typename: 'ServicesPageFaqs', q?: string | null, a?: string | null } | null> | null } | null } | null> | null } };
-
-export type AboutPageQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
-}>;
-
-
-export type AboutPageQuery = { __typename?: 'Query', aboutPage: { __typename: 'AboutPage', id: string, heroHeadline?: string | null, heroHeadlineYellow?: string | null, heroSubtext?: string | null, storyEyebrow?: string | null, storyParagraphs?: Array<string | null> | null, storyQuote?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats?: Array<{ __typename: 'AboutPageStats', value?: string | null, label?: string | null } | null> | null, guarantees?: Array<{ __typename: 'AboutPageGuarantees', label?: string | null, detail?: string | null } | null> | null } };
-
-export type AboutPageConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<AboutPageFilter>;
-}>;
-
-
-export type AboutPageConnectionQuery = { __typename?: 'Query', aboutPageConnection: { __typename?: 'AboutPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutPageConnectionEdges', cursor: string, node?: { __typename: 'AboutPage', id: string, heroHeadline?: string | null, heroHeadlineYellow?: string | null, heroSubtext?: string | null, storyEyebrow?: string | null, storyParagraphs?: Array<string | null> | null, storyQuote?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats?: Array<{ __typename: 'AboutPageStats', value?: string | null, label?: string | null } | null> | null, guarantees?: Array<{ __typename: 'AboutPageGuarantees', label?: string | null, detail?: string | null } | null> | null } | null } | null> | null } };
-
-export type ContactPageQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
-}>;
-
-
-export type ContactPageQuery = { __typename?: 'Query', contactPage: { __typename: 'ContactPage', id: string, heroHeadline?: string | null, heroSubtext?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, faqs?: Array<{ __typename: 'ContactPageFaqs', q?: string | null, a?: string | null } | null> | null } };
-
-export type ContactPageConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<ContactPageFilter>;
-}>;
-
-
-export type ContactPageConnectionQuery = { __typename?: 'Query', contactPageConnection: { __typename?: 'ContactPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactPageConnectionEdges', cursor: string, node?: { __typename: 'ContactPage', id: string, heroHeadline?: string | null, heroSubtext?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, faqs?: Array<{ __typename: 'ContactPageFaqs', q?: string | null, a?: string | null } | null> | null } | null } | null> | null } };
-
-export type WarrantyPageQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
-}>;
-
-
-export type WarrantyPageQuery = { __typename?: 'Query', warrantyPage: { __typename: 'WarrantyPage', id: string, heroHeadline?: string | null, heroHeadlineYellow?: string | null, heroSubtext?: string | null, claimSteps?: Array<string | null> | null, ctaHeadline?: string | null, ctaSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, coveredItems?: Array<{ __typename: 'WarrantyPageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'WarrantyPageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } };
-
-export type WarrantyPageConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<WarrantyPageFilter>;
-}>;
-
-
-export type WarrantyPageConnectionQuery = { __typename?: 'Query', warrantyPageConnection: { __typename?: 'WarrantyPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'WarrantyPageConnectionEdges', cursor: string, node?: { __typename: 'WarrantyPage', id: string, heroHeadline?: string | null, heroHeadlineYellow?: string | null, heroSubtext?: string | null, claimSteps?: Array<string | null> | null, ctaHeadline?: string | null, ctaSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, coveredItems?: Array<{ __typename: 'WarrantyPageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'WarrantyPageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } | null } | null> | null } };
-
-export type EstimatePageQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
-}>;
-
-
-export type EstimatePageQuery = { __typename?: 'Query', estimatePage: { __typename: 'EstimatePage', id: string, heroHeadline?: string | null, heroSubtext?: string | null, secondStoreySurcharge?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, faqs?: Array<{ __typename: 'EstimatePageFaqs', q?: string | null, a?: string | null } | null> | null } };
-
-export type EstimatePageConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<EstimatePageFilter>;
-}>;
-
-
-export type EstimatePageConnectionQuery = { __typename?: 'Query', estimatePageConnection: { __typename?: 'EstimatePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'EstimatePageConnectionEdges', cursor: string, node?: { __typename: 'EstimatePage', id: string, heroHeadline?: string | null, heroSubtext?: string | null, secondStoreySurcharge?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, faqs?: Array<{ __typename: 'EstimatePageFaqs', q?: string | null, a?: string | null } | null> | null } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PageBlocksHero', variant?: string | null, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, primaryCtaLabel?: string | null, primaryCtaHref?: string | null, imageSrc?: string | null, imageAlt?: string | null, showWarrantyBadge?: boolean | null, adaptorCaption?: string | null, accentWord?: string | null } | { __typename: 'PageBlocksTrustBar', placeholder?: string | null } | { __typename: 'PageBlocksWhyRetrofit', eyebrow?: string | null, heading1?: string | null, heading2?: string | null, items?: Array<{ __typename: 'PageBlocksWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null } | { __typename: 'PageBlocksProcessSteps', steps?: Array<{ __typename: 'PageBlocksProcessStepsSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null } | { __typename: 'PageBlocksEstimateCta', headline?: string | null, subtext?: string | null, buttonLabel?: string | null, caption?: string | null } | { __typename: 'PageBlocksFaq', heading?: string | null, subheading?: string | null, faqs?: Array<{ __typename: 'PageBlocksFaqFaqs', q?: string | null, a?: string | null } | null> | null } | { __typename: 'PageBlocksServiceSection', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, variant?: string | null, imageSrc?: string | null, imageAlt?: string | null, primaryCta?: { __typename: 'PageBlocksServiceSectionPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksServiceSectionSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksStoryWithStats', eyebrow?: string | null, paragraphs?: Array<string | null> | null, quote?: string | null, stats?: Array<{ __typename: 'PageBlocksStoryWithStatsStats', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWarrantyCoverage', claimSteps?: Array<string | null> | null, coveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } | { __typename: 'PageBlocksContactCards', placeholder?: string | null } | { __typename: 'PageBlocksContactForm', heading?: string | null } | { __typename: 'PageBlocksCtaBanner', heading?: string | null, subtext?: string | null, primaryCtaLabel?: string | null, primaryCtaHref?: string | null } | { __typename: 'PageBlocksGlassComparison', placeholder?: string | null } | { __typename: 'PageBlocksGlassTechSpecs', placeholder?: string | null } | { __typename: 'PageBlocksAdaptorDisclosure', placeholder?: string | null } | { __typename: 'PageBlocksPaymentTerms', placeholder?: string | null } | { __typename: 'PageBlocksFreeAdvice', placeholder?: string | null } | { __typename: 'PageBlocksWhatElseStrip', placeholder?: string | null } | { __typename: 'PageBlocksEmergencyStrip', placeholder?: string | null } | null> | null } | null } | null> | null } };
 
 export type GalleryQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1725,142 +1485,140 @@ export const NavigationPartsFragmentDoc = gql`
   }
 }
     `;
-export const HomePagePartsFragmentDoc = gql`
-    fragment HomePageParts on HomePage {
+export const PagePartsFragmentDoc = gql`
+    fragment PageParts on Page {
   __typename
-  badge
-  headlineWhite
-  headlineYellow
-  subtext
-  primaryCtaLabel
-  adaptorCaption
-  estimateCtaHeadline
-  estimateCtaSubtext
-  estimateCtaButtonLabel
-  estimateCtaCaption
-  faqHeading
-  faqSubheading
-  whyRetrofitEyebrow
-  whyRetrofitHeading1
-  whyRetrofitHeading2
-  whyRetrofitItems {
+  blocks {
     __typename
-    iconKey
-    headline
-    sub
-  }
-  processSteps {
-    __typename
-    title
-    body
-    callout
-    imageSrc
-    imageAlt
-  }
-  faqs {
-    __typename
-    q
-    a
-  }
-}
-    `;
-export const ServicesPagePartsFragmentDoc = gql`
-    fragment ServicesPageParts on ServicesPage {
-  __typename
-  heroHeading
-  heroSubtext
-  serviceSections {
-    __typename
-    id
-    eyebrow
-    heading
-    bodyText
-    bullets
-    primaryCta {
-      __typename
-      label
-      href
+    ... on PageBlocksHero {
+      variant
+      badge
+      headlineWhite
+      headlineYellow
+      subtext
+      primaryCtaLabel
+      primaryCtaHref
+      imageSrc
+      imageAlt
+      showWarrantyBadge
+      adaptorCaption
+      accentWord
     }
-    secondaryCta {
-      __typename
-      label
-      href
+    ... on PageBlocksTrustBar {
+      placeholder
     }
-  }
-  faqHeading
-  faqSubheading
-  faqs {
-    __typename
-    q
-    a
-  }
-}
-    `;
-export const AboutPagePartsFragmentDoc = gql`
-    fragment AboutPageParts on AboutPage {
-  __typename
-  heroHeadline
-  heroHeadlineYellow
-  heroSubtext
-  stats {
-    __typename
-    value
-    label
-  }
-  storyEyebrow
-  storyParagraphs
-  storyQuote
-  guarantees {
-    __typename
-    label
-    detail
-  }
-}
-    `;
-export const ContactPagePartsFragmentDoc = gql`
-    fragment ContactPageParts on ContactPage {
-  __typename
-  heroHeadline
-  heroSubtext
-  formHeading
-  faqs {
-    __typename
-    q
-    a
-  }
-}
-    `;
-export const WarrantyPagePartsFragmentDoc = gql`
-    fragment WarrantyPageParts on WarrantyPage {
-  __typename
-  heroHeadline
-  heroHeadlineYellow
-  heroSubtext
-  coveredItems {
-    __typename
-    item
-    detail
-  }
-  notCoveredItems {
-    __typename
-    item
-    detail
-  }
-  claimSteps
-  ctaHeadline
-  ctaSubtext
-}
-    `;
-export const EstimatePagePartsFragmentDoc = gql`
-    fragment EstimatePageParts on EstimatePage {
-  __typename
-  heroHeadline
-  heroSubtext
-  secondStoreySurcharge
-  faqs {
-    __typename
-    q
-    a
+    ... on PageBlocksWhyRetrofit {
+      eyebrow
+      heading1
+      heading2
+      items {
+        __typename
+        iconKey
+        headline
+        sub
+      }
+    }
+    ... on PageBlocksProcessSteps {
+      steps {
+        __typename
+        title
+        body
+        callout
+        imageSrc
+        imageAlt
+      }
+    }
+    ... on PageBlocksEstimateCta {
+      headline
+      subtext
+      buttonLabel
+      caption
+    }
+    ... on PageBlocksFaq {
+      heading
+      subheading
+      faqs {
+        __typename
+        q
+        a
+      }
+    }
+    ... on PageBlocksServiceSection {
+      id
+      eyebrow
+      heading
+      bodyText
+      bullets
+      variant
+      imageSrc
+      imageAlt
+      primaryCta {
+        __typename
+        label
+        href
+      }
+      secondaryCta {
+        __typename
+        label
+        href
+      }
+    }
+    ... on PageBlocksStoryWithStats {
+      eyebrow
+      paragraphs
+      quote
+      stats {
+        __typename
+        value
+        label
+      }
+    }
+    ... on PageBlocksWarrantyCoverage {
+      coveredItems {
+        __typename
+        item
+        detail
+      }
+      notCoveredItems {
+        __typename
+        item
+        detail
+      }
+      claimSteps
+    }
+    ... on PageBlocksContactCards {
+      placeholder
+    }
+    ... on PageBlocksContactForm {
+      heading
+    }
+    ... on PageBlocksCtaBanner {
+      heading
+      subtext
+      primaryCtaLabel
+      primaryCtaHref
+    }
+    ... on PageBlocksGlassComparison {
+      placeholder
+    }
+    ... on PageBlocksGlassTechSpecs {
+      placeholder
+    }
+    ... on PageBlocksAdaptorDisclosure {
+      placeholder
+    }
+    ... on PageBlocksPaymentTerms {
+      placeholder
+    }
+    ... on PageBlocksFreeAdvice {
+      placeholder
+    }
+    ... on PageBlocksWhatElseStrip {
+      placeholder
+    }
+    ... on PageBlocksEmergencyStrip {
+      placeholder
+    }
   }
 }
     `;
@@ -2011,9 +1769,9 @@ export const NavigationConnectionDocument = gql`
   }
 }
     ${NavigationPartsFragmentDoc}`;
-export const HomePageDocument = gql`
-    query homePage($relativePath: String!) {
-  homePage(relativePath: $relativePath) {
+export const PageDocument = gql`
+    query page($relativePath: String!) {
+  page(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -2026,13 +1784,13 @@ export const HomePageDocument = gql`
       }
       id
     }
-    ...HomePageParts
+    ...PageParts
   }
 }
-    ${HomePagePartsFragmentDoc}`;
-export const HomePageConnectionDocument = gql`
-    query homePageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: HomePageFilter) {
-  homePageConnection(
+    ${PagePartsFragmentDoc}`;
+export const PageConnectionDocument = gql`
+    query pageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PageFilter) {
+  pageConnection(
     before: $before
     after: $after
     first: $first
@@ -2062,297 +1820,12 @@ export const HomePageConnectionDocument = gql`
           }
           id
         }
-        ...HomePageParts
+        ...PageParts
       }
     }
   }
 }
-    ${HomePagePartsFragmentDoc}`;
-export const ServicesPageDocument = gql`
-    query servicesPage($relativePath: String!) {
-  servicesPage(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...ServicesPageParts
-  }
-}
-    ${ServicesPagePartsFragmentDoc}`;
-export const ServicesPageConnectionDocument = gql`
-    query servicesPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ServicesPageFilter) {
-  servicesPageConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...ServicesPageParts
-      }
-    }
-  }
-}
-    ${ServicesPagePartsFragmentDoc}`;
-export const AboutPageDocument = gql`
-    query aboutPage($relativePath: String!) {
-  aboutPage(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...AboutPageParts
-  }
-}
-    ${AboutPagePartsFragmentDoc}`;
-export const AboutPageConnectionDocument = gql`
-    query aboutPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AboutPageFilter) {
-  aboutPageConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...AboutPageParts
-      }
-    }
-  }
-}
-    ${AboutPagePartsFragmentDoc}`;
-export const ContactPageDocument = gql`
-    query contactPage($relativePath: String!) {
-  contactPage(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...ContactPageParts
-  }
-}
-    ${ContactPagePartsFragmentDoc}`;
-export const ContactPageConnectionDocument = gql`
-    query contactPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactPageFilter) {
-  contactPageConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...ContactPageParts
-      }
-    }
-  }
-}
-    ${ContactPagePartsFragmentDoc}`;
-export const WarrantyPageDocument = gql`
-    query warrantyPage($relativePath: String!) {
-  warrantyPage(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...WarrantyPageParts
-  }
-}
-    ${WarrantyPagePartsFragmentDoc}`;
-export const WarrantyPageConnectionDocument = gql`
-    query warrantyPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: WarrantyPageFilter) {
-  warrantyPageConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...WarrantyPageParts
-      }
-    }
-  }
-}
-    ${WarrantyPagePartsFragmentDoc}`;
-export const EstimatePageDocument = gql`
-    query estimatePage($relativePath: String!) {
-  estimatePage(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...EstimatePageParts
-  }
-}
-    ${EstimatePagePartsFragmentDoc}`;
-export const EstimatePageConnectionDocument = gql`
-    query estimatePageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: EstimatePageFilter) {
-  estimatePageConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...EstimatePageParts
-      }
-    }
-  }
-}
-    ${EstimatePagePartsFragmentDoc}`;
+    ${PagePartsFragmentDoc}`;
 export const GalleryDocument = gql`
     query gallery($relativePath: String!) {
   gallery(relativePath: $relativePath) {
@@ -2482,41 +1955,11 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
     navigationConnection(variables?: NavigationConnectionQueryVariables, options?: C): Promise<{data: NavigationConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationConnectionQueryVariables, query: string}> {
         return requester<{data: NavigationConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationConnectionQueryVariables, query: string}, NavigationConnectionQueryVariables>(NavigationConnectionDocument, variables, options);
       },
-    homePage(variables: HomePageQueryVariables, options?: C): Promise<{data: HomePageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomePageQueryVariables, query: string}> {
-        return requester<{data: HomePageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomePageQueryVariables, query: string}, HomePageQueryVariables>(HomePageDocument, variables, options);
+    page(variables: PageQueryVariables, options?: C): Promise<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}> {
+        return requester<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}, PageQueryVariables>(PageDocument, variables, options);
       },
-    homePageConnection(variables?: HomePageConnectionQueryVariables, options?: C): Promise<{data: HomePageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomePageConnectionQueryVariables, query: string}> {
-        return requester<{data: HomePageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomePageConnectionQueryVariables, query: string}, HomePageConnectionQueryVariables>(HomePageConnectionDocument, variables, options);
-      },
-    servicesPage(variables: ServicesPageQueryVariables, options?: C): Promise<{data: ServicesPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesPageQueryVariables, query: string}> {
-        return requester<{data: ServicesPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesPageQueryVariables, query: string}, ServicesPageQueryVariables>(ServicesPageDocument, variables, options);
-      },
-    servicesPageConnection(variables?: ServicesPageConnectionQueryVariables, options?: C): Promise<{data: ServicesPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesPageConnectionQueryVariables, query: string}> {
-        return requester<{data: ServicesPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesPageConnectionQueryVariables, query: string}, ServicesPageConnectionQueryVariables>(ServicesPageConnectionDocument, variables, options);
-      },
-    aboutPage(variables: AboutPageQueryVariables, options?: C): Promise<{data: AboutPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageQueryVariables, query: string}> {
-        return requester<{data: AboutPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageQueryVariables, query: string}, AboutPageQueryVariables>(AboutPageDocument, variables, options);
-      },
-    aboutPageConnection(variables?: AboutPageConnectionQueryVariables, options?: C): Promise<{data: AboutPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageConnectionQueryVariables, query: string}> {
-        return requester<{data: AboutPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageConnectionQueryVariables, query: string}, AboutPageConnectionQueryVariables>(AboutPageConnectionDocument, variables, options);
-      },
-    contactPage(variables: ContactPageQueryVariables, options?: C): Promise<{data: ContactPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactPageQueryVariables, query: string}> {
-        return requester<{data: ContactPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactPageQueryVariables, query: string}, ContactPageQueryVariables>(ContactPageDocument, variables, options);
-      },
-    contactPageConnection(variables?: ContactPageConnectionQueryVariables, options?: C): Promise<{data: ContactPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactPageConnectionQueryVariables, query: string}> {
-        return requester<{data: ContactPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactPageConnectionQueryVariables, query: string}, ContactPageConnectionQueryVariables>(ContactPageConnectionDocument, variables, options);
-      },
-    warrantyPage(variables: WarrantyPageQueryVariables, options?: C): Promise<{data: WarrantyPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WarrantyPageQueryVariables, query: string}> {
-        return requester<{data: WarrantyPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WarrantyPageQueryVariables, query: string}, WarrantyPageQueryVariables>(WarrantyPageDocument, variables, options);
-      },
-    warrantyPageConnection(variables?: WarrantyPageConnectionQueryVariables, options?: C): Promise<{data: WarrantyPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WarrantyPageConnectionQueryVariables, query: string}> {
-        return requester<{data: WarrantyPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WarrantyPageConnectionQueryVariables, query: string}, WarrantyPageConnectionQueryVariables>(WarrantyPageConnectionDocument, variables, options);
-      },
-    estimatePage(variables: EstimatePageQueryVariables, options?: C): Promise<{data: EstimatePageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: EstimatePageQueryVariables, query: string}> {
-        return requester<{data: EstimatePageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: EstimatePageQueryVariables, query: string}, EstimatePageQueryVariables>(EstimatePageDocument, variables, options);
-      },
-    estimatePageConnection(variables?: EstimatePageConnectionQueryVariables, options?: C): Promise<{data: EstimatePageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: EstimatePageConnectionQueryVariables, query: string}> {
-        return requester<{data: EstimatePageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: EstimatePageConnectionQueryVariables, query: string}, EstimatePageConnectionQueryVariables>(EstimatePageConnectionDocument, variables, options);
+    pageConnection(variables?: PageConnectionQueryVariables, options?: C): Promise<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}> {
+        return requester<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}, PageConnectionQueryVariables>(PageConnectionDocument, variables, options);
       },
     gallery(variables: GalleryQueryVariables, options?: C): Promise<{data: GalleryQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GalleryQueryVariables, query: string}> {
         return requester<{data: GalleryQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GalleryQueryVariables, query: string}, GalleryQueryVariables>(GalleryDocument, variables, options);

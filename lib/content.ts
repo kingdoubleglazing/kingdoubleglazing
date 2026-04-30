@@ -1,14 +1,5 @@
 // Re-export sync singleton getters from the client-safe module
-export {
-  getSiteSettings,
-  getNavigation,
-  getHomePage,
-  getServicesPage,
-  getAboutPage,
-  getContactPage,
-  getWarrantyPage,
-  getEstimatePage,
-} from '@/lib/site-settings'
+export { getSiteSettings, getNavigation } from '@/lib/site-settings'
 
 // Server-only collection readers (use fs/promises — never import in client components)
 import { readdir, readFile } from 'fs/promises'

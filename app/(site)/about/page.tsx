@@ -3,9 +3,10 @@ import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
 import { buildWebPageSchema } from '@/lib/seo/schema/webpage'
 import { buildFaqSchema } from '@/lib/seo/schema/faqPage'
 import { SchemaScript } from '@/components/SchemaScript'
-import { getSiteSettings, getAboutPage, getFaqs } from '@/lib/content'
+import { getSiteSettings, getFaqs } from '@/lib/content'
 import { client } from '@/tina/__generated__/client'
-import { AboutPageClient } from './AboutPageClient'
+import { PageClient } from '@/components/PageClient'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 
 export const metadata: Metadata = buildMetadata({
   title: "About King Double Glazing | Melbourne's Anti-Ripoff Glaziers | Tas Markou",
@@ -18,7 +19,7 @@ export default async function AboutPage() {
   const settings = getSiteSettings()
   const generalFaqs = await getFaqs('general')
 
-  const aboutPageSchemas = [
+  const schemas = [
     buildWebPageSchema({
       url: `${BASE_URL}/about/`,
       name: "About King Double Glazing | Melbourne's Anti-Ripoff Glaziers | Tas Markou",
@@ -40,24 +41,21 @@ export default async function AboutPage() {
     buildFaqSchema(generalFaqs.map(f => ({ question: f.q, answer: f.a }))),
   ]
 
-  let tinaAbout: Awaited<ReturnType<typeof client.queries.aboutPage>>
-
   try {
-    tinaAbout = await client.queries.aboutPage({ relativePath: 'about.json' })
+    const tinaPage = await client.queries.page({ relativePath: 'about.json' })
+    return (
+      <>
+        <SchemaScript schemas={schemas} />
+        <PageClient tinaPage={tinaPage} />
+      </>
+    )
   } catch {
-    const aboutPage = getAboutPage()
-    tinaAbout = { data: { aboutPage: aboutPage as never }, query: '', variables: { relativePath: 'about.json' } }
+    const { blocks = [] } = await import('@/content/pages/about.json')
+    return (
+      <>
+        <SchemaScript schemas={schemas} />
+        <BlockRenderer blocks={blocks as never[]} />
+      </>
+    )
   }
-
-  return (
-    <>
-      <SchemaScript schemas={aboutPageSchemas} />
-      <AboutPageClient
-        tinaAbout={tinaAbout}
-        phone={settings.phone}
-        phoneHref={settings.phoneHref}
-        domain={settings.domain}
-      />
-    </>
-  )
 }
