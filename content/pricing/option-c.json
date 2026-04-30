@@ -1,0 +1,20 @@
+{
+  "id": "option-c",
+  "optionKey": "C",
+  "label": "Option C",
+  "sublabel": "Quiet & warm",
+  "spec": "6.38mm acoustic + 12mm argon + 4mm Low-E",
+  "pricePerSqm": 795,
+  "heatPct": 68,
+  "noisePct": 60,
+  "tech": {
+    "composition": ["6.38mm acoustic laminate", "12mm argon fill", "4mm Low-E"],
+    "spacerMm": 12,
+    "lowE": true,
+    "acousticPVB": true,
+    "tinted": false,
+    "bestFor": "Homes near trams, main roads, or airports",
+    "rwRating": "36",
+    "notes": "Acoustic PVB interlayer in the laminated pane significantly reduces traffic and tram noise."
+  }
+}

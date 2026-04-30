@@ -11,6 +11,9 @@ interface FAQProps {
   items: readonly FaqItem[]
   /** Emit FAQPage JSON-LD schema. Set false if the parent page already emits it. */
   emitSchema?: boolean
+  tinaHeading?: string
+  tinaSubheading?: string
+  tinaFields?: ReadonlyArray<{ q?: string; a?: string } | undefined>
 }
 
 export function FAQ({
@@ -18,6 +21,9 @@ export function FAQ({
   subheading = 'Everything Melbourne homeowners ask before booking.',
   items,
   emitSchema = true,
+  tinaHeading,
+  tinaSubheading,
+  tinaFields,
 }: FAQProps) {
   const schema = emitSchema
     ? buildFaqSchema(items.map(({ q, a }) => ({ question: q, answer: a })))
@@ -41,13 +47,17 @@ export function FAQ({
               FAQ
             </p>
             <h2
+              data-tina-field={tinaHeading || undefined}
               className="font-display uppercase leading-[0.88] text-on-surface"
               style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
             >
               {heading}
             </h2>
           </div>
-          <p className="font-sans text-base text-on-surface max-w-sm leading-relaxed lg:text-right">
+          <p
+            data-tina-field={tinaSubheading || undefined}
+            className="font-sans text-base text-on-surface max-w-sm leading-relaxed lg:text-right"
+          >
             {subheading}
           </p>
         </div>
@@ -71,7 +81,10 @@ export function FAQ({
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="font-headline text-base font-semibold uppercase tracking-wide text-on-surface leading-snug pt-1">
+                  <h3
+                    data-tina-field={tinaFields?.[i]?.q || undefined}
+                    className="font-headline text-base font-semibold uppercase tracking-wide text-on-surface leading-snug pt-1"
+                  >
                     {item.q}
                   </h3>
                 </div>
@@ -92,7 +105,10 @@ export function FAQ({
               {/* Answer */}
               <div className="px-7 pb-7 pl-[calc(1.75rem+2rem+1.25rem)]">
                 <div className="h-px w-8 bg-primary-container mb-5" aria-hidden="true" />
-                <p className="font-sans text-base text-on-surface leading-relaxed">
+                <p
+                  data-tina-field={tinaFields?.[i]?.a || undefined}
+                  className="font-sans text-base text-on-surface leading-relaxed"
+                >
                   {item.a}
                 </p>
               </div>

@@ -1,10 +1,8 @@
 import { Ruler } from 'lucide-react'
-import { sanityFetch } from '@/sanity/lib/fetch'
-import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
-import type { SiteSettings } from '@/sanity/types'
+import { getSiteSettings } from '@/lib/site-settings'
 
-export async function AdaptorDisclosure() {
-  const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
+export function AdaptorDisclosure() {
+  const settings = getSiteSettings()
   const ad = settings.adaptorDisclosure
 
   const heading         = ad?.heading         ?? 'About our adaptors'

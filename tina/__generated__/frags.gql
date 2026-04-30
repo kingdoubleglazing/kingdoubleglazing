@@ -1,0 +1,221 @@
+fragment SiteSettingsParts on SiteSettings {
+  __typename
+  name
+  legalName
+  domain
+  phone
+  phoneTel
+  phoneHref
+  email
+  notificationEmail
+  abn
+  licenseNumber
+  address {
+    __typename
+    street
+    suburb
+    state
+    postcode
+    country
+    display
+  }
+  social {
+    __typename
+    facebook
+    instagram
+    google
+  }
+  pricing {
+    __typename
+    retrofitFromPerSqm
+    retrofitFromDisplay
+  }
+}
+
+fragment NavigationParts on Navigation {
+  __typename
+  mainNav {
+    __typename
+    label
+    href
+  }
+  ctaNav {
+    __typename
+    label
+    href
+  }
+  footerServicesNav {
+    __typename
+    label
+    href
+  }
+  footerCompanyNav {
+    __typename
+    label
+    href
+  }
+}
+
+fragment HomePageParts on HomePage {
+  __typename
+  badge
+  headlineWhite
+  headlineYellow
+  subtext
+  primaryCtaLabel
+  adaptorCaption
+  estimateCtaHeadline
+  estimateCtaSubtext
+  estimateCtaButtonLabel
+  estimateCtaCaption
+  faqHeading
+  faqSubheading
+  whyRetrofitEyebrow
+  whyRetrofitHeading1
+  whyRetrofitHeading2
+  whyRetrofitItems {
+    __typename
+    iconKey
+    headline
+    sub
+  }
+  processSteps {
+    __typename
+    title
+    body
+    callout
+    imageSrc
+    imageAlt
+  }
+  faqs {
+    __typename
+    q
+    a
+  }
+}
+
+fragment ServicesPageParts on ServicesPage {
+  __typename
+  heroHeading
+  heroSubtext
+  serviceSections {
+    __typename
+    id
+    eyebrow
+    heading
+    bodyText
+    bullets
+    primaryCta {
+      __typename
+      label
+      href
+    }
+    secondaryCta {
+      __typename
+      label
+      href
+    }
+  }
+  faqHeading
+  faqSubheading
+  faqs {
+    __typename
+    q
+    a
+  }
+}
+
+fragment AboutPageParts on AboutPage {
+  __typename
+  heroHeadline
+  heroHeadlineYellow
+  heroSubtext
+  stats {
+    __typename
+    value
+    label
+  }
+  storyEyebrow
+  storyParagraphs
+  storyQuote
+  guarantees {
+    __typename
+    label
+    detail
+  }
+}
+
+fragment ContactPageParts on ContactPage {
+  __typename
+  heroHeadline
+  heroSubtext
+  formHeading
+  faqs {
+    __typename
+    q
+    a
+  }
+}
+
+fragment WarrantyPageParts on WarrantyPage {
+  __typename
+  heroHeadline
+  heroHeadlineYellow
+  heroSubtext
+  coveredItems {
+    __typename
+    item
+    detail
+  }
+  notCoveredItems {
+    __typename
+    item
+    detail
+  }
+  claimSteps
+  ctaHeadline
+  ctaSubtext
+}
+
+fragment EstimatePageParts on EstimatePage {
+  __typename
+  heroHeadline
+  heroSubtext
+  secondStoreySurcharge
+  faqs {
+    __typename
+    q
+    a
+  }
+}
+
+fragment GalleryParts on Gallery {
+  __typename
+  src
+  alt
+  category
+  caption
+  order
+}
+
+fragment PricingOptionParts on PricingOption {
+  __typename
+  optionKey
+  label
+  sublabel
+  spec
+  pricePerSqm
+  heatPct
+  noisePct
+  tech {
+    __typename
+    composition
+    spacerMm
+    lowE
+    acousticPVB
+    tinted
+    bestFor
+    rwRating
+    notes
+  }
+}

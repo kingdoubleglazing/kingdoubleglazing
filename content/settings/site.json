@@ -1,0 +1,31 @@
+{
+  "name": "King Double Glazing",
+  "legalName": "Brooklyn Glass Pty Ltd t/a King Double Glazing",
+  "domain": "https://kingdoubleglazing.com.au",
+  "phone": "0406 470 595",
+  "phoneTel": "+61406470595",
+  "phoneHref": "tel:+61406470595",
+  "email": "hello@kingdoubleglazing.com.au",
+  "abn": "87 627 894 428",
+  "licenseNumber": "",
+  "notificationEmail": "tasmarkou1969@gmail.com",
+  "address": {
+    "street": "5 Glenarm Road",
+    "suburb": "Glen Iris",
+    "state": "VIC",
+    "postcode": "3146",
+    "country": "AU",
+    "display": "5 Glenarm Road, Glen Iris VIC 3146, Australia"
+  },
+  "geo": { "latitude": -37.8577, "longitude": 145.0594 },
+  "social": { "facebook": "", "instagram": "", "google": "" },
+  "logos": {
+    "light": "/logo-light.png",
+    "dark": "/logo-dark.png",
+    "icon": "/icon-small.png"
+  },
+  "pricing": {
+    "retrofitFromPerSqm": 595,
+    "retrofitFromDisplay": "From $595/m²"
+  }
+}

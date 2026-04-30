@@ -1,0 +1,20 @@
+{
+  "id": "option-b",
+  "optionKey": "B",
+  "label": "Option B",
+  "sublabel": "Better warmth",
+  "spec": "4mm Low-E + 12mm argon + 4mm clear",
+  "pricePerSqm": 695,
+  "heatPct": 65,
+  "noisePct": 45,
+  "tech": {
+    "composition": ["4mm Low-E coated", "12mm argon fill", "4mm clear"],
+    "spacerMm": 12,
+    "lowE": true,
+    "acousticPVB": false,
+    "tinted": false,
+    "bestFor": "Most Melbourne homes — best balance of performance and price",
+    "rwRating": "30",
+    "notes": "Low-E coating reflects heat back inside in winter. Argon fill improves insulation further."
+  }
+}

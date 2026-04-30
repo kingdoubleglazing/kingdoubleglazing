@@ -1,0 +1,20 @@
+{
+  "id": "option-d",
+  "optionKey": "D",
+  "label": "Option D",
+  "sublabel": "Maximum performance",
+  "spec": "10.38mm acoustic Low-E + 16mm argon + 6mm Low-E",
+  "pricePerSqm": 895,
+  "heatPct": 72,
+  "noisePct": 70,
+  "tech": {
+    "composition": ["10.38mm acoustic Low-E laminate", "16mm argon fill", "6mm Low-E"],
+    "spacerMm": 16,
+    "lowE": true,
+    "acousticPVB": true,
+    "tinted": false,
+    "bestFor": "Noise-sensitive homes, home theatres, or east/west-facing rooms with heat issues",
+    "rwRating": "40",
+    "notes": "Our top-spec unit. Maximum noise reduction and thermal performance in one glass."
+  }
+}

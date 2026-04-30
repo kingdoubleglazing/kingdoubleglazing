@@ -1,9 +1,7 @@
-import { sanityFetch } from '@/sanity/lib/fetch'
-import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
-import type { SiteSettings } from '@/sanity/types'
+import { getSiteSettings } from '@/lib/content'
 
 export default async function ConfirmErrorPage() {
-  const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
+  const settings = getSiteSettings()
   return (
     <div className="min-h-screen bg-black flex items-center justify-center px-4">
       <div className="max-w-lg w-full text-center">

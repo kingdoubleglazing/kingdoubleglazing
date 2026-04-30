@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Phone } from 'lucide-react'
 import { calculateQuote, type OptionKey, type WindowRow } from '@/data/pricing'
 import { submitQuote, type QuoteState } from '@/app/(site)/actions/quote'
-import type { PricingOption } from '@/sanity/types'
+import type { PricingOption } from '@/lib/types'
 import {
   Dialog,
   DialogContent,

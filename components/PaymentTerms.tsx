@@ -1,10 +1,8 @@
 import { CheckCircle, DollarSign } from 'lucide-react'
-import { sanityFetch } from '@/sanity/lib/fetch'
-import { SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
-import type { SiteSettings } from '@/sanity/types'
+import { getSiteSettings } from '@/lib/site-settings'
 
-export async function PaymentTerms() {
-  const settings = await sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] })
+export function PaymentTerms() {
+  const settings = getSiteSettings()
   const pt = settings.paymentTerms
 
   const depositTitle    = pt?.depositTitle    ?? '50% Deposit to Start'

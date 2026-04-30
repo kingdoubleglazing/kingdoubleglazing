@@ -11,9 +11,7 @@ import {
   Zap,
   type LucideIcon,
 } from 'lucide-react'
-import { sanityFetch } from '@/sanity/lib/fetch'
-import { HOME_PAGE_QUERY } from '@/sanity/lib/queries'
-import type { HomePage } from '@/sanity/types'
+import { getHomePage } from '@/lib/site-settings'
 
 const ICON_MAP: Record<string, LucideIcon> = {
   hammer: Hammer,
@@ -37,8 +35,8 @@ const FALLBACK_ITEMS = [
   { icon: BadgePercent, headline: 'We Beat Any Quote by 30%',   sub: 'Send us a real competitor quote. We come in 30% cheaper, in writing, with the 10-year warranty.' },
 ]
 
-export async function WhyRetrofit() {
-  const page = await sanityFetch<HomePage>({ query: HOME_PAGE_QUERY, tags: ['homePage'] })
+export function WhyRetrofit() {
+  const page = getHomePage()
 
   const eyebrow  = page.whyRetrofitEyebrow  ?? 'WHY RETROFIT?'
   const heading1 = page.whyRetrofitHeading1 ?? "Stop. Don’t Overpay."

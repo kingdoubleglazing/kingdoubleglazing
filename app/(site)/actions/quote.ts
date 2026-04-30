@@ -6,8 +6,8 @@ import { getDb } from '@/db'
 import { quotes } from '@/db/schema'
 import { calculateQuote, type OptionKey, type WindowRow } from '@/data/pricing'
 import { sendQuoteNotification, sendQuoteConfirmation } from '@/lib/email'
-import { client as sanityClient } from '@/sanity/lib/client'
-import type { PricingOption } from '@/sanity/types'
+import { getPricingOptions } from '@/lib/content'
+import type { PricingOption } from '@/lib/types'
 
 const windowRowSchema = z.object({
   heightMm:     z.number().min(200).max(3500),
@@ -46,11 +46,9 @@ export async function submitQuote(
   try {
     const { name, email, phone, suburb, option, windows, total, windowCount } = parsed.data
 
-    // Fetch pricing option from Sanity to validate and get display data
-    const opt = await sanityClient.fetch<PricingOption>(
-      `*[_type == "pricingOption" && optionKey == $key][0]`,
-      { key: option },
-    )
+    // Fetch pricing option from content files to validate and get display data
+    const allOptions = await getPricingOptions()
+    const opt = allOptions.find((o: PricingOption) => o.optionKey === option)
     if (!opt) return { status: 'error', message: 'Invalid option selected.' }
 
     // Revalidate total server-side using Sanity pricePerSqm

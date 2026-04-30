@@ -1,4 +1,4 @@
-import type { SiteSettings } from '@/sanity/types'
+import type { SiteSettings } from '@/lib/types'
 
 const AREA_SERVED_SUBURBS = [
   'Melbourne', 'South Yarra', 'Richmond', 'Fitzroy', 'Carlton', 'St Kilda',

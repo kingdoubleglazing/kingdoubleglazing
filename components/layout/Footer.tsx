@@ -1,15 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Phone, Mail, MapPin } from 'lucide-react'
-import { sanityFetch } from '@/sanity/lib/fetch'
-import { NAVIGATION_QUERY, SITE_SETTINGS_QUERY } from '@/sanity/lib/queries'
-import type { Navigation, SiteSettings } from '@/sanity/types'
+import { getSiteSettings, getNavigation } from '@/lib/content'
 
 export async function Footer() {
-  const [nav, settings] = await Promise.all([
-    sanityFetch<Navigation>({ query: NAVIGATION_QUERY, tags: ['navigation'] }),
-    sanityFetch<SiteSettings>({ query: SITE_SETTINGS_QUERY, tags: ['siteSettings'] }),
-  ])
+  const nav = getNavigation()
+  const settings = getSiteSettings()
 
   return (
     <footer className="bg-inverse-surface text-inverse-on-surface mt-auto">

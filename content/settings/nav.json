@@ -1,0 +1,25 @@
+{
+  "mainNav": [
+    { "label": "Home", "href": "/" },
+    { "label": "Services", "href": "/services/" },
+    { "label": "Gallery", "href": "/gallery/" },
+    { "label": "Who We Are", "href": "/about/" },
+    { "label": "Contact", "href": "/contact/" }
+  ],
+  "ctaNav": { "label": "Get Quote", "href": "/instant-estimate/" },
+  "footerServicesNav": [
+    { "label": "Retrofit Double Glazing", "href": "/services/#retrofit" },
+    { "label": "Emergency Glass Repair", "href": "/services/#emergency" },
+    { "label": "Shower Screens", "href": "/services/#shower-screens" },
+    { "label": "Glass Splashbacks", "href": "/services/#splashbacks" },
+    { "label": "Custom Mirrors", "href": "/services/#mirrors" },
+    { "label": "Commercial Glazing", "href": "/services/#commercial" }
+  ],
+  "footerCompanyNav": [
+    { "label": "Who We Are", "href": "/about/" },
+    { "label": "Gallery", "href": "/gallery/" },
+    { "label": "Contact", "href": "/contact/" },
+    { "label": "Warranty", "href": "/warranty/" },
+    { "label": "Get an Instant Estimate", "href": "/instant-estimate/" }
+  ]
+}

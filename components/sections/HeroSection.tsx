@@ -16,6 +16,13 @@ interface HeroSectionProps {
   imageAlt?: string
   compact?: boolean
   showWarrantyBadge?: boolean
+  tina?: {
+    badge?: string
+    headlineWhite?: string
+    headlineYellow?: string
+    subtext?: string
+    adaptorCaption?: string
+  }
 }
 
 export function HeroSection({
@@ -31,6 +38,7 @@ export function HeroSection({
   imageAlt = 'Double glazed windows with Melbourne skyline view',
   compact = false,
   showWarrantyBadge = false,
+  tina,
 }: HeroSectionProps) {
   return (
     <section className={`relative flex flex-col overflow-hidden bg-[#111318] ${compact ? 'min-h-[50vh]' : 'min-h-[70vh]'}`}>
@@ -58,7 +66,10 @@ export function HeroSection({
       <div className="relative z-10 flex flex-col justify-end flex-1 max-w-5xl mx-auto w-full px-4 pb-16 md:pb-20 pt-30">
         {/* Badge */}
         <div className="mb-6 md:mb-8">
-          <span className="inline-block bg-primary-container px-3 py-1 font-headline text-xs font-semibold uppercase tracking-widest text-on-primary-fixed">
+          <span
+            data-tina-field={tina?.badge || undefined}
+            className="inline-block bg-primary-container px-3 py-1 font-headline text-xs font-semibold uppercase tracking-widest text-on-primary-fixed"
+          >
             {badge}
           </span>
         </div>
@@ -66,12 +77,14 @@ export function HeroSection({
         {/* Headline */}
         <h1 className="font-display uppercase leading-[0.9] mb-6 md:mb-8">
           <span
+            data-tina-field={tina?.headlineWhite || undefined}
             className="block text-white"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
           >
             {headlineWhite}
           </span>{' '}
           <span
+            data-tina-field={tina?.headlineYellow || undefined}
             className="block text-primary-container"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
           >
@@ -80,14 +93,21 @@ export function HeroSection({
         </h1>
 
         {/* Subtext */}
-        <p className="font-sans text-lg md:text-xl text-white mb-6 max-w-2xl leading-relaxed">
+        <p
+          data-tina-field={tina?.subtext || undefined}
+          className="font-sans text-lg md:text-xl text-white mb-6 max-w-2xl leading-relaxed"
+        >
           {subtext}
         </p>
 
         {/* Adaptor caption — prominent, between subtext and CTAs */}
         {adaptorCaption && (
           <div className="border-l-4 border-primary-container pl-4 mb-6 max-w-xl">
-            <p className="font-sans font-bold text-white leading-snug" style={{ fontSize: 'clamp(1.1rem,2.5vw,1.4rem)' }}>
+            <p
+              data-tina-field={tina?.adaptorCaption || undefined}
+              className="font-sans font-bold text-white leading-snug"
+              style={{ fontSize: 'clamp(1.1rem,2.5vw,1.4rem)' }}
+            >
               {adaptorCaption}
             </p>
           </div>
