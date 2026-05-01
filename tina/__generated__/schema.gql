@@ -54,10 +54,8 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
-  siteSettings(relativePath: String): SiteSettings!
-  siteSettingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SiteSettingsFilter): SiteSettingsConnection!
-  navigation(relativePath: String): Navigation!
-  navigationConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavigationFilter): NavigationConnection!
+  settings(relativePath: String): Settings!
+  settingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SettingsFilter): SettingsConnection!
   page(relativePath: String): Page!
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
   gallery(relativePath: String): Gallery!
@@ -67,8 +65,7 @@ type Query {
 }
 
 input DocumentFilter {
-  siteSettings: SiteSettingsFilter
-  navigation: NavigationFilter
+  settings: SettingsFilter
   page: PageFilter
   gallery: GalleryFilter
   pricingOption: PricingOptionFilter
@@ -97,9 +94,9 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = SiteSettings | Navigation | Page | Gallery | PricingOption | Folder
+union DocumentNode = Settings | Page | Gallery | PricingOption | Folder
 
-type SiteSettingsAddress {
+type SettingsAddress {
   street: String
   suburb: String
   state: String
@@ -108,30 +105,44 @@ type SiteSettingsAddress {
   display: String
 }
 
-type SiteSettingsSocial {
+type SettingsSocial {
   facebook: String
   instagram: String
   google: String
 }
 
-type SiteSettingsPricing {
+type SettingsLogos {
+  light: String
+  dark: String
+  icon: String
+}
+
+type SettingsPricing {
   retrofitFromPerSqm: Float
   retrofitFromDisplay: String
 }
 
-type SiteSettingsTrustBarItems {
-  iconKey: String
+type SettingsMainNav {
   label: String
+  href: String
 }
 
-type SiteSettingsAdaptorDisclosure {
-  heading: String
-  mobileSubtitle: String
-  body1: String
-  body2: String
+type SettingsCtaNav {
+  label: String
+  href: String
 }
 
-type SiteSettingsPaymentTerms {
+type SettingsFooterServicesNav {
+  label: String
+  href: String
+}
+
+type SettingsFooterCompanyNav {
+  label: String
+  href: String
+}
+
+type SettingsPaymentTerms {
   depositTitle: String
   depositBody: String
   completionTitle: String
@@ -140,32 +151,31 @@ type SiteSettingsPaymentTerms {
   warrantyBody: String
 }
 
-type SiteSettingsFreeAdviceBlock {
-  eyebrow: String
-  headingLine1: String
-  headingLine2: String
-  body: String
-  buttonLabel: String
-}
-
-type SiteSettings implements Node & Document {
+type Settings implements Node & Document {
   name: String
   legalName: String
   domain: String
+  abn: String
+  licenseNumber: String
   phone: String
   phoneTel: String
   phoneHref: String
   email: String
   notificationEmail: String
-  abn: String
-  licenseNumber: String
-  address: SiteSettingsAddress
-  social: SiteSettingsSocial
-  pricing: SiteSettingsPricing
-  trustBarItems: [SiteSettingsTrustBarItems]
-  adaptorDisclosure: SiteSettingsAdaptorDisclosure
-  paymentTerms: SiteSettingsPaymentTerms
-  freeAdviceBlock: SiteSettingsFreeAdviceBlock
+  address: SettingsAddress
+  social: SettingsSocial
+  logos: SettingsLogos
+  pricing: SettingsPricing
+  footerTagline: String
+  footerBio: String
+  warrantyBlurb: String
+  mainNav: [SettingsMainNav]
+  ctaNav: SettingsCtaNav
+  footerServicesHeading: String
+  footerServicesNav: [SettingsFooterServicesNav]
+  footerCompanyHeading: String
+  footerCompanyNav: [SettingsFooterCompanyNav]
+  paymentTerms: SettingsPaymentTerms
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -178,7 +188,7 @@ input StringFilter {
   in: [String]
 }
 
-input SiteSettingsAddressFilter {
+input SettingsAddressFilter {
   street: StringFilter
   suburb: StringFilter
   state: StringFilter
@@ -187,10 +197,23 @@ input SiteSettingsAddressFilter {
   display: StringFilter
 }
 
-input SiteSettingsSocialFilter {
+input SettingsSocialFilter {
   facebook: StringFilter
   instagram: StringFilter
   google: StringFilter
+}
+
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input SettingsLogosFilter {
+  light: ImageFilter
+  dark: ImageFilter
+  icon: ImageFilter
 }
 
 input NumberFilter {
@@ -203,24 +226,32 @@ input NumberFilter {
   in: [Float]
 }
 
-input SiteSettingsPricingFilter {
+input SettingsPricingFilter {
   retrofitFromPerSqm: NumberFilter
   retrofitFromDisplay: StringFilter
 }
 
-input SiteSettingsTrustBarItemsFilter {
-  iconKey: StringFilter
+input SettingsMainNavFilter {
   label: StringFilter
+  href: StringFilter
 }
 
-input SiteSettingsAdaptorDisclosureFilter {
-  heading: StringFilter
-  mobileSubtitle: StringFilter
-  body1: StringFilter
-  body2: StringFilter
+input SettingsCtaNavFilter {
+  label: StringFilter
+  href: StringFilter
 }
 
-input SiteSettingsPaymentTermsFilter {
+input SettingsFooterServicesNavFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
+input SettingsFooterCompanyNavFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
+input SettingsPaymentTermsFilter {
   depositTitle: StringFilter
   depositBody: StringFilter
   completionTitle: StringFilter
@@ -229,111 +260,42 @@ input SiteSettingsPaymentTermsFilter {
   warrantyBody: StringFilter
 }
 
-input SiteSettingsFreeAdviceBlockFilter {
-  eyebrow: StringFilter
-  headingLine1: StringFilter
-  headingLine2: StringFilter
-  body: StringFilter
-  buttonLabel: StringFilter
-}
-
-input SiteSettingsFilter {
+input SettingsFilter {
   name: StringFilter
   legalName: StringFilter
   domain: StringFilter
+  abn: StringFilter
+  licenseNumber: StringFilter
   phone: StringFilter
   phoneTel: StringFilter
   phoneHref: StringFilter
   email: StringFilter
   notificationEmail: StringFilter
-  abn: StringFilter
-  licenseNumber: StringFilter
-  address: SiteSettingsAddressFilter
-  social: SiteSettingsSocialFilter
-  pricing: SiteSettingsPricingFilter
-  trustBarItems: SiteSettingsTrustBarItemsFilter
-  adaptorDisclosure: SiteSettingsAdaptorDisclosureFilter
-  paymentTerms: SiteSettingsPaymentTermsFilter
-  freeAdviceBlock: SiteSettingsFreeAdviceBlockFilter
+  address: SettingsAddressFilter
+  social: SettingsSocialFilter
+  logos: SettingsLogosFilter
+  pricing: SettingsPricingFilter
+  footerTagline: StringFilter
+  footerBio: StringFilter
+  warrantyBlurb: StringFilter
+  mainNav: SettingsMainNavFilter
+  ctaNav: SettingsCtaNavFilter
+  footerServicesHeading: StringFilter
+  footerServicesNav: SettingsFooterServicesNavFilter
+  footerCompanyHeading: StringFilter
+  footerCompanyNav: SettingsFooterCompanyNavFilter
+  paymentTerms: SettingsPaymentTermsFilter
 }
 
-type SiteSettingsConnectionEdges {
+type SettingsConnectionEdges {
   cursor: String!
-  node: SiteSettings
+  node: Settings
 }
 
-type SiteSettingsConnection implements Connection {
+type SettingsConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [SiteSettingsConnectionEdges]
-}
-
-type NavigationMainNav {
-  label: String
-  href: String
-}
-
-type NavigationCtaNav {
-  label: String
-  href: String
-}
-
-type NavigationFooterServicesNav {
-  label: String
-  href: String
-}
-
-type NavigationFooterCompanyNav {
-  label: String
-  href: String
-}
-
-type Navigation implements Node & Document {
-  mainNav: [NavigationMainNav]
-  ctaNav: NavigationCtaNav
-  footerServicesNav: [NavigationFooterServicesNav]
-  footerCompanyNav: [NavigationFooterCompanyNav]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input NavigationMainNavFilter {
-  label: StringFilter
-  href: StringFilter
-}
-
-input NavigationCtaNavFilter {
-  label: StringFilter
-  href: StringFilter
-}
-
-input NavigationFooterServicesNavFilter {
-  label: StringFilter
-  href: StringFilter
-}
-
-input NavigationFooterCompanyNavFilter {
-  label: StringFilter
-  href: StringFilter
-}
-
-input NavigationFilter {
-  mainNav: NavigationMainNavFilter
-  ctaNav: NavigationCtaNavFilter
-  footerServicesNav: NavigationFooterServicesNavFilter
-  footerCompanyNav: NavigationFooterCompanyNavFilter
-}
-
-type NavigationConnectionEdges {
-  cursor: String!
-  node: Navigation
-}
-
-type NavigationConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [NavigationConnectionEdges]
+  edges: [SettingsConnectionEdges]
 }
 
 type PageBlocksHeroPrimaryCta {
@@ -493,10 +455,17 @@ type PageBlocksCtaBannerPrimaryCta {
   href: String
 }
 
+type PageBlocksCtaBannerSecondaryCta {
+  label: String
+  href: String
+}
+
 type PageBlocksCtaBanner {
   heading: String
   subtext: String
   primaryCta: PageBlocksCtaBannerPrimaryCta
+  secondaryCta: PageBlocksCtaBannerSecondaryCta
+  trustItems: [String]
 }
 
 type PageBlocksGlassComparison {
@@ -578,13 +547,6 @@ input PageBlocksHeroPrimaryCtaFilter {
 input PageBlocksHeroSecondaryCtaFilter {
   label: StringFilter
   href: StringFilter
-}
-
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
 }
 
 input BooleanFilter {
@@ -739,10 +701,17 @@ input PageBlocksCtaBannerPrimaryCtaFilter {
   href: StringFilter
 }
 
+input PageBlocksCtaBannerSecondaryCtaFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
 input PageBlocksCtaBannerFilter {
   heading: StringFilter
   subtext: StringFilter
   primaryCta: PageBlocksCtaBannerPrimaryCtaFilter
+  secondaryCta: PageBlocksCtaBannerSecondaryCtaFilter
+  trustItems: StringFilter
 }
 
 input PageBlocksGlassComparisonFilter {
@@ -938,10 +907,8 @@ type Mutation {
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
-  updateSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
-  createSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
-  updateNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
-  createNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
+  updateSettings(relativePath: String!, params: SettingsMutation!): Settings!
+  createSettings(relativePath: String!, params: SettingsMutation!): Settings!
   updatePage(relativePath: String!, params: PageMutation!): Page!
   createPage(relativePath: String!, params: PageMutation!): Page!
   updateGallery(relativePath: String!, params: GalleryMutation!): Gallery!
@@ -951,8 +918,7 @@ type Mutation {
 }
 
 input DocumentUpdateMutation {
-  siteSettings: SiteSettingsMutation
-  navigation: NavigationMutation
+  settings: SettingsMutation
   page: PageMutation
   gallery: GalleryMutation
   pricingOption: PricingOptionMutation
@@ -960,14 +926,13 @@ input DocumentUpdateMutation {
 }
 
 input DocumentMutation {
-  siteSettings: SiteSettingsMutation
-  navigation: NavigationMutation
+  settings: SettingsMutation
   page: PageMutation
   gallery: GalleryMutation
   pricingOption: PricingOptionMutation
 }
 
-input SiteSettingsAddressMutation {
+input SettingsAddressMutation {
   street: String
   suburb: String
   state: String
@@ -976,30 +941,44 @@ input SiteSettingsAddressMutation {
   display: String
 }
 
-input SiteSettingsSocialMutation {
+input SettingsSocialMutation {
   facebook: String
   instagram: String
   google: String
 }
 
-input SiteSettingsPricingMutation {
+input SettingsLogosMutation {
+  light: String
+  dark: String
+  icon: String
+}
+
+input SettingsPricingMutation {
   retrofitFromPerSqm: Float
   retrofitFromDisplay: String
 }
 
-input SiteSettingsTrustBarItemsMutation {
-  iconKey: String
+input SettingsMainNavMutation {
   label: String
+  href: String
 }
 
-input SiteSettingsAdaptorDisclosureMutation {
-  heading: String
-  mobileSubtitle: String
-  body1: String
-  body2: String
+input SettingsCtaNavMutation {
+  label: String
+  href: String
 }
 
-input SiteSettingsPaymentTermsMutation {
+input SettingsFooterServicesNavMutation {
+  label: String
+  href: String
+}
+
+input SettingsFooterCompanyNavMutation {
+  label: String
+  href: String
+}
+
+input SettingsPaymentTermsMutation {
   depositTitle: String
   depositBody: String
   completionTitle: String
@@ -1008,59 +987,31 @@ input SiteSettingsPaymentTermsMutation {
   warrantyBody: String
 }
 
-input SiteSettingsFreeAdviceBlockMutation {
-  eyebrow: String
-  headingLine1: String
-  headingLine2: String
-  body: String
-  buttonLabel: String
-}
-
-input SiteSettingsMutation {
+input SettingsMutation {
   name: String
   legalName: String
   domain: String
+  abn: String
+  licenseNumber: String
   phone: String
   phoneTel: String
   phoneHref: String
   email: String
   notificationEmail: String
-  abn: String
-  licenseNumber: String
-  address: SiteSettingsAddressMutation
-  social: SiteSettingsSocialMutation
-  pricing: SiteSettingsPricingMutation
-  trustBarItems: [SiteSettingsTrustBarItemsMutation]
-  adaptorDisclosure: SiteSettingsAdaptorDisclosureMutation
-  paymentTerms: SiteSettingsPaymentTermsMutation
-  freeAdviceBlock: SiteSettingsFreeAdviceBlockMutation
-}
-
-input NavigationMainNavMutation {
-  label: String
-  href: String
-}
-
-input NavigationCtaNavMutation {
-  label: String
-  href: String
-}
-
-input NavigationFooterServicesNavMutation {
-  label: String
-  href: String
-}
-
-input NavigationFooterCompanyNavMutation {
-  label: String
-  href: String
-}
-
-input NavigationMutation {
-  mainNav: [NavigationMainNavMutation]
-  ctaNav: NavigationCtaNavMutation
-  footerServicesNav: [NavigationFooterServicesNavMutation]
-  footerCompanyNav: [NavigationFooterCompanyNavMutation]
+  address: SettingsAddressMutation
+  social: SettingsSocialMutation
+  logos: SettingsLogosMutation
+  pricing: SettingsPricingMutation
+  footerTagline: String
+  footerBio: String
+  warrantyBlurb: String
+  mainNav: [SettingsMainNavMutation]
+  ctaNav: SettingsCtaNavMutation
+  footerServicesHeading: String
+  footerServicesNav: [SettingsFooterServicesNavMutation]
+  footerCompanyHeading: String
+  footerCompanyNav: [SettingsFooterCompanyNavMutation]
+  paymentTerms: SettingsPaymentTermsMutation
 }
 
 input PageBlocksHeroPrimaryCtaMutation {
@@ -1220,10 +1171,17 @@ input PageBlocksCtaBannerPrimaryCtaMutation {
   href: String
 }
 
+input PageBlocksCtaBannerSecondaryCtaMutation {
+  label: String
+  href: String
+}
+
 input PageBlocksCtaBannerMutation {
   heading: String
   subtext: String
   primaryCta: PageBlocksCtaBannerPrimaryCtaMutation
+  secondaryCta: PageBlocksCtaBannerSecondaryCtaMutation
+  trustItems: [String]
 }
 
 input PageBlocksGlassComparisonMutation {

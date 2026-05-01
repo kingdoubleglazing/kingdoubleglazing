@@ -1,15 +1,15 @@
-fragment SiteSettingsParts on SiteSettings {
+fragment SettingsParts on Settings {
   __typename
   name
   legalName
   domain
+  abn
+  licenseNumber
   phone
   phoneTel
   phoneHref
   email
   notificationEmail
-  abn
-  licenseNumber
   address {
     __typename
     street
@@ -25,44 +25,20 @@ fragment SiteSettingsParts on SiteSettings {
     instagram
     google
   }
+  logos {
+    __typename
+    light
+    dark
+    icon
+  }
   pricing {
     __typename
     retrofitFromPerSqm
     retrofitFromDisplay
   }
-  trustBarItems {
-    __typename
-    iconKey
-    label
-  }
-  adaptorDisclosure {
-    __typename
-    heading
-    mobileSubtitle
-    body1
-    body2
-  }
-  paymentTerms {
-    __typename
-    depositTitle
-    depositBody
-    completionTitle
-    completionBody
-    warrantyTitle
-    warrantyBody
-  }
-  freeAdviceBlock {
-    __typename
-    eyebrow
-    headingLine1
-    headingLine2
-    body
-    buttonLabel
-  }
-}
-
-fragment NavigationParts on Navigation {
-  __typename
+  footerTagline
+  footerBio
+  warrantyBlurb
   mainNav {
     __typename
     label
@@ -73,15 +49,26 @@ fragment NavigationParts on Navigation {
     label
     href
   }
+  footerServicesHeading
   footerServicesNav {
     __typename
     label
     href
   }
+  footerCompanyHeading
   footerCompanyNav {
     __typename
     label
     href
+  }
+  paymentTerms {
+    __typename
+    depositTitle
+    depositBody
+    completionTitle
+    completionBody
+    warrantyTitle
+    warrantyBody
   }
 }
 
@@ -225,6 +212,12 @@ fragment PageParts on Page {
         label
         href
       }
+      secondaryCta {
+        __typename
+        label
+        href
+      }
+      trustItems
     }
     ... on PageBlocksGlassComparison {
       placeholder

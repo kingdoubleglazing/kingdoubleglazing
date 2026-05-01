@@ -49,7 +49,7 @@ function augmentBlocks(blocks: AnyBlock[]): AnyBlock[] {
       case 'contactForm':
         return { ...block, tina: { heading: sf(block, 'heading') } }
       case 'ctaBanner':
-        return { ...block, tina: { heading: sf(block, 'heading'), subtext: sf(block, 'subtext'), primaryCta: block.primaryCta ? { label: sf(block.primaryCta, 'label'), href: sf(block.primaryCta, 'href') } : undefined } }
+        return { ...block, tina: { heading: sf(block, 'heading'), subtext: sf(block, 'subtext'), primaryCta: block.primaryCta ? { label: sf(block.primaryCta, 'label'), href: sf(block.primaryCta, 'href') } : undefined, secondaryCta: { label: block.secondaryCta ? sf(block.secondaryCta, 'label') : sf(block, 'secondaryCta'), href: block.secondaryCta ? sf(block.secondaryCta, 'href') : undefined }, trustItems: sf(block, 'trustItems') } }
       case 'trustBar':
         return { ...block, tina: { items: ((block.items as AnyBlock[]) ?? []).map((item: AnyBlock) => item ? { iconKey: sf(item, 'iconKey'), label: sf(item, 'label') } : undefined) } }
       case 'contactCards':

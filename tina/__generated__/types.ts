@@ -82,10 +82,8 @@ export type Query = {
   collections: Array<Collection>;
   node: Node;
   document: DocumentNode;
-  siteSettings: SiteSettings;
-  siteSettingsConnection: SiteSettingsConnection;
-  navigation: Navigation;
-  navigationConnection: NavigationConnection;
+  settings: Settings;
+  settingsConnection: SettingsConnection;
   page: Page;
   pageConnection: PageConnection;
   gallery: Gallery;
@@ -116,33 +114,18 @@ export type QueryDocumentArgs = {
 };
 
 
-export type QuerySiteSettingsArgs = {
+export type QuerySettingsArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QuerySiteSettingsConnectionArgs = {
+export type QuerySettingsConnectionArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<SiteSettingsFilter>;
-};
-
-
-export type QueryNavigationArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryNavigationConnectionArgs = {
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<NavigationFilter>;
+  filter?: InputMaybe<SettingsFilter>;
 };
 
 
@@ -191,8 +174,7 @@ export type QueryPricingOptionConnectionArgs = {
 };
 
 export type DocumentFilter = {
-  siteSettings?: InputMaybe<SiteSettingsFilter>;
-  navigation?: InputMaybe<NavigationFilter>;
+  settings?: InputMaybe<SettingsFilter>;
   page?: InputMaybe<PageFilter>;
   gallery?: InputMaybe<GalleryFilter>;
   pricingOption?: InputMaybe<PricingOptionFilter>;
@@ -235,10 +217,10 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = SiteSettings | Navigation | Page | Gallery | PricingOption | Folder;
+export type DocumentNode = Settings | Page | Gallery | PricingOption | Folder;
 
-export type SiteSettingsAddress = {
-  __typename?: 'SiteSettingsAddress';
+export type SettingsAddress = {
+  __typename?: 'SettingsAddress';
   street?: Maybe<Scalars['String']['output']>;
   suburb?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
@@ -247,35 +229,52 @@ export type SiteSettingsAddress = {
   display?: Maybe<Scalars['String']['output']>;
 };
 
-export type SiteSettingsSocial = {
-  __typename?: 'SiteSettingsSocial';
+export type SettingsSocial = {
+  __typename?: 'SettingsSocial';
   facebook?: Maybe<Scalars['String']['output']>;
   instagram?: Maybe<Scalars['String']['output']>;
   google?: Maybe<Scalars['String']['output']>;
 };
 
-export type SiteSettingsPricing = {
-  __typename?: 'SiteSettingsPricing';
+export type SettingsLogos = {
+  __typename?: 'SettingsLogos';
+  light?: Maybe<Scalars['String']['output']>;
+  dark?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+};
+
+export type SettingsPricing = {
+  __typename?: 'SettingsPricing';
   retrofitFromPerSqm?: Maybe<Scalars['Float']['output']>;
   retrofitFromDisplay?: Maybe<Scalars['String']['output']>;
 };
 
-export type SiteSettingsTrustBarItems = {
-  __typename?: 'SiteSettingsTrustBarItems';
-  iconKey?: Maybe<Scalars['String']['output']>;
+export type SettingsMainNav = {
+  __typename?: 'SettingsMainNav';
   label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
 };
 
-export type SiteSettingsAdaptorDisclosure = {
-  __typename?: 'SiteSettingsAdaptorDisclosure';
-  heading?: Maybe<Scalars['String']['output']>;
-  mobileSubtitle?: Maybe<Scalars['String']['output']>;
-  body1?: Maybe<Scalars['String']['output']>;
-  body2?: Maybe<Scalars['String']['output']>;
+export type SettingsCtaNav = {
+  __typename?: 'SettingsCtaNav';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
 };
 
-export type SiteSettingsPaymentTerms = {
-  __typename?: 'SiteSettingsPaymentTerms';
+export type SettingsFooterServicesNav = {
+  __typename?: 'SettingsFooterServicesNav';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type SettingsFooterCompanyNav = {
+  __typename?: 'SettingsFooterCompanyNav';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type SettingsPaymentTerms = {
+  __typename?: 'SettingsPaymentTerms';
   depositTitle?: Maybe<Scalars['String']['output']>;
   depositBody?: Maybe<Scalars['String']['output']>;
   completionTitle?: Maybe<Scalars['String']['output']>;
@@ -284,34 +283,32 @@ export type SiteSettingsPaymentTerms = {
   warrantyBody?: Maybe<Scalars['String']['output']>;
 };
 
-export type SiteSettingsFreeAdviceBlock = {
-  __typename?: 'SiteSettingsFreeAdviceBlock';
-  eyebrow?: Maybe<Scalars['String']['output']>;
-  headingLine1?: Maybe<Scalars['String']['output']>;
-  headingLine2?: Maybe<Scalars['String']['output']>;
-  body?: Maybe<Scalars['String']['output']>;
-  buttonLabel?: Maybe<Scalars['String']['output']>;
-};
-
-export type SiteSettings = Node & Document & {
-  __typename?: 'SiteSettings';
+export type Settings = Node & Document & {
+  __typename?: 'Settings';
   name?: Maybe<Scalars['String']['output']>;
   legalName?: Maybe<Scalars['String']['output']>;
   domain?: Maybe<Scalars['String']['output']>;
+  abn?: Maybe<Scalars['String']['output']>;
+  licenseNumber?: Maybe<Scalars['String']['output']>;
   phone?: Maybe<Scalars['String']['output']>;
   phoneTel?: Maybe<Scalars['String']['output']>;
   phoneHref?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   notificationEmail?: Maybe<Scalars['String']['output']>;
-  abn?: Maybe<Scalars['String']['output']>;
-  licenseNumber?: Maybe<Scalars['String']['output']>;
-  address?: Maybe<SiteSettingsAddress>;
-  social?: Maybe<SiteSettingsSocial>;
-  pricing?: Maybe<SiteSettingsPricing>;
-  trustBarItems?: Maybe<Array<Maybe<SiteSettingsTrustBarItems>>>;
-  adaptorDisclosure?: Maybe<SiteSettingsAdaptorDisclosure>;
-  paymentTerms?: Maybe<SiteSettingsPaymentTerms>;
-  freeAdviceBlock?: Maybe<SiteSettingsFreeAdviceBlock>;
+  address?: Maybe<SettingsAddress>;
+  social?: Maybe<SettingsSocial>;
+  logos?: Maybe<SettingsLogos>;
+  pricing?: Maybe<SettingsPricing>;
+  footerTagline?: Maybe<Scalars['String']['output']>;
+  footerBio?: Maybe<Scalars['String']['output']>;
+  warrantyBlurb?: Maybe<Scalars['String']['output']>;
+  mainNav?: Maybe<Array<Maybe<SettingsMainNav>>>;
+  ctaNav?: Maybe<SettingsCtaNav>;
+  footerServicesHeading?: Maybe<Scalars['String']['output']>;
+  footerServicesNav?: Maybe<Array<Maybe<SettingsFooterServicesNav>>>;
+  footerCompanyHeading?: Maybe<Scalars['String']['output']>;
+  footerCompanyNav?: Maybe<Array<Maybe<SettingsFooterCompanyNav>>>;
+  paymentTerms?: Maybe<SettingsPaymentTerms>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -324,7 +321,7 @@ export type StringFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type SiteSettingsAddressFilter = {
+export type SettingsAddressFilter = {
   street?: InputMaybe<StringFilter>;
   suburb?: InputMaybe<StringFilter>;
   state?: InputMaybe<StringFilter>;
@@ -333,10 +330,23 @@ export type SiteSettingsAddressFilter = {
   display?: InputMaybe<StringFilter>;
 };
 
-export type SiteSettingsSocialFilter = {
+export type SettingsSocialFilter = {
   facebook?: InputMaybe<StringFilter>;
   instagram?: InputMaybe<StringFilter>;
   google?: InputMaybe<StringFilter>;
+};
+
+export type ImageFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type SettingsLogosFilter = {
+  light?: InputMaybe<ImageFilter>;
+  dark?: InputMaybe<ImageFilter>;
+  icon?: InputMaybe<ImageFilter>;
 };
 
 export type NumberFilter = {
@@ -349,24 +359,32 @@ export type NumberFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
 };
 
-export type SiteSettingsPricingFilter = {
+export type SettingsPricingFilter = {
   retrofitFromPerSqm?: InputMaybe<NumberFilter>;
   retrofitFromDisplay?: InputMaybe<StringFilter>;
 };
 
-export type SiteSettingsTrustBarItemsFilter = {
-  iconKey?: InputMaybe<StringFilter>;
+export type SettingsMainNavFilter = {
   label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
 };
 
-export type SiteSettingsAdaptorDisclosureFilter = {
-  heading?: InputMaybe<StringFilter>;
-  mobileSubtitle?: InputMaybe<StringFilter>;
-  body1?: InputMaybe<StringFilter>;
-  body2?: InputMaybe<StringFilter>;
+export type SettingsCtaNavFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
 };
 
-export type SiteSettingsPaymentTermsFilter = {
+export type SettingsFooterServicesNavFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type SettingsFooterCompanyNavFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type SettingsPaymentTermsFilter = {
   depositTitle?: InputMaybe<StringFilter>;
   depositBody?: InputMaybe<StringFilter>;
   completionTitle?: InputMaybe<StringFilter>;
@@ -375,120 +393,44 @@ export type SiteSettingsPaymentTermsFilter = {
   warrantyBody?: InputMaybe<StringFilter>;
 };
 
-export type SiteSettingsFreeAdviceBlockFilter = {
-  eyebrow?: InputMaybe<StringFilter>;
-  headingLine1?: InputMaybe<StringFilter>;
-  headingLine2?: InputMaybe<StringFilter>;
-  body?: InputMaybe<StringFilter>;
-  buttonLabel?: InputMaybe<StringFilter>;
-};
-
-export type SiteSettingsFilter = {
+export type SettingsFilter = {
   name?: InputMaybe<StringFilter>;
   legalName?: InputMaybe<StringFilter>;
   domain?: InputMaybe<StringFilter>;
+  abn?: InputMaybe<StringFilter>;
+  licenseNumber?: InputMaybe<StringFilter>;
   phone?: InputMaybe<StringFilter>;
   phoneTel?: InputMaybe<StringFilter>;
   phoneHref?: InputMaybe<StringFilter>;
   email?: InputMaybe<StringFilter>;
   notificationEmail?: InputMaybe<StringFilter>;
-  abn?: InputMaybe<StringFilter>;
-  licenseNumber?: InputMaybe<StringFilter>;
-  address?: InputMaybe<SiteSettingsAddressFilter>;
-  social?: InputMaybe<SiteSettingsSocialFilter>;
-  pricing?: InputMaybe<SiteSettingsPricingFilter>;
-  trustBarItems?: InputMaybe<SiteSettingsTrustBarItemsFilter>;
-  adaptorDisclosure?: InputMaybe<SiteSettingsAdaptorDisclosureFilter>;
-  paymentTerms?: InputMaybe<SiteSettingsPaymentTermsFilter>;
-  freeAdviceBlock?: InputMaybe<SiteSettingsFreeAdviceBlockFilter>;
+  address?: InputMaybe<SettingsAddressFilter>;
+  social?: InputMaybe<SettingsSocialFilter>;
+  logos?: InputMaybe<SettingsLogosFilter>;
+  pricing?: InputMaybe<SettingsPricingFilter>;
+  footerTagline?: InputMaybe<StringFilter>;
+  footerBio?: InputMaybe<StringFilter>;
+  warrantyBlurb?: InputMaybe<StringFilter>;
+  mainNav?: InputMaybe<SettingsMainNavFilter>;
+  ctaNav?: InputMaybe<SettingsCtaNavFilter>;
+  footerServicesHeading?: InputMaybe<StringFilter>;
+  footerServicesNav?: InputMaybe<SettingsFooterServicesNavFilter>;
+  footerCompanyHeading?: InputMaybe<StringFilter>;
+  footerCompanyNav?: InputMaybe<SettingsFooterCompanyNavFilter>;
+  paymentTerms?: InputMaybe<SettingsPaymentTermsFilter>;
 };
 
-export type SiteSettingsConnectionEdges = {
-  __typename?: 'SiteSettingsConnectionEdges';
+export type SettingsConnectionEdges = {
+  __typename?: 'SettingsConnectionEdges';
   cursor: Scalars['String']['output'];
-  node?: Maybe<SiteSettings>;
+  node?: Maybe<Settings>;
 };
 
-export type SiteSettingsConnection = Connection & {
-  __typename?: 'SiteSettingsConnection';
+export type SettingsConnection = Connection & {
+  __typename?: 'SettingsConnection';
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<SiteSettingsConnectionEdges>>>;
-};
-
-export type NavigationMainNav = {
-  __typename?: 'NavigationMainNav';
-  label?: Maybe<Scalars['String']['output']>;
-  href?: Maybe<Scalars['String']['output']>;
-};
-
-export type NavigationCtaNav = {
-  __typename?: 'NavigationCtaNav';
-  label?: Maybe<Scalars['String']['output']>;
-  href?: Maybe<Scalars['String']['output']>;
-};
-
-export type NavigationFooterServicesNav = {
-  __typename?: 'NavigationFooterServicesNav';
-  label?: Maybe<Scalars['String']['output']>;
-  href?: Maybe<Scalars['String']['output']>;
-};
-
-export type NavigationFooterCompanyNav = {
-  __typename?: 'NavigationFooterCompanyNav';
-  label?: Maybe<Scalars['String']['output']>;
-  href?: Maybe<Scalars['String']['output']>;
-};
-
-export type Navigation = Node & Document & {
-  __typename?: 'Navigation';
-  mainNav?: Maybe<Array<Maybe<NavigationMainNav>>>;
-  ctaNav?: Maybe<NavigationCtaNav>;
-  footerServicesNav?: Maybe<Array<Maybe<NavigationFooterServicesNav>>>;
-  footerCompanyNav?: Maybe<Array<Maybe<NavigationFooterCompanyNav>>>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type NavigationMainNavFilter = {
-  label?: InputMaybe<StringFilter>;
-  href?: InputMaybe<StringFilter>;
-};
-
-export type NavigationCtaNavFilter = {
-  label?: InputMaybe<StringFilter>;
-  href?: InputMaybe<StringFilter>;
-};
-
-export type NavigationFooterServicesNavFilter = {
-  label?: InputMaybe<StringFilter>;
-  href?: InputMaybe<StringFilter>;
-};
-
-export type NavigationFooterCompanyNavFilter = {
-  label?: InputMaybe<StringFilter>;
-  href?: InputMaybe<StringFilter>;
-};
-
-export type NavigationFilter = {
-  mainNav?: InputMaybe<NavigationMainNavFilter>;
-  ctaNav?: InputMaybe<NavigationCtaNavFilter>;
-  footerServicesNav?: InputMaybe<NavigationFooterServicesNavFilter>;
-  footerCompanyNav?: InputMaybe<NavigationFooterCompanyNavFilter>;
-};
-
-export type NavigationConnectionEdges = {
-  __typename?: 'NavigationConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<Navigation>;
-};
-
-export type NavigationConnection = Connection & {
-  __typename?: 'NavigationConnection';
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<NavigationConnectionEdges>>>;
+  edges?: Maybe<Array<Maybe<SettingsConnectionEdges>>>;
 };
 
 export type PageBlocksHeroPrimaryCta = {
@@ -673,11 +615,19 @@ export type PageBlocksCtaBannerPrimaryCta = {
   href?: Maybe<Scalars['String']['output']>;
 };
 
+export type PageBlocksCtaBannerSecondaryCta = {
+  __typename?: 'PageBlocksCtaBannerSecondaryCta';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
 export type PageBlocksCtaBanner = {
   __typename?: 'PageBlocksCtaBanner';
   heading?: Maybe<Scalars['String']['output']>;
   subtext?: Maybe<Scalars['String']['output']>;
   primaryCta?: Maybe<PageBlocksCtaBannerPrimaryCta>;
+  secondaryCta?: Maybe<PageBlocksCtaBannerSecondaryCta>;
+  trustItems?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
 export type PageBlocksGlassComparison = {
@@ -770,13 +720,6 @@ export type PageBlocksHeroPrimaryCtaFilter = {
 export type PageBlocksHeroSecondaryCtaFilter = {
   label?: InputMaybe<StringFilter>;
   href?: InputMaybe<StringFilter>;
-};
-
-export type ImageFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type BooleanFilter = {
@@ -931,10 +874,17 @@ export type PageBlocksCtaBannerPrimaryCtaFilter = {
   href?: InputMaybe<StringFilter>;
 };
 
+export type PageBlocksCtaBannerSecondaryCtaFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
 export type PageBlocksCtaBannerFilter = {
   heading?: InputMaybe<StringFilter>;
   subtext?: InputMaybe<StringFilter>;
   primaryCta?: InputMaybe<PageBlocksCtaBannerPrimaryCtaFilter>;
+  secondaryCta?: InputMaybe<PageBlocksCtaBannerSecondaryCtaFilter>;
+  trustItems?: InputMaybe<StringFilter>;
 };
 
 export type PageBlocksGlassComparisonFilter = {
@@ -1140,10 +1090,8 @@ export type Mutation = {
   deleteDocument: DocumentNode;
   createDocument: DocumentNode;
   createFolder: DocumentNode;
-  updateSiteSettings: SiteSettings;
-  createSiteSettings: SiteSettings;
-  updateNavigation: Navigation;
-  createNavigation: Navigation;
+  updateSettings: Settings;
+  createSettings: Settings;
   updatePage: Page;
   createPage: Page;
   updateGallery: Gallery;
@@ -1186,27 +1134,15 @@ export type MutationCreateFolderArgs = {
 };
 
 
-export type MutationUpdateSiteSettingsArgs = {
+export type MutationUpdateSettingsArgs = {
   relativePath: Scalars['String']['input'];
-  params: SiteSettingsMutation;
+  params: SettingsMutation;
 };
 
 
-export type MutationCreateSiteSettingsArgs = {
+export type MutationCreateSettingsArgs = {
   relativePath: Scalars['String']['input'];
-  params: SiteSettingsMutation;
-};
-
-
-export type MutationUpdateNavigationArgs = {
-  relativePath: Scalars['String']['input'];
-  params: NavigationMutation;
-};
-
-
-export type MutationCreateNavigationArgs = {
-  relativePath: Scalars['String']['input'];
-  params: NavigationMutation;
+  params: SettingsMutation;
 };
 
 
@@ -1246,8 +1182,7 @@ export type MutationCreatePricingOptionArgs = {
 };
 
 export type DocumentUpdateMutation = {
-  siteSettings?: InputMaybe<SiteSettingsMutation>;
-  navigation?: InputMaybe<NavigationMutation>;
+  settings?: InputMaybe<SettingsMutation>;
   page?: InputMaybe<PageMutation>;
   gallery?: InputMaybe<GalleryMutation>;
   pricingOption?: InputMaybe<PricingOptionMutation>;
@@ -1255,14 +1190,13 @@ export type DocumentUpdateMutation = {
 };
 
 export type DocumentMutation = {
-  siteSettings?: InputMaybe<SiteSettingsMutation>;
-  navigation?: InputMaybe<NavigationMutation>;
+  settings?: InputMaybe<SettingsMutation>;
   page?: InputMaybe<PageMutation>;
   gallery?: InputMaybe<GalleryMutation>;
   pricingOption?: InputMaybe<PricingOptionMutation>;
 };
 
-export type SiteSettingsAddressMutation = {
+export type SettingsAddressMutation = {
   street?: InputMaybe<Scalars['String']['input']>;
   suburb?: InputMaybe<Scalars['String']['input']>;
   state?: InputMaybe<Scalars['String']['input']>;
@@ -1271,30 +1205,44 @@ export type SiteSettingsAddressMutation = {
   display?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SiteSettingsSocialMutation = {
+export type SettingsSocialMutation = {
   facebook?: InputMaybe<Scalars['String']['input']>;
   instagram?: InputMaybe<Scalars['String']['input']>;
   google?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SiteSettingsPricingMutation = {
+export type SettingsLogosMutation = {
+  light?: InputMaybe<Scalars['String']['input']>;
+  dark?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SettingsPricingMutation = {
   retrofitFromPerSqm?: InputMaybe<Scalars['Float']['input']>;
   retrofitFromDisplay?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SiteSettingsTrustBarItemsMutation = {
-  iconKey?: InputMaybe<Scalars['String']['input']>;
+export type SettingsMainNavMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SiteSettingsAdaptorDisclosureMutation = {
-  heading?: InputMaybe<Scalars['String']['input']>;
-  mobileSubtitle?: InputMaybe<Scalars['String']['input']>;
-  body1?: InputMaybe<Scalars['String']['input']>;
-  body2?: InputMaybe<Scalars['String']['input']>;
+export type SettingsCtaNavMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SiteSettingsPaymentTermsMutation = {
+export type SettingsFooterServicesNavMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SettingsFooterCompanyNavMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SettingsPaymentTermsMutation = {
   depositTitle?: InputMaybe<Scalars['String']['input']>;
   depositBody?: InputMaybe<Scalars['String']['input']>;
   completionTitle?: InputMaybe<Scalars['String']['input']>;
@@ -1303,59 +1251,31 @@ export type SiteSettingsPaymentTermsMutation = {
   warrantyBody?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SiteSettingsFreeAdviceBlockMutation = {
-  eyebrow?: InputMaybe<Scalars['String']['input']>;
-  headingLine1?: InputMaybe<Scalars['String']['input']>;
-  headingLine2?: InputMaybe<Scalars['String']['input']>;
-  body?: InputMaybe<Scalars['String']['input']>;
-  buttonLabel?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type SiteSettingsMutation = {
+export type SettingsMutation = {
   name?: InputMaybe<Scalars['String']['input']>;
   legalName?: InputMaybe<Scalars['String']['input']>;
   domain?: InputMaybe<Scalars['String']['input']>;
+  abn?: InputMaybe<Scalars['String']['input']>;
+  licenseNumber?: InputMaybe<Scalars['String']['input']>;
   phone?: InputMaybe<Scalars['String']['input']>;
   phoneTel?: InputMaybe<Scalars['String']['input']>;
   phoneHref?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   notificationEmail?: InputMaybe<Scalars['String']['input']>;
-  abn?: InputMaybe<Scalars['String']['input']>;
-  licenseNumber?: InputMaybe<Scalars['String']['input']>;
-  address?: InputMaybe<SiteSettingsAddressMutation>;
-  social?: InputMaybe<SiteSettingsSocialMutation>;
-  pricing?: InputMaybe<SiteSettingsPricingMutation>;
-  trustBarItems?: InputMaybe<Array<InputMaybe<SiteSettingsTrustBarItemsMutation>>>;
-  adaptorDisclosure?: InputMaybe<SiteSettingsAdaptorDisclosureMutation>;
-  paymentTerms?: InputMaybe<SiteSettingsPaymentTermsMutation>;
-  freeAdviceBlock?: InputMaybe<SiteSettingsFreeAdviceBlockMutation>;
-};
-
-export type NavigationMainNavMutation = {
-  label?: InputMaybe<Scalars['String']['input']>;
-  href?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type NavigationCtaNavMutation = {
-  label?: InputMaybe<Scalars['String']['input']>;
-  href?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type NavigationFooterServicesNavMutation = {
-  label?: InputMaybe<Scalars['String']['input']>;
-  href?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type NavigationFooterCompanyNavMutation = {
-  label?: InputMaybe<Scalars['String']['input']>;
-  href?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type NavigationMutation = {
-  mainNav?: InputMaybe<Array<InputMaybe<NavigationMainNavMutation>>>;
-  ctaNav?: InputMaybe<NavigationCtaNavMutation>;
-  footerServicesNav?: InputMaybe<Array<InputMaybe<NavigationFooterServicesNavMutation>>>;
-  footerCompanyNav?: InputMaybe<Array<InputMaybe<NavigationFooterCompanyNavMutation>>>;
+  address?: InputMaybe<SettingsAddressMutation>;
+  social?: InputMaybe<SettingsSocialMutation>;
+  logos?: InputMaybe<SettingsLogosMutation>;
+  pricing?: InputMaybe<SettingsPricingMutation>;
+  footerTagline?: InputMaybe<Scalars['String']['input']>;
+  footerBio?: InputMaybe<Scalars['String']['input']>;
+  warrantyBlurb?: InputMaybe<Scalars['String']['input']>;
+  mainNav?: InputMaybe<Array<InputMaybe<SettingsMainNavMutation>>>;
+  ctaNav?: InputMaybe<SettingsCtaNavMutation>;
+  footerServicesHeading?: InputMaybe<Scalars['String']['input']>;
+  footerServicesNav?: InputMaybe<Array<InputMaybe<SettingsFooterServicesNavMutation>>>;
+  footerCompanyHeading?: InputMaybe<Scalars['String']['input']>;
+  footerCompanyNav?: InputMaybe<Array<InputMaybe<SettingsFooterCompanyNavMutation>>>;
+  paymentTerms?: InputMaybe<SettingsPaymentTermsMutation>;
 };
 
 export type PageBlocksHeroPrimaryCtaMutation = {
@@ -1515,10 +1435,17 @@ export type PageBlocksCtaBannerPrimaryCtaMutation = {
   href?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type PageBlocksCtaBannerSecondaryCtaMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type PageBlocksCtaBannerMutation = {
   heading?: InputMaybe<Scalars['String']['input']>;
   subtext?: InputMaybe<Scalars['String']['input']>;
   primaryCta?: InputMaybe<PageBlocksCtaBannerPrimaryCtaMutation>;
+  secondaryCta?: InputMaybe<PageBlocksCtaBannerSecondaryCtaMutation>;
+  trustItems?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type PageBlocksGlassComparisonMutation = {
@@ -1639,60 +1566,39 @@ export type PricingOptionMutation = {
   tech?: InputMaybe<PricingOptionTechMutation>;
 };
 
-export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', name?: string | null, legalName?: string | null, domain?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, abn?: string | null, licenseNumber?: string | null, address?: { __typename: 'SiteSettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SiteSettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, pricing?: { __typename: 'SiteSettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, trustBarItems?: Array<{ __typename: 'SiteSettingsTrustBarItems', iconKey?: string | null, label?: string | null } | null> | null, adaptorDisclosure?: { __typename: 'SiteSettingsAdaptorDisclosure', heading?: string | null, mobileSubtitle?: string | null, body1?: string | null, body2?: string | null } | null, paymentTerms?: { __typename: 'SiteSettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null, freeAdviceBlock?: { __typename: 'SiteSettingsFreeAdviceBlock', eyebrow?: string | null, headingLine1?: string | null, headingLine2?: string | null, body?: string | null, buttonLabel?: string | null } | null };
+export type SettingsPartsFragment = { __typename: 'Settings', name?: string | null, legalName?: string | null, domain?: string | null, abn?: string | null, licenseNumber?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, footerTagline?: string | null, footerBio?: string | null, warrantyBlurb?: string | null, footerServicesHeading?: string | null, footerCompanyHeading?: string | null, address?: { __typename: 'SettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, logos?: { __typename: 'SettingsLogos', light?: string | null, dark?: string | null, icon?: string | null } | null, pricing?: { __typename: 'SettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, mainNav?: Array<{ __typename: 'SettingsMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'SettingsCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'SettingsFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'SettingsFooterCompanyNav', label?: string | null, href?: string | null } | null> | null, paymentTerms?: { __typename: 'SettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null };
 
-export type NavigationPartsFragment = { __typename: 'Navigation', mainNav?: Array<{ __typename: 'NavigationMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'NavigationCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'NavigationFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'NavigationFooterCompanyNav', label?: string | null, href?: string | null } | null> | null };
-
-export type PagePartsFragment = { __typename: 'Page', blocks?: Array<{ __typename: 'PageBlocksHero', variant?: string | null, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, imageSrc?: string | null, imageAlt?: string | null, showWarrantyBadge?: boolean | null, adaptorCaption?: string | null, accentWord?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksTrustBar', items?: Array<{ __typename: 'PageBlocksTrustBarItems', iconKey?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWhyRetrofit', eyebrow?: string | null, heading1?: string | null, heading2?: string | null, items?: Array<{ __typename: 'PageBlocksWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null } | { __typename: 'PageBlocksProcessSteps', heading?: string | null, subheading?: string | null, cta?: { __typename: 'PageBlocksProcessStepsCta', label?: string | null, href?: string | null } | null, steps?: Array<{ __typename: 'PageBlocksProcessStepsSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null } | { __typename: 'PageBlocksEstimateCta', headline?: string | null, subtext?: string | null, caption?: string | null, cta?: { __typename: 'PageBlocksEstimateCtaCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksFaq', heading?: string | null, subheading?: string | null, faqs?: Array<{ __typename: 'PageBlocksFaqFaqs', q?: string | null, a?: string | null } | null> | null } | { __typename: 'PageBlocksServiceSection', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, variant?: string | null, imageSrc?: string | null, imageAlt?: string | null, primaryCta?: { __typename: 'PageBlocksServiceSectionPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksServiceSectionSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksStoryWithStats', eyebrow?: string | null, paragraphs?: Array<string | null> | null, quote?: string | null, stats?: Array<{ __typename: 'PageBlocksStoryWithStatsStats', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWarrantyCoverage', claimSteps?: Array<string | null> | null, coveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } | { __typename: 'PageBlocksContactCards', phoneSublabel?: string | null, emailSublabel?: string | null, areaSublabel?: string | null, emergencySublabel?: string | null } | { __typename: 'PageBlocksContactForm', heading?: string | null } | { __typename: 'PageBlocksCtaBanner', heading?: string | null, subtext?: string | null, primaryCta?: { __typename: 'PageBlocksCtaBannerPrimaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksGlassComparison', placeholder?: string | null } | { __typename: 'PageBlocksGlassTechSpecs', placeholder?: string | null } | { __typename: 'PageBlocksAdaptorDisclosure', heading?: string | null, mobileSubtitle?: string | null, body1?: string | null, body2?: string | null } | { __typename: 'PageBlocksPaymentTerms', eyebrow?: string | null, heading?: string | null, depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | { __typename: 'PageBlocksFreeAdvice', eyebrow?: string | null, headingLine1?: string | null, headingLine2?: string | null, body?: string | null, buttonLabel?: string | null } | { __typename: 'PageBlocksWhatElseStrip', eyebrow?: string | null, heading?: string | null, cta?: { __typename: 'PageBlocksWhatElseStripCta', label?: string | null, href?: string | null } | null, services?: Array<{ __typename: 'PageBlocksWhatElseStripServices', label?: string | null, href?: string | null } | null> | null } | { __typename: 'PageBlocksEmergencyStrip', boldText?: string | null, text?: string | null, cta?: { __typename: 'PageBlocksEmergencyStripCta', label?: string | null, href?: string | null } | null } | null> | null };
+export type PagePartsFragment = { __typename: 'Page', blocks?: Array<{ __typename: 'PageBlocksHero', variant?: string | null, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, imageSrc?: string | null, imageAlt?: string | null, showWarrantyBadge?: boolean | null, adaptorCaption?: string | null, accentWord?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksTrustBar', items?: Array<{ __typename: 'PageBlocksTrustBarItems', iconKey?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWhyRetrofit', eyebrow?: string | null, heading1?: string | null, heading2?: string | null, items?: Array<{ __typename: 'PageBlocksWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null } | { __typename: 'PageBlocksProcessSteps', heading?: string | null, subheading?: string | null, cta?: { __typename: 'PageBlocksProcessStepsCta', label?: string | null, href?: string | null } | null, steps?: Array<{ __typename: 'PageBlocksProcessStepsSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null } | { __typename: 'PageBlocksEstimateCta', headline?: string | null, subtext?: string | null, caption?: string | null, cta?: { __typename: 'PageBlocksEstimateCtaCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksFaq', heading?: string | null, subheading?: string | null, faqs?: Array<{ __typename: 'PageBlocksFaqFaqs', q?: string | null, a?: string | null } | null> | null } | { __typename: 'PageBlocksServiceSection', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, variant?: string | null, imageSrc?: string | null, imageAlt?: string | null, primaryCta?: { __typename: 'PageBlocksServiceSectionPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksServiceSectionSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksStoryWithStats', eyebrow?: string | null, paragraphs?: Array<string | null> | null, quote?: string | null, stats?: Array<{ __typename: 'PageBlocksStoryWithStatsStats', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWarrantyCoverage', claimSteps?: Array<string | null> | null, coveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } | { __typename: 'PageBlocksContactCards', phoneSublabel?: string | null, emailSublabel?: string | null, areaSublabel?: string | null, emergencySublabel?: string | null } | { __typename: 'PageBlocksContactForm', heading?: string | null } | { __typename: 'PageBlocksCtaBanner', heading?: string | null, subtext?: string | null, trustItems?: Array<string | null> | null, primaryCta?: { __typename: 'PageBlocksCtaBannerPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksCtaBannerSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksGlassComparison', placeholder?: string | null } | { __typename: 'PageBlocksGlassTechSpecs', placeholder?: string | null } | { __typename: 'PageBlocksAdaptorDisclosure', heading?: string | null, mobileSubtitle?: string | null, body1?: string | null, body2?: string | null } | { __typename: 'PageBlocksPaymentTerms', eyebrow?: string | null, heading?: string | null, depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | { __typename: 'PageBlocksFreeAdvice', eyebrow?: string | null, headingLine1?: string | null, headingLine2?: string | null, body?: string | null, buttonLabel?: string | null } | { __typename: 'PageBlocksWhatElseStrip', eyebrow?: string | null, heading?: string | null, cta?: { __typename: 'PageBlocksWhatElseStripCta', label?: string | null, href?: string | null } | null, services?: Array<{ __typename: 'PageBlocksWhatElseStripServices', label?: string | null, href?: string | null } | null> | null } | { __typename: 'PageBlocksEmergencyStrip', boldText?: string | null, text?: string | null, cta?: { __typename: 'PageBlocksEmergencyStripCta', label?: string | null, href?: string | null } | null } | null> | null };
 
 export type GalleryPartsFragment = { __typename: 'Gallery', src?: string | null, alt?: string | null, category?: string | null, caption?: string | null, order?: number | null };
 
 export type PricingOptionPartsFragment = { __typename: 'PricingOption', optionKey?: string | null, label?: string | null, sublabel?: string | null, spec?: string | null, pricePerSqm?: number | null, heatPct?: number | null, noisePct?: number | null, tech?: { __typename: 'PricingOptionTech', composition?: Array<string | null> | null, spacerMm?: number | null, lowE?: boolean | null, acousticPVB?: boolean | null, tinted?: boolean | null, bestFor?: string | null, rwRating?: string | null, notes?: string | null } | null };
 
-export type SiteSettingsQueryVariables = Exact<{
+export type SettingsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type SiteSettingsQuery = { __typename?: 'Query', siteSettings: { __typename: 'SiteSettings', id: string, name?: string | null, legalName?: string | null, domain?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, abn?: string | null, licenseNumber?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, address?: { __typename: 'SiteSettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SiteSettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, pricing?: { __typename: 'SiteSettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, trustBarItems?: Array<{ __typename: 'SiteSettingsTrustBarItems', iconKey?: string | null, label?: string | null } | null> | null, adaptorDisclosure?: { __typename: 'SiteSettingsAdaptorDisclosure', heading?: string | null, mobileSubtitle?: string | null, body1?: string | null, body2?: string | null } | null, paymentTerms?: { __typename: 'SiteSettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null, freeAdviceBlock?: { __typename: 'SiteSettingsFreeAdviceBlock', eyebrow?: string | null, headingLine1?: string | null, headingLine2?: string | null, body?: string | null, buttonLabel?: string | null } | null } };
+export type SettingsQuery = { __typename?: 'Query', settings: { __typename: 'Settings', id: string, name?: string | null, legalName?: string | null, domain?: string | null, abn?: string | null, licenseNumber?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, footerTagline?: string | null, footerBio?: string | null, warrantyBlurb?: string | null, footerServicesHeading?: string | null, footerCompanyHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, address?: { __typename: 'SettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, logos?: { __typename: 'SettingsLogos', light?: string | null, dark?: string | null, icon?: string | null } | null, pricing?: { __typename: 'SettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, mainNav?: Array<{ __typename: 'SettingsMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'SettingsCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'SettingsFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'SettingsFooterCompanyNav', label?: string | null, href?: string | null } | null> | null, paymentTerms?: { __typename: 'SettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null } };
 
-export type SiteSettingsConnectionQueryVariables = Exact<{
+export type SettingsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<SiteSettingsFilter>;
+  filter?: InputMaybe<SettingsFilter>;
 }>;
 
 
-export type SiteSettingsConnectionQuery = { __typename?: 'Query', siteSettingsConnection: { __typename?: 'SiteSettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteSettingsConnectionEdges', cursor: string, node?: { __typename: 'SiteSettings', id: string, name?: string | null, legalName?: string | null, domain?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, abn?: string | null, licenseNumber?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, address?: { __typename: 'SiteSettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SiteSettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, pricing?: { __typename: 'SiteSettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, trustBarItems?: Array<{ __typename: 'SiteSettingsTrustBarItems', iconKey?: string | null, label?: string | null } | null> | null, adaptorDisclosure?: { __typename: 'SiteSettingsAdaptorDisclosure', heading?: string | null, mobileSubtitle?: string | null, body1?: string | null, body2?: string | null } | null, paymentTerms?: { __typename: 'SiteSettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null, freeAdviceBlock?: { __typename: 'SiteSettingsFreeAdviceBlock', eyebrow?: string | null, headingLine1?: string | null, headingLine2?: string | null, body?: string | null, buttonLabel?: string | null } | null } | null } | null> | null } };
-
-export type NavigationQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
-}>;
-
-
-export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, mainNav?: Array<{ __typename: 'NavigationMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'NavigationCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'NavigationFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'NavigationFooterCompanyNav', label?: string | null, href?: string | null } | null> | null } };
-
-export type NavigationConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<NavigationFilter>;
-}>;
-
-
-export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, mainNav?: Array<{ __typename: 'NavigationMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'NavigationCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'NavigationFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'NavigationFooterCompanyNav', label?: string | null, href?: string | null } | null> | null } | null } | null> | null } };
+export type SettingsConnectionQuery = { __typename?: 'Query', settingsConnection: { __typename?: 'SettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SettingsConnectionEdges', cursor: string, node?: { __typename: 'Settings', id: string, name?: string | null, legalName?: string | null, domain?: string | null, abn?: string | null, licenseNumber?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, footerTagline?: string | null, footerBio?: string | null, warrantyBlurb?: string | null, footerServicesHeading?: string | null, footerCompanyHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, address?: { __typename: 'SettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, logos?: { __typename: 'SettingsLogos', light?: string | null, dark?: string | null, icon?: string | null } | null, pricing?: { __typename: 'SettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, mainNav?: Array<{ __typename: 'SettingsMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'SettingsCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'SettingsFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'SettingsFooterCompanyNav', label?: string | null, href?: string | null } | null> | null, paymentTerms?: { __typename: 'SettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null } | null } | null> | null } };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PageBlocksHero', variant?: string | null, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, imageSrc?: string | null, imageAlt?: string | null, showWarrantyBadge?: boolean | null, adaptorCaption?: string | null, accentWord?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksTrustBar', items?: Array<{ __typename: 'PageBlocksTrustBarItems', iconKey?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWhyRetrofit', eyebrow?: string | null, heading1?: string | null, heading2?: string | null, items?: Array<{ __typename: 'PageBlocksWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null } | { __typename: 'PageBlocksProcessSteps', heading?: string | null, subheading?: string | null, cta?: { __typename: 'PageBlocksProcessStepsCta', label?: string | null, href?: string | null } | null, steps?: Array<{ __typename: 'PageBlocksProcessStepsSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null } | { __typename: 'PageBlocksEstimateCta', headline?: string | null, subtext?: string | null, caption?: string | null, cta?: { __typename: 'PageBlocksEstimateCtaCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksFaq', heading?: string | null, subheading?: string | null, faqs?: Array<{ __typename: 'PageBlocksFaqFaqs', q?: string | null, a?: string | null } | null> | null } | { __typename: 'PageBlocksServiceSection', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, variant?: string | null, imageSrc?: string | null, imageAlt?: string | null, primaryCta?: { __typename: 'PageBlocksServiceSectionPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksServiceSectionSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksStoryWithStats', eyebrow?: string | null, paragraphs?: Array<string | null> | null, quote?: string | null, stats?: Array<{ __typename: 'PageBlocksStoryWithStatsStats', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWarrantyCoverage', claimSteps?: Array<string | null> | null, coveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } | { __typename: 'PageBlocksContactCards', phoneSublabel?: string | null, emailSublabel?: string | null, areaSublabel?: string | null, emergencySublabel?: string | null } | { __typename: 'PageBlocksContactForm', heading?: string | null } | { __typename: 'PageBlocksCtaBanner', heading?: string | null, subtext?: string | null, primaryCta?: { __typename: 'PageBlocksCtaBannerPrimaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksGlassComparison', placeholder?: string | null } | { __typename: 'PageBlocksGlassTechSpecs', placeholder?: string | null } | { __typename: 'PageBlocksAdaptorDisclosure', heading?: string | null, mobileSubtitle?: string | null, body1?: string | null, body2?: string | null } | { __typename: 'PageBlocksPaymentTerms', eyebrow?: string | null, heading?: string | null, depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | { __typename: 'PageBlocksFreeAdvice', eyebrow?: string | null, headingLine1?: string | null, headingLine2?: string | null, body?: string | null, buttonLabel?: string | null } | { __typename: 'PageBlocksWhatElseStrip', eyebrow?: string | null, heading?: string | null, cta?: { __typename: 'PageBlocksWhatElseStripCta', label?: string | null, href?: string | null } | null, services?: Array<{ __typename: 'PageBlocksWhatElseStripServices', label?: string | null, href?: string | null } | null> | null } | { __typename: 'PageBlocksEmergencyStrip', boldText?: string | null, text?: string | null, cta?: { __typename: 'PageBlocksEmergencyStripCta', label?: string | null, href?: string | null } | null } | null> | null } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PageBlocksHero', variant?: string | null, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, imageSrc?: string | null, imageAlt?: string | null, showWarrantyBadge?: boolean | null, adaptorCaption?: string | null, accentWord?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksTrustBar', items?: Array<{ __typename: 'PageBlocksTrustBarItems', iconKey?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWhyRetrofit', eyebrow?: string | null, heading1?: string | null, heading2?: string | null, items?: Array<{ __typename: 'PageBlocksWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null } | { __typename: 'PageBlocksProcessSteps', heading?: string | null, subheading?: string | null, cta?: { __typename: 'PageBlocksProcessStepsCta', label?: string | null, href?: string | null } | null, steps?: Array<{ __typename: 'PageBlocksProcessStepsSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null } | { __typename: 'PageBlocksEstimateCta', headline?: string | null, subtext?: string | null, caption?: string | null, cta?: { __typename: 'PageBlocksEstimateCtaCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksFaq', heading?: string | null, subheading?: string | null, faqs?: Array<{ __typename: 'PageBlocksFaqFaqs', q?: string | null, a?: string | null } | null> | null } | { __typename: 'PageBlocksServiceSection', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, variant?: string | null, imageSrc?: string | null, imageAlt?: string | null, primaryCta?: { __typename: 'PageBlocksServiceSectionPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksServiceSectionSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksStoryWithStats', eyebrow?: string | null, paragraphs?: Array<string | null> | null, quote?: string | null, stats?: Array<{ __typename: 'PageBlocksStoryWithStatsStats', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWarrantyCoverage', claimSteps?: Array<string | null> | null, coveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } | { __typename: 'PageBlocksContactCards', phoneSublabel?: string | null, emailSublabel?: string | null, areaSublabel?: string | null, emergencySublabel?: string | null } | { __typename: 'PageBlocksContactForm', heading?: string | null } | { __typename: 'PageBlocksCtaBanner', heading?: string | null, subtext?: string | null, trustItems?: Array<string | null> | null, primaryCta?: { __typename: 'PageBlocksCtaBannerPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksCtaBannerSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksGlassComparison', placeholder?: string | null } | { __typename: 'PageBlocksGlassTechSpecs', placeholder?: string | null } | { __typename: 'PageBlocksAdaptorDisclosure', heading?: string | null, mobileSubtitle?: string | null, body1?: string | null, body2?: string | null } | { __typename: 'PageBlocksPaymentTerms', eyebrow?: string | null, heading?: string | null, depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | { __typename: 'PageBlocksFreeAdvice', eyebrow?: string | null, headingLine1?: string | null, headingLine2?: string | null, body?: string | null, buttonLabel?: string | null } | { __typename: 'PageBlocksWhatElseStrip', eyebrow?: string | null, heading?: string | null, cta?: { __typename: 'PageBlocksWhatElseStripCta', label?: string | null, href?: string | null } | null, services?: Array<{ __typename: 'PageBlocksWhatElseStripServices', label?: string | null, href?: string | null } | null> | null } | { __typename: 'PageBlocksEmergencyStrip', boldText?: string | null, text?: string | null, cta?: { __typename: 'PageBlocksEmergencyStripCta', label?: string | null, href?: string | null } | null } | null> | null } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1704,7 +1610,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PageBlocksHero', variant?: string | null, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, imageSrc?: string | null, imageAlt?: string | null, showWarrantyBadge?: boolean | null, adaptorCaption?: string | null, accentWord?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksTrustBar', items?: Array<{ __typename: 'PageBlocksTrustBarItems', iconKey?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWhyRetrofit', eyebrow?: string | null, heading1?: string | null, heading2?: string | null, items?: Array<{ __typename: 'PageBlocksWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null } | { __typename: 'PageBlocksProcessSteps', heading?: string | null, subheading?: string | null, cta?: { __typename: 'PageBlocksProcessStepsCta', label?: string | null, href?: string | null } | null, steps?: Array<{ __typename: 'PageBlocksProcessStepsSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null } | { __typename: 'PageBlocksEstimateCta', headline?: string | null, subtext?: string | null, caption?: string | null, cta?: { __typename: 'PageBlocksEstimateCtaCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksFaq', heading?: string | null, subheading?: string | null, faqs?: Array<{ __typename: 'PageBlocksFaqFaqs', q?: string | null, a?: string | null } | null> | null } | { __typename: 'PageBlocksServiceSection', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, variant?: string | null, imageSrc?: string | null, imageAlt?: string | null, primaryCta?: { __typename: 'PageBlocksServiceSectionPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksServiceSectionSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksStoryWithStats', eyebrow?: string | null, paragraphs?: Array<string | null> | null, quote?: string | null, stats?: Array<{ __typename: 'PageBlocksStoryWithStatsStats', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWarrantyCoverage', claimSteps?: Array<string | null> | null, coveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } | { __typename: 'PageBlocksContactCards', phoneSublabel?: string | null, emailSublabel?: string | null, areaSublabel?: string | null, emergencySublabel?: string | null } | { __typename: 'PageBlocksContactForm', heading?: string | null } | { __typename: 'PageBlocksCtaBanner', heading?: string | null, subtext?: string | null, primaryCta?: { __typename: 'PageBlocksCtaBannerPrimaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksGlassComparison', placeholder?: string | null } | { __typename: 'PageBlocksGlassTechSpecs', placeholder?: string | null } | { __typename: 'PageBlocksAdaptorDisclosure', heading?: string | null, mobileSubtitle?: string | null, body1?: string | null, body2?: string | null } | { __typename: 'PageBlocksPaymentTerms', eyebrow?: string | null, heading?: string | null, depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | { __typename: 'PageBlocksFreeAdvice', eyebrow?: string | null, headingLine1?: string | null, headingLine2?: string | null, body?: string | null, buttonLabel?: string | null } | { __typename: 'PageBlocksWhatElseStrip', eyebrow?: string | null, heading?: string | null, cta?: { __typename: 'PageBlocksWhatElseStripCta', label?: string | null, href?: string | null } | null, services?: Array<{ __typename: 'PageBlocksWhatElseStripServices', label?: string | null, href?: string | null } | null> | null } | { __typename: 'PageBlocksEmergencyStrip', boldText?: string | null, text?: string | null, cta?: { __typename: 'PageBlocksEmergencyStripCta', label?: string | null, href?: string | null } | null } | null> | null } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PageBlocksHero', variant?: string | null, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, imageSrc?: string | null, imageAlt?: string | null, showWarrantyBadge?: boolean | null, adaptorCaption?: string | null, accentWord?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksTrustBar', items?: Array<{ __typename: 'PageBlocksTrustBarItems', iconKey?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWhyRetrofit', eyebrow?: string | null, heading1?: string | null, heading2?: string | null, items?: Array<{ __typename: 'PageBlocksWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null } | { __typename: 'PageBlocksProcessSteps', heading?: string | null, subheading?: string | null, cta?: { __typename: 'PageBlocksProcessStepsCta', label?: string | null, href?: string | null } | null, steps?: Array<{ __typename: 'PageBlocksProcessStepsSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null } | { __typename: 'PageBlocksEstimateCta', headline?: string | null, subtext?: string | null, caption?: string | null, cta?: { __typename: 'PageBlocksEstimateCtaCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksFaq', heading?: string | null, subheading?: string | null, faqs?: Array<{ __typename: 'PageBlocksFaqFaqs', q?: string | null, a?: string | null } | null> | null } | { __typename: 'PageBlocksServiceSection', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, variant?: string | null, imageSrc?: string | null, imageAlt?: string | null, primaryCta?: { __typename: 'PageBlocksServiceSectionPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksServiceSectionSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksStoryWithStats', eyebrow?: string | null, paragraphs?: Array<string | null> | null, quote?: string | null, stats?: Array<{ __typename: 'PageBlocksStoryWithStatsStats', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWarrantyCoverage', claimSteps?: Array<string | null> | null, coveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } | { __typename: 'PageBlocksContactCards', phoneSublabel?: string | null, emailSublabel?: string | null, areaSublabel?: string | null, emergencySublabel?: string | null } | { __typename: 'PageBlocksContactForm', heading?: string | null } | { __typename: 'PageBlocksCtaBanner', heading?: string | null, subtext?: string | null, trustItems?: Array<string | null> | null, primaryCta?: { __typename: 'PageBlocksCtaBannerPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksCtaBannerSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksGlassComparison', placeholder?: string | null } | { __typename: 'PageBlocksGlassTechSpecs', placeholder?: string | null } | { __typename: 'PageBlocksAdaptorDisclosure', heading?: string | null, mobileSubtitle?: string | null, body1?: string | null, body2?: string | null } | { __typename: 'PageBlocksPaymentTerms', eyebrow?: string | null, heading?: string | null, depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | { __typename: 'PageBlocksFreeAdvice', eyebrow?: string | null, headingLine1?: string | null, headingLine2?: string | null, body?: string | null, buttonLabel?: string | null } | { __typename: 'PageBlocksWhatElseStrip', eyebrow?: string | null, heading?: string | null, cta?: { __typename: 'PageBlocksWhatElseStripCta', label?: string | null, href?: string | null } | null, services?: Array<{ __typename: 'PageBlocksWhatElseStripServices', label?: string | null, href?: string | null } | null> | null } | { __typename: 'PageBlocksEmergencyStrip', boldText?: string | null, text?: string | null, cta?: { __typename: 'PageBlocksEmergencyStripCta', label?: string | null, href?: string | null } | null } | null> | null } | null } | null> | null } };
 
 export type GalleryQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1744,19 +1650,19 @@ export type PricingOptionConnectionQueryVariables = Exact<{
 
 export type PricingOptionConnectionQuery = { __typename?: 'Query', pricingOptionConnection: { __typename?: 'PricingOptionConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PricingOptionConnectionEdges', cursor: string, node?: { __typename: 'PricingOption', id: string, optionKey?: string | null, label?: string | null, sublabel?: string | null, spec?: string | null, pricePerSqm?: number | null, heatPct?: number | null, noisePct?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, tech?: { __typename: 'PricingOptionTech', composition?: Array<string | null> | null, spacerMm?: number | null, lowE?: boolean | null, acousticPVB?: boolean | null, tinted?: boolean | null, bestFor?: string | null, rwRating?: string | null, notes?: string | null } | null } | null } | null> | null } };
 
-export const SiteSettingsPartsFragmentDoc = gql`
-    fragment SiteSettingsParts on SiteSettings {
+export const SettingsPartsFragmentDoc = gql`
+    fragment SettingsParts on Settings {
   __typename
   name
   legalName
   domain
+  abn
+  licenseNumber
   phone
   phoneTel
   phoneHref
   email
   notificationEmail
-  abn
-  licenseNumber
   address {
     __typename
     street
@@ -1772,45 +1678,20 @@ export const SiteSettingsPartsFragmentDoc = gql`
     instagram
     google
   }
+  logos {
+    __typename
+    light
+    dark
+    icon
+  }
   pricing {
     __typename
     retrofitFromPerSqm
     retrofitFromDisplay
   }
-  trustBarItems {
-    __typename
-    iconKey
-    label
-  }
-  adaptorDisclosure {
-    __typename
-    heading
-    mobileSubtitle
-    body1
-    body2
-  }
-  paymentTerms {
-    __typename
-    depositTitle
-    depositBody
-    completionTitle
-    completionBody
-    warrantyTitle
-    warrantyBody
-  }
-  freeAdviceBlock {
-    __typename
-    eyebrow
-    headingLine1
-    headingLine2
-    body
-    buttonLabel
-  }
-}
-    `;
-export const NavigationPartsFragmentDoc = gql`
-    fragment NavigationParts on Navigation {
-  __typename
+  footerTagline
+  footerBio
+  warrantyBlurb
   mainNav {
     __typename
     label
@@ -1821,15 +1702,26 @@ export const NavigationPartsFragmentDoc = gql`
     label
     href
   }
+  footerServicesHeading
   footerServicesNav {
     __typename
     label
     href
   }
+  footerCompanyHeading
   footerCompanyNav {
     __typename
     label
     href
+  }
+  paymentTerms {
+    __typename
+    depositTitle
+    depositBody
+    completionTitle
+    completionBody
+    warrantyTitle
+    warrantyBody
   }
 }
     `;
@@ -1974,6 +1866,12 @@ export const PagePartsFragmentDoc = gql`
         label
         href
       }
+      secondaryCta {
+        __typename
+        label
+        href
+      }
+      trustItems
     }
     ... on PageBlocksGlassComparison {
       placeholder
@@ -2063,9 +1961,9 @@ export const PricingOptionPartsFragmentDoc = gql`
   }
 }
     `;
-export const SiteSettingsDocument = gql`
-    query siteSettings($relativePath: String!) {
-  siteSettings(relativePath: $relativePath) {
+export const SettingsDocument = gql`
+    query settings($relativePath: String!) {
+  settings(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -2078,13 +1976,13 @@ export const SiteSettingsDocument = gql`
       }
       id
     }
-    ...SiteSettingsParts
+    ...SettingsParts
   }
 }
-    ${SiteSettingsPartsFragmentDoc}`;
-export const SiteSettingsConnectionDocument = gql`
-    query siteSettingsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SiteSettingsFilter) {
-  siteSettingsConnection(
+    ${SettingsPartsFragmentDoc}`;
+export const SettingsConnectionDocument = gql`
+    query settingsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SettingsFilter) {
+  settingsConnection(
     before: $before
     after: $after
     first: $first
@@ -2114,69 +2012,12 @@ export const SiteSettingsConnectionDocument = gql`
           }
           id
         }
-        ...SiteSettingsParts
+        ...SettingsParts
       }
     }
   }
 }
-    ${SiteSettingsPartsFragmentDoc}`;
-export const NavigationDocument = gql`
-    query navigation($relativePath: String!) {
-  navigation(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...NavigationParts
-  }
-}
-    ${NavigationPartsFragmentDoc}`;
-export const NavigationConnectionDocument = gql`
-    query navigationConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: NavigationFilter) {
-  navigationConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...NavigationParts
-      }
-    }
-  }
-}
-    ${NavigationPartsFragmentDoc}`;
+    ${SettingsPartsFragmentDoc}`;
 export const PageDocument = gql`
     query page($relativePath: String!) {
   page(relativePath: $relativePath) {
@@ -2351,17 +2192,11 @@ export const PricingOptionConnectionDocument = gql`
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
-      siteSettings(variables: SiteSettingsQueryVariables, options?: C): Promise<{data: SiteSettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsQueryVariables, query: string}> {
-        return requester<{data: SiteSettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsQueryVariables, query: string}, SiteSettingsQueryVariables>(SiteSettingsDocument, variables, options);
+      settings(variables: SettingsQueryVariables, options?: C): Promise<{data: SettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SettingsQueryVariables, query: string}> {
+        return requester<{data: SettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SettingsQueryVariables, query: string}, SettingsQueryVariables>(SettingsDocument, variables, options);
       },
-    siteSettingsConnection(variables?: SiteSettingsConnectionQueryVariables, options?: C): Promise<{data: SiteSettingsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsConnectionQueryVariables, query: string}> {
-        return requester<{data: SiteSettingsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsConnectionQueryVariables, query: string}, SiteSettingsConnectionQueryVariables>(SiteSettingsConnectionDocument, variables, options);
-      },
-    navigation(variables: NavigationQueryVariables, options?: C): Promise<{data: NavigationQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationQueryVariables, query: string}> {
-        return requester<{data: NavigationQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationQueryVariables, query: string}, NavigationQueryVariables>(NavigationDocument, variables, options);
-      },
-    navigationConnection(variables?: NavigationConnectionQueryVariables, options?: C): Promise<{data: NavigationConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationConnectionQueryVariables, query: string}> {
-        return requester<{data: NavigationConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationConnectionQueryVariables, query: string}, NavigationConnectionQueryVariables>(NavigationConnectionDocument, variables, options);
+    settingsConnection(variables?: SettingsConnectionQueryVariables, options?: C): Promise<{data: SettingsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SettingsConnectionQueryVariables, query: string}> {
+        return requester<{data: SettingsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SettingsConnectionQueryVariables, query: string}, SettingsConnectionQueryVariables>(SettingsConnectionDocument, variables, options);
       },
     page(variables: PageQueryVariables, options?: C): Promise<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}> {
         return requester<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}, PageQueryVariables>(PageDocument, variables, options);

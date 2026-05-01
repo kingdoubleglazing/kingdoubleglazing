@@ -23,9 +23,8 @@ export async function Footer() {
               />
             </Link>
             <p className="text-sm text-white mb-4 leading-relaxed">
-              Stop. Don&apos;t Overpay.<br />
-              Melbourne&apos;s retrofit window specialists.<br />
-              We&apos;ll beat any genuine quote by 30%.
+              {settings.footerTagline ?? 'Stop. Don\'t Overpay.'}<br />
+              {settings.footerBio ?? 'Melbourne\'s retrofit window specialists. We\'ll beat any genuine quote by 30%.'}
             </p>
             <ul className="space-y-2 text-sm text-white">
               <li>
@@ -57,7 +56,7 @@ export async function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white/80 mb-4">Services</h3>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-white/80 mb-4">{nav.footerServicesHeading ?? 'Services'}</h3>
             <ul className="space-y-2">
               {nav.footerServicesNav.map(({ label, href }) => (
                 <li key={href}>
@@ -71,7 +70,7 @@ export async function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white/80 mb-4">Company</h3>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-white/80 mb-4">{nav.footerCompanyHeading ?? 'Company'}</h3>
             <ul className="space-y-2">
               {nav.footerCompanyNav.map(({ label, href }) => (
                 <li key={href}>
@@ -87,9 +86,9 @@ export async function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-white/80">
           <p>
-            © {new Date().getFullYear()} Brooklyn Glass Pty Ltd t/a King Double Glazing. ABN {settings.abn}. All rights reserved.
+            © {new Date().getFullYear()} {settings.legalName}. ABN {settings.abn}. All rights reserved.
           </p>
-          <p>10-year warranty on every job.</p>
+          <p>{settings.warrantyBlurb ?? '10-year warranty on every job.'}</p>
         </div>
       </div>
     </footer>

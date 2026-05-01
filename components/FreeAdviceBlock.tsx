@@ -1,4 +1,3 @@
-import { getSiteSettings } from '@/lib/site-settings'
 import { CallButton } from '@/components/ui/CallButton'
 
 export interface FreeAdviceBlockData {
@@ -18,14 +17,11 @@ export interface FreeAdviceBlockData {
 }
 
 export function FreeAdviceBlock({ block }: { block?: FreeAdviceBlockData }) {
-  const settings = getSiteSettings()
-  const fab = settings.freeAdviceBlock
-
-  const eyebrow      = block?.eyebrow      ?? fab?.eyebrow      ?? 'Free Advice'
-  const headingLine1 = block?.headingLine1 ?? fab?.headingLine1 ?? 'Got a question'
-  const headingLine2 = block?.headingLine2 ?? fab?.headingLine2 ?? "we haven't covered?"
-  const body         = block?.body         ?? fab?.body         ?? "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer."
-  const buttonLabel  = block?.buttonLabel  ?? fab?.buttonLabel  ?? 'Call Us'
+  const eyebrow      = block?.eyebrow      ?? 'Free Advice'
+  const headingLine1 = block?.headingLine1 ?? 'Got a question'
+  const headingLine2 = block?.headingLine2 ?? "we haven't covered?"
+  const body         = block?.body         ?? "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer."
+  const buttonLabel  = block?.buttonLabel  ?? 'Call Us'
 
   return (
     <section className="bg-inverse-surface py-12 md:py-16">

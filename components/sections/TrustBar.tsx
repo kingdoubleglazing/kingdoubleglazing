@@ -28,7 +28,6 @@ import {
   Zap,
   type LucideIcon,
 } from 'lucide-react'
-import { getSiteSettings } from '@/lib/site-settings'
 
 const ICON_MAP: Record<string, LucideIcon> = {
   alertTriangle: AlertTriangle,
@@ -97,13 +96,7 @@ export function TrustBar({ items, block }: TrustBarProps) {
           label: item!.label ?? '',
         }))
     } else {
-      const settings = getSiteSettings()
-      resolvedItems = settings.trustBarItems?.length
-        ? settings.trustBarItems.map(({ iconKey, label }) => ({
-            icon: ICON_MAP[iconKey] ?? Clock,
-            label,
-          }))
-        : FALLBACK_ITEMS
+      resolvedItems = FALLBACK_ITEMS
     }
   }
 

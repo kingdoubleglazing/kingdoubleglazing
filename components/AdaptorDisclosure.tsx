@@ -1,5 +1,4 @@
 import { Ruler } from 'lucide-react'
-import { getSiteSettings } from '@/lib/site-settings'
 
 export interface AdaptorDisclosureBlockData {
   __typename?: string
@@ -16,13 +15,10 @@ export interface AdaptorDisclosureBlockData {
 }
 
 export function AdaptorDisclosure({ block }: { block?: AdaptorDisclosureBlockData }) {
-  const settings = getSiteSettings()
-  const ad = settings.adaptorDisclosure
-
-  const heading        = block?.heading        ?? ad?.heading        ?? 'About our adaptors'
-  const mobileSubtitle = block?.mobileSubtitle ?? ad?.mobileSubtitle ?? 'Adds ~20mm to your frame. Tap to read more.'
-  const body1          = block?.body1          ?? ad?.body1          ?? 'We use special fittings to attach new glass to your existing frame. Your frame gets about 20mm wider — that is the only visible change. No ripping out, no plastering, no mess.'
-  const body2          = block?.body2          ?? ad?.body2          ?? 'This saves you thousands compared to full window replacement.'
+  const heading        = block?.heading        ?? 'About our adaptors'
+  const mobileSubtitle = block?.mobileSubtitle ?? 'Adds ~20mm to your frame. Tap to read more.'
+  const body1          = block?.body1          ?? 'We use special fittings to attach new glass to your existing frame. Your frame gets about 20mm wider — that is the only visible change. No ripping out, no plastering, no mess.'
+  const body2          = block?.body2          ?? 'This saves you thousands compared to full window replacement.'
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 md:py-10">

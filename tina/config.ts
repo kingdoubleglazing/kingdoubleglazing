@@ -27,25 +27,27 @@ export default defineConfig({
   media: { tina: { mediaRoot: '', publicFolder: 'public' } },
   schema: {
     collections: [
-      // ─── Global Settings ──────────────────────────────────────────────
+      // ─── Global Settings (site + navigation combined) ─────────────────
       {
-        name: 'siteSettings',
-        label: 'Site Settings',
+        name: 'settings',
+        label: 'Settings',
         path: 'content/settings',
         format: 'json',
-        match: { include: 'site' },
+        match: { include: 'settings' },
         ui: { allowedActions: { create: false, delete: false }, global: true },
         fields: [
+          // ── Business ──────────────────────────────────────────────────
           { name: 'name', type: 'string', label: 'Business Name' },
           { name: 'legalName', type: 'string', label: 'Legal Name' },
           { name: 'domain', type: 'string', label: 'Domain' },
+          { name: 'abn', type: 'string', label: 'ABN' },
+          { name: 'licenseNumber', type: 'string', label: 'Licence Number' },
+          // ── Contact ───────────────────────────────────────────────────
           { name: 'phone', type: 'string', label: 'Phone (display, e.g. 0406 470 595)' },
           { name: 'phoneTel', type: 'string', label: 'Phone E.164 (e.g. +61406470595)' },
           { name: 'phoneHref', type: 'string', label: 'Phone href (e.g. tel:+61406470595)' },
           { name: 'email', type: 'string', label: 'Email' },
-          { name: 'notificationEmail', type: 'string', label: 'Notification Email' },
-          { name: 'abn', type: 'string', label: 'ABN' },
-          { name: 'licenseNumber', type: 'string', label: 'Licence Number' },
+          { name: 'notificationEmail', type: 'string', label: 'Notification Email (quote alerts)' },
           { name: 'address', type: 'object', label: 'Address', fields: [
             { name: 'street', type: 'string', label: 'Street' },
             { name: 'suburb', type: 'string', label: 'Suburb' },
@@ -59,88 +61,48 @@ export default defineConfig({
             { name: 'instagram', type: 'string', label: 'Instagram URL' },
             { name: 'google', type: 'string', label: 'Google Business URL' },
           ]},
+          // ── Branding ──────────────────────────────────────────────────
+          { name: 'logos', type: 'object', label: 'Logos', fields: [
+            { name: 'light', type: 'image', label: 'Logo — light background (header)' },
+            { name: 'dark', type: 'image', label: 'Logo — dark background (footer)' },
+            { name: 'icon', type: 'image', label: 'Icon / Crown mark' },
+          ]},
+          // ── Pricing ───────────────────────────────────────────────────
           { name: 'pricing', type: 'object', label: 'Pricing Display', fields: [
             { name: 'retrofitFromPerSqm', type: 'number', label: 'Price per m² (number)' },
             { name: 'retrofitFromDisplay', type: 'string', label: 'Price display string' },
           ]},
-          { name: 'trustBarItems', type: 'object', list: true, label: 'Trust Bar Items (global default)', ui: { itemProps: (item: { label?: string }) => ({ label: item?.label ?? 'Item' }) }, fields: [
-            { name: 'iconKey', type: 'string', label: 'Icon', options: [
-              { value: 'alertTriangle', label: 'Alert / Warning' },
-              { value: 'award', label: 'Award' },
-              { value: 'badgePercent', label: 'Badge / Percent' },
-              { value: 'building2', label: 'Building / Commercial' },
-              { value: 'calendar', label: 'Calendar' },
-              { value: 'checkCircle', label: 'Check Circle' },
-              { value: 'clock', label: 'Clock' },
-              { value: 'dollarSign', label: 'Dollar Sign' },
-              { value: 'gauge', label: 'Gauge / Performance' },
-              { value: 'hammer', label: 'Hammer' },
-              { value: 'home', label: 'Home / Residential' },
-              { value: 'layers', label: 'Layers' },
-              { value: 'leaf', label: 'Leaf / Eco' },
-              { value: 'lock', label: 'Lock / Security' },
-              { value: 'mapPin', label: 'Map Pin / Location' },
-              { value: 'phone', label: 'Phone' },
-              { value: 'shieldCheck', label: 'Shield / Check' },
-              { value: 'star', label: 'Star' },
-              { value: 'sun', label: 'Sun / Heat' },
-              { value: 'thermometer', label: 'Thermometer' },
-              { value: 'thumbsUp', label: 'Thumbs Up' },
-              { value: 'truck', label: 'Truck / Delivery' },
-              { value: 'users', label: 'Users / Team' },
-              { value: 'volume2', label: 'Volume / Sound' },
-              { value: 'wind', label: 'Wind / Draft' },
-              { value: 'wrench', label: 'Wrench' },
-              { value: 'zap', label: 'Zap / Fast' },
-            ]},
+          // ── Footer ────────────────────────────────────────────────────
+          { name: 'footerTagline', type: 'string', label: 'Footer: Tagline' },
+          { name: 'footerBio', type: 'string', label: 'Footer: Bio / descriptor', ui: { component: 'textarea' as const } },
+          { name: 'warrantyBlurb', type: 'string', label: 'Footer: Warranty blurb (bottom bar)' },
+          // ── Navigation ────────────────────────────────────────────────
+          { name: 'mainNav', type: 'object', list: true, label: 'Main Navigation', ui: { itemProps: (item: { label?: string }) => ({ label: item?.label }) }, fields: [
             { name: 'label', type: 'string', label: 'Label' },
+            { name: 'href', type: 'string', label: 'Path' },
           ]},
-          { name: 'adaptorDisclosure', type: 'object', label: 'Adaptor Disclosure (global default)', fields: [
-            { name: 'heading', type: 'string', label: 'Heading' },
-            { name: 'mobileSubtitle', type: 'string', label: 'Mobile subtitle' },
-            { name: 'body1', type: 'string', label: 'Body paragraph 1', ui: { component: 'textarea' as const } },
-            { name: 'body2', type: 'string', label: 'Body paragraph 2', ui: { component: 'textarea' as const } },
+          { name: 'ctaNav', type: 'object', label: 'Header CTA Button', fields: [
+            { name: 'label', type: 'string', label: 'Label' },
+            { name: 'href', type: 'string', label: 'Path' },
           ]},
-          { name: 'paymentTerms', type: 'object', label: 'Payment Terms (global default)', fields: [
+          { name: 'footerServicesHeading', type: 'string', label: 'Footer: Services column heading' },
+          { name: 'footerServicesNav', type: 'object', list: true, label: 'Footer: Services links', ui: { itemProps: (item: { label?: string }) => ({ label: item?.label }) }, fields: [
+            { name: 'label', type: 'string', label: 'Label' },
+            { name: 'href', type: 'string', label: 'Path' },
+          ]},
+          { name: 'footerCompanyHeading', type: 'string', label: 'Footer: Company column heading' },
+          { name: 'footerCompanyNav', type: 'object', list: true, label: 'Footer: Company links', ui: { itemProps: (item: { label?: string }) => ({ label: item?.label }) }, fields: [
+            { name: 'label', type: 'string', label: 'Label' },
+            { name: 'href', type: 'string', label: 'Path' },
+          ]},
+          // ── Payment Terms (global — shared across all pages) ──────────────
+          { name: 'paymentTerms', type: 'object', label: 'Payment Terms', fields: [
             { name: 'depositTitle', type: 'string', label: 'Deposit title' },
             { name: 'depositBody', type: 'string', label: 'Deposit body', ui: { component: 'textarea' as const } },
             { name: 'completionTitle', type: 'string', label: 'Completion title' },
             { name: 'completionBody', type: 'string', label: 'Completion body', ui: { component: 'textarea' as const } },
             { name: 'warrantyTitle', type: 'string', label: 'Warranty title' },
             { name: 'warrantyBody', type: 'string', label: 'Warranty body', ui: { component: 'textarea' as const } },
-          ]},
-          { name: 'freeAdviceBlock', type: 'object', label: 'Free Advice Block (global default)', fields: [
-            { name: 'eyebrow', type: 'string', label: 'Eyebrow' },
-            { name: 'headingLine1', type: 'string', label: 'Heading line 1' },
-            { name: 'headingLine2', type: 'string', label: 'Heading line 2 (gold)' },
-            { name: 'body', type: 'string', label: 'Body', ui: { component: 'textarea' as const } },
-            { name: 'buttonLabel', type: 'string', label: 'Button label' },
-          ]},
-        ],
-      },
-      {
-        name: 'navigation',
-        label: 'Navigation',
-        path: 'content/settings',
-        format: 'json',
-        match: { include: 'nav' },
-        ui: { allowedActions: { create: false, delete: false }, global: true },
-        fields: [
-          { name: 'mainNav', type: 'object', list: true, label: 'Main Nav', ui: { itemProps: (item: { label?: string }) => ({ label: item?.label }) }, fields: [
-            { name: 'label', type: 'string', label: 'Label' },
-            { name: 'href', type: 'string', label: 'Path' },
-          ]},
-          { name: 'ctaNav', type: 'object', label: 'CTA Button', fields: [
-            { name: 'label', type: 'string', label: 'Label' },
-            { name: 'href', type: 'string', label: 'Path' },
-          ]},
-          { name: 'footerServicesNav', type: 'object', list: true, label: 'Footer: Services', ui: { itemProps: (item: { label?: string }) => ({ label: item?.label }) }, fields: [
-            { name: 'label', type: 'string', label: 'Label' },
-            { name: 'href', type: 'string', label: 'Path' },
-          ]},
-          { name: 'footerCompanyNav', type: 'object', list: true, label: 'Footer: Company', ui: { itemProps: (item: { label?: string }) => ({ label: item?.label }) }, fields: [
-            { name: 'label', type: 'string', label: 'Label' },
-            { name: 'href', type: 'string', label: 'Path' },
           ]},
         ],
       },
@@ -427,6 +389,8 @@ export default defineConfig({
                   { name: 'heading', type: 'string', label: 'Heading' },
                   { name: 'subtext', type: 'string', label: 'Subtext', ui: { component: 'textarea' } },
                   { name: 'primaryCta', type: 'object' as const, label: 'Primary CTA', fields: ctaFields },
+                  { name: 'secondaryCta', type: 'object' as const, label: 'Secondary CTA (phone)', fields: ctaFields },
+                  { name: 'trustItems', type: 'string', label: 'Trust footnotes', list: true },
                 ],
               },
 

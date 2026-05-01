@@ -1,23 +1,33 @@
-export interface SiteSettings {
-  name: string; legalName: string; domain: string; phone: string; phoneTel: string;
-  phoneHref: string; email: string; abn: string; licenseNumber: string;
-  notificationEmail: string;
+export interface Settings {
+  // Business identity
+  name: string; legalName: string; domain: string; abn: string; licenseNumber: string;
+  // Contact
+  phone: string; phoneTel: string; phoneHref: string; email: string; notificationEmail: string;
   address: { street: string; suburb: string; state: string; postcode: string; country: string; display: string }
   geo: { latitude: number; longitude: number }
   social: { facebook: string; instagram: string; google: string }
+  // Branding
   logos: { light: string; dark: string; icon: string }
+  // Pricing
   pricing: { retrofitFromPerSqm: number; retrofitFromDisplay: string }
-  trustBarItems?: Array<{ iconKey: string; label: string }>
+  // Footer copy
+  footerTagline?: string
+  footerBio?: string
+  warrantyBlurb?: string
+  // Payment terms (global — shared across all pages)
   paymentTerms?: { depositTitle: string; depositBody: string; completionTitle: string; completionBody: string; warrantyTitle: string; warrantyBody: string }
-  adaptorDisclosure?: { heading: string; mobileSubtitle: string; body1: string; body2: string }
-  freeAdviceBlock?: { eyebrow: string; headingLine1: string; headingLine2: string; body: string; buttonLabel: string }
-}
-export interface Navigation {
+  // Navigation
   mainNav: Array<{ label: string; href: string }>
   ctaNav: { label: string; href: string }
+  footerServicesHeading?: string
   footerServicesNav: Array<{ label: string; href: string }>
+  footerCompanyHeading?: string
   footerCompanyNav: Array<{ label: string; href: string }>
 }
+/** @deprecated Use Settings */
+export type SiteSettings = Settings
+/** @deprecated Use Settings */
+export type Navigation = Settings
 export interface GalleryItem {
   id: string; src: string; alt: string; category: string; caption: string; order: number
 }

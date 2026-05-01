@@ -2,15 +2,24 @@ import { getSiteSettings } from '@/lib/site-settings'
 import { DarkCTAButton } from '@/components/ui/DarkCTAButton'
 import { GhostPhoneButton } from '@/components/ui/GhostPhoneButton'
 
+const DEFAULT_TRUST_ITEMS = [
+  'Price locked at quote',
+  '10-year warranty',
+  'We beat any quote by 30%',
+]
+
 interface CtaBannerProps {
   heading?: string
   subtext?: string
   primaryCta?: { label: string; href: string }
   secondaryCta?: { label: string; href: string }
+  trustItems?: (string | null)[]
   tina?: {
     heading?: string
     subtext?: string
     primaryCta?: { label?: string; href?: string }
+    secondaryCta?: { label?: string; href?: string }
+    trustItems?: string
   }
 }
 
@@ -19,12 +28,16 @@ export function CtaBanner({
   subtext = 'Get a transparent, itemised estimate in minutes. No sales calls.',
   primaryCta = { label: 'Get Instant Estimate', href: '/instant-estimate/' },
   secondaryCta,
+  trustItems,
   tina,
 }: CtaBannerProps) {
   if (!secondaryCta) {
     const settings = getSiteSettings()
     secondaryCta = { label: settings.phone, href: settings.phoneHref }
   }
+  const items = trustItems?.filter(Boolean) as string[] | undefined
+  const resolvedItems = items?.length ? items : DEFAULT_TRUST_ITEMS
+
   return (
     <section className="bg-primary-container py-16 md:py-24 overflow-hidden relative">
 
@@ -62,18 +75,15 @@ export function CtaBanner({
           {/* CTA cluster */}
           <div className="flex flex-col sm:flex-row gap-3">
             <DarkCTAButton label={primaryCta.label} href={primaryCta.href} tinaField={tina?.primaryCta?.label} />
-            <GhostPhoneButton label={secondaryCta.label} href={secondaryCta.href} />
+            <GhostPhoneButton label={secondaryCta.label} href={secondaryCta.href} tinaField={tina?.secondaryCta?.label} />
           </div>
 
           {/* Trust footnote */}
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-2">
-            {[
-              'Price locked at quote',
-              '10-year warranty',
-              'We beat any quote by 30%',
-            ].map((item) => (
+            {resolvedItems.map((item, i) => (
               <p
-                key={item}
+                key={i}
+                data-tina-field={tina?.trustItems}
                 className="font-headline text-[0.8125rem] font-semibold uppercase tracking-[0.2em] text-on-primary-fixed/80"
               >
                 ✓ {item}
