@@ -272,6 +272,9 @@ var config_default = defineConfig({
                 label: "Process Steps",
                 ui: { itemProps: () => ({ label: "\u{1F4CB} Process Steps" }) },
                 fields: [
+                  { name: "heading", type: "string", label: "Heading" },
+                  { name: "subheading", type: "string", label: "Subheading", ui: { component: "textarea" } },
+                  { name: "cta", type: "object", label: "CTA Button", fields: ctaFields },
                   {
                     name: "steps",
                     type: "object",
@@ -296,7 +299,7 @@ var config_default = defineConfig({
                 fields: [
                   { name: "headline", type: "string", label: "Headline" },
                   { name: "subtext", type: "string", label: "Subtext", ui: { component: "textarea" } },
-                  { name: "buttonLabel", type: "string", label: "Button Label" },
+                  { name: "cta", type: "object", label: "CTA Button", fields: ctaFields },
                   { name: "caption", type: "string", label: "Caption" }
                 ]
               },
@@ -416,8 +419,7 @@ var config_default = defineConfig({
                 fields: [
                   { name: "heading", type: "string", label: "Heading" },
                   { name: "subtext", type: "string", label: "Subtext", ui: { component: "textarea" } },
-                  { name: "primaryCtaLabel", type: "string", label: "Primary CTA Label" },
-                  { name: "primaryCtaHref", type: "string", label: "Primary CTA URL" }
+                  { name: "primaryCta", type: "object", label: "Primary CTA", fields: ctaFields }
                 ]
               },
               // ── Glass Comparison (Estimate page) ──────────────────────
@@ -452,6 +454,8 @@ var config_default = defineConfig({
                 label: "Payment Terms",
                 ui: { itemProps: () => ({ label: "\u{1F4B3} Payment Terms" }) },
                 fields: [
+                  { name: "eyebrow", type: "string", label: "Eyebrow" },
+                  { name: "heading", type: "string", label: "Heading" },
                   { name: "depositTitle", type: "string", label: "Deposit title" },
                   { name: "depositBody", type: "string", label: "Deposit body", ui: { component: "textarea" } },
                   { name: "completionTitle", type: "string", label: "Completion title" },
@@ -481,8 +485,7 @@ var config_default = defineConfig({
                 fields: [
                   { name: "eyebrow", type: "string", label: "Eyebrow" },
                   { name: "heading", type: "string", label: "Heading" },
-                  { name: "ctaLabel", type: "string", label: "CTA button label" },
-                  { name: "ctaHref", type: "string", label: "CTA button URL" },
+                  { name: "cta", type: "object", label: "CTA Button", fields: ctaFields },
                   { name: "services", type: "object", list: true, label: "Service links", ui: { itemProps: (item) => ({ label: item?.label ?? "Service" }) }, fields: [
                     { name: "label", type: "string", label: "Label" },
                     { name: "href", type: "string", label: "URL" }
@@ -497,8 +500,7 @@ var config_default = defineConfig({
                 fields: [
                   { name: "boldText", type: "string", label: "Bold text" },
                   { name: "text", type: "string", label: "Text after bold" },
-                  { name: "ctaLabel", type: "string", label: "Link label" },
-                  { name: "ctaHref", type: "string", label: "Link URL" }
+                  { name: "cta", type: "object", label: "CTA Link", fields: ctaFields }
                 ]
               }
             ]

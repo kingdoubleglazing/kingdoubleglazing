@@ -130,6 +130,13 @@ fragment PageParts on Page {
       }
     }
     ... on PageBlocksProcessSteps {
+      heading
+      subheading
+      cta {
+        __typename
+        label
+        href
+      }
       steps {
         __typename
         title
@@ -142,7 +149,11 @@ fragment PageParts on Page {
     ... on PageBlocksEstimateCta {
       headline
       subtext
-      buttonLabel
+      cta {
+        __typename
+        label
+        href
+      }
       caption
     }
     ... on PageBlocksFaq {
@@ -209,8 +220,11 @@ fragment PageParts on Page {
     ... on PageBlocksCtaBanner {
       heading
       subtext
-      primaryCtaLabel
-      primaryCtaHref
+      primaryCta {
+        __typename
+        label
+        href
+      }
     }
     ... on PageBlocksGlassComparison {
       placeholder
@@ -225,6 +239,8 @@ fragment PageParts on Page {
       body2
     }
     ... on PageBlocksPaymentTerms {
+      eyebrow
+      heading
       depositTitle
       depositBody
       completionTitle
@@ -242,8 +258,11 @@ fragment PageParts on Page {
     ... on PageBlocksWhatElseStrip {
       eyebrow
       heading
-      ctaLabel
-      ctaHref
+      cta {
+        __typename
+        label
+        href
+      }
       services {
         __typename
         label
@@ -253,8 +272,11 @@ fragment PageParts on Page {
     ... on PageBlocksEmergencyStrip {
       boldText
       text
-      ctaLabel
-      ctaHref
+      cta {
+        __typename
+        label
+        href
+      }
     }
   }
 }

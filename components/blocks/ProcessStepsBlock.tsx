@@ -2,6 +2,9 @@ import { ProcessSteps } from '@/components/sections/ProcessSteps'
 
 export interface ProcessStepsBlockData {
   __typename?: string
+  heading?: string | null
+  subheading?: string | null
+  cta?: { label?: string | null; href?: string | null } | null
   steps?: Array<{
     __typename?: string
     title?: string | null
@@ -11,6 +14,10 @@ export interface ProcessStepsBlockData {
     imageAlt?: string | null
   } | null> | null
   tina?: {
+    heading?: string
+    subheading?: string
+    ctaRef?: string
+    cta?: { label?: string; href?: string }
     steps?: Array<{ title?: string; body?: string; callout?: string } | undefined>
   }
 }
@@ -28,5 +35,13 @@ export function ProcessStepsBlock({ block }: { block: ProcessStepsBlockData }) {
       order: i,
     }))
 
-  return <ProcessSteps steps={steps} tinaFields={block.tina?.steps} />
+  return (
+    <ProcessSteps
+      steps={steps}
+      heading={block.heading ?? undefined}
+      subheading={block.subheading ?? undefined}
+      cta={block.cta?.label && block.cta?.href ? { label: block.cta.label, href: block.cta.href } : undefined}
+      tinaFields={block.tina}
+    />
+  )
 }

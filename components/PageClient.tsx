@@ -35,13 +35,13 @@ function augmentBlocks(blocks: AnyBlock[]): AnyBlock[] {
       case 'whyRetrofit':
         return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), heading1: sf(block, 'heading1'), heading2: sf(block, 'heading2'), items: ((block.items as AnyBlock[]) ?? []).map((item: AnyBlock) => item ? { headline: sf(item, 'headline'), sub: sf(item, 'sub') } : undefined) } }
       case 'processSteps':
-        return { ...block, tina: { steps: ((block.steps as AnyBlock[]) ?? []).map((step: AnyBlock) => step ? { title: sf(step, 'title'), body: sf(step, 'body'), callout: sf(step, 'callout') } : undefined) } }
+        return { ...block, tina: { heading: sf(block, 'heading'), subheading: sf(block, 'subheading'), ctaRef: sf(block, 'cta'), cta: block.cta ? { label: sf(block.cta, 'label'), href: sf(block.cta, 'href') } : undefined, steps: ((block.steps as AnyBlock[]) ?? []).map((step: AnyBlock) => step ? { title: sf(step, 'title'), body: sf(step, 'body'), callout: sf(step, 'callout') } : undefined) } }
       case 'estimateCta':
-        return { ...block, tina: { headline: sf(block, 'headline'), subtext: sf(block, 'subtext'), buttonLabel: sf(block, 'buttonLabel'), caption: sf(block, 'caption') } }
+        return { ...block, tina: { headline: sf(block, 'headline'), subtext: sf(block, 'subtext'), cta: block.cta ? { label: sf(block.cta, 'label'), href: sf(block.cta, 'href') } : undefined, caption: sf(block, 'caption') } }
       case 'faq':
         return { ...block, tina: { heading: sf(block, 'heading'), subheading: sf(block, 'subheading'), faqs: ((block.faqs as AnyBlock[]) ?? []).map((faq: AnyBlock) => faq ? { q: sf(faq, 'q'), a: sf(faq, 'a') } : undefined) } }
       case 'serviceSection':
-        return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), heading: sf(block, 'heading'), bodyText: sf(block, 'bodyText'), bullets: sf(block, 'bullets') } }
+        return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), heading: sf(block, 'heading'), bodyText: sf(block, 'bodyText'), bullets: sf(block, 'bullets'), primaryCta: block.primaryCta ? { label: sf(block.primaryCta, 'label'), href: sf(block.primaryCta, 'href') } : undefined, secondaryCta: block.secondaryCta ? { label: sf(block.secondaryCta, 'label'), href: sf(block.secondaryCta, 'href') } : undefined } }
       case 'storyWithStats':
         return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), paragraphs: sf(block, 'paragraphs'), quote: sf(block, 'quote'), stats: ((block.stats as AnyBlock[]) ?? []).map((stat: AnyBlock) => stat ? { value: sf(stat, 'value'), label: sf(stat, 'label') } : undefined) } }
       case 'warrantyCoverage':
@@ -49,7 +49,7 @@ function augmentBlocks(blocks: AnyBlock[]): AnyBlock[] {
       case 'contactForm':
         return { ...block, tina: { heading: sf(block, 'heading') } }
       case 'ctaBanner':
-        return { ...block, tina: { heading: sf(block, 'heading'), subtext: sf(block, 'subtext'), primaryCtaLabel: sf(block, 'primaryCtaLabel') } }
+        return { ...block, tina: { heading: sf(block, 'heading'), subtext: sf(block, 'subtext'), primaryCta: block.primaryCta ? { label: sf(block.primaryCta, 'label'), href: sf(block.primaryCta, 'href') } : undefined } }
       case 'trustBar':
         return { ...block, tina: { items: ((block.items as AnyBlock[]) ?? []).map((item: AnyBlock) => item ? { iconKey: sf(item, 'iconKey'), label: sf(item, 'label') } : undefined) } }
       case 'contactCards':
@@ -57,13 +57,13 @@ function augmentBlocks(blocks: AnyBlock[]): AnyBlock[] {
       case 'adaptorDisclosure':
         return { ...block, tina: { heading: sf(block, 'heading'), mobileSubtitle: sf(block, 'mobileSubtitle'), body1: sf(block, 'body1'), body2: sf(block, 'body2') } }
       case 'paymentTerms':
-        return { ...block, tina: { depositTitle: sf(block, 'depositTitle'), depositBody: sf(block, 'depositBody'), completionTitle: sf(block, 'completionTitle'), completionBody: sf(block, 'completionBody'), warrantyTitle: sf(block, 'warrantyTitle'), warrantyBody: sf(block, 'warrantyBody') } }
+        return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), heading: sf(block, 'heading'), depositTitle: sf(block, 'depositTitle'), depositBody: sf(block, 'depositBody'), completionTitle: sf(block, 'completionTitle'), completionBody: sf(block, 'completionBody'), warrantyTitle: sf(block, 'warrantyTitle'), warrantyBody: sf(block, 'warrantyBody') } }
       case 'freeAdvice':
         return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), headingLine1: sf(block, 'headingLine1'), headingLine2: sf(block, 'headingLine2'), body: sf(block, 'body'), buttonLabel: sf(block, 'buttonLabel') } }
       case 'whatElseStrip':
-        return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), heading: sf(block, 'heading'), ctaLabel: sf(block, 'ctaLabel') } }
+        return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), heading: sf(block, 'heading'), cta: block.cta ? { label: sf(block.cta, 'label'), href: sf(block.cta, 'href') } : undefined, services: ((block.services as AnyBlock[]) ?? []).map((s: AnyBlock) => s ? { label: sf(s, 'label'), href: sf(s, 'href') } : undefined) } }
       case 'emergencyStrip':
-        return { ...block, tina: { boldText: sf(block, 'boldText'), text: sf(block, 'text'), ctaLabel: sf(block, 'ctaLabel') } }
+        return { ...block, tina: { boldText: sf(block, 'boldText'), text: sf(block, 'text'), cta: block.cta ? { label: sf(block.cta, 'label'), href: sf(block.cta, 'href') } : undefined } }
       default:
         return block
     }

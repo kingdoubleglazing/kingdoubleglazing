@@ -383,6 +383,11 @@ type PageBlocksWhyRetrofit {
   items: [PageBlocksWhyRetrofitItems]
 }
 
+type PageBlocksProcessStepsCta {
+  label: String
+  href: String
+}
+
 type PageBlocksProcessStepsSteps {
   title: String
   body: String
@@ -392,13 +397,21 @@ type PageBlocksProcessStepsSteps {
 }
 
 type PageBlocksProcessSteps {
+  heading: String
+  subheading: String
+  cta: PageBlocksProcessStepsCta
   steps: [PageBlocksProcessStepsSteps]
+}
+
+type PageBlocksEstimateCtaCta {
+  label: String
+  href: String
 }
 
 type PageBlocksEstimateCta {
   headline: String
   subtext: String
-  buttonLabel: String
+  cta: PageBlocksEstimateCtaCta
   caption: String
 }
 
@@ -475,11 +488,15 @@ type PageBlocksContactForm {
   heading: String
 }
 
+type PageBlocksCtaBannerPrimaryCta {
+  label: String
+  href: String
+}
+
 type PageBlocksCtaBanner {
   heading: String
   subtext: String
-  primaryCtaLabel: String
-  primaryCtaHref: String
+  primaryCta: PageBlocksCtaBannerPrimaryCta
 }
 
 type PageBlocksGlassComparison {
@@ -498,6 +515,8 @@ type PageBlocksAdaptorDisclosure {
 }
 
 type PageBlocksPaymentTerms {
+  eyebrow: String
+  heading: String
   depositTitle: String
   depositBody: String
   completionTitle: String
@@ -514,6 +533,11 @@ type PageBlocksFreeAdvice {
   buttonLabel: String
 }
 
+type PageBlocksWhatElseStripCta {
+  label: String
+  href: String
+}
+
 type PageBlocksWhatElseStripServices {
   label: String
   href: String
@@ -522,16 +546,19 @@ type PageBlocksWhatElseStripServices {
 type PageBlocksWhatElseStrip {
   eyebrow: String
   heading: String
-  ctaLabel: String
-  ctaHref: String
+  cta: PageBlocksWhatElseStripCta
   services: [PageBlocksWhatElseStripServices]
+}
+
+type PageBlocksEmergencyStripCta {
+  label: String
+  href: String
 }
 
 type PageBlocksEmergencyStrip {
   boldText: String
   text: String
-  ctaLabel: String
-  ctaHref: String
+  cta: PageBlocksEmergencyStripCta
 }
 
 union PageBlocks = PageBlocksHero | PageBlocksTrustBar | PageBlocksWhyRetrofit | PageBlocksProcessSteps | PageBlocksEstimateCta | PageBlocksFaq | PageBlocksServiceSection | PageBlocksStoryWithStats | PageBlocksWarrantyCoverage | PageBlocksContactCards | PageBlocksContactForm | PageBlocksCtaBanner | PageBlocksGlassComparison | PageBlocksGlassTechSpecs | PageBlocksAdaptorDisclosure | PageBlocksPaymentTerms | PageBlocksFreeAdvice | PageBlocksWhatElseStrip | PageBlocksEmergencyStrip
@@ -602,6 +629,11 @@ input PageBlocksWhyRetrofitFilter {
   items: PageBlocksWhyRetrofitItemsFilter
 }
 
+input PageBlocksProcessStepsCtaFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
 input PageBlocksProcessStepsStepsFilter {
   title: StringFilter
   body: StringFilter
@@ -611,13 +643,21 @@ input PageBlocksProcessStepsStepsFilter {
 }
 
 input PageBlocksProcessStepsFilter {
+  heading: StringFilter
+  subheading: StringFilter
+  cta: PageBlocksProcessStepsCtaFilter
   steps: PageBlocksProcessStepsStepsFilter
+}
+
+input PageBlocksEstimateCtaCtaFilter {
+  label: StringFilter
+  href: StringFilter
 }
 
 input PageBlocksEstimateCtaFilter {
   headline: StringFilter
   subtext: StringFilter
-  buttonLabel: StringFilter
+  cta: PageBlocksEstimateCtaCtaFilter
   caption: StringFilter
 }
 
@@ -694,11 +734,15 @@ input PageBlocksContactFormFilter {
   heading: StringFilter
 }
 
+input PageBlocksCtaBannerPrimaryCtaFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
 input PageBlocksCtaBannerFilter {
   heading: StringFilter
   subtext: StringFilter
-  primaryCtaLabel: StringFilter
-  primaryCtaHref: StringFilter
+  primaryCta: PageBlocksCtaBannerPrimaryCtaFilter
 }
 
 input PageBlocksGlassComparisonFilter {
@@ -717,6 +761,8 @@ input PageBlocksAdaptorDisclosureFilter {
 }
 
 input PageBlocksPaymentTermsFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
   depositTitle: StringFilter
   depositBody: StringFilter
   completionTitle: StringFilter
@@ -733,6 +779,11 @@ input PageBlocksFreeAdviceFilter {
   buttonLabel: StringFilter
 }
 
+input PageBlocksWhatElseStripCtaFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
 input PageBlocksWhatElseStripServicesFilter {
   label: StringFilter
   href: StringFilter
@@ -741,16 +792,19 @@ input PageBlocksWhatElseStripServicesFilter {
 input PageBlocksWhatElseStripFilter {
   eyebrow: StringFilter
   heading: StringFilter
-  ctaLabel: StringFilter
-  ctaHref: StringFilter
+  cta: PageBlocksWhatElseStripCtaFilter
   services: PageBlocksWhatElseStripServicesFilter
+}
+
+input PageBlocksEmergencyStripCtaFilter {
+  label: StringFilter
+  href: StringFilter
 }
 
 input PageBlocksEmergencyStripFilter {
   boldText: StringFilter
   text: StringFilter
-  ctaLabel: StringFilter
-  ctaHref: StringFilter
+  cta: PageBlocksEmergencyStripCtaFilter
 }
 
 input PageBlocksFilter {
@@ -1056,6 +1110,11 @@ input PageBlocksWhyRetrofitMutation {
   items: [PageBlocksWhyRetrofitItemsMutation]
 }
 
+input PageBlocksProcessStepsCtaMutation {
+  label: String
+  href: String
+}
+
 input PageBlocksProcessStepsStepsMutation {
   title: String
   body: String
@@ -1065,13 +1124,21 @@ input PageBlocksProcessStepsStepsMutation {
 }
 
 input PageBlocksProcessStepsMutation {
+  heading: String
+  subheading: String
+  cta: PageBlocksProcessStepsCtaMutation
   steps: [PageBlocksProcessStepsStepsMutation]
+}
+
+input PageBlocksEstimateCtaCtaMutation {
+  label: String
+  href: String
 }
 
 input PageBlocksEstimateCtaMutation {
   headline: String
   subtext: String
-  buttonLabel: String
+  cta: PageBlocksEstimateCtaCtaMutation
   caption: String
 }
 
@@ -1148,11 +1215,15 @@ input PageBlocksContactFormMutation {
   heading: String
 }
 
+input PageBlocksCtaBannerPrimaryCtaMutation {
+  label: String
+  href: String
+}
+
 input PageBlocksCtaBannerMutation {
   heading: String
   subtext: String
-  primaryCtaLabel: String
-  primaryCtaHref: String
+  primaryCta: PageBlocksCtaBannerPrimaryCtaMutation
 }
 
 input PageBlocksGlassComparisonMutation {
@@ -1171,6 +1242,8 @@ input PageBlocksAdaptorDisclosureMutation {
 }
 
 input PageBlocksPaymentTermsMutation {
+  eyebrow: String
+  heading: String
   depositTitle: String
   depositBody: String
   completionTitle: String
@@ -1187,6 +1260,11 @@ input PageBlocksFreeAdviceMutation {
   buttonLabel: String
 }
 
+input PageBlocksWhatElseStripCtaMutation {
+  label: String
+  href: String
+}
+
 input PageBlocksWhatElseStripServicesMutation {
   label: String
   href: String
@@ -1195,16 +1273,19 @@ input PageBlocksWhatElseStripServicesMutation {
 input PageBlocksWhatElseStripMutation {
   eyebrow: String
   heading: String
-  ctaLabel: String
-  ctaHref: String
+  cta: PageBlocksWhatElseStripCtaMutation
   services: [PageBlocksWhatElseStripServicesMutation]
+}
+
+input PageBlocksEmergencyStripCtaMutation {
+  label: String
+  href: String
 }
 
 input PageBlocksEmergencyStripMutation {
   boldText: String
   text: String
-  ctaLabel: String
-  ctaHref: String
+  cta: PageBlocksEmergencyStripCtaMutation
 }
 
 input PageBlocksMutation {

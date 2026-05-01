@@ -1,3 +1,4 @@
+import { ServiceCTAButton } from '@/components/ui/ServiceCTAButton'
 import Link from 'next/link'
 
 const DEFAULT_SERVICES = [
@@ -12,21 +13,21 @@ export interface WhatElseStripBlockData {
   __typename?: string
   eyebrow?: string | null
   heading?: string | null
-  ctaLabel?: string | null
-  ctaHref?: string | null
+  cta?: { label?: string | null; href?: string | null } | null
   services?: Array<{ label?: string | null; href?: string | null } | null> | null
   tina?: {
     eyebrow?: string
     heading?: string
-    ctaLabel?: string
+    cta?: { label?: string; href?: string }
+    services?: Array<{ label?: string; href?: string } | undefined | null>
   }
 }
 
 export function WhatElseStripBlock({ block }: { block?: WhatElseStripBlockData }) {
   const eyebrow = block?.eyebrow ?? 'What Else We Do'
   const heading = block?.heading ?? "We're glaziers. We do the lot."
-  const ctaLabel = block?.ctaLabel ?? 'See All Services →'
-  const ctaHref = block?.ctaHref ?? '/services/'
+  const ctaLabel = block?.cta?.label ?? 'See All Services →'
+  const ctaHref = block?.cta?.href ?? '/services/'
   const services = block?.services?.filter(Boolean).map(s => ({ label: s!.label ?? '', href: s!.href ?? '#' }))
     ?? DEFAULT_SERVICES
 
@@ -48,17 +49,11 @@ export function WhatElseStripBlock({ block }: { block?: WhatElseStripBlockData }
               {heading}
             </h2>
           </div>
-          <Link
-            href={ctaHref}
-            data-tina-field={block?.tina?.ctaLabel}
-            className="inline-flex items-center gap-2 bg-on-surface text-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-6 py-3 hover:bg-primary-container hover:text-on-primary-fixed transition-colors duration-150 shrink-0"
-          >
-            {ctaLabel}
-          </Link>
+          <ServiceCTAButton label={ctaLabel} href={ctaHref} tinaField={block?.tina?.cta?.label} />
         </div>
         <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
-          {services.map(({ label, href }) => (
-            <li key={href}>
+          {services.map(({ label, href }, i) => (
+            <li key={href} data-tina-field={block?.tina?.services?.[i]?.label}>
               <Link
                 href={href}
                 className="font-sans text-base text-on-surface hover:text-primary underline underline-offset-4 decoration-on-surface/40 hover:decoration-primary"

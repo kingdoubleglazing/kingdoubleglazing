@@ -1,7 +1,6 @@
 import Image from 'next/image'
-import Link from 'next/link'
-import { Phone } from 'lucide-react'
-import { getSiteSettings } from '@/lib/site-settings'
+import { GoldLinkButton } from '@/components/ui/GoldLinkButton'
+import { GhostLinkButton } from '@/components/ui/GhostLinkButton'
 
 export interface ServiceSectionBlockData {
   __typename?: string
@@ -20,11 +19,12 @@ export interface ServiceSectionBlockData {
     heading?: string
     bodyText?: string
     bullets?: string
+    primaryCta?: { label?: string; href?: string }
+    secondaryCta?: { label?: string; href?: string }
   }
 }
 
 export function ServiceSectionBlock({ block }: { block: ServiceSectionBlockData }) {
-  const settings = getSiteSettings()
   const variant = block.variant ?? 'default'
   const isDanger = variant === 'danger'
   const isDark = variant === 'dark'
@@ -44,8 +44,6 @@ export function ServiceSectionBlock({ block }: { block: ServiceSectionBlockData 
   const eyebrowClass = onDark ? 'text-white/80' : 'text-primary'
   const headingClass = onDark ? 'text-white' : 'text-on-surface'
   const border = isFeatured ? 'border-l-4 border-primary-container pl-8' : ''
-  const isEmergency = block.id === 'emergency'
-  const isMirrors = block.id === 'mirrors'
 
   return (
     <section id={block.id ?? undefined} className={`${bg} py-16 md:py-20 scroll-mt-20`}>
@@ -85,38 +83,21 @@ export function ServiceSectionBlock({ block }: { block: ServiceSectionBlockData 
                 ))}
               </ul>
             )}
-            {isEmergency ? (
-              <a
-                href={settings.phoneHref}
-                className="inline-flex items-center gap-2 bg-black text-white font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-black/80 transition-colors duration-150"
-              >
-                <Phone size={16} aria-hidden="true" />
-                Call {settings.phone} Now
-              </a>
-            ) : isMirrors ? (
-              <Link
-                href={block.primaryCta?.href ?? '/contact/'}
-                className="inline-flex items-center gap-3 bg-inverse-surface text-inverse-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-on-surface/80 transition-colors duration-150"
-              >
-                {block.primaryCta?.label ?? 'Get a Quote →'}
-              </Link>
-            ) : (
+            {(block.primaryCta?.label || block.secondaryCta?.label) && (
               <div className="flex flex-wrap gap-3">
                 {block.primaryCta?.label && (
-                  <Link
+                  <GoldLinkButton
+                    label={block.primaryCta.label}
                     href={block.primaryCta.href ?? '/contact/'}
-                    className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150"
-                  >
-                    {block.primaryCta.label}
-                  </Link>
+                    tinaField={block.tina?.primaryCta?.label}
+                  />
                 )}
                 {block.secondaryCta?.label && (
-                  <Link
+                  <GhostLinkButton
+                    label={block.secondaryCta.label}
                     href={block.secondaryCta.href ?? '/contact/'}
-                    className="inline-flex items-center gap-3 bg-transparent text-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 border border-on-surface/30 hover:bg-on-surface/10 transition-colors duration-150"
-                  >
-                    {block.secondaryCta.label}
-                  </Link>
+                    tinaField={block.tina?.secondaryCta?.label}
+                  />
                 )}
               </div>
             )}

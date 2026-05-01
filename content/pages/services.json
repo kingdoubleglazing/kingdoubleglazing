@@ -6,11 +6,11 @@
             "badge": "All Services",
             "headlineWhite": "One Team.",
             "headlineYellow": "Every Job.",
-            "subtext": "Retrofit double glazing is our main business \u2014 we add a second pane to your existing windows. We also do emergency repairs, shower screens, splashbacks, mirrors, and commercial glazing. 10-year warranty on every job.",
+            "subtext": "Retrofit double glazing is our main business — we add a second pane to your existing windows. We also do emergency repairs, shower screens, splashbacks, mirrors, and commercial glazing. 10-year warranty on every job.",
             "imageSrc": "/hero/hero-services.webp",
             "imageAlt": "Double glazing services Melbourne",
             "primaryCta": {
-                "label": "Generate My Quote \u2192",
+                "label": "Generate My Quote →",
                 "href": "/instant-estimate/"
             },
             "secondaryCta": {
@@ -44,20 +44,20 @@
             "id": "retrofit",
             "eyebrow": "Our Main Service",
             "heading": "Retrofit Double Glazing",
-            "bodyText": "We add a second layer of glass to your existing windows \u2014 no frame replacement. Works on timber, aluminium, and steel frames. Installed in one day with minimal disruption.",
+            "bodyText": "We add a second layer of glass to your existing windows — no frame replacement. Works on timber, aluminium, and steel frames. Installed in one day with minimal disruption.",
             "variant": "featured",
             "imageSrc": "/stock/double-glazed-2000px.webp",
-            "imageAlt": "Double glazed window close-up \u2014 retrofit installation Melbourne",
+            "imageAlt": "Double glazed window close-up — retrofit installation Melbourne",
             "bullets": [
                 "Works on existing timber, aluminium & steel frames",
-                "Up to 70% quieter \u2014 ideal for tram & traffic noise",
+                "Up to 70% quieter — ideal for tram & traffic noise",
                 "Up to 70% less heat loss in winter",
                 "Installed in one day, no permits required",
                 "10-year warranty on glass and workmanship",
-                "Beat any genuine quote by 30% \u2014 guaranteed in writing"
+                "Beat any genuine quote by 30% — guaranteed in writing"
             ],
             "primaryCta": {
-                "label": "Get My Quote \u2192",
+                "label": "Get My Quote →",
                 "href": "/instant-estimate/"
             },
             "secondaryCta": {
@@ -66,20 +66,24 @@
             }
         },
         {
-            "_template": "adaptorDisclosure"
+            "_template": "adaptorDisclosure",
+            "heading": "About our adaptors",
+            "mobileSubtitle": "Adds ~20mm to your frame. Tap to read more.",
+            "body1": "We use special fittings to attach new glass to your existing frame. Your frame gets about 20mm wider — that is the only visible change. No ripping out, no plastering, no mess.",
+            "body2": "This saves you thousands compared to full window replacement."
         },
         {
             "_template": "serviceSection",
             "id": "emergency",
             "eyebrow": "24/7 Emergency",
             "heading": "Emergency Glass Repair",
-            "bodyText": "Broken window? We respond within 2\u20134 hours across Melbourne. Temporary board-up available if immediate replacement isn't possible. Insurance documentation provided on request.",
+            "bodyText": "Broken window? We respond within 2–4 hours across Melbourne. Temporary board-up available if immediate replacement isn't possible. Insurance documentation provided on request.",
             "variant": "danger",
             "imageSrc": "/stock/AdobeStock_323273938.webp",
-            "imageAlt": "Emergency glass repair \u2014 glazier on site in Melbourne",
+            "imageAlt": "Emergency glass repair — glazier on site in Melbourne",
             "bullets": [
                 "24/7 emergency response across Melbourne",
-                "2\u20134 hour response time for inner suburbs",
+                "2–4 hour response time for inner suburbs",
                 "Temporary board-up if needed",
                 "All glass types: single, double, shower screens, shopfronts",
                 "Insurance documentation on request"
@@ -105,7 +109,7 @@
                 "Clean, minimal installation"
             ],
             "primaryCta": {
-                "label": "Get a Quote \u2192",
+                "label": "Get a Quote →",
                 "href": "/contact/?service=shower-visit"
             },
             "secondaryCta": {
@@ -123,20 +127,20 @@
             "imageSrc": "/stock/splashback-2.webp",
             "imageAlt": "Kitchen glass splashback installation Melbourne",
             "bullets": [
-                "Any colour \u2014 matched to your paint or tile",
+                "Any colour — matched to your paint or tile",
                 "Toughened safety glass",
                 "Custom cut to size",
                 "Easy to clean, no grout lines"
             ],
             "primaryCta": {
-                "label": "Get a Quote \u2192",
+                "label": "Get a Quote →",
                 "href": "/contact/"
             }
         },
         {
             "_template": "serviceSection",
             "id": "mirrors",
-            "eyebrow": "D\u00e9cor",
+            "eyebrow": "Décor",
             "heading": "Custom Mirrors",
             "bodyText": "Custom-cut mirrors for bathrooms, gyms, hallways, and feature walls. Any size, any shape, cut and fitted by our team.",
             "variant": "default",
@@ -147,7 +151,7 @@
                 "Bevelled edges available"
             ],
             "primaryCta": {
-                "label": "Get a Quote \u2192",
+                "label": "Get a Quote →",
                 "href": "/contact/"
             }
         },
@@ -159,7 +163,7 @@
             "bodyText": "Shopfront glazing, office partitions, and large-format commercial glass. We supply and install across Melbourne with competitive trade pricing.",
             "variant": "dark",
             "imageSrc": "/hero/hero-commercial-glazing.webp",
-            "imageAlt": "Commercial glazing \u2014 shopfront and office glass Melbourne",
+            "imageAlt": "Commercial glazing — shopfront and office glass Melbourne",
             "bullets": [
                 "Shopfronts and entrances",
                 "Office partitions and screens",
@@ -168,7 +172,7 @@
                 "Trade pricing available"
             ],
             "primaryCta": {
-                "label": "Get a Quote \u2192",
+                "label": "Get a Quote →",
                 "href": "/contact/"
             }
         },
@@ -195,7 +199,7 @@
                 },
                 {
                     "q": "Can you beat a competitor quote on double glazing?",
-                    "a": "Yes \u2014 we will beat any genuine, like-for-like written competitor quote by at least 30%, guaranteed in writing with the same 10-year warranty."
+                    "a": "Yes — we will beat any genuine, like-for-like written competitor quote by at least 30%, guaranteed in writing with the same 10-year warranty."
                 },
                 {
                     "q": "Do you do 24/7 emergency glass repair in Melbourne?",
@@ -203,11 +207,11 @@
                 },
                 {
                     "q": "How quickly can you respond to a broken window in Melbourne?",
-                    "a": "We aim to respond within 2\u20134 hours for emergency calls across inner Melbourne suburbs."
+                    "a": "We aim to respond within 2–4 hours for emergency calls across inner Melbourne suburbs."
                 },
                 {
                     "q": "Do you provide temporary board-up for broken windows?",
-                    "a": "Yes \u2014 if glass cannot be replaced immediately, we provide secure temporary board-up to protect your property."
+                    "a": "Yes — if glass cannot be replaced immediately, we provide secure temporary board-up to protect your property."
                 },
                 {
                     "q": "Is emergency glass repair covered by home insurance?",
@@ -215,27 +219,34 @@
                 },
                 {
                     "q": "Do you service all Melbourne suburbs?",
-                    "a": "Yes \u2014 we cover all of metropolitan Melbourne, eastern, northern, and inner-western suburbs. Call for outer-metro jobs."
+                    "a": "Yes — we cover all of metropolitan Melbourne, eastern, northern, and inner-western suburbs. Call for outer-metro jobs."
                 },
                 {
                     "q": "How quickly can you start?",
-                    "a": "Most jobs are scheduled within 2\u20133 weeks of deposit. Emergency glass repairs are same-day."
+                    "a": "Most jobs are scheduled within 2–3 weeks of deposit. Emergency glass repairs are same-day."
                 },
                 {
                     "q": "Do you provide quotes on-site?",
-                    "a": "Retrofit double glazing quotes are done online with our Instant Estimate tool \u2014 no site visit needed. Shower screens and custom work require a site measure."
+                    "a": "Retrofit double glazing quotes are done online with our Instant Estimate tool — no site visit needed. Shower screens and custom work require a site measure."
                 }
             ]
         },
         {
-            "_template": "freeAdvice"
+            "_template": "freeAdvice",
+            "eyebrow": "Free Advice",
+            "headingLine1": "Got a question",
+            "headingLine2": "we haven't covered?",
+            "body": "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.",
+            "buttonLabel": "Call Us"
         },
         {
             "_template": "ctaBanner",
             "heading": "Ready to Get\nStarted?",
             "subtext": "Generate your own quote in minutes, or call us directly for any service.",
-            "primaryCtaLabel": "Generate My Quote",
-            "primaryCtaHref": "/instant-estimate/"
+            "primaryCta": {
+                "label": "Generate My Quote",
+                "href": "/instant-estimate/"
+            }
         }
     ]
 }

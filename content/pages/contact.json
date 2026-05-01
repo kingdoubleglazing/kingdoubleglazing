@@ -10,7 +10,7 @@
             "imageSrc": "/hero/hero-home.webp",
             "imageAlt": "Contact King Double Glazing Melbourne",
             "primaryCta": {
-                "label": "Generate My Quote \u2192",
+                "label": "Generate My Quote →",
                 "href": "/instant-estimate/"
             },
             "secondaryCta": {
@@ -47,7 +47,9 @@
             "heading": "Send Us a Message"
         },
         {
-            "_template": "paymentTerms"
+            "_template": "paymentTerms",
+            "eyebrow": "How payment works",
+            "heading": "Payment Terms & Assurance"
         },
         {
             "_template": "faq",
@@ -56,11 +58,11 @@
             "faqs": [
                 {
                     "q": "How quickly do you respond?",
-                    "a": "Within one business day for emails and forms. Phone calls answered same day during business hours. Broken glass? Call directly \u2014 we aim to dispatch within 2\u20134 hours in Melbourne."
+                    "a": "Within one business day for emails and forms. Phone calls answered same day during business hours. Broken glass? Call directly — we aim to dispatch within 2–4 hours in Melbourne."
                 },
                 {
                     "q": "Do I need a site visit to get a price?",
-                    "a": "No. Use the Quote Generator to get your price in minutes \u2014 no email required to see your number. If you're happy with the estimate, email your quote through to us to proceed. We'll then arrange a convenient time for a site inspection and final measure before scheduling your installation."
+                    "a": "No. Use the Quote Generator to get your price in minutes — no email required to see your number. If you're happy with the estimate, email your quote through to us to proceed. We'll then arrange a convenient time for a site inspection and final measure before scheduling your installation."
                 },
                 {
                     "q": "What areas do you service?",
@@ -69,14 +71,21 @@
             ]
         },
         {
-            "_template": "freeAdvice"
+            "_template": "freeAdvice",
+            "eyebrow": "Free Advice",
+            "headingLine1": "Got a question",
+            "headingLine2": "we haven't covered?",
+            "body": "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.",
+            "buttonLabel": "Call Us"
         },
         {
             "_template": "ctaBanner",
             "heading": "Want the\nNumber First?",
-            "subtext": "Use the Quote Generator \u2014 see your price in minutes, no email required. Then contact us when you're ready.",
-            "primaryCtaLabel": "Generate My Quote",
-            "primaryCtaHref": "/instant-estimate/"
+            "subtext": "Use the Quote Generator — see your price in minutes, no email required. Then contact us when you're ready.",
+            "primaryCta": {
+                "label": "Generate My Quote",
+                "href": "/instant-estimate/"
+            }
         }
     ]
 }

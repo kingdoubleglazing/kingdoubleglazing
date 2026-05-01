@@ -6,12 +6,12 @@
             "badge": "About King Double Glazing",
             "headlineWhite": "Built by a Family",
             "headlineYellow": "of Melbourne Glaziers",
-            "subtext": "Tas Markou ran two double glazing factories. He found a way to drop the price \u2014 because most companies charge more than families can afford. 40+ staff at peak. 25+ years in the trade.",
+            "subtext": "Tas Markou ran two double glazing factories. He found a way to drop the price — because most companies charge more than families can afford. 40+ staff at peak. 25+ years in the trade.",
             "imageSrc": "/testimonial-founder/founder.webp",
             "imageAlt": "Tas Markou, founder of King Double Glazing",
             "accentWord": "TAS",
             "primaryCta": {
-                "label": "Generate My Quote \u2192",
+                "label": "Generate My Quote →",
                 "href": "/instant-estimate/"
             },
             "secondaryCta": {
@@ -44,11 +44,11 @@
             "_template": "storyWithStats",
             "eyebrow": "The Origin Story",
             "paragraphs": [
-                "I grew up in glass. My father was a glazier and I was doing installs as a kid. I ran two factories. Along the way I found a way to drop the price \u2014 most companies charge way more than families can afford.",
+                "I grew up in glass. My father was a glazier and I was doing installs as a kid. I ran two factories. Along the way I found a way to drop the price — most companies charge way more than families can afford.",
                 "You want quieter, warmer windows. You don't want to spend $15,000 ripping out frames that work fine. We add a second pane to what you already have. No mess. One day, done.",
                 "Every quote is in plain numbers. No hidden extras. If we can't beat any real competitor quote by 30%, I'll say so. Stop. Don't overpay."
             ],
-            "quote": "Transparent quoting. Fair pricing. 10-year warranty. That's the King promise. \u2014 Tas",
+            "quote": "Transparent quoting. Fair pricing. 10-year warranty. That's the King promise. — Tas",
             "stats": [
                 {
                     "value": "50+",
@@ -69,14 +69,21 @@
             ]
         },
         {
-            "_template": "freeAdvice"
+            "_template": "freeAdvice",
+            "eyebrow": "Free Advice",
+            "headingLine1": "Got a question",
+            "headingLine2": "we haven't covered?",
+            "body": "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.",
+            "buttonLabel": "Call Us"
         },
         {
             "_template": "ctaBanner",
             "heading": "Ready to\nGet Started?",
-            "subtext": "Generate your own quote in minutes. Or call us directly \u2014 no call centres, no middlemen.",
-            "primaryCtaLabel": "Generate My Quote \u2192",
-            "primaryCtaHref": "/instant-estimate/"
+            "subtext": "Generate your own quote in minutes. Or call us directly — no call centres, no middlemen.",
+            "primaryCta": {
+                "label": "Generate My Quote →",
+                "href": "/instant-estimate/"
+            }
         }
     ]
 }

@@ -1,46 +1,102 @@
 {
-  "blocks": [
-    {
-      "_template": "hero",
-      "variant": "overlay",
-      "badge": "Quote Generator",
-      "headlineWhite": "Instant Double Glazing Estimate",
-      "headlineYellow": "See Your Price in Minutes.",
-      "subtext": "See your price in minutes. No email required.",
-      "primaryCtaLabel": "Generate My Quote →",
-      "primaryCtaHref": "#estimate-form",
-      "imageSrc": "/hero/hero-double-glazing.webp",
-      "imageAlt": "Double glazing upgrade in progress on a Melbourne home"
-    },
-    { "_template": "glassComparison" },
-    { "_template": "glassTechSpecs" },
-    { "_template": "paymentTerms" },
-    { "_template": "adaptorDisclosure" },
-    {
-      "_template": "faq",
-      "heading": "Quote Generator FAQ",
-      "subheading": "Common questions about the tool and how it works.",
-      "faqs": [
-        { "q": "How accurate is the online price?", "a": "Within about 10%, as long as your measurements are correct. Enter the height and width of each window in millimetres and the calculator does the rest. When we visit your home for final measurements, the number rarely moves by more than 10%." },
-        { "q": "How do I measure my windows?", "a": "Measure the glass pane itself — height then width, in millimetres. Not the frame, just the glass. A standard double-hung window might be around 900mm tall × 600mm wide. If you have the same size in multiple rooms, put them all in one row with the quantity." },
-        { "q": "Why do I need to price myself first?", "a": "We keep our prices low by running lean. The calculator means no sales visits, no chasing, and no time wasted on either side. You see the price. If it works, we move forward. If not, we don't chase." },
-        { "q": "What about the deposit?", "a": "We ask for a 50% deposit to start fabrication — your glass is custom-made for your exact windows. The remaining 50% is due once materials are ready and your install is scheduled. No surprise fees." },
-        { "q": "What is the second storey surcharge?", "a": "Second storey windows are harder to access, so we charge a flat $150 extra per window. Tick the second storey checkbox on any row that applies and the calculator adds it automatically." },
-        { "q": "Will the adaptor change how my window looks?", "a": "Our adaptor adds about 20mm to your existing frame width — so a 40mm frame becomes around 60mm. This is how we fit insulated glass into your existing frames without replacing them. Most customers don't notice the difference after install." },
-        { "q": "What's covered by the warranty?", "a": "Our 10-year warranty covers the glass unit, the seals, and our workmanship. If anything fails within that time, we come back and fix it — no charge." },
-        { "q": "How long from quote to install?", "a": "Once your deposit is in, fabrication typically takes 2–3 weeks. We'll confirm your install date as soon as materials are ready." },
-        { "q": "Do I have to give my email to see the price?", "a": "No. Your price appears as you enter your windows — no email, no phone number, no obligation. You can optionally send your quote through to us when you're ready to proceed." },
-        { "q": "Does the price include installation?", "a": "Yes. Every quote includes glass, installation, frame preparation, rubbish removal, and 10-year warranty. No hidden extras." },
-        { "q": "What if I already have a quote from someone else?", "a": "Send it to us. If it's a genuine quote, we'll beat it by 30% — guaranteed in writing, same 10-year warranty." }
-      ]
-    },
-    { "_template": "freeAdvice" },
-    {
-      "_template": "ctaBanner",
-      "heading": "Ready for the\nFormal Quote?",
-      "subtext": "Once you have an estimate, call us to confirm and book the installation.",
-      "primaryCtaLabel": "Contact Us",
-      "primaryCtaHref": "/contact/"
-    }
-  ]
+    "blocks": [
+        {
+            "_template": "hero",
+            "variant": "overlay",
+            "badge": "Quote Generator",
+            "headlineWhite": "Instant Double Glazing Estimate",
+            "headlineYellow": "See Your Price in Minutes.",
+            "subtext": "See your price in minutes. No email required.",
+            "primaryCtaLabel": "Generate My Quote →",
+            "primaryCtaHref": "#estimate-form",
+            "imageSrc": "/hero/hero-double-glazing.webp",
+            "imageAlt": "Double glazing upgrade in progress on a Melbourne home"
+        },
+        {
+            "_template": "glassComparison"
+        },
+        {
+            "_template": "glassTechSpecs"
+        },
+        {
+            "_template": "paymentTerms",
+            "eyebrow": "How payment works",
+            "heading": "Payment Terms & Assurance"
+        },
+        {
+            "_template": "adaptorDisclosure",
+            "heading": "About our adaptors",
+            "mobileSubtitle": "Adds ~20mm to your frame. Tap to read more.",
+            "body1": "We use special fittings to attach new glass to your existing frame. Your frame gets about 20mm wider — that is the only visible change. No ripping out, no plastering, no mess.",
+            "body2": "This saves you thousands compared to full window replacement."
+        },
+        {
+            "_template": "faq",
+            "heading": "Quote Generator FAQ",
+            "subheading": "Common questions about the tool and how it works.",
+            "faqs": [
+                {
+                    "q": "How accurate is the online price?",
+                    "a": "Within about 10%, as long as your measurements are correct. Enter the height and width of each window in millimetres and the calculator does the rest. When we visit your home for final measurements, the number rarely moves by more than 10%."
+                },
+                {
+                    "q": "How do I measure my windows?",
+                    "a": "Measure the glass pane itself — height then width, in millimetres. Not the frame, just the glass. A standard double-hung window might be around 900mm tall × 600mm wide. If you have the same size in multiple rooms, put them all in one row with the quantity."
+                },
+                {
+                    "q": "Why do I need to price myself first?",
+                    "a": "We keep our prices low by running lean. The calculator means no sales visits, no chasing, and no time wasted on either side. You see the price. If it works, we move forward. If not, we don't chase."
+                },
+                {
+                    "q": "What about the deposit?",
+                    "a": "We ask for a 50% deposit to start fabrication — your glass is custom-made for your exact windows. The remaining 50% is due once materials are ready and your install is scheduled. No surprise fees."
+                },
+                {
+                    "q": "What is the second storey surcharge?",
+                    "a": "Second storey windows are harder to access, so we charge a flat $150 extra per window. Tick the second storey checkbox on any row that applies and the calculator adds it automatically."
+                },
+                {
+                    "q": "Will the adaptor change how my window looks?",
+                    "a": "Our adaptor adds about 20mm to your existing frame width — so a 40mm frame becomes around 60mm. This is how we fit insulated glass into your existing frames without replacing them. Most customers don't notice the difference after install."
+                },
+                {
+                    "q": "What's covered by the warranty?",
+                    "a": "Our 10-year warranty covers the glass unit, the seals, and our workmanship. If anything fails within that time, we come back and fix it — no charge."
+                },
+                {
+                    "q": "How long from quote to install?",
+                    "a": "Once your deposit is in, fabrication typically takes 2–3 weeks. We'll confirm your install date as soon as materials are ready."
+                },
+                {
+                    "q": "Do I have to give my email to see the price?",
+                    "a": "No. Your price appears as you enter your windows — no email, no phone number, no obligation. You can optionally send your quote through to us when you're ready to proceed."
+                },
+                {
+                    "q": "Does the price include installation?",
+                    "a": "Yes. Every quote includes glass, installation, frame preparation, rubbish removal, and 10-year warranty. No hidden extras."
+                },
+                {
+                    "q": "What if I already have a quote from someone else?",
+                    "a": "Send it to us. If it's a genuine quote, we'll beat it by 30% — guaranteed in writing, same 10-year warranty."
+                }
+            ]
+        },
+        {
+            "_template": "freeAdvice",
+            "eyebrow": "Free Advice",
+            "headingLine1": "Got a question",
+            "headingLine2": "we haven't covered?",
+            "body": "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.",
+            "buttonLabel": "Call Us"
+        },
+        {
+            "_template": "ctaBanner",
+            "heading": "Ready for the\nFormal Quote?",
+            "subtext": "Once you have an estimate, call us to confirm and book the installation.",
+            "primaryCta": {
+                "label": "Contact Us",
+                "href": "/contact/"
+            }
+        }
+    ]
 }

@@ -5,12 +5,11 @@ export interface CTABannerBlockData {
   __typename?: string
   heading?: string | null
   subtext?: string | null
-  primaryCtaLabel?: string | null
-  primaryCtaHref?: string | null
+  primaryCta?: { label?: string | null; href?: string | null } | null
   tina?: {
     heading?: string
     subtext?: string
-    primaryCtaLabel?: string
+    primaryCta?: { label?: string; href?: string }
   }
 }
 
@@ -22,8 +21,8 @@ export function CTABannerBlock({ block }: { block: CTABannerBlockData }) {
       heading={block.heading ?? undefined}
       subtext={block.subtext ?? undefined}
       primaryCta={
-        block.primaryCtaLabel
-          ? { label: block.primaryCtaLabel, href: block.primaryCtaHref ?? '/instant-estimate/' }
+        block.primaryCta?.label
+          ? { label: block.primaryCta.label, href: block.primaryCta.href ?? '/instant-estimate/' }
           : undefined
       }
       secondaryCta={{ label: settings.phone, href: settings.phoneHref }}

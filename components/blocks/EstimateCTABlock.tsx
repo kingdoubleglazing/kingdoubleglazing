@@ -1,15 +1,15 @@
-import Link from 'next/link'
+import { EstimateButton } from '@/components/ui/EstimateButton'
 
 export interface EstimateCTABlockData {
   __typename?: string
   headline?: string | null
   subtext?: string | null
-  buttonLabel?: string | null
+  cta?: { label?: string | null; href?: string | null } | null
   caption?: string | null
   tina?: {
     headline?: string
     subtext?: string
-    buttonLabel?: string
+    cta?: { label?: string; href?: string }
     caption?: string
   }
 }
@@ -17,7 +17,8 @@ export interface EstimateCTABlockData {
 export function EstimateCTABlock({ block }: { block: EstimateCTABlockData }) {
   const headline = block.headline ?? 'Get Your Price.\nIn Minutes Online.'
   const subtext = block.subtext ?? "We beat any genuine quote by 30%. That's a promise in writing."
-  const buttonLabel = block.buttonLabel ?? 'Start My Quote →'
+  const buttonLabel = block.cta?.label ?? 'Start My Quote →'
+  const buttonHref = block.cta?.href ?? '/instant-estimate/'
   const caption = block.caption ?? 'Enter your window sizes · See your price instantly'
 
   const [line1, line2] = headline.split('\n')
@@ -46,12 +47,7 @@ export function EstimateCTABlock({ block }: { block: EstimateCTABlockData }) {
         >
           {subtext}
         </p>
-        <Link
-          href="/instant-estimate/"
-          className="inline-flex items-center gap-3 bg-on-primary-fixed text-primary-container font-headline text-sm font-semibold uppercase tracking-[0.12em] px-10 py-5 hover:bg-on-primary-fixed/80 transition-colors duration-150"
-        >
-          <span data-tina-field={block.tina?.buttonLabel}>{buttonLabel}</span>
-        </Link>
+        <EstimateButton label={buttonLabel} href={buttonHref} tinaField={block.tina?.cta?.label} />
         <p
           data-tina-field={block.tina?.caption}
           className="mt-4 font-headline text-xs font-semibold uppercase tracking-widest text-on-primary-fixed/80"

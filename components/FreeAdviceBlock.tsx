@@ -1,5 +1,5 @@
-import { Phone } from 'lucide-react'
 import { getSiteSettings } from '@/lib/site-settings'
+import { CallButton } from '@/components/ui/CallButton'
 
 export interface FreeAdviceBlockData {
   __typename?: string
@@ -51,13 +51,7 @@ export function FreeAdviceBlock({ block }: { block?: FreeAdviceBlockData }) {
           >
             {body}
           </p>
-          <a
-            href={settings.phoneHref}
-            className="inline-flex items-center gap-3 bg-primary-container text-on-primary-fixed font-headline text-base font-semibold uppercase tracking-[0.1em] px-8 py-5 hover:bg-primary-fixed-dim transition-colors duration-150"
-          >
-            <Phone size={18} aria-hidden="true" />
-            <span data-tina-field={block?.tina?.buttonLabel}>{buttonLabel}</span> — {settings.phone}
-          </a>
+          <CallButton label={buttonLabel} tinaField={block?.tina?.buttonLabel} />
         </div>
       </div>
     </section>

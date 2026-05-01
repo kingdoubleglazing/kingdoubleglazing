@@ -80,10 +80,20 @@
             ]
         },
         {
-            "_template": "adaptorDisclosure"
+            "_template": "adaptorDisclosure",
+            "heading": "About our adaptors",
+            "mobileSubtitle": "Adds ~20mm to your frame. Tap to read more.",
+            "body1": "We use special fittings to attach new glass to your existing frame. Your frame gets about 20mm wider \u2014 that is the only visible change. No ripping out, no plastering, no mess.",
+            "body2": "This saves you thousands compared to full window replacement."
         },
         {
             "_template": "processSteps",
+            "heading": "Our Process",
+            "subheading": "Simple and transparent \u2014 from quote to installation.",
+            "cta": {
+                "label": "Get Instant Estimate",
+                "href": "/instant-estimate/"
+            },
             "steps": [
                 {
                     "title": "Request a Quote",
@@ -113,13 +123,15 @@
             ]
         },
         {
-            "_template": "paymentTerms"
+            "_template": "paymentTerms",
+            "eyebrow": "How payment works",
+            "heading": "Payment Terms & Assurance"
         },
         {
             "_template": "estimateCta",
             "headline": "Get Your Price.\nIn Minutes Online.",
             "subtext": "We beat any genuine quote by 30%. That's a promise in writing.",
-            "buttonLabel": "Start My Quote \u2192",
+            "cta": { "label": "Start My Quote \u2192", "href": "/instant-estimate/" },
             "caption": "Enter your window sizes \u00b7 See your price instantly"
         },
         {
@@ -150,13 +162,31 @@
             ]
         },
         {
-            "_template": "freeAdvice"
+            "_template": "freeAdvice",
+            "eyebrow": "Free Advice",
+            "headingLine1": "Got a question",
+            "headingLine2": "we haven't covered?",
+            "body": "Call us directly. Free advice, no sales pitch. 25+ years in glazing \u2014 we'll give you a straight answer.",
+            "buttonLabel": "Call Us"
         },
         {
-            "_template": "whatElseStrip"
+            "_template": "whatElseStrip",
+            "eyebrow": "What Else We Do",
+            "heading": "We're glaziers. We do the lot.",
+            "cta": { "label": "See All Services →", "href": "/services/" },
+            "services": [
+                { "label": "Emergency repairs", "href": "/services/#emergency" },
+                { "label": "Shower screens", "href": "/services/#shower-screens" },
+                { "label": "Splashbacks", "href": "/services/#splashbacks" },
+                { "label": "Custom mirrors", "href": "/services/#mirrors" },
+                { "label": "Commercial glazing", "href": "/services/#commercial" }
+            ]
         },
         {
-            "_template": "emergencyStrip"
+            "_template": "emergencyStrip",
+            "boldText": "Broken window right now?",
+            "text": "We do emergency glass repair across Melbourne.",
+            "cta": { "label": "See emergency services →", "href": "/services/#emergency" }
         }
     ]
 }
