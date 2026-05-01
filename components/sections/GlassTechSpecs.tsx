@@ -1,5 +1,4 @@
 import type { PricingOption } from '@/lib/types'
-import type { OptionKey } from '@/data/pricing'
 
 const YES = (
   <span className="text-primary-container font-bold" aria-label="Yes">✓</span>
@@ -9,8 +8,8 @@ const NO = (
 )
 
 export function GlassTechSpecs({ options }: { options: PricingOption[] }) {
-  const OPTION_KEYS = options.map(o => o.optionKey) as OptionKey[]
-  const OPTIONS = Object.fromEntries(options.map(o => [o.optionKey, o])) as Record<OptionKey, PricingOption>
+  const OPTION_KEYS = options.map(o => o.optionKey)
+  const OPTIONS = Object.fromEntries(options.map(o => [o.optionKey, o]))
 
   return (
     <section id="tech-specs" className="bg-surface-container-low py-14 md:py-18">

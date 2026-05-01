@@ -119,6 +119,35 @@ type SiteSettingsPricing {
   retrofitFromDisplay: String
 }
 
+type SiteSettingsTrustBarItems {
+  iconKey: String
+  label: String
+}
+
+type SiteSettingsAdaptorDisclosure {
+  heading: String
+  mobileSubtitle: String
+  body1: String
+  body2: String
+}
+
+type SiteSettingsPaymentTerms {
+  depositTitle: String
+  depositBody: String
+  completionTitle: String
+  completionBody: String
+  warrantyTitle: String
+  warrantyBody: String
+}
+
+type SiteSettingsFreeAdviceBlock {
+  eyebrow: String
+  headingLine1: String
+  headingLine2: String
+  body: String
+  buttonLabel: String
+}
+
 type SiteSettings implements Node & Document {
   name: String
   legalName: String
@@ -133,6 +162,10 @@ type SiteSettings implements Node & Document {
   address: SiteSettingsAddress
   social: SiteSettingsSocial
   pricing: SiteSettingsPricing
+  trustBarItems: [SiteSettingsTrustBarItems]
+  adaptorDisclosure: SiteSettingsAdaptorDisclosure
+  paymentTerms: SiteSettingsPaymentTerms
+  freeAdviceBlock: SiteSettingsFreeAdviceBlock
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -175,6 +208,35 @@ input SiteSettingsPricingFilter {
   retrofitFromDisplay: StringFilter
 }
 
+input SiteSettingsTrustBarItemsFilter {
+  iconKey: StringFilter
+  label: StringFilter
+}
+
+input SiteSettingsAdaptorDisclosureFilter {
+  heading: StringFilter
+  mobileSubtitle: StringFilter
+  body1: StringFilter
+  body2: StringFilter
+}
+
+input SiteSettingsPaymentTermsFilter {
+  depositTitle: StringFilter
+  depositBody: StringFilter
+  completionTitle: StringFilter
+  completionBody: StringFilter
+  warrantyTitle: StringFilter
+  warrantyBody: StringFilter
+}
+
+input SiteSettingsFreeAdviceBlockFilter {
+  eyebrow: StringFilter
+  headingLine1: StringFilter
+  headingLine2: StringFilter
+  body: StringFilter
+  buttonLabel: StringFilter
+}
+
 input SiteSettingsFilter {
   name: StringFilter
   legalName: StringFilter
@@ -189,6 +251,10 @@ input SiteSettingsFilter {
   address: SiteSettingsAddressFilter
   social: SiteSettingsSocialFilter
   pricing: SiteSettingsPricingFilter
+  trustBarItems: SiteSettingsTrustBarItemsFilter
+  adaptorDisclosure: SiteSettingsAdaptorDisclosureFilter
+  paymentTerms: SiteSettingsPaymentTermsFilter
+  freeAdviceBlock: SiteSettingsFreeAdviceBlockFilter
 }
 
 type SiteSettingsConnectionEdges {
@@ -270,14 +336,24 @@ type NavigationConnection implements Connection {
   edges: [NavigationConnectionEdges]
 }
 
+type PageBlocksHeroPrimaryCta {
+  label: String
+  href: String
+}
+
+type PageBlocksHeroSecondaryCta {
+  label: String
+  href: String
+}
+
 type PageBlocksHero {
   variant: String
   badge: String
   headlineWhite: String
   headlineYellow: String
   subtext: String
-  primaryCtaLabel: String
-  primaryCtaHref: String
+  primaryCta: PageBlocksHeroPrimaryCta
+  secondaryCta: PageBlocksHeroSecondaryCta
   imageSrc: String
   imageAlt: String
   showWarrantyBadge: Boolean
@@ -285,8 +361,13 @@ type PageBlocksHero {
   accentWord: String
 }
 
+type PageBlocksTrustBarItems {
+  iconKey: String
+  label: String
+}
+
 type PageBlocksTrustBar {
-  placeholder: String
+  items: [PageBlocksTrustBarItems]
 }
 
 type PageBlocksWhyRetrofitItems {
@@ -384,7 +465,10 @@ type PageBlocksWarrantyCoverage {
 }
 
 type PageBlocksContactCards {
-  placeholder: String
+  phoneSublabel: String
+  emailSublabel: String
+  areaSublabel: String
+  emergencySublabel: String
 }
 
 type PageBlocksContactForm {
@@ -407,23 +491,47 @@ type PageBlocksGlassTechSpecs {
 }
 
 type PageBlocksAdaptorDisclosure {
-  placeholder: String
+  heading: String
+  mobileSubtitle: String
+  body1: String
+  body2: String
 }
 
 type PageBlocksPaymentTerms {
-  placeholder: String
+  depositTitle: String
+  depositBody: String
+  completionTitle: String
+  completionBody: String
+  warrantyTitle: String
+  warrantyBody: String
 }
 
 type PageBlocksFreeAdvice {
-  placeholder: String
+  eyebrow: String
+  headingLine1: String
+  headingLine2: String
+  body: String
+  buttonLabel: String
+}
+
+type PageBlocksWhatElseStripServices {
+  label: String
+  href: String
 }
 
 type PageBlocksWhatElseStrip {
-  placeholder: String
+  eyebrow: String
+  heading: String
+  ctaLabel: String
+  ctaHref: String
+  services: [PageBlocksWhatElseStripServices]
 }
 
 type PageBlocksEmergencyStrip {
-  placeholder: String
+  boldText: String
+  text: String
+  ctaLabel: String
+  ctaHref: String
 }
 
 union PageBlocks = PageBlocksHero | PageBlocksTrustBar | PageBlocksWhyRetrofit | PageBlocksProcessSteps | PageBlocksEstimateCta | PageBlocksFaq | PageBlocksServiceSection | PageBlocksStoryWithStats | PageBlocksWarrantyCoverage | PageBlocksContactCards | PageBlocksContactForm | PageBlocksCtaBanner | PageBlocksGlassComparison | PageBlocksGlassTechSpecs | PageBlocksAdaptorDisclosure | PageBlocksPaymentTerms | PageBlocksFreeAdvice | PageBlocksWhatElseStrip | PageBlocksEmergencyStrip
@@ -433,6 +541,16 @@ type Page implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input PageBlocksHeroPrimaryCtaFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
+input PageBlocksHeroSecondaryCtaFilter {
+  label: StringFilter
+  href: StringFilter
 }
 
 input ImageFilter {
@@ -453,8 +571,8 @@ input PageBlocksHeroFilter {
   headlineWhite: StringFilter
   headlineYellow: StringFilter
   subtext: StringFilter
-  primaryCtaLabel: StringFilter
-  primaryCtaHref: StringFilter
+  primaryCta: PageBlocksHeroPrimaryCtaFilter
+  secondaryCta: PageBlocksHeroSecondaryCtaFilter
   imageSrc: ImageFilter
   imageAlt: StringFilter
   showWarrantyBadge: BooleanFilter
@@ -462,8 +580,13 @@ input PageBlocksHeroFilter {
   accentWord: StringFilter
 }
 
+input PageBlocksTrustBarItemsFilter {
+  iconKey: StringFilter
+  label: StringFilter
+}
+
 input PageBlocksTrustBarFilter {
-  placeholder: StringFilter
+  items: PageBlocksTrustBarItemsFilter
 }
 
 input PageBlocksWhyRetrofitItemsFilter {
@@ -561,7 +684,10 @@ input PageBlocksWarrantyCoverageFilter {
 }
 
 input PageBlocksContactCardsFilter {
-  placeholder: StringFilter
+  phoneSublabel: StringFilter
+  emailSublabel: StringFilter
+  areaSublabel: StringFilter
+  emergencySublabel: StringFilter
 }
 
 input PageBlocksContactFormFilter {
@@ -584,23 +710,47 @@ input PageBlocksGlassTechSpecsFilter {
 }
 
 input PageBlocksAdaptorDisclosureFilter {
-  placeholder: StringFilter
+  heading: StringFilter
+  mobileSubtitle: StringFilter
+  body1: StringFilter
+  body2: StringFilter
 }
 
 input PageBlocksPaymentTermsFilter {
-  placeholder: StringFilter
+  depositTitle: StringFilter
+  depositBody: StringFilter
+  completionTitle: StringFilter
+  completionBody: StringFilter
+  warrantyTitle: StringFilter
+  warrantyBody: StringFilter
 }
 
 input PageBlocksFreeAdviceFilter {
-  placeholder: StringFilter
+  eyebrow: StringFilter
+  headingLine1: StringFilter
+  headingLine2: StringFilter
+  body: StringFilter
+  buttonLabel: StringFilter
+}
+
+input PageBlocksWhatElseStripServicesFilter {
+  label: StringFilter
+  href: StringFilter
 }
 
 input PageBlocksWhatElseStripFilter {
-  placeholder: StringFilter
+  eyebrow: StringFilter
+  heading: StringFilter
+  ctaLabel: StringFilter
+  ctaHref: StringFilter
+  services: PageBlocksWhatElseStripServicesFilter
 }
 
 input PageBlocksEmergencyStripFilter {
-  placeholder: StringFilter
+  boldText: StringFilter
+  text: StringFilter
+  ctaLabel: StringFilter
+  ctaHref: StringFilter
 }
 
 input PageBlocksFilter {
@@ -783,6 +933,35 @@ input SiteSettingsPricingMutation {
   retrofitFromDisplay: String
 }
 
+input SiteSettingsTrustBarItemsMutation {
+  iconKey: String
+  label: String
+}
+
+input SiteSettingsAdaptorDisclosureMutation {
+  heading: String
+  mobileSubtitle: String
+  body1: String
+  body2: String
+}
+
+input SiteSettingsPaymentTermsMutation {
+  depositTitle: String
+  depositBody: String
+  completionTitle: String
+  completionBody: String
+  warrantyTitle: String
+  warrantyBody: String
+}
+
+input SiteSettingsFreeAdviceBlockMutation {
+  eyebrow: String
+  headingLine1: String
+  headingLine2: String
+  body: String
+  buttonLabel: String
+}
+
 input SiteSettingsMutation {
   name: String
   legalName: String
@@ -797,6 +976,10 @@ input SiteSettingsMutation {
   address: SiteSettingsAddressMutation
   social: SiteSettingsSocialMutation
   pricing: SiteSettingsPricingMutation
+  trustBarItems: [SiteSettingsTrustBarItemsMutation]
+  adaptorDisclosure: SiteSettingsAdaptorDisclosureMutation
+  paymentTerms: SiteSettingsPaymentTermsMutation
+  freeAdviceBlock: SiteSettingsFreeAdviceBlockMutation
 }
 
 input NavigationMainNavMutation {
@@ -826,14 +1009,24 @@ input NavigationMutation {
   footerCompanyNav: [NavigationFooterCompanyNavMutation]
 }
 
+input PageBlocksHeroPrimaryCtaMutation {
+  label: String
+  href: String
+}
+
+input PageBlocksHeroSecondaryCtaMutation {
+  label: String
+  href: String
+}
+
 input PageBlocksHeroMutation {
   variant: String
   badge: String
   headlineWhite: String
   headlineYellow: String
   subtext: String
-  primaryCtaLabel: String
-  primaryCtaHref: String
+  primaryCta: PageBlocksHeroPrimaryCtaMutation
+  secondaryCta: PageBlocksHeroSecondaryCtaMutation
   imageSrc: String
   imageAlt: String
   showWarrantyBadge: Boolean
@@ -841,8 +1034,13 @@ input PageBlocksHeroMutation {
   accentWord: String
 }
 
+input PageBlocksTrustBarItemsMutation {
+  iconKey: String
+  label: String
+}
+
 input PageBlocksTrustBarMutation {
-  placeholder: String
+  items: [PageBlocksTrustBarItemsMutation]
 }
 
 input PageBlocksWhyRetrofitItemsMutation {
@@ -940,7 +1138,10 @@ input PageBlocksWarrantyCoverageMutation {
 }
 
 input PageBlocksContactCardsMutation {
-  placeholder: String
+  phoneSublabel: String
+  emailSublabel: String
+  areaSublabel: String
+  emergencySublabel: String
 }
 
 input PageBlocksContactFormMutation {
@@ -963,23 +1164,47 @@ input PageBlocksGlassTechSpecsMutation {
 }
 
 input PageBlocksAdaptorDisclosureMutation {
-  placeholder: String
+  heading: String
+  mobileSubtitle: String
+  body1: String
+  body2: String
 }
 
 input PageBlocksPaymentTermsMutation {
-  placeholder: String
+  depositTitle: String
+  depositBody: String
+  completionTitle: String
+  completionBody: String
+  warrantyTitle: String
+  warrantyBody: String
 }
 
 input PageBlocksFreeAdviceMutation {
-  placeholder: String
+  eyebrow: String
+  headingLine1: String
+  headingLine2: String
+  body: String
+  buttonLabel: String
+}
+
+input PageBlocksWhatElseStripServicesMutation {
+  label: String
+  href: String
 }
 
 input PageBlocksWhatElseStripMutation {
-  placeholder: String
+  eyebrow: String
+  heading: String
+  ctaLabel: String
+  ctaHref: String
+  services: [PageBlocksWhatElseStripServicesMutation]
 }
 
 input PageBlocksEmergencyStripMutation {
-  placeholder: String
+  boldText: String
+  text: String
+  ctaLabel: String
+  ctaHref: String
 }
 
 input PageBlocksMutation {

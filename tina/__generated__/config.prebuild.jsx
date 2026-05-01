@@ -59,6 +59,59 @@ var config_default = defineConfig({
           { name: "pricing", type: "object", label: "Pricing Display", fields: [
             { name: "retrofitFromPerSqm", type: "number", label: "Price per m\xB2 (number)" },
             { name: "retrofitFromDisplay", type: "string", label: "Price display string" }
+          ] },
+          { name: "trustBarItems", type: "object", list: true, label: "Trust Bar Items (global default)", ui: { itemProps: (item) => ({ label: item?.label ?? "Item" }) }, fields: [
+            { name: "iconKey", type: "string", label: "Icon", options: [
+              { value: "alertTriangle", label: "Alert / Warning" },
+              { value: "award", label: "Award" },
+              { value: "badgePercent", label: "Badge / Percent" },
+              { value: "building2", label: "Building / Commercial" },
+              { value: "calendar", label: "Calendar" },
+              { value: "checkCircle", label: "Check Circle" },
+              { value: "clock", label: "Clock" },
+              { value: "dollarSign", label: "Dollar Sign" },
+              { value: "gauge", label: "Gauge / Performance" },
+              { value: "hammer", label: "Hammer" },
+              { value: "home", label: "Home / Residential" },
+              { value: "layers", label: "Layers" },
+              { value: "leaf", label: "Leaf / Eco" },
+              { value: "lock", label: "Lock / Security" },
+              { value: "mapPin", label: "Map Pin / Location" },
+              { value: "phone", label: "Phone" },
+              { value: "shieldCheck", label: "Shield / Check" },
+              { value: "star", label: "Star" },
+              { value: "sun", label: "Sun / Heat" },
+              { value: "thermometer", label: "Thermometer" },
+              { value: "thumbsUp", label: "Thumbs Up" },
+              { value: "truck", label: "Truck / Delivery" },
+              { value: "users", label: "Users / Team" },
+              { value: "volume2", label: "Volume / Sound" },
+              { value: "wind", label: "Wind / Draft" },
+              { value: "wrench", label: "Wrench" },
+              { value: "zap", label: "Zap / Fast" }
+            ] },
+            { name: "label", type: "string", label: "Label" }
+          ] },
+          { name: "adaptorDisclosure", type: "object", label: "Adaptor Disclosure (global default)", fields: [
+            { name: "heading", type: "string", label: "Heading" },
+            { name: "mobileSubtitle", type: "string", label: "Mobile subtitle" },
+            { name: "body1", type: "string", label: "Body paragraph 1", ui: { component: "textarea" } },
+            { name: "body2", type: "string", label: "Body paragraph 2", ui: { component: "textarea" } }
+          ] },
+          { name: "paymentTerms", type: "object", label: "Payment Terms (global default)", fields: [
+            { name: "depositTitle", type: "string", label: "Deposit title" },
+            { name: "depositBody", type: "string", label: "Deposit body", ui: { component: "textarea" } },
+            { name: "completionTitle", type: "string", label: "Completion title" },
+            { name: "completionBody", type: "string", label: "Completion body", ui: { component: "textarea" } },
+            { name: "warrantyTitle", type: "string", label: "Warranty title" },
+            { name: "warrantyBody", type: "string", label: "Warranty body", ui: { component: "textarea" } }
+          ] },
+          { name: "freeAdviceBlock", type: "object", label: "Free Advice Block (global default)", fields: [
+            { name: "eyebrow", type: "string", label: "Eyebrow" },
+            { name: "headingLine1", type: "string", label: "Heading line 1" },
+            { name: "headingLine2", type: "string", label: "Heading line 2 (gold)" },
+            { name: "body", type: "string", label: "Body", ui: { component: "textarea" } },
+            { name: "buttonLabel", type: "string", label: "Button label" }
           ] }
         ]
       },
@@ -130,8 +183,8 @@ var config_default = defineConfig({
                   { name: "headlineWhite", type: "string", label: "Headline (white part)" },
                   { name: "headlineYellow", type: "string", label: "Headline (gold part)" },
                   { name: "subtext", type: "string", label: "Subtext", ui: { component: "textarea" } },
-                  { name: "primaryCtaLabel", type: "string", label: "Primary CTA Label" },
-                  { name: "primaryCtaHref", type: "string", label: "Primary CTA URL" },
+                  { name: "primaryCta", type: "object", label: "Primary CTA", fields: ctaFields },
+                  { name: "secondaryCta", type: "object", label: "Secondary CTA (phone)", fields: ctaFields },
                   { name: "imageSrc", type: "image", label: "Image" },
                   { name: "imageAlt", type: "string", label: "Image Alt Text" },
                   { name: "showWarrantyBadge", type: "boolean", label: "Show Warranty Badge" },
@@ -144,7 +197,40 @@ var config_default = defineConfig({
                 name: "trustBar",
                 label: "Trust Bar",
                 ui: { itemProps: () => ({ label: "\u2B50 Trust Bar" }) },
-                fields: [{ name: "placeholder", type: "string", label: "Static section \u2014 no options", ui: { component: "hidden" } }]
+                fields: [
+                  { name: "items", type: "object", list: true, label: "Items", ui: { itemProps: (item) => ({ label: item?.label ?? "Item" }) }, fields: [
+                    { name: "iconKey", type: "string", label: "Icon", options: [
+                      { value: "alertTriangle", label: "Alert / Warning" },
+                      { value: "award", label: "Award" },
+                      { value: "badgePercent", label: "Badge / Percent" },
+                      { value: "building2", label: "Building / Commercial" },
+                      { value: "calendar", label: "Calendar" },
+                      { value: "checkCircle", label: "Check Circle" },
+                      { value: "clock", label: "Clock" },
+                      { value: "dollarSign", label: "Dollar Sign" },
+                      { value: "gauge", label: "Gauge / Performance" },
+                      { value: "hammer", label: "Hammer" },
+                      { value: "home", label: "Home / Residential" },
+                      { value: "layers", label: "Layers" },
+                      { value: "leaf", label: "Leaf / Eco" },
+                      { value: "lock", label: "Lock / Security" },
+                      { value: "mapPin", label: "Map Pin / Location" },
+                      { value: "phone", label: "Phone" },
+                      { value: "shieldCheck", label: "Shield / Check" },
+                      { value: "star", label: "Star" },
+                      { value: "sun", label: "Sun / Heat" },
+                      { value: "thermometer", label: "Thermometer" },
+                      { value: "thumbsUp", label: "Thumbs Up" },
+                      { value: "truck", label: "Truck / Delivery" },
+                      { value: "users", label: "Users / Team" },
+                      { value: "volume2", label: "Volume / Sound" },
+                      { value: "wind", label: "Wind / Draft" },
+                      { value: "wrench", label: "Wrench" },
+                      { value: "zap", label: "Zap / Fast" }
+                    ] },
+                    { name: "label", type: "string", label: "Label" }
+                  ] }
+                ]
               },
               // ── Why Retrofit ─────────────────────────────────────────
               {
@@ -306,7 +392,12 @@ var config_default = defineConfig({
                 name: "contactCards",
                 label: "Contact Cards",
                 ui: { itemProps: () => ({ label: "\u{1F4DE} Contact Cards" }) },
-                fields: [{ name: "placeholder", type: "string", label: "Static section \u2014 no options", ui: { component: "hidden" } }]
+                fields: [
+                  { name: "phoneSublabel", type: "string", label: "Phone sublabel" },
+                  { name: "emailSublabel", type: "string", label: "Email sublabel" },
+                  { name: "areaSublabel", type: "string", label: "Service Area sublabel" },
+                  { name: "emergencySublabel", type: "string", label: "Emergency sublabel" }
+                ]
               },
               // ── Contact Form ──────────────────────────────────────────
               {
@@ -343,36 +434,72 @@ var config_default = defineConfig({
                 ui: { itemProps: () => ({ label: "\u2697\uFE0F Glass Tech Specs" }) },
                 fields: [{ name: "placeholder", type: "string", label: "Static section \u2014 no options", ui: { component: "hidden" } }]
               },
-              // ── Static sections ───────────────────────────────────────
+              // ── Adaptor Disclosure ────────────────────────────────────
               {
                 name: "adaptorDisclosure",
                 label: "Adaptor Disclosure",
                 ui: { itemProps: () => ({ label: "\u{1F4CF} Adaptor Disclosure" }) },
-                fields: [{ name: "placeholder", type: "string", label: "Static section \u2014 no options", ui: { component: "hidden" } }]
+                fields: [
+                  { name: "heading", type: "string", label: "Heading" },
+                  { name: "mobileSubtitle", type: "string", label: "Mobile subtitle" },
+                  { name: "body1", type: "string", label: "Body paragraph 1", ui: { component: "textarea" } },
+                  { name: "body2", type: "string", label: "Body paragraph 2", ui: { component: "textarea" } }
+                ]
               },
+              // ── Payment Terms ─────────────────────────────────────────
               {
                 name: "paymentTerms",
                 label: "Payment Terms",
                 ui: { itemProps: () => ({ label: "\u{1F4B3} Payment Terms" }) },
-                fields: [{ name: "placeholder", type: "string", label: "Static section \u2014 no options", ui: { component: "hidden" } }]
+                fields: [
+                  { name: "depositTitle", type: "string", label: "Deposit title" },
+                  { name: "depositBody", type: "string", label: "Deposit body", ui: { component: "textarea" } },
+                  { name: "completionTitle", type: "string", label: "Completion title" },
+                  { name: "completionBody", type: "string", label: "Completion body", ui: { component: "textarea" } },
+                  { name: "warrantyTitle", type: "string", label: "Warranty title" },
+                  { name: "warrantyBody", type: "string", label: "Warranty body", ui: { component: "textarea" } }
+                ]
               },
+              // ── Free Advice CTA ───────────────────────────────────────
               {
                 name: "freeAdvice",
                 label: "Free Advice CTA",
                 ui: { itemProps: () => ({ label: "\u{1F4A1} Free Advice" }) },
-                fields: [{ name: "placeholder", type: "string", label: "Static section \u2014 no options", ui: { component: "hidden" } }]
+                fields: [
+                  { name: "eyebrow", type: "string", label: "Eyebrow" },
+                  { name: "headingLine1", type: "string", label: "Heading line 1" },
+                  { name: "headingLine2", type: "string", label: "Heading line 2 (gold)" },
+                  { name: "body", type: "string", label: "Body", ui: { component: "textarea" } },
+                  { name: "buttonLabel", type: "string", label: "Button label" }
+                ]
               },
+              // ── What Else Strip ───────────────────────────────────────
               {
                 name: "whatElseStrip",
                 label: "What Else We Do Strip",
                 ui: { itemProps: () => ({ label: "\u{1F4CC} What Else Strip" }) },
-                fields: [{ name: "placeholder", type: "string", label: "Static section \u2014 no options", ui: { component: "hidden" } }]
+                fields: [
+                  { name: "eyebrow", type: "string", label: "Eyebrow" },
+                  { name: "heading", type: "string", label: "Heading" },
+                  { name: "ctaLabel", type: "string", label: "CTA button label" },
+                  { name: "ctaHref", type: "string", label: "CTA button URL" },
+                  { name: "services", type: "object", list: true, label: "Service links", ui: { itemProps: (item) => ({ label: item?.label ?? "Service" }) }, fields: [
+                    { name: "label", type: "string", label: "Label" },
+                    { name: "href", type: "string", label: "URL" }
+                  ] }
+                ]
               },
+              // ── Emergency Strip ───────────────────────────────────────
               {
                 name: "emergencyStrip",
                 label: "Emergency Strip",
                 ui: { itemProps: () => ({ label: "\u{1F6A8} Emergency Strip" }) },
-                fields: [{ name: "placeholder", type: "string", label: "Static section \u2014 no options", ui: { component: "hidden" } }]
+                fields: [
+                  { name: "boldText", type: "string", label: "Bold text" },
+                  { name: "text", type: "string", label: "Text after bold" },
+                  { name: "ctaLabel", type: "string", label: "Link label" },
+                  { name: "ctaHref", type: "string", label: "Link URL" }
+                ]
               }
             ]
           }
@@ -404,7 +531,7 @@ var config_default = defineConfig({
         path: "content/pricing",
         format: "json",
         fields: [
-          { name: "optionKey", type: "string", label: "Option Key (A/B/C/D)" },
+          { name: "optionKey", type: "string", label: "Option Key \u2014 single uppercase letter, e.g. A, B, C \u2026 displayed on the card" },
           { name: "label", type: "string", label: "Label" },
           { name: "sublabel", type: "string", label: "Sublabel" },
           { name: "spec", type: "string", label: "Glass Spec" },

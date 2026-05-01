@@ -6,6 +6,11 @@ export interface WarrantyCoverageBlockData {
   coveredItems?: Array<{ item?: string | null; detail?: string | null } | null> | null
   notCoveredItems?: Array<{ item?: string | null; detail?: string | null } | null> | null
   claimSteps?: (string | null)[] | null
+  tina?: {
+    coveredItems?: Array<{ item?: string; detail?: string } | undefined>
+    notCoveredItems?: Array<{ item?: string; detail?: string } | undefined>
+    claimSteps?: string
+  }
 }
 
 export function WarrantyCoverageBlock({ block }: { block: WarrantyCoverageBlockData }) {
@@ -36,10 +41,16 @@ export function WarrantyCoverageBlock({ block }: { block: WarrantyCoverageBlockD
                       ✓
                     </span>
                     <div>
-                      <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface mb-1">
+                      <p
+                        data-tina-field={block.tina?.coveredItems?.[i]?.item}
+                        className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface mb-1"
+                      >
                         {c!.item}
                       </p>
-                      <p className="font-sans text-sm text-on-surface/70 leading-relaxed">
+                      <p
+                        data-tina-field={block.tina?.coveredItems?.[i]?.detail}
+                        className="font-sans text-sm text-on-surface/70 leading-relaxed"
+                      >
                         {c!.detail}
                       </p>
                     </div>
@@ -65,10 +76,16 @@ export function WarrantyCoverageBlock({ block }: { block: WarrantyCoverageBlockD
                       ✕
                     </span>
                     <div>
-                      <p className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface mb-1">
+                      <p
+                        data-tina-field={block.tina?.notCoveredItems?.[i]?.item}
+                        className="font-headline text-sm font-semibold uppercase tracking-wide text-on-surface mb-1"
+                      >
                         {c!.item}
                       </p>
-                      <p className="font-sans text-sm text-on-surface/70 leading-relaxed">
+                      <p
+                        data-tina-field={block.tina?.notCoveredItems?.[i]?.detail}
+                        className="font-sans text-sm text-on-surface/70 leading-relaxed"
+                      >
                         {c!.detail}
                       </p>
                     </div>
@@ -81,7 +98,7 @@ export function WarrantyCoverageBlock({ block }: { block: WarrantyCoverageBlockD
                   <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">
                     How to Make a Claim
                   </p>
-                  <ol className="space-y-3">
+                  <ol className="space-y-3" data-tina-field={block.tina?.claimSteps}>
                     {claimSteps.map((step, i) => (
                       <li key={i} className="flex items-start gap-3 font-sans text-base text-on-surface">
                         <span className="shrink-0 w-6 h-6 bg-primary-container text-on-primary-fixed flex items-center justify-center font-headline text-xs font-bold mt-0.5">

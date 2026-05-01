@@ -6,6 +6,11 @@ interface CtaBannerProps {
   subtext?: string
   primaryCta?: { label: string; href: string }
   secondaryCta?: { label: string; href: string }
+  tina?: {
+    heading?: string
+    subtext?: string
+    primaryCtaLabel?: string
+  }
 }
 
 export function CtaBanner({
@@ -13,6 +18,7 @@ export function CtaBanner({
   subtext = 'Get a transparent, itemised estimate in minutes. No sales calls.',
   primaryCta = { label: 'Get Instant Estimate', href: '/instant-estimate/' },
   secondaryCta,
+  tina,
 }: CtaBannerProps) {
   if (!secondaryCta) {
     const settings = getSiteSettings()
@@ -36,6 +42,7 @@ export function CtaBanner({
           {/* Headline block */}
           <div>
             <h2
+              data-tina-field={tina?.heading}
               className="font-display uppercase leading-[0.88] text-on-primary-fixed"
               style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}
             >
@@ -43,7 +50,10 @@ export function CtaBanner({
                 <span key={i} className="block">{line}</span>
               ))}
             </h2>
-            <p className="font-sans text-base text-on-primary-fixed mt-5 max-w-md leading-relaxed mx-auto">
+            <p
+              data-tina-field={tina?.subtext}
+              className="font-sans text-base text-on-primary-fixed mt-5 max-w-md leading-relaxed mx-auto"
+            >
               {subtext}
             </p>
           </div>

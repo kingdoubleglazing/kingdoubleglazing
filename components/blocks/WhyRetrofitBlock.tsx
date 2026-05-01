@@ -1,5 +1,4 @@
 import { WhyRetrofit } from '@/components/sections/WhyRetrofit'
-import { tinaField } from 'tinacms/dist/react'
 
 export interface WhyRetrofitBlockData {
   __typename?: string
@@ -12,15 +11,22 @@ export interface WhyRetrofitBlockData {
     headline?: string | null
     sub?: string | null
   } | null> | null
+  tina?: {
+    eyebrow?: string
+    heading1?: string
+    heading2?: string
+    items?: Array<{ headline?: string; sub?: string } | undefined>
+  }
 }
 
 export function WhyRetrofitBlock({ block }: { block: WhyRetrofitBlockData }) {
   const items = block.items
     ?.filter(Boolean)
-    .map(item => ({
+    .map((item, i) => ({
       iconKey: item!.iconKey ?? 'hammer',
       headline: item!.headline ?? '',
       sub: item!.sub ?? '',
+      tina: block.tina?.items?.[i],
     })) ?? undefined
 
   return (
@@ -29,6 +35,7 @@ export function WhyRetrofitBlock({ block }: { block: WhyRetrofitBlockData }) {
       heading1={block.heading1 ?? undefined}
       heading2={block.heading2 ?? undefined}
       items={items}
+      tina={block.tina}
     />
   )
 }

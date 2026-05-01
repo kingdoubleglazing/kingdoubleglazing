@@ -10,6 +10,9 @@ export interface ProcessStepsBlockData {
     imageSrc?: string | null
     imageAlt?: string | null
   } | null> | null
+  tina?: {
+    steps?: Array<{ title?: string; body?: string; callout?: string } | undefined>
+  }
 }
 
 export function ProcessStepsBlock({ block }: { block: ProcessStepsBlockData }) {
@@ -25,5 +28,5 @@ export function ProcessStepsBlock({ block }: { block: ProcessStepsBlockData }) {
       order: i,
     }))
 
-  return <ProcessSteps steps={steps} />
+  return <ProcessSteps steps={steps} tinaFields={block.tina?.steps} />
 }

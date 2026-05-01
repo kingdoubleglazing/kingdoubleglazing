@@ -30,6 +30,35 @@ fragment SiteSettingsParts on SiteSettings {
     retrofitFromPerSqm
     retrofitFromDisplay
   }
+  trustBarItems {
+    __typename
+    iconKey
+    label
+  }
+  adaptorDisclosure {
+    __typename
+    heading
+    mobileSubtitle
+    body1
+    body2
+  }
+  paymentTerms {
+    __typename
+    depositTitle
+    depositBody
+    completionTitle
+    completionBody
+    warrantyTitle
+    warrantyBody
+  }
+  freeAdviceBlock {
+    __typename
+    eyebrow
+    headingLine1
+    headingLine2
+    body
+    buttonLabel
+  }
 }
 
 fragment NavigationParts on Navigation {
@@ -66,8 +95,16 @@ fragment PageParts on Page {
       headlineWhite
       headlineYellow
       subtext
-      primaryCtaLabel
-      primaryCtaHref
+      primaryCta {
+        __typename
+        label
+        href
+      }
+      secondaryCta {
+        __typename
+        label
+        href
+      }
       imageSrc
       imageAlt
       showWarrantyBadge
@@ -75,7 +112,11 @@ fragment PageParts on Page {
       accentWord
     }
     ... on PageBlocksTrustBar {
-      placeholder
+      items {
+        __typename
+        iconKey
+        label
+      }
     }
     ... on PageBlocksWhyRetrofit {
       eyebrow
@@ -157,7 +198,10 @@ fragment PageParts on Page {
       claimSteps
     }
     ... on PageBlocksContactCards {
-      placeholder
+      phoneSublabel
+      emailSublabel
+      areaSublabel
+      emergencySublabel
     }
     ... on PageBlocksContactForm {
       heading
@@ -175,19 +219,42 @@ fragment PageParts on Page {
       placeholder
     }
     ... on PageBlocksAdaptorDisclosure {
-      placeholder
+      heading
+      mobileSubtitle
+      body1
+      body2
     }
     ... on PageBlocksPaymentTerms {
-      placeholder
+      depositTitle
+      depositBody
+      completionTitle
+      completionBody
+      warrantyTitle
+      warrantyBody
     }
     ... on PageBlocksFreeAdvice {
-      placeholder
+      eyebrow
+      headingLine1
+      headingLine2
+      body
+      buttonLabel
     }
     ... on PageBlocksWhatElseStrip {
-      placeholder
+      eyebrow
+      heading
+      ctaLabel
+      ctaHref
+      services {
+        __typename
+        label
+        href
+      }
     }
     ... on PageBlocksEmergencyStrip {
-      placeholder
+      boldText
+      text
+      ctaLabel
+      ctaHref
     }
   }
 }

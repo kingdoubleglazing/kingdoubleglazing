@@ -15,7 +15,7 @@ type ButtonProps = BaseProps &
   (
     | ({ as?: 'button' } & React.ButtonHTMLAttributes<HTMLButtonElement>)
     | ({ as: 'a'; href: string } & React.AnchorHTMLAttributes<HTMLAnchorElement>)
-    | ({ as: 'link'; href: string })
+    | ({ as: 'link'; href: string } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>)
   )
 
 // Design system: I-Beams. Sharp, no bounce, no scale on active.
@@ -62,7 +62,7 @@ export function Button({
   const classes = getClasses(variant, size, fullWidth, className)
 
   if ('as' in rest && rest.as === 'link') {
-    const { as, href, ...linkProps } = rest as { as: 'link'; href: string }
+    const { as, href, ...linkProps } = rest as { as: 'link'; href: string } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>
     return (
       <Link href={href} className={classes} {...(linkProps as object)}>
         {children}

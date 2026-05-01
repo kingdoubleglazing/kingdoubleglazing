@@ -1,7 +1,7 @@
-import { TrustBar } from '@/components/sections/TrustBar'
-import { AdaptorDisclosure } from '@/components/AdaptorDisclosure'
-import { PaymentTerms } from '@/components/PaymentTerms'
-import { FreeAdviceBlock } from '@/components/FreeAdviceBlock'
+import { TrustBar, type TrustBarBlockData } from '@/components/sections/TrustBar'
+import { AdaptorDisclosure, type AdaptorDisclosureBlockData } from '@/components/AdaptorDisclosure'
+import { PaymentTerms, type PaymentTermsBlockData } from '@/components/PaymentTerms'
+import { FreeAdviceBlock, type FreeAdviceBlockData } from '@/components/FreeAdviceBlock'
 import { HeroBlock, type HeroBlockData } from './HeroBlock'
 import { WhyRetrofitBlock, type WhyRetrofitBlockData } from './WhyRetrofitBlock'
 import { ProcessStepsBlock, type ProcessStepsBlockData } from './ProcessStepsBlock'
@@ -10,14 +10,14 @@ import { FAQBlock, type FAQBlockData } from './FAQBlock'
 import { ServiceSectionBlock, type ServiceSectionBlockData } from './ServiceSectionBlock'
 import { StoryWithStatsBlock, type StoryWithStatsBlockData } from './StoryWithStatsBlock'
 import { WarrantyCoverageBlock, type WarrantyCoverageBlockData } from './WarrantyCoverageBlock'
-import { ContactCardsBlock } from './ContactCardsBlock'
+import { ContactCardsBlock, type ContactCardsBlockData } from './ContactCardsBlock'
 import { ContactFormBlock, type ContactFormBlockData } from './ContactFormBlock'
 import { CTABannerBlock, type CTABannerBlockData } from './CTABannerBlock'
 import { GlassComparisonBlock } from './GlassComparisonBlock'
 import { GlassTechSpecsBlock } from './GlassTechSpecsBlock'
 import type { PricingOption } from '@/lib/types'
-import { WhatElseStripBlock } from './WhatElseStripBlock'
-import { EmergencyStripBlock } from './EmergencyStripBlock'
+import { WhatElseStripBlock, type WhatElseStripBlockData } from './WhatElseStripBlock'
+import { EmergencyStripBlock, type EmergencyStripBlockData } from './EmergencyStripBlock'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyBlock = { __typename?: string; _template?: string; [key: string]: any }
@@ -42,7 +42,7 @@ export function BlockRenderer({ blocks, pricingOptions = [] }: { blocks: AnyBloc
             return <HeroBlock key={key} block={{ ...block, __typename: typename } as HeroBlockData} />
 
           case 'PageBlocksTrustBar':
-            return <TrustBar key={key} />
+            return <TrustBar key={key} block={block as TrustBarBlockData} />
 
           case 'PageBlocksWhyRetrofit':
             return <WhyRetrofitBlock key={key} block={block as WhyRetrofitBlockData} />
@@ -66,7 +66,7 @@ export function BlockRenderer({ blocks, pricingOptions = [] }: { blocks: AnyBloc
             return <WarrantyCoverageBlock key={key} block={block as WarrantyCoverageBlockData} />
 
           case 'PageBlocksContactCards':
-            return <ContactCardsBlock key={key} />
+            return <ContactCardsBlock key={key} block={block as ContactCardsBlockData} />
 
           case 'PageBlocksContactForm':
             return <ContactFormBlock key={key} block={block as ContactFormBlockData} />
@@ -81,19 +81,19 @@ export function BlockRenderer({ blocks, pricingOptions = [] }: { blocks: AnyBloc
             return <GlassTechSpecsBlock key={key} pricingOptions={pricingOptions} />
 
           case 'PageBlocksAdaptorDisclosure':
-            return <AdaptorDisclosure key={key} />
+            return <AdaptorDisclosure key={key} block={block as AdaptorDisclosureBlockData} />
 
           case 'PageBlocksPaymentTerms':
-            return <PaymentTerms key={key} />
+            return <PaymentTerms key={key} block={block as PaymentTermsBlockData} />
 
           case 'PageBlocksFreeAdvice':
-            return <FreeAdviceBlock key={key} />
+            return <FreeAdviceBlock key={key} block={block as FreeAdviceBlockData} />
 
           case 'PageBlocksWhatElseStrip':
-            return <WhatElseStripBlock key={key} />
+            return <WhatElseStripBlock key={key} block={block as WhatElseStripBlockData} />
 
           case 'PageBlocksEmergencyStrip':
-            return <EmergencyStripBlock key={key} />
+            return <EmergencyStripBlock key={key} block={block as EmergencyStripBlockData} />
 
           default:
             return null

@@ -3,9 +3,19 @@ import { getSiteSettings } from '@/lib/site-settings'
 
 export interface ContactCardsBlockData {
   __typename?: string
+  phoneSublabel?: string | null
+  emailSublabel?: string | null
+  areaSublabel?: string | null
+  emergencySublabel?: string | null
+  tina?: {
+    phoneSublabel?: string
+    emailSublabel?: string
+    areaSublabel?: string
+    emergencySublabel?: string
+  }
 }
 
-export function ContactCardsBlock() {
+export function ContactCardsBlock({ block }: { block?: ContactCardsBlockData }) {
   const settings = getSiteSettings()
 
   const cards = [
@@ -14,27 +24,31 @@ export function ContactCardsBlock() {
       label: 'Phone',
       value: settings.phone,
       href: settings.phoneHref,
-      sublabel: 'Mon–Fri 8am–6pm · Emergency 24/7',
+      sublabel: block?.phoneSublabel ?? 'Mon–Fri 8am–6pm · Emergency 24/7',
+      tinaField: block?.tina?.phoneSublabel,
     },
     {
       icon: <Mail size={18} aria-hidden="true" />,
       label: 'Email',
       value: settings.email,
       href: `mailto:${settings.email}`,
-      sublabel: 'Reply within one business day',
+      sublabel: block?.emailSublabel ?? 'Reply within one business day',
+      tinaField: block?.tina?.emailSublabel,
     },
     {
       icon: <MapPin size={18} aria-hidden="true" />,
       label: 'Service Area',
       value: 'All of Melbourne',
-      sublabel: 'Eastern, northern & inner-western suburbs',
+      sublabel: block?.areaSublabel ?? 'Eastern, northern & inner-western suburbs',
+      tinaField: block?.tina?.areaSublabel,
     },
     {
       icon: <Clock size={18} aria-hidden="true" />,
       label: 'Emergency',
       value: '24/7 Emergency Glass',
       href: settings.phoneHref,
-      sublabel: '2–4 hour response, inner suburbs',
+      sublabel: block?.emergencySublabel ?? '2–4 hour response, inner suburbs',
+      tinaField: block?.tina?.emergencySublabel,
     },
   ]
 
@@ -42,7 +56,7 @@ export function ContactCardsBlock() {
     <section className="bg-inverse-surface py-10 md:py-14">
       <div className="max-w-5xl mx-auto px-4">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          {cards.map(({ icon, label, value, href, sublabel }) => {
+          {cards.map(({ icon, label, value, href, sublabel, tinaField }) => {
             const inner = (
               <div className="bg-white/10 p-5 flex flex-col gap-2 h-full border border-white/20">
                 <div className="flex items-center gap-2 text-white">
@@ -54,7 +68,7 @@ export function ContactCardsBlock() {
                 <p className="font-headline text-sm font-semibold uppercase tracking-wide text-white leading-tight">
                   {value}
                 </p>
-                <p className="font-sans text-xs text-white/80 leading-snug">{sublabel}</p>
+                <p data-tina-field={tinaField} className="font-sans text-xs text-white/80 leading-snug">{sublabel}</p>
               </div>
             )
             return href ? (

@@ -12,6 +12,7 @@ export interface FAQBlockData {
   tina?: {
     heading?: string
     subheading?: string
+    faqs?: Array<{ q?: string; a?: string } | undefined>
   }
 }
 
@@ -27,6 +28,7 @@ export function FAQBlock({ block }: { block: FAQBlockData }) {
       items={items}
       tinaHeading={block.tina?.heading}
       tinaSubheading={block.tina?.subheading}
+      tinaFields={block.tina?.faqs}
     />
   )
 }

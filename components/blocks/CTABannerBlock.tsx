@@ -7,6 +7,11 @@ export interface CTABannerBlockData {
   subtext?: string | null
   primaryCtaLabel?: string | null
   primaryCtaHref?: string | null
+  tina?: {
+    heading?: string
+    subtext?: string
+    primaryCtaLabel?: string
+  }
 }
 
 export function CTABannerBlock({ block }: { block: CTABannerBlockData }) {
@@ -22,6 +27,7 @@ export function CTABannerBlock({ block }: { block: CTABannerBlockData }) {
           : undefined
       }
       secondaryCta={{ label: settings.phone, href: settings.phoneHref }}
+      tina={block.tina}
     />
   )
 }

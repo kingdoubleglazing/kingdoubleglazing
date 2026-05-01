@@ -22,7 +22,7 @@ export interface GalleryItem {
   id: string; src: string; alt: string; category: string; caption: string; order: number
 }
 export interface PricingOption {
-  id: string; optionKey: 'A' | 'B' | 'C' | 'D'; label: string; sublabel: string;
+  id: string; optionKey: string; label: string; sublabel: string;
   spec: string; pricePerSqm: number; heatPct: number; noisePct: number;
   tech: { composition: string[]; spacerMm: number; lowE: boolean; acousticPVB: boolean; tinted: boolean; bestFor: string; rwRating: string | null; notes: string }
 }

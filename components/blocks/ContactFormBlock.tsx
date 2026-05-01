@@ -8,9 +8,10 @@ import { getSiteSettings } from '@/lib/site-settings'
 export interface ContactFormBlockData {
   __typename?: string
   heading?: string | null
+  tina?: { heading?: string }
 }
 
-function ContactFormInner({ heading }: { heading: string }) {
+function ContactFormInner({ heading, tinaHeading }: { heading: string; tinaHeading?: string }) {
   const params = useSearchParams()
   const isUploadFlow = params.get('upload') === '1'
   const settings = getSiteSettings()
@@ -22,6 +23,7 @@ function ContactFormInner({ heading }: { heading: string }) {
         <div className="max-w-5xl mx-auto px-4">
           {heading && (
             <h2
+              data-tina-field={tinaHeading}
               className="font-display uppercase leading-[0.88] text-on-surface mb-10"
               style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
             >
@@ -43,7 +45,7 @@ export function ContactFormBlock({ block }: { block: ContactFormBlockData }) {
   const heading = block.heading ?? 'Send Us a Message'
   return (
     <Suspense fallback={<div className="bg-surface h-96" />}>
-      <ContactFormInner heading={heading} />
+      <ContactFormInner heading={heading} tinaHeading={block.tina?.heading} />
     </Suspense>
   )
 }

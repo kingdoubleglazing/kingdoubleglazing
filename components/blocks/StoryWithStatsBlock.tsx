@@ -12,6 +12,7 @@ export interface StoryWithStatsBlockData {
     eyebrow?: string
     paragraphs?: string
     quote?: string
+    stats?: Array<{ value?: string; label?: string } | undefined>
   }
 }
 
@@ -67,12 +68,16 @@ export function StoryWithStatsBlock({ block }: { block: StoryWithStatsBlockData 
                 >
                   <div className="h-0.5 w-8 bg-primary-container mb-5" aria-hidden="true" />
                   <p
+                    data-tina-field={block.tina?.stats?.[i]?.value}
                     className="font-display uppercase leading-none text-primary-container mb-2"
                     style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
                   >
                     {stat!.value}
                   </p>
-                  <p className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface">
+                  <p
+                    data-tina-field={block.tina?.stats?.[i]?.label}
+                    className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface"
+                  >
                     {stat!.label}
                   </p>
                 </div>

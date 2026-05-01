@@ -1,42 +1,82 @@
 {
-  "blocks": [
-    {
-      "_template": "hero",
-      "variant": "split",
-      "badge": "About King Double Glazing",
-      "headlineWhite": "Built by a Family",
-      "headlineYellow": "of Melbourne Glaziers",
-      "subtext": "Tas Markou ran two double glazing factories. He found a way to drop the price — because most companies charge more than families can afford. 40+ staff at peak. 25+ years in the trade.",
-      "primaryCtaLabel": "Generate My Quote →",
-      "primaryCtaHref": "/instant-estimate/",
-      "imageSrc": "/testimonial-founder/founder.webp",
-      "imageAlt": "Tas Markou, founder of King Double Glazing",
-      "accentWord": "TAS"
-    },
-    { "_template": "trustBar" },
-    {
-      "_template": "storyWithStats",
-      "eyebrow": "The Origin Story",
-      "paragraphs": [
-        "I grew up in glass. My father was a glazier and I was doing installs as a kid. I ran two factories. Along the way I found a way to drop the price — most companies charge way more than families can afford.",
-        "You want quieter, warmer windows. You don't want to spend $15,000 ripping out frames that work fine. We add a second pane to what you already have. No mess. One day, done.",
-        "Every quote is in plain numbers. No hidden extras. If we can't beat any real competitor quote by 30%, I'll say so. Stop. Don't overpay."
-      ],
-      "quote": "Transparent quoting. Fair pricing. 10-year warranty. That's the King promise. — Tas",
-      "stats": [
-        { "value": "50+", "label": "Years combined experience" },
-        { "value": "40+", "label": "Staff at peak commercial operation" },
-        { "value": "30%", "label": "Cheaper than any genuine quote" },
-        { "value": "1-2 days", "label": "Typical install time" }
-      ]
-    },
-    { "_template": "freeAdvice" },
-    {
-      "_template": "ctaBanner",
-      "heading": "Ready to\nGet Started?",
-      "subtext": "Generate your own quote in minutes. Or call us directly — no call centres, no middlemen.",
-      "primaryCtaLabel": "Generate My Quote →",
-      "primaryCtaHref": "/instant-estimate/"
-    }
-  ]
+    "blocks": [
+        {
+            "_template": "hero",
+            "variant": "split",
+            "badge": "About King Double Glazing",
+            "headlineWhite": "Built by a Family",
+            "headlineYellow": "of Melbourne Glaziers",
+            "subtext": "Tas Markou ran two double glazing factories. He found a way to drop the price \u2014 because most companies charge more than families can afford. 40+ staff at peak. 25+ years in the trade.",
+            "imageSrc": "/testimonial-founder/founder.webp",
+            "imageAlt": "Tas Markou, founder of King Double Glazing",
+            "accentWord": "TAS",
+            "primaryCta": {
+                "label": "Generate My Quote \u2192",
+                "href": "/instant-estimate/"
+            },
+            "secondaryCta": {
+                "label": "0406 470 595",
+                "href": "tel:+61406470595"
+            }
+        },
+        {
+            "_template": "trustBar",
+            "items": [
+                {
+                    "iconKey": "clock",
+                    "label": "50+ Years Combined Experience"
+                },
+                {
+                    "iconKey": "star",
+                    "label": "Beat Any Quote by 30%"
+                },
+                {
+                    "iconKey": "shieldCheck",
+                    "label": "10-Year Warranty"
+                },
+                {
+                    "iconKey": "wrench",
+                    "label": "Fits Most Existing Frames"
+                }
+            ]
+        },
+        {
+            "_template": "storyWithStats",
+            "eyebrow": "The Origin Story",
+            "paragraphs": [
+                "I grew up in glass. My father was a glazier and I was doing installs as a kid. I ran two factories. Along the way I found a way to drop the price \u2014 most companies charge way more than families can afford.",
+                "You want quieter, warmer windows. You don't want to spend $15,000 ripping out frames that work fine. We add a second pane to what you already have. No mess. One day, done.",
+                "Every quote is in plain numbers. No hidden extras. If we can't beat any real competitor quote by 30%, I'll say so. Stop. Don't overpay."
+            ],
+            "quote": "Transparent quoting. Fair pricing. 10-year warranty. That's the King promise. \u2014 Tas",
+            "stats": [
+                {
+                    "value": "50+",
+                    "label": "Years combined experience"
+                },
+                {
+                    "value": "40+",
+                    "label": "Staff at peak commercial operation"
+                },
+                {
+                    "value": "30%",
+                    "label": "Cheaper than any genuine quote"
+                },
+                {
+                    "value": "1-2 days",
+                    "label": "Typical install time"
+                }
+            ]
+        },
+        {
+            "_template": "freeAdvice"
+        },
+        {
+            "_template": "ctaBanner",
+            "heading": "Ready to\nGet Started?",
+            "subtext": "Generate your own quote in minutes. Or call us directly \u2014 no call centres, no middlemen.",
+            "primaryCtaLabel": "Generate My Quote \u2192",
+            "primaryCtaHref": "/instant-estimate/"
+        }
+    ]
 }

@@ -39,9 +39,21 @@ interface GlassComparisonTableProps {
   phoneHref: string
 }
 
+// Tailwind class strings must be literal — not constructed dynamically
+const GRID_CLASS: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-2',
+  3: 'grid-cols-2 sm:grid-cols-3',
+  4: 'grid-cols-2 md:grid-cols-4',
+  5: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5',
+  6: 'grid-cols-2 sm:grid-cols-3',
+}
+
 export function GlassComparisonTable({ options, secondStoreySurcharge, phone, phoneHref }: GlassComparisonTableProps) {
-  const optionsMap = Object.fromEntries(options.map(o => [o.optionKey, o])) as Record<OptionKey, PricingOption>
-  const optionKeys = options.map(o => o.optionKey) as OptionKey[]
+  const optionsMap = Object.fromEntries(options.map(o => [o.optionKey, o]))
+  const optionKeys = options.map(o => o.optionKey)
+  const topKey = optionKeys[optionKeys.length - 1] // last option is always the premium tier
+  const gridClass = GRID_CLASS[optionKeys.length] ?? 'grid-cols-2 sm:grid-cols-3'
 
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -126,11 +138,11 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
           </p>
         </div>
 
-        {/* 2×2 grid on mobile, 4-column on desktop */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {/* responsive grid — adapts to however many options exist */}
+        <div className={`grid ${gridClass} gap-3`}>
           {optionKeys.map(key => {
             const opt = optionsMap[key]
-            const isTop = key === 'D'
+            const isTop = key === topKey
             const isSelected = selectedOption === key
 
             return (
