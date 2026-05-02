@@ -20,10 +20,17 @@ const GLASS_LABELS: Record<string, string> = {
 }
 
 export function QuoteConfirmationEmail({ name, estimateLow, estimateHigh, windowBand, glassType }: Props) {
+  const copy = siteConfig.emailCopy ?? {}
+  const heading     = copy.quoteConfirmHeading     ?? 'Your quote is confirmed.'
+  const intro       = copy.quoteConfirmIntro        ?? "we'll be in touch within 2 hours."
+  const summaryLabel = copy.quoteConfirmSummaryLabel ?? 'Your summary'
+  const contactNote  = (copy.quoteConfirmContactNote ?? 'Questions? Reply to this email or call {phone}.')
+    .replace('{phone}', siteConfig.phone)
+
   return (
     <Html lang="en">
       <Head />
-      <Preview>{"Your King Double Glazing quote is confirmed — we'll be in touch within 2 hours"}</Preview>
+      <Preview>{`${heading} — ${intro}`}</Preview>
       <Body style={body}>
         {/* Header */}
         <Section style={header}>
@@ -34,17 +41,17 @@ export function QuoteConfirmationEmail({ name, estimateLow, estimateHigh, window
         <Container style={container}>
           {/* Heading */}
           <Section style={headingSection}>
-            <Heading style={h1}>Your quote is confirmed.</Heading>
+            <Heading style={h1}>{heading}</Heading>
           </Section>
 
-          <Text style={intro}>
-            Hi {name} — we&apos;ll be in touch within 2 hours to arrange your free in-home assessment.
+          <Text style={introStyle}>
+            Hi {name} — {intro}
           </Text>
 
           {/* Summary */}
           {(windowBand || glassType || estimateLow) && (
             <Section style={summarySection}>
-              <Text style={summaryHeading}>Your summary</Text>
+              <Text style={summaryHeading}>{summaryLabel}</Text>
               {windowBand != null && (
                 <table width="100%" cellPadding={0} cellSpacing={0} style={{ marginBottom: 8 }}>
                   <tbody>
@@ -82,13 +89,7 @@ export function QuoteConfirmationEmail({ name, estimateLow, estimateHigh, window
 
           <Hr style={divider} />
 
-          <Text style={contactNote}>
-            Questions? Reply to this email or call{' '}
-            <a href={siteConfig.phoneHref} style={{ color: '#F5C518' }}>
-              {siteConfig.phone}
-            </a>
-            .
-          </Text>
+          <Text style={contactNoteStyle}>{contactNote}</Text>
         </Container>
 
         {/* Footer */}
@@ -149,7 +150,7 @@ const h1: React.CSSProperties = {
   margin: 0,
 }
 
-const intro: React.CSSProperties = {
+const introStyle: React.CSSProperties = {
   color: '#333333',
   fontSize: 15,
   lineHeight: '1.6',
@@ -192,7 +193,7 @@ const divider: React.CSSProperties = {
   margin: '24px 0',
 }
 
-const contactNote: React.CSSProperties = {
+const contactNoteStyle: React.CSSProperties = {
   color: '#555555',
   fontSize: 13,
   lineHeight: '1.5',

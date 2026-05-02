@@ -2,6 +2,7 @@ import {
   Html, Head, Body, Container, Section,
   Heading, Text, Hr, Preview,
 } from '@react-email/components'
+import { siteConfig } from '@/data/site'
 
 interface Props {
   name: string
@@ -19,6 +20,11 @@ const TIME_LABELS: Record<string, string> = {
 }
 
 export function ContactNotificationEmail({ name, email, phone, suburb, message, preferredTime }: Props) {
+  const copy = siteConfig.emailCopy ?? {}
+  const heading   = copy.contactNotifHeading   ?? 'New Enquiry'
+  const replyNote = (copy.contactNotifReplyNote ?? 'Reply to this email to respond directly to {name}.')
+    .replace('{name}', name)
+
   return (
     <Html lang="en">
       <Head />
@@ -33,7 +39,7 @@ export function ContactNotificationEmail({ name, email, phone, suburb, message, 
         <Container style={container}>
           {/* Heading */}
           <Section style={headingSection}>
-            <Heading style={h1}>New Enquiry</Heading>
+            <Heading style={h1}>{heading}</Heading>
           </Section>
 
           {/* Data rows */}
@@ -48,9 +54,7 @@ export function ContactNotificationEmail({ name, email, phone, suburb, message, 
 
           <Hr style={divider} />
 
-          <Text style={replyNote}>
-            Reply to this email to respond directly to {name}.
-          </Text>
+          <Text style={replyNoteStyle}>{replyNote}</Text>
         </Container>
 
         {/* Footer */}
@@ -151,7 +155,7 @@ const divider: React.CSSProperties = {
   margin: '24px 0',
 }
 
-const replyNote: React.CSSProperties = {
+const replyNoteStyle: React.CSSProperties = {
   color: '#777777',
   fontSize: 12,
   margin: 0,

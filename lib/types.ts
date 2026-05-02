@@ -10,6 +10,21 @@ export interface Settings {
   logos: { light: string; dark: string; icon: string }
   // Pricing
   pricing: { retrofitFromPerSqm: number; retrofitFromDisplay: string }
+  // Email copy (all templates)
+  emailCopy?: {
+    // Quote confirmation — sent to customer
+    quoteConfirmSubject?: string
+    quoteConfirmHeading?: string
+    quoteConfirmIntro?: string
+    quoteConfirmSummaryLabel?: string
+    quoteConfirmContactNote?: string
+    // Contact notification — sent to business
+    contactNotifHeading?: string
+    contactNotifReplyNote?: string
+    // Quote notification — sent to business
+    quoteNotifConfirmButton?: string
+    quoteNotifConfirmNote?: string
+  }
   // Footer copy
   footerTagline?: string
   footerBio?: string
