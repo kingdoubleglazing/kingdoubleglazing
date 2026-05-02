@@ -18,7 +18,12 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   trailingSlash: true,
   images: {
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'assets.tina.io',
+      },
+    ],
   },
   async headers() {
     return [
