@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo/generateMetadata'
-import { getSiteSettings, getEstimatePage, getPricingOptions } from '@/lib/content'
+import { getSiteSettings, getPricingOptions } from '@/lib/content'
 import { client } from '@/tina/__generated__/client'
-import { EstimatePageClient } from './EstimatePageClient'
+import { PageClient } from '@/components/PageClient'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Instant Double Glazing Estimate Melbourne | See Your Price First',
@@ -13,8 +14,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function InstantEstimatePage() {
   const settings = getSiteSettings()
-  const estimatePage = getEstimatePage()
-  const faqs = estimatePage.faqs ?? []
+  const pricingOptions = await getPricingOptions()
 
   const webAppSchema = {
     '@context': 'https://schema.org',
@@ -37,44 +37,29 @@ export default async function InstantEstimatePage() {
     },
   }
 
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map(item => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: { '@type': 'Answer', text: item.a },
-    })),
-  }
-
-  const pricingOptions = await getPricingOptions()
-
-  let tinaEstimate: Awaited<ReturnType<typeof client.queries.estimatePage>>
   try {
-    tinaEstimate = await client.queries.estimatePage({ relativePath: 'estimate.json' })
+    const tinaPage = await client.queries.page({ relativePath: 'estimate.json' })
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static schema
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
+        />
+        <PageClient tinaPage={tinaPage} pricingOptions={pricingOptions} />
+      </>
+    )
   } catch {
-    tinaEstimate = { data: { estimatePage: estimatePage as never }, query: '', variables: { relativePath: 'estimate.json' } }
+    const { blocks = [] } = await import('@/content/pages/estimate.json')
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static schema
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
+        />
+        <BlockRenderer blocks={blocks as never[]} pricingOptions={pricingOptions} />
+      </>
+    )
   }
-
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static schema
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted static schema
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <EstimatePageClient
-        tinaEstimate={tinaEstimate}
-        pricingOptions={pricingOptions}
-        faqs={faqs}
-        phone={settings.phone}
-        phoneHref={settings.phoneHref}
-      />
-    </>
-  )
 }

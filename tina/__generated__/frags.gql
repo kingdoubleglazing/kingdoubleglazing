@@ -1,15 +1,15 @@
-fragment SiteSettingsParts on SiteSettings {
+fragment SettingsParts on Settings {
   __typename
   name
   legalName
   domain
+  abn
+  licenseNumber
   phone
   phoneTel
   phoneHref
   email
   notificationEmail
-  abn
-  licenseNumber
   address {
     __typename
     street
@@ -25,15 +25,20 @@ fragment SiteSettingsParts on SiteSettings {
     instagram
     google
   }
+  logos {
+    __typename
+    light
+    dark
+    icon
+  }
   pricing {
     __typename
     retrofitFromPerSqm
     retrofitFromDisplay
   }
-}
-
-fragment NavigationParts on Navigation {
-  __typename
+  footerTagline
+  footerBio
+  warrantyBlurb
   mainNav {
     __typename
     label
@@ -44,148 +49,276 @@ fragment NavigationParts on Navigation {
     label
     href
   }
+  footerServicesHeading
   footerServicesNav {
     __typename
     label
     href
   }
+  footerCompanyHeading
   footerCompanyNav {
     __typename
     label
     href
   }
-}
-
-fragment HomePageParts on HomePage {
-  __typename
-  badge
-  headlineWhite
-  headlineYellow
-  subtext
-  primaryCtaLabel
-  adaptorCaption
-  estimateCtaHeadline
-  estimateCtaSubtext
-  estimateCtaButtonLabel
-  estimateCtaCaption
-  faqHeading
-  faqSubheading
-  whyRetrofitEyebrow
-  whyRetrofitHeading1
-  whyRetrofitHeading2
-  whyRetrofitItems {
+  paymentTerms {
     __typename
-    iconKey
-    headline
-    sub
-  }
-  processSteps {
-    __typename
-    title
-    body
-    callout
-    imageSrc
-    imageAlt
-  }
-  faqs {
-    __typename
-    q
-    a
+    depositTitle
+    depositBody
+    completionTitle
+    completionBody
+    warrantyTitle
+    warrantyBody
   }
 }
 
-fragment ServicesPageParts on ServicesPage {
+fragment PageParts on Page {
   __typename
-  heroHeading
-  heroSubtext
-  serviceSections {
+  galleryBlurb
+  blocks {
     __typename
-    id
-    eyebrow
-    heading
-    bodyText
-    bullets
-    primaryCta {
-      __typename
-      label
-      href
+    ... on PageBlocksHero {
+      variant
+      badge
+      headlineWhite
+      headlineYellow
+      subtext
+      primaryCta {
+        __typename
+        label
+        href
+      }
+      secondaryCta {
+        __typename
+        label
+        href
+      }
+      imageSrc
+      imageAlt
+      showWarrantyBadge
+      adaptorCaption
+      accentWord
+      trustItems
     }
-    secondaryCta {
-      __typename
-      label
-      href
+    ... on PageBlocksTrustBar {
+      items {
+        __typename
+        iconKey
+        label
+      }
     }
-  }
-  faqHeading
-  faqSubheading
-  faqs {
-    __typename
-    q
-    a
-  }
-}
-
-fragment AboutPageParts on AboutPage {
-  __typename
-  heroHeadline
-  heroHeadlineYellow
-  heroSubtext
-  stats {
-    __typename
-    value
-    label
-  }
-  storyEyebrow
-  storyParagraphs
-  storyQuote
-  guarantees {
-    __typename
-    label
-    detail
-  }
-}
-
-fragment ContactPageParts on ContactPage {
-  __typename
-  heroHeadline
-  heroSubtext
-  formHeading
-  faqs {
-    __typename
-    q
-    a
-  }
-}
-
-fragment WarrantyPageParts on WarrantyPage {
-  __typename
-  heroHeadline
-  heroHeadlineYellow
-  heroSubtext
-  coveredItems {
-    __typename
-    item
-    detail
-  }
-  notCoveredItems {
-    __typename
-    item
-    detail
-  }
-  claimSteps
-  ctaHeadline
-  ctaSubtext
-}
-
-fragment EstimatePageParts on EstimatePage {
-  __typename
-  heroHeadline
-  heroSubtext
-  secondStoreySurcharge
-  faqs {
-    __typename
-    q
-    a
+    ... on PageBlocksWhyRetrofit {
+      eyebrow
+      heading1
+      heading2
+      items {
+        __typename
+        iconKey
+        headline
+        sub
+      }
+    }
+    ... on PageBlocksProcessSteps {
+      heading
+      subheading
+      cta {
+        __typename
+        label
+        href
+      }
+      steps {
+        __typename
+        title
+        body
+        callout
+        imageSrc
+        imageAlt
+      }
+    }
+    ... on PageBlocksEstimateCta {
+      headline
+      subtext
+      cta {
+        __typename
+        label
+        href
+      }
+      caption
+    }
+    ... on PageBlocksFaq {
+      heading
+      subheading
+      faqs {
+        __typename
+        q
+        a
+      }
+    }
+    ... on PageBlocksServiceSection {
+      id
+      eyebrow
+      heading
+      bodyText
+      bullets
+      variant
+      imageSrc
+      imageAlt
+      primaryCta {
+        __typename
+        label
+        href
+      }
+      secondaryCta {
+        __typename
+        label
+        href
+      }
+    }
+    ... on PageBlocksStoryWithStats {
+      eyebrow
+      paragraphs
+      quote
+      stats {
+        __typename
+        value
+        label
+      }
+    }
+    ... on PageBlocksWarrantyCoverage {
+      coveredEyebrow
+      coveredHeading
+      notCoveredEyebrow
+      notCoveredHeading
+      claimEyebrow
+      coveredItems {
+        __typename
+        item
+        detail
+      }
+      notCoveredItems {
+        __typename
+        item
+        detail
+      }
+      claimSteps
+    }
+    ... on PageBlocksContactCards {
+      phoneSublabel
+      emailSublabel
+      serviceAreaLabel
+      serviceAreaValue
+      areaSublabel
+      emergencyLabel
+      emergencyValue
+      emergencySublabel
+    }
+    ... on PageBlocksContactForm {
+      heading
+    }
+    ... on PageBlocksCtaBanner {
+      heading
+      subtext
+      primaryCta {
+        __typename
+        label
+        href
+      }
+      secondaryCta {
+        __typename
+        label
+        href
+      }
+      trustItems
+    }
+    ... on PageBlocksGlassComparison {
+      eyebrow
+      heading
+      subtext
+      secondStoreySurcharge
+      quieterLabel
+      lessHeatLabel
+      getMyPriceLabel
+      selectedLabel
+      specLinkLabel
+      pressHint
+      eastWestBold
+      eastWestBody
+      comparisonNote
+      step1Label
+      step1Heading
+      measureInstruction
+      measureNote
+      addWindowLabel
+      changeLabel
+      step2Label
+      yourQuoteLabel
+      noMeasurementsHint
+      accuracyNote
+      measurementOffNote
+      budgetPrompt
+      sendQuoteLabel
+      dialogTitle
+      dialogDescription
+      modalQuoteSummaryLabel
+      modalSubmitLabel
+      modalSendingLabel
+      modalErrorMessage
+      successEyebrow
+      successTitle
+      successBody
+      startNewQuoteLabel
+    }
+    ... on PageBlocksGlassTechSpecs {
+      eyebrow
+      heading
+      description
+    }
+    ... on PageBlocksAdaptorDisclosure {
+      heading
+      mobileSubtitle
+      body1
+      body2
+    }
+    ... on PageBlocksPaymentTerms {
+      eyebrow
+      heading
+      depositTitle
+      depositBody
+      completionTitle
+      completionBody
+      warrantyTitle
+      warrantyBody
+    }
+    ... on PageBlocksFreeAdvice {
+      eyebrow
+      headingLine1
+      headingLine2
+      body
+      buttonLabel
+    }
+    ... on PageBlocksWhatElseStrip {
+      eyebrow
+      heading
+      cta {
+        __typename
+        label
+        href
+      }
+      services {
+        __typename
+        label
+        href
+      }
+    }
+    ... on PageBlocksEmergencyStrip {
+      boldText
+      text
+      cta {
+        __typename
+        label
+        href
+      }
+    }
   }
 }
 

@@ -14,7 +14,7 @@ export function ClientFitNote() {
               We keep our prices low by quoting efficiently. The calculator lets you check your number without a sales call.
             </p>
             <p>
-              If the price works, send your quote through — we'll call to confirm and book your install.
+              If the price works, send your quote through — we&apos;ll call to confirm and book your install.
             </p>
             <p>
               If the price isn&apos;t right, no pressure. Close the tab. We won&apos;t chase.

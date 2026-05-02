@@ -1,19 +1,100 @@
 {
-  "heroHeadline": "Get a Quote.",
-  "heroSubtext": "Price yourself online first. Call us when you'd like to proceed.",
-  "formHeading": "Send Us a Message",
-  "faqs": [
+  "blocks": [
     {
-      "q": "How quickly do you respond?",
-      "a": "Within one business day for emails and forms. Phone calls answered same day during business hours. Broken glass? Call directly — we aim to dispatch within 2–4 hours in Melbourne."
+      "_template": "hero",
+      "variant": "overlay",
+      "badge": "Get in Touch",
+      "headlineWhite": "Get a Quote.",
+      "headlineYellow": "No Pressure.",
+      "subtext": "Price yourself online first. Call us when you'd like to proceed.",
+      "imageSrc": "/hero/hero-home.webp",
+      "imageAlt": "Contact King Double Glazing Melbourne",
+      "primaryCta": {
+        "label": "Generate My Quote →",
+        "href": "/instant-estimate/"
+      },
+      "secondaryCta": {
+        "label": "0406 470 595",
+        "href": "tel:+61406470595"
+      }
     },
     {
-      "q": "Do I need a site visit to get a price?",
-      "a": "No. Use the Quote Generator to get your price in minutes — no email required to see your number. If you're happy with the estimate, email your quote through to us to proceed. We'll then arrange a convenient time for a site inspection and final measure before scheduling your installation."
+      "_template": "trustBar",
+      "items": [
+        {
+          "iconKey": "clock",
+          "label": "50+ Years Combined Experience"
+        },
+        {
+          "iconKey": "star",
+          "label": "Beat Any Quote by 30%"
+        },
+        {
+          "iconKey": "shieldCheck",
+          "label": "10-Year Warranty"
+        },
+        {
+          "iconKey": "wrench",
+          "label": "Fits Most Existing Frames"
+        }
+      ]
     },
     {
-      "q": "What areas do you service?",
-      "a": "All of metropolitan Melbourne. We work across eastern, northern, and inner-western suburbs. Call us for outer-metro jobs."
+      "_template": "contactCards"
+    },
+    {
+      "_template": "contactForm",
+      "heading": "Send Us a Message"
+    },
+    {
+      "_template": "paymentTerms",
+      "eyebrow": "How payment works",
+      "heading": "Payment Terms & Assurance"
+    },
+    {
+      "_template": "faq",
+      "heading": "Common Questions",
+      "subheading": "Quick answers before you get in touch.",
+      "faqs": [
+        {
+          "q": "How quickly do you respond?",
+          "a": "Within one business day for emails and forms. Phone calls answered same day during business hours. Broken glass? Call directly — we aim to dispatch within 2–4 hours in Melbourne."
+        },
+        {
+          "q": "Do I need a site visit to get a price?",
+          "a": "No. Use the Quote Generator to get your price in minutes — no email required to see your number. If you're happy with the estimate, email your quote through to us to proceed. We'll then arrange a convenient time for a site inspection and final measure before scheduling your installation."
+        },
+        {
+          "q": "What areas do you service?",
+          "a": "All of metropolitan Melbourne. We work across eastern, northern, and inner-western suburbs. Call us for outer-metro jobs."
+        }
+      ]
+    },
+    {
+      "_template": "freeAdvice",
+      "eyebrow": "Free Advice",
+      "headingLine1": "Got a question",
+      "headingLine2": "we haven't covered?",
+      "body": "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.",
+      "buttonLabel": "Call Us"
+    },
+    {
+      "_template": "ctaBanner",
+      "heading": "Want the\nNumber First?",
+      "subtext": "Use the Quote Generator — see your price in minutes, no email required. Then contact us when you're ready.",
+      "primaryCta": {
+        "label": "Generate My Quote",
+        "href": "/instant-estimate/"
+      },
+      "secondaryCta": {
+        "label": "0406 470 595",
+        "href": "tel:+61406470595"
+      },
+      "trustItems": [
+        "Price locked at quote",
+        "10-year warranty",
+        "We beat any quote by 30%"
+      ]
     }
   ]
 }

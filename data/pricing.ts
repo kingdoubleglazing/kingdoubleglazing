@@ -1,4 +1,4 @@
-export type OptionKey = 'A' | 'B' | 'C' | 'D'
+export type OptionKey = string
 
 export const SECOND_STOREY_SURCHARGE = 150 // flat per window, used as fallback default
 

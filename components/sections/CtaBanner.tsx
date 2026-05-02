@@ -1,11 +1,26 @@
-import Link from 'next/link'
 import { getSiteSettings } from '@/lib/site-settings'
+import { DarkCTAButton } from '@/components/ui/DarkCTAButton'
+import { GhostPhoneButton } from '@/components/ui/GhostPhoneButton'
+
+const DEFAULT_TRUST_ITEMS = [
+  'Price locked at quote',
+  '10-year warranty',
+  'We beat any quote by 30%',
+]
 
 interface CtaBannerProps {
   heading?: string
   subtext?: string
   primaryCta?: { label: string; href: string }
   secondaryCta?: { label: string; href: string }
+  trustItems?: (string | null)[]
+  tina?: {
+    heading?: string
+    subtext?: string
+    primaryCta?: { label?: string; href?: string }
+    secondaryCta?: { label?: string; href?: string }
+    trustItems?: string
+  }
 }
 
 export function CtaBanner({
@@ -13,11 +28,16 @@ export function CtaBanner({
   subtext = 'Get a transparent, itemised estimate in minutes. No sales calls.',
   primaryCta = { label: 'Get Instant Estimate', href: '/instant-estimate/' },
   secondaryCta,
+  trustItems,
+  tina,
 }: CtaBannerProps) {
   if (!secondaryCta) {
     const settings = getSiteSettings()
     secondaryCta = { label: settings.phone, href: settings.phoneHref }
   }
+  const items = trustItems?.filter(Boolean) as string[] | undefined
+  const resolvedItems = items?.length ? items : DEFAULT_TRUST_ITEMS
+
   return (
     <section className="bg-primary-container py-16 md:py-24 overflow-hidden relative">
 
@@ -36,6 +56,7 @@ export function CtaBanner({
           {/* Headline block */}
           <div>
             <h2
+              data-tina-field={tina?.heading}
               className="font-display uppercase leading-[0.88] text-on-primary-fixed"
               style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}
             >
@@ -43,40 +64,26 @@ export function CtaBanner({
                 <span key={i} className="block">{line}</span>
               ))}
             </h2>
-            <p className="font-sans text-base text-on-primary-fixed mt-5 max-w-md leading-relaxed mx-auto">
+            <p
+              data-tina-field={tina?.subtext}
+              className="font-sans text-base text-on-primary-fixed mt-5 max-w-md leading-relaxed mx-auto"
+            >
               {subtext}
             </p>
           </div>
 
           {/* CTA cluster */}
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link
-              href={primaryCta.href}
-              className="inline-flex items-center justify-center gap-3 bg-inverse-surface text-inverse-on-surface font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-on-surface/80 transition-colors duration-150"
-            >
-              {primaryCta.label}
-              <span aria-hidden="true">→</span>
-            </Link>
-            <Link
-              href={secondaryCta.href}
-              className="inline-flex items-center justify-center gap-3 bg-transparent text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 ghost-border hover:bg-on-primary-fixed/10 transition-colors duration-150"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="shrink-0">
-                <path d="M3 1h3l1.5 3.5-1.5 1a8.5 8.5 0 004.5 4.5l1-1.5L15 10v3a1 1 0 01-1 1A13 13 0 012 2a1 1 0 011-1z" fill="currentColor"/>
-              </svg>
-              {secondaryCta.label}
-            </Link>
+            <DarkCTAButton label={primaryCta.label} href={primaryCta.href} tinaField={tina?.primaryCta?.label} />
+            <GhostPhoneButton label={secondaryCta.label} href={secondaryCta.href} tinaField={tina?.secondaryCta?.label} />
           </div>
 
           {/* Trust footnote */}
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-2">
-            {[
-              'Price locked at quote',
-              '10-year warranty',
-              'We beat any quote by 30%',
-            ].map((item) => (
+            {resolvedItems.map((item, i) => (
               <p
-                key={item}
+                key={i}
+                data-tina-field={tina?.trustItems}
                 className="font-headline text-[0.8125rem] font-semibold uppercase tracking-[0.2em] text-on-primary-fixed/80"
               >
                 ✓ {item}

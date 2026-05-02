@@ -28,7 +28,7 @@ export function ContactForm({ phone, phoneHref, email }: ContactFormProps) {
             ✓ Message Received
           </p>
           <p className="font-sans text-sm text-on-surface leading-relaxed">
-            Got it, {state.name}. We'll call you within 2 hours.
+            Got it, {state.name}. We&apos;ll call you within 2 hours.
           </p>
         </div>
         <p className="font-sans text-xs text-on-surface leading-relaxed">
@@ -175,7 +175,7 @@ export function ContactForm({ phone, phoneHref, email }: ContactFormProps) {
       </button>
 
       <p className="text-center font-sans text-xs text-on-surface">
-        We'll call within 2 hours. No spam, no pressure.
+        We&apos;ll call within 2 hours. No spam, no pressure.
       </p>
 
       {/* Alternatives */}

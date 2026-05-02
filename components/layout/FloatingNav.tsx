@@ -8,13 +8,14 @@ import { cn } from '@/lib/utils'
 
 interface FloatingNavProps {
   logoSrc: string
-  mainNav: Array<{ label: string; href: string }>
+  mainNav: Array<{ label: string; href: string; tinaLabel?: string }>
   ctaNav: { label: string; href: string }
   phone: string
   phoneHref: string
+  tinaMainNav?: Array<{ tinaLabel?: string } | undefined>
 }
 
-export function FloatingNav({ logoSrc, mainNav, ctaNav, phone, phoneHref }: FloatingNavProps) {
+export function FloatingNav({ logoSrc, mainNav, ctaNav, phone, phoneHref, tinaMainNav }: FloatingNavProps) {
   const [show, setShow] = useState(false)
   const lastScrollY = useRef(0)
   const headerVisible = useRef(true)
@@ -90,13 +91,13 @@ export function FloatingNav({ logoSrc, mainNav, ctaNav, phone, phoneHref }: Floa
 
             {/* Nav links — desktop */}
             <div className="hidden lg:flex items-center gap-1 flex-1 justify-center">
-              {mainNav.map(({ label, href }) => (
+              {mainNav.map(({ label, href, tinaLabel }, i) => (
                 <Link
                   key={href}
                   href={href}
                   className="font-headline text-xs font-semibold uppercase tracking-wide px-3 py-2 text-white hover:text-white transition-colors duration-150"
                 >
-                  {label}
+                  <span data-tina-field={tinaLabel ?? tinaMainNav?.[i]?.tinaLabel}>{label}</span>
                 </Link>
               ))}
             </div>

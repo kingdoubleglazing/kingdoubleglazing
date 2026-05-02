@@ -1,0 +1,41 @@
+{
+  "galleryBlurb": "Every job above came with a 10-year warranty on glass and workmanship.",
+  "blocks": [
+    {
+      "_template": "hero",
+      "variant": "centered",
+      "badge": "Our Work",
+      "headlineWhite": "Real Jobs.",
+      "headlineYellow": "Real Melbourne Homes.",
+      "subtext": "Every job shown here was done with the existing frames kept intact. No permits, no demolition, done in a day.",
+      "showWarrantyBadge": false
+    },
+    {
+      "_template": "trustBar",
+      "items": [
+        { "iconKey": "clock", "label": "50+ Years Combined Experience" },
+        { "iconKey": "star", "label": "Beat Any Quote by 30%" },
+        { "iconKey": "shieldCheck", "label": "10-Year Warranty" },
+        { "iconKey": "wrench", "label": "Fits Most Existing Frames" }
+      ]
+    },
+    {
+      "_template": "ctaBanner",
+      "heading": "Like What You See?",
+      "subtext": "Get an instant estimate in minutes. No email required to see your number.",
+      "primaryCta": {
+        "label": "Generate My Quote →",
+        "href": "/instant-estimate/"
+      },
+      "secondaryCta": {
+        "label": "0406 470 595",
+        "href": "tel:+61406470595"
+      },
+      "trustItems": [
+        "Price locked at quote",
+        "10-year warranty",
+        "We beat any quote by 30%"
+      ]
+    }
+  ]
+}

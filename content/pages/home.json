@@ -1,74 +1,191 @@
 {
-  "badge": "Stop. Don't Overpay. · 10-Year Warranty · Beat Any Quote 30%",
-  "headlineWhite": "Quieter Home. Lower Bills.",
-  "headlineYellow": "Without Replacing Your Windows",
-  "subtext": "We add a second pane to your existing windows. No ripping out, no mess. Up to 70% quieter.",
-  "primaryCtaLabel": "Generate My Quote →",
-  "adaptorCaption": "Our standard adapters are engineered to suit a wide range of window configurations.",
-  "estimateCtaHeadline": "Get Your Price.\nIn Minutes Online.",
-  "estimateCtaSubtext": "We beat any genuine quote by 30%. That's a promise in writing.",
-  "estimateCtaButtonLabel": "Start My Quote →",
-  "estimateCtaCaption": "Enter your window sizes · See your price instantly",
-  "faqHeading": "Common Questions",
-  "faqSubheading": "Plain answers, no jargon.",
-  "whyRetrofitEyebrow": "WHY RETROFIT?",
-  "whyRetrofitHeading1": "Stop. Don't Overpay.",
-  "whyRetrofitHeading2": "Upgrade What You Already Have.",
-  "whyRetrofitItems": [
-    { "iconKey": "hammer",       "headline": "No Structural Work",         "sub": "No demolition, no painting, no plastering. Your frames stay where they are." },
-    { "iconKey": "layers",       "headline": "Suits Most Domestic Frames",  "sub": "Custom adaptors fit timber, aluminium, and steel windows." },
-    { "iconKey": "zap",          "headline": "Installed in One Day",        "sub": "Most Melbourne homes done by sundown." },
-    { "iconKey": "volume2",      "headline": "Up to 70% Quieter",           "sub": "Acoustic glass cuts traffic and tram noise." },
-    { "iconKey": "thermometer",  "headline": "50–55% Less Heat Loss",       "sub": "Compared to standard single glazing — lower bills, warmer rooms." },
-    { "iconKey": "badgePercent", "headline": "We Beat Any Quote by 30%",    "sub": "Send us a real competitor quote. We come in 30% cheaper, in writing, with the 10-year warranty." }
-  ],
-  "processSteps": [
-    {
-      "title": "Request a Quote",
-      "body": "Fill out our online quote form with your measurements and requirements.",
-      "imageSrc": "/process-steps/step-1-measure.webp",
-      "imageAlt": "Homeowner using the online estimate tool on a phone"
-    },
-    {
-      "title": "Review & Proceed",
-      "body": "If you're happy with the estimate, simply email your quote through to us to proceed.",
-      "imageSrc": "/stock/window-house.webp",
-      "imageAlt": "Homeowner reviewing a double glazing quote online"
-    },
-    {
-      "title": "Site Visit",
-      "body": "We'll contact you to arrange a convenient time for a site inspection and final measure.",
-      "imageSrc": "/process-steps/step-2-install.webp",
-      "imageAlt": "Glazier conducting a site inspection and measuring windows"
-    },
-    {
-      "title": "Final Confirmation",
-      "body": "Once all sizes are confirmed, we'll lock everything in and schedule your installation.",
-      "callout": "Adds ~20mm to your frame width. We'll confirm exact measurements on site.",
-      "imageSrc": "/process-steps/step-3-finish.webp",
-      "imageAlt": "Glazier completing a retrofit double glazing installation"
-    }
-  ],
-  "faqs": [
-    {
-      "q": "Will this fit my existing windows?",
-      "a": "Almost always yes. We retrofit timber, aluminium, and steel frames. If your frames can't take a retrofit, we'll tell you before any work begins — no charge."
-    },
-    {
-      "q": "How long does it take?",
-      "a": "Most jobs are done in a single day. Large homes might take two."
-    },
-    {
-      "q": "How much does it cost?",
-      "a": "Most Melbourne homes land between $2,400 and $6,000 depending on how many windows you upgrade. Use our Instant Estimate to get your exact range in minutes."
-    },
-    {
-      "q": "What's the warranty?",
-      "a": "10 years on glass and workmanship. Guaranteed in writing on every job, no conditions. See full warranty terms →"
-    },
-    {
-      "q": "What if I already have a quote from someone else?",
-      "a": "Send it to us. If it's a genuine quote, we'll beat it by 30% — guaranteed in writing."
-    }
-  ]
+    "blocks": [
+        {
+            "_template": "hero",
+            "variant": "overlay",
+            "badge": "Stop. Don't Overpay. \u00b7 10-Year Warranty \u00b7 Beat Any Quote 30%",
+            "headlineWhite": "Quieter Home. Lower Bills.",
+            "headlineYellow": "Without Replacing Your Windows",
+            "adaptorCaption": "We add a second pane to your existing windows. No ripping out, no mess. Up to 70% quieter.",
+            "imageSrc": "/hero/hero-double-glazing.webp",
+            "imageAlt": "Double glazing upgrade on an existing window in a Melbourne home",
+            "showWarrantyBadge": true,
+            "primaryCta": {
+                "label": "Generate My Quote \u2192",
+                "href": "/instant-estimate/"
+            },
+            "secondaryCta": {
+                "label": "0406 470 595",
+                "href": "tel:+61406470595"
+            }
+        },
+        {
+            "_template": "trustBar",
+            "items": [
+                {
+                    "iconKey": "clock",
+                    "label": "50+ Years Combined Experience"
+                },
+                {
+                    "iconKey": "star",
+                    "label": "Beat Any Quote by 30%"
+                },
+                {
+                    "iconKey": "shieldCheck",
+                    "label": "10-Year Warranty"
+                },
+                {
+                    "iconKey": "wrench",
+                    "label": "Fits Most Existing Frames"
+                }
+            ]
+        },
+        {
+            "_template": "whyRetrofit",
+            "eyebrow": "WHY RETROFIT?",
+            "heading1": "Stop. Don't Overpay.",
+            "heading2": "Upgrade What You Already Have.",
+            "items": [
+                {
+                    "iconKey": "hammer",
+                    "headline": "No Structural Work",
+                    "sub": "No demolition, no painting, no plastering. Your frames stay where they are."
+                },
+                {
+                    "iconKey": "layers",
+                    "headline": "Suits Most Domestic Frames",
+                    "sub": "Custom adaptors fit timber, aluminium, and steel windows."
+                },
+                {
+                    "iconKey": "zap",
+                    "headline": "Installed in One Day",
+                    "sub": "Most Melbourne homes done by sundown."
+                },
+                {
+                    "iconKey": "volume2",
+                    "headline": "Up to 70% Quieter",
+                    "sub": "Acoustic glass cuts traffic and tram noise."
+                },
+                {
+                    "iconKey": "thermometer",
+                    "headline": "50\u201355% Less Heat Loss",
+                    "sub": "Compared to standard single glazing \u2014 lower bills, warmer rooms."
+                },
+                {
+                    "iconKey": "badgePercent",
+                    "headline": "We Beat Any Quote by 30%",
+                    "sub": "Send us a real competitor quote. We come in 30% cheaper, in writing, with the 10-year warranty."
+                }
+            ]
+        },
+        {
+            "_template": "adaptorDisclosure",
+            "heading": "About our adaptors",
+            "mobileSubtitle": "Adds ~20mm to your frame. Tap to read more.",
+            "body1": "We use special fittings to attach new glass to your existing frame. Your frame gets about 20mm wider \u2014 that is the only visible change. No ripping out, no plastering, no mess.",
+            "body2": "This saves you thousands compared to full window replacement."
+        },
+        {
+            "_template": "processSteps",
+            "heading": "Our Process",
+            "subheading": "Simple and transparent \u2014 from quote to installation.",
+            "cta": {
+                "label": "Get Instant Estimate",
+                "href": "/instant-estimate/"
+            },
+            "steps": [
+                {
+                    "title": "Request a Quote",
+                    "body": "Fill out our online quote form with your measurements and requirements.",
+                    "imageSrc": "/process-steps/step-1-measure.webp",
+                    "imageAlt": "Homeowner using the online estimate tool on a phone"
+                },
+                {
+                    "title": "Review & Proceed",
+                    "body": "If you're happy with the estimate, simply email your quote through to us to proceed.",
+                    "imageSrc": "/stock/window-house.webp",
+                    "imageAlt": "Homeowner reviewing a double glazing quote online"
+                },
+                {
+                    "title": "Site Visit",
+                    "body": "We'll contact you to arrange a convenient time for a site inspection and final measure.",
+                    "imageSrc": "/process-steps/step-2-install.webp",
+                    "imageAlt": "Glazier conducting a site inspection and measuring windows"
+                },
+                {
+                    "title": "Final Confirmation",
+                    "body": "Once all sizes are confirmed, we'll lock everything in and schedule your installation.",
+                    "callout": "Adds ~20mm to your frame width. We'll confirm exact measurements on site.",
+                    "imageSrc": "/process-steps/step-3-finish.webp",
+                    "imageAlt": "Glazier completing a retrofit double glazing installation"
+                }
+            ]
+        },
+        {
+            "_template": "paymentTerms",
+            "eyebrow": "How payment works",
+            "heading": "Payment Terms & Assurance"
+        },
+        {
+            "_template": "estimateCta",
+            "headline": "Get Your Price.\nIn Minutes Online.",
+            "subtext": "We beat any genuine quote by 30%. That's a promise in writing.",
+            "cta": { "label": "Start My Quote \u2192", "href": "/instant-estimate/" },
+            "caption": "Enter your window sizes \u00b7 See your price instantly"
+        },
+        {
+            "_template": "faq",
+            "heading": "Common Questions",
+            "subheading": "Plain answers, no jargon.",
+            "faqs": [
+                {
+                    "q": "Will this fit my existing windows?",
+                    "a": "Almost always yes. We retrofit timber, aluminium, and steel frames. If your frames can't take a retrofit, we'll tell you before any work begins \u2014 no charge."
+                },
+                {
+                    "q": "How long does it take?",
+                    "a": "Most jobs are done in a single day. Large homes might take two."
+                },
+                {
+                    "q": "How much does it cost?",
+                    "a": "Most Melbourne homes land between $2,400 and $6,000 depending on how many windows you upgrade. Use our Instant Estimate to get your exact range in minutes."
+                },
+                {
+                    "q": "What's the warranty?",
+                    "a": "10 years on glass and workmanship. Guaranteed in writing on every job, no conditions. See full warranty terms \u2192"
+                },
+                {
+                    "q": "What if I already have a quote from someone else?",
+                    "a": "Send it to us. If it's a genuine quote, we'll beat it by 30% \u2014 guaranteed in writing."
+                }
+            ]
+        },
+        {
+            "_template": "freeAdvice",
+            "eyebrow": "Free Advice",
+            "headingLine1": "Got a question",
+            "headingLine2": "we haven't covered?",
+            "body": "Call us directly. Free advice, no sales pitch. 25+ years in glazing \u2014 we'll give you a straight answer.",
+            "buttonLabel": "Call Us"
+        },
+        {
+            "_template": "whatElseStrip",
+            "eyebrow": "What Else We Do",
+            "heading": "We're glaziers. We do the lot.",
+            "cta": { "label": "See All Services →", "href": "/services/" },
+            "services": [
+                { "label": "Emergency repairs", "href": "/services/#emergency" },
+                { "label": "Shower screens", "href": "/services/#shower-screens" },
+                { "label": "Splashbacks", "href": "/services/#splashbacks" },
+                { "label": "Custom mirrors", "href": "/services/#mirrors" },
+                { "label": "Commercial glazing", "href": "/services/#commercial" }
+            ]
+        },
+        {
+            "_template": "emergencyStrip",
+            "boldText": "Broken window right now?",
+            "text": "We do emergency glass repair across Melbourne.",
+            "cta": { "label": "See emergency services →", "href": "/services/#emergency" }
+        }
+    ]
 }

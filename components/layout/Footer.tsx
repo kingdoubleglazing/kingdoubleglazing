@@ -1,11 +1,64 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Phone, Mail, MapPin } from 'lucide-react'
-import { getSiteSettings, getNavigation } from '@/lib/content'
+import { getSiteSettings, getNavigation } from '@/lib/site-settings'
 
-export async function Footer() {
-  const nav = getNavigation()
-  const settings = getSiteSettings()
+type FooterNavItem = { label: string; href: string; tinaLabel?: string }
+
+interface FooterSettings {
+  phone: string
+  phoneHref: string
+  email: string
+  addressDisplay: string
+  logoDark: string
+  footerTagline?: string
+  footerBio?: string
+  warrantyBlurb?: string
+  legalName?: string
+  abn?: string
+  footerServicesHeading?: string
+  footerCompanyHeading?: string
+  footerServicesNav: FooterNavItem[]
+  footerCompanyNav: FooterNavItem[]
+}
+
+interface FooterTinaFields {
+  footerTagline?: string
+  footerBio?: string
+  phone?: string
+  email?: string
+  addressDisplay?: string
+  warrantyBlurb?: string
+  footerServicesHeading?: string
+  footerCompanyHeading?: string
+}
+
+export function Footer({
+  settings: settingsProp,
+  tinaFields,
+}: {
+  settings?: FooterSettings
+  tinaFields?: FooterTinaFields
+} = {}) {
+  const staticSettings = getSiteSettings()
+  const staticNav = getNavigation()
+
+  const s = settingsProp ?? {
+    phone: staticSettings.phone,
+    phoneHref: staticSettings.phoneHref,
+    email: staticSettings.email,
+    addressDisplay: staticSettings.address.display,
+    logoDark: staticSettings.logos.dark,
+    footerTagline: staticSettings.footerTagline ?? undefined,
+    footerBio: staticSettings.footerBio ?? undefined,
+    warrantyBlurb: staticSettings.warrantyBlurb ?? undefined,
+    legalName: staticSettings.legalName ?? undefined,
+    abn: staticSettings.abn ?? undefined,
+    footerServicesHeading: staticNav.footerServicesHeading ?? undefined,
+    footerCompanyHeading: staticNav.footerCompanyHeading ?? undefined,
+    footerServicesNav: staticNav.footerServicesNav as FooterNavItem[],
+    footerCompanyNav: staticNav.footerCompanyNav as FooterNavItem[],
+  }
 
   return (
     <footer className="bg-inverse-surface text-inverse-on-surface mt-auto">
@@ -15,7 +68,7 @@ export async function Footer() {
           <div>
             <Link href="/" aria-label="King Double Glazing — home" className="inline-block mb-4">
               <Image
-                src={settings.logos.dark}
+                src={s.logoDark}
                 alt="King Double Glazing"
                 width={222}
                 height={87}
@@ -23,33 +76,33 @@ export async function Footer() {
               />
             </Link>
             <p className="text-sm text-white mb-4 leading-relaxed">
-              Stop. Don&apos;t Overpay.<br />
-              Melbourne&apos;s retrofit window specialists.<br />
-              We&apos;ll beat any genuine quote by 30%.
+              <span data-tina-field={tinaFields?.footerTagline}>{s.footerTagline ?? "Stop. Don't Overpay."}</span>
+              <br />
+              <span data-tina-field={tinaFields?.footerBio}>{s.footerBio ?? "Melbourne's retrofit window specialists. We'll beat any genuine quote by 30%."}</span>
             </p>
             <ul className="space-y-2 text-sm text-white">
               <li>
                 <a
-                  href={settings.phoneHref}
+                  href={s.phoneHref}
                   className="inline-flex items-center gap-2 hover:text-primary-container transition-colors duration-150"
                 >
                   <Phone size={13} aria-hidden="true" />
-                  {settings.phone}
+                  <span data-tina-field={tinaFields?.phone}>{s.phone}</span>
                 </a>
               </li>
               <li>
                 <a
-                  href={`mailto:${settings.email}`}
+                  href={`mailto:${s.email}`}
                   className="inline-flex items-center gap-2 hover:text-primary-container transition-colors duration-150"
                 >
                   <Mail size={13} aria-hidden="true" />
-                  {settings.email}
+                  <span data-tina-field={tinaFields?.email}>{s.email}</span>
                 </a>
               </li>
               <li>
                 <span className="inline-flex items-start gap-2">
                   <MapPin size={13} className="mt-0.5 shrink-0" aria-hidden="true" />
-                  {settings.address.display}
+                  <span data-tina-field={tinaFields?.addressDisplay}>{s.addressDisplay}</span>
                 </span>
               </li>
             </ul>
@@ -57,12 +110,17 @@ export async function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white/80 mb-4">Services</h3>
+            <h3
+              data-tina-field={tinaFields?.footerServicesHeading}
+              className="text-xs font-bold uppercase tracking-wider text-white/80 mb-4"
+            >
+              {s.footerServicesHeading ?? 'Services'}
+            </h3>
             <ul className="space-y-2">
-              {nav.footerServicesNav.map(({ label, href }) => (
+              {s.footerServicesNav.map(({ label, href, tinaLabel }) => (
                 <li key={href}>
                   <Link href={href} className="text-sm text-white hover:text-primary-container transition-colors duration-150">
-                    {label}
+                    <span data-tina-field={tinaLabel}>{label}</span>
                   </Link>
                 </li>
               ))}
@@ -71,12 +129,17 @@ export async function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white/80 mb-4">Company</h3>
+            <h3
+              data-tina-field={tinaFields?.footerCompanyHeading}
+              className="text-xs font-bold uppercase tracking-wider text-white/80 mb-4"
+            >
+              {s.footerCompanyHeading ?? 'Company'}
+            </h3>
             <ul className="space-y-2">
-              {nav.footerCompanyNav.map(({ label, href }) => (
+              {s.footerCompanyNav.map(({ label, href, tinaLabel }) => (
                 <li key={href}>
                   <Link href={href} className="text-sm text-white hover:text-primary-container transition-colors duration-150">
-                    {label}
+                    <span data-tina-field={tinaLabel}>{label}</span>
                   </Link>
                 </li>
               ))}
@@ -87,9 +150,9 @@ export async function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-white/80">
           <p>
-            © {new Date().getFullYear()} Brooklyn Glass Pty Ltd t/a King Double Glazing. ABN {settings.abn}. All rights reserved.
+            © {new Date().getFullYear()} {s.legalName}. ABN {s.abn}. All rights reserved.
           </p>
-          <p>10-year warranty on every job.</p>
+          <p data-tina-field={tinaFields?.warrantyBlurb}>{s.warrantyBlurb ?? '10-year warranty on every job.'}</p>
         </div>
       </div>
     </footer>

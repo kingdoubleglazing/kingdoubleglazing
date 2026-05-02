@@ -43,3 +43,11 @@ next-env.d.ts
 # tinacms
 .tina/__generated__/
 public/admin/
+
+# claude code
+.claude/
+.agents/
+skills-lock.json
+
+# drizzle migrations output
+/drizzle/

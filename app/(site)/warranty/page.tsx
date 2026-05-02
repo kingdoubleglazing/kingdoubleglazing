@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { buildMetadata, BASE_URL } from '@/lib/seo/generateMetadata'
 import { buildWebPageSchema } from '@/lib/seo/schema/webpage'
 import { SchemaScript } from '@/components/SchemaScript'
-import { getSiteSettings, getWarrantyPage } from '@/lib/content'
 import { client } from '@/tina/__generated__/client'
-import { WarrantyPageClient } from './WarrantyPageClient'
+import { PageClient } from '@/components/PageClient'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 
 export const metadata: Metadata = buildMetadata({
   title: '10-Year Warranty on Double Glazing | King Double Glazing Melbourne',
@@ -27,26 +27,21 @@ const warrantyPageSchemas = [
 ]
 
 export default async function WarrantyPage() {
-  const settings = getSiteSettings()
-
-  let tinaWarranty: Awaited<ReturnType<typeof client.queries.warrantyPage>>
-
   try {
-    tinaWarranty = await client.queries.warrantyPage({ relativePath: 'warranty.json' })
+    const tinaPage = await client.queries.page({ relativePath: 'warranty.json' })
+    return (
+      <>
+        <SchemaScript schemas={warrantyPageSchemas} />
+        <PageClient tinaPage={tinaPage} />
+      </>
+    )
   } catch {
-    const warrantyPage = getWarrantyPage()
-    tinaWarranty = { data: { warrantyPage: warrantyPage as never }, query: '', variables: { relativePath: 'warranty.json' } }
+    const { blocks = [] } = await import('@/content/pages/warranty.json')
+    return (
+      <>
+        <SchemaScript schemas={warrantyPageSchemas} />
+        <BlockRenderer blocks={blocks as never[]} />
+      </>
+    )
   }
-
-  return (
-    <>
-      <SchemaScript schemas={warrantyPageSchemas} />
-      <WarrantyPageClient
-        tinaWarranty={tinaWarranty}
-        phone={settings.phone}
-        phoneHref={settings.phoneHref}
-        email={settings.email}
-      />
-    </>
-  )
 }

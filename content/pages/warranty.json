@@ -1,23 +1,76 @@
 {
-  "heroHeadline": "Our 10-Year",
-  "heroHeadlineYellow": "Warranty",
-  "heroSubtext": "Every installation is backed by a 10-year warranty on glass and workmanship. No conditions, no fine print.",
-  "coveredItems": [
-    { "item": "Glass units", "detail": "Any seal failure, fogging, or manufacturing defect in the glass itself." },
-    { "item": "Installation workmanship", "detail": "If it fails because of how we fitted it, we fix it free." },
-    { "item": "Frame adaptors", "detail": "The fittings we use to attach new glass to your existing frame." },
-    { "item": "Seals and edge spacers", "detail": "The seal and spacer bar that keep moisture and air out of the unit." }
-  ],
-  "notCoveredItems": [
-    { "item": "Intentional damage", "detail": "Breakage caused by deliberate impact or misuse." },
-    { "item": "Storm or weather damage", "detail": "Damage caused by hail, fallen debris, or extreme weather events." },
-    { "item": "Building structural movement", "detail": "If the building settles and distorts the frame beyond the fitting's tolerance." }
-  ],
-  "claimSteps": [
-    "Call or email us with your job reference and a brief description.",
-    "We inspect within 7 business days — no charge for the visit.",
-    "If it's covered, we repair or replace at no cost to you."
-  ],
-  "ctaHeadline": "Ready to Get Your Price?",
-  "ctaSubtext": "Get your price in minutes. Every job comes with this warranty, in writing."
+  "blocks": [
+    {
+      "_template": "hero",
+      "variant": "centered",
+      "badge": "Warranty",
+      "headlineWhite": "Our 10-Year",
+      "headlineYellow": "Warranty",
+      "subtext": "Every installation is backed by a 10-year warranty on glass and workmanship. No conditions, no fine print.",
+      "accentWord": "COVERED"
+    },
+    {
+      "_template": "warrantyCoverage",
+      "coveredEyebrow": "What's Covered",
+      "coveredHeading": "10 Years. Full Stop.",
+      "notCoveredEyebrow": "What's Not Covered",
+      "notCoveredHeading": "Exclusions",
+      "claimEyebrow": "How to Make a Claim",
+      "coveredItems": [
+        {
+          "item": "Glass units",
+          "detail": "Any seal failure, fogging, or manufacturing defect in the glass itself."
+        },
+        {
+          "item": "Installation workmanship",
+          "detail": "If it fails because of how we fitted it, we fix it free."
+        },
+        {
+          "item": "Frame adaptors",
+          "detail": "The fittings we use to attach new glass to your existing frame."
+        },
+        {
+          "item": "Seals and edge spacers",
+          "detail": "The seal and spacer bar that keep moisture and air out of the unit."
+        }
+      ],
+      "notCoveredItems": [
+        {
+          "item": "Intentional damage",
+          "detail": "Breakage caused by deliberate impact or misuse."
+        },
+        {
+          "item": "Storm or weather damage",
+          "detail": "Damage caused by hail, fallen debris, or extreme weather events."
+        },
+        {
+          "item": "Building structural movement",
+          "detail": "If the building settles and distorts the frame beyond the fitting's tolerance."
+        }
+      ],
+      "claimSteps": [
+        "Call or email us with your job reference and a brief description.",
+        "We inspect within 7 business days — no charge for the visit.",
+        "If it's covered, we repair or replace at no cost to you."
+      ]
+    },
+    {
+      "_template": "ctaBanner",
+      "heading": "Ready to Get\nYour Price?",
+      "subtext": "Get your price in minutes. Every job comes with this warranty, in writing.",
+      "primaryCta": {
+        "label": "Generate My Quote →",
+        "href": "/instant-estimate/"
+      },
+      "secondaryCta": {
+        "label": "0406 470 595",
+        "href": "tel:+61406470595"
+      },
+      "trustItems": [
+        "Price locked at quote",
+        "10-year warranty",
+        "We beat any quote by 30%"
+      ]
+    }
+  ]
 }
