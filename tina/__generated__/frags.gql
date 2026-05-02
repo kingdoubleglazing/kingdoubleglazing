@@ -10,6 +10,18 @@ fragment SettingsParts on Settings {
   phoneHref
   email
   notificationEmail
+  emailCopy {
+    __typename
+    quoteConfirmSubject
+    quoteConfirmHeading
+    quoteConfirmIntro
+    quoteConfirmSummaryLabel
+    quoteConfirmContactNote
+    contactNotifHeading
+    contactNotifReplyNote
+    quoteNotifConfirmButton
+    quoteNotifConfirmNote
+  }
   address {
     __typename
     street
