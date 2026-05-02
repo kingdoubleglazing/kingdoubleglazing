@@ -48,6 +48,21 @@ export default defineConfig({
           { name: 'phoneHref', type: 'string', label: 'Phone href (e.g. tel:+61406470595)' },
           { name: 'email', type: 'string', label: 'Email' },
           { name: 'notificationEmail', type: 'string', label: 'Notification Email (quote alerts)' },
+          // ── Email Copy ────────────────────────────────────────────────
+          { name: 'emailCopy', type: 'object', label: 'Email Copy', fields: [
+            // Quote confirmation (customer-facing)
+            { name: 'quoteConfirmSubject', type: 'string', label: 'Quote confirm: subject line' },
+            { name: 'quoteConfirmHeading', type: 'string', label: 'Quote confirm: heading' },
+            { name: 'quoteConfirmIntro', type: 'string', label: 'Quote confirm: intro (after "Hi {name} —")', ui: { component: 'textarea' as const } },
+            { name: 'quoteConfirmSummaryLabel', type: 'string', label: 'Quote confirm: summary section label' },
+            { name: 'quoteConfirmContactNote', type: 'string', label: 'Quote confirm: contact note (use {phone} for the phone number)', ui: { component: 'textarea' as const } },
+            // Contact notification (internal)
+            { name: 'contactNotifHeading', type: 'string', label: 'Contact notification: heading' },
+            { name: 'contactNotifReplyNote', type: 'string', label: 'Contact notification: reply note (use {name} for customer name)' },
+            // Quote notification (internal)
+            { name: 'quoteNotifConfirmButton', type: 'string', label: 'Quote notification: confirm button label' },
+            { name: 'quoteNotifConfirmNote', type: 'string', label: 'Quote notification: confirm note' },
+          ]},
           { name: 'address', type: 'object', label: 'Address', fields: [
             { name: 'street', type: 'string', label: 'Street' },
             { name: 'suburb', type: 'string', label: 'Suburb' },

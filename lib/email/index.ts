@@ -66,7 +66,7 @@ export async function sendQuoteConfirmation(quote: {
   await getResend().emails.send({
     from:    FROM_EMAIL,
     to:      quote.email,
-    subject: 'Your King Double Glazing quote is confirmed',
+    subject: siteConfig.emailCopy?.quoteConfirmSubject ?? 'Your King Double Glazing quote is confirmed',
     react:   QuoteConfirmationEmail({ ...quote, windowBand: null }),
   })
 }

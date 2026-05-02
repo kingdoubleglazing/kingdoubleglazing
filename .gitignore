@@ -51,3 +51,6 @@ skills-lock.json
 
 # drizzle migrations output
 /drizzle/
+
+# handover documents
+*.docx

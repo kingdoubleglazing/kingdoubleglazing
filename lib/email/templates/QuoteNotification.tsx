@@ -2,6 +2,7 @@ import {
   Html, Head, Body, Container, Section,
   Heading, Text, Button, Hr, Preview,
 } from '@react-email/components'
+import { siteConfig } from '@/data/site'
 
 interface WindowRow {
   heightMm: number
@@ -34,6 +35,10 @@ export function QuoteNotificationEmail({
   windows, windowCount, total,
   quoteId, confirmUrl,
 }: Props) {
+  const copy = siteConfig.emailCopy ?? {}
+  const confirmButton = copy.quoteNotifConfirmButton ?? '✓ Confirm This Quote'
+  const confirmNote   = copy.quoteNotifConfirmNote   ?? 'Tapping confirm sends the client their booking confirmation email.'
+
   return (
     <Html lang="en">
       <Head />
@@ -126,12 +131,8 @@ export function QuoteNotificationEmail({
           <Hr style={divider} />
 
           <Section style={{ textAlign: 'center' }}>
-            <Button href={confirmUrl} style={ctaButton}>
-              ✓ Confirm This Quote
-            </Button>
-            <Text style={ctaNote}>
-              Tapping confirm sends the client their booking confirmation email.
-            </Text>
+            <Button href={confirmUrl} style={ctaButton}>{confirmButton}</Button>
+            <Text style={ctaNote}>{confirmNote}</Text>
           </Section>
         </Container>
 

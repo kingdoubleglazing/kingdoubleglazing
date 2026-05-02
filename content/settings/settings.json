@@ -35,6 +35,17 @@
     "retrofitFromPerSqm": 595,
     "retrofitFromDisplay": "From $595/m²"
   },
+  "emailCopy": {
+    "quoteConfirmSubject": "Your King Double Glazing quote is confirmed",
+    "quoteConfirmHeading": "Your quote is confirmed.",
+    "quoteConfirmIntro": "we'll be in touch within 2 hours.",
+    "quoteConfirmSummaryLabel": "Your summary",
+    "quoteConfirmContactNote": "Questions? Reply to this email or call {phone}.",
+    "contactNotifHeading": "New Enquiry",
+    "contactNotifReplyNote": "Reply to this email to respond directly to {name}.",
+    "quoteNotifConfirmButton": "✓ Confirm This Quote",
+    "quoteNotifConfirmNote": "Tapping confirm sends the client their booking confirmation email."
+  },
   "footerTagline": "Stop. Don't Overpay.",
   "footerBio": "Melbourne's retrofit window specialists. We'll beat any genuine quote by 30%.",
   "warrantyBlurb": "10-year warranty on every job.",
