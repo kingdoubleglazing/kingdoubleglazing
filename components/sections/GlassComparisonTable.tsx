@@ -102,13 +102,14 @@ const [selectedOption, setSelectedOption] = useState<OptionKey | null>(null)
   const calcRef = useRef<HTMLDivElement>(null)
 
   // Sync from URL on mount
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  /* eslint-disable react-hooks/exhaustive-deps, react-hooks/set-state-in-effect */
   useEffect(() => {
     const opt = searchParams.get('option') as OptionKey
     if (optionKeys.includes(opt) && !selectedOption) {
       setSelectedOption(opt)
     }
   }, [searchParams])
+  /* eslint-enable react-hooks/exhaustive-deps, react-hooks/set-state-in-effect */
 
 
   function handleSelect(key: OptionKey) {

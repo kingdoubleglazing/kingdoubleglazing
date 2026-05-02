@@ -54,7 +54,7 @@ export default function OGImage() {
           maxWidth: 900,
         }}
       >
-        Melbourne's Anti-Ripoff Glaziers
+        Melbourne&apos;s Anti-Ripoff Glaziers
       </h1>
 
       <p
@@ -96,7 +96,7 @@ export default function OGImage() {
             textTransform: 'uppercase',
           }}
         >
-          Stop. Don't Overpay.
+          Stop. Don&apos;t Overpay.
         </span>
       </div>
     </div>,

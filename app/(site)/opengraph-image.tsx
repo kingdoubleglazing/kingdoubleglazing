@@ -43,7 +43,7 @@ export default function OGImage() {
           margin: '0 0 24px 0',
         }}
       >
-        Stop. Don't Overpay.
+        Stop. Don&apos;t Overpay.
       </p>
 
       {/* Main headline */}

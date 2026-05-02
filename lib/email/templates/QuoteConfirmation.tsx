@@ -23,7 +23,7 @@ export function QuoteConfirmationEmail({ name, estimateLow, estimateHigh, window
   return (
     <Html lang="en">
       <Head />
-      <Preview>Your King Double Glazing quote is confirmed — we'll be in touch within 2 hours</Preview>
+      <Preview>{"Your King Double Glazing quote is confirmed — we'll be in touch within 2 hours"}</Preview>
       <Body style={body}>
         {/* Header */}
         <Section style={header}>
@@ -38,7 +38,7 @@ export function QuoteConfirmationEmail({ name, estimateLow, estimateHigh, window
           </Section>
 
           <Text style={intro}>
-            Hi {name} — we'll be in touch within 2 hours to arrange your free in-home assessment.
+            Hi {name} — we&apos;ll be in touch within 2 hours to arrange your free in-home assessment.
           </Text>
 
           {/* Summary */}

@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# King Double Glazing
 
-## Getting Started
+Marketing and lead-capture website for **King Double Glazing** — Melbourne's retrofit double-glazing specialists.
 
-First, run the development server:
+**Live site:** [kingdoubleglazing.com.au](https://kingdoubleglazing.com.au)
+
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| CMS | TinaCMS (content editing) |
+| Database | Neon Postgres + Drizzle ORM |
+| Email | Resend + React Email |
+| Deployment | Vercel |
+
+## Getting started
+
+Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Copy the environment template and fill in your values:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cp .env.local.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run the development server (Next.js + TinaCMS):
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Variable | Description |
+|---|---|
+| `DATABASE_URL` | Neon Postgres connection string |
+| `RESEND_API_KEY` | Resend API key for transactional email |
+| `NEXT_PUBLIC_TINA_CLIENT_ID` | TinaCMS client ID |
+| `TINA_TOKEN` | TinaCMS read token |
+| `GITHUB_BRANCH` | Branch TinaCMS reads from (defaults to `main`) |
 
-## Deploy on Vercel
+## Project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/
+  (site)/          # All public-facing routes + layout
+  api/             # API routes (quote confirmation)
+components/
+  blocks/          # Page-builder blocks (driven by TinaCMS)
+  layout/          # Header, Footer, Nav
+  sections/        # Reusable section components
+  ui/              # Atomic UI primitives
+content/           # JSON content files (faqs, gallery, pricing, pages)
+data/              # Static TypeScript data (site config, nav)
+db/                # Drizzle schema + db client
+lib/               # Email templates, SEO helpers, utilities
+tina/              # TinaCMS schema config
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Content editing
+
+Content is managed through TinaCMS. Run `pnpm dev` and open the `/admin` path in your browser to access the visual editor.
+
+## Database
+
+Migrations are managed with Drizzle Kit:
+
+```bash
+pnpm drizzle-kit generate   # generate migration files
+pnpm drizzle-kit migrate    # apply migrations to the database
+```
+
+## Build & deploy
+
+```bash
+pnpm build   # builds TinaCMS then Next.js
+pnpm start   # starts production server
+```
+
+Deployments are automatic on push to `main` via Vercel.
