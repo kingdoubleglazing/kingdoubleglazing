@@ -219,6 +219,19 @@ export type CollectionDocumentsArgs = {
 
 export type DocumentNode = Settings | Page | Gallery | PricingOption | Folder;
 
+export type SettingsEmailCopy = {
+  __typename?: 'SettingsEmailCopy';
+  quoteConfirmSubject?: Maybe<Scalars['String']['output']>;
+  quoteConfirmHeading?: Maybe<Scalars['String']['output']>;
+  quoteConfirmIntro?: Maybe<Scalars['String']['output']>;
+  quoteConfirmSummaryLabel?: Maybe<Scalars['String']['output']>;
+  quoteConfirmContactNote?: Maybe<Scalars['String']['output']>;
+  contactNotifHeading?: Maybe<Scalars['String']['output']>;
+  contactNotifReplyNote?: Maybe<Scalars['String']['output']>;
+  quoteNotifConfirmButton?: Maybe<Scalars['String']['output']>;
+  quoteNotifConfirmNote?: Maybe<Scalars['String']['output']>;
+};
+
 export type SettingsAddress = {
   __typename?: 'SettingsAddress';
   street?: Maybe<Scalars['String']['output']>;
@@ -295,6 +308,7 @@ export type Settings = Node & Document & {
   phoneHref?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   notificationEmail?: Maybe<Scalars['String']['output']>;
+  emailCopy?: Maybe<SettingsEmailCopy>;
   address?: Maybe<SettingsAddress>;
   social?: Maybe<SettingsSocial>;
   logos?: Maybe<SettingsLogos>;
@@ -319,6 +333,18 @@ export type StringFilter = {
   eq?: InputMaybe<Scalars['String']['input']>;
   exists?: InputMaybe<Scalars['Boolean']['input']>;
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type SettingsEmailCopyFilter = {
+  quoteConfirmSubject?: InputMaybe<StringFilter>;
+  quoteConfirmHeading?: InputMaybe<StringFilter>;
+  quoteConfirmIntro?: InputMaybe<StringFilter>;
+  quoteConfirmSummaryLabel?: InputMaybe<StringFilter>;
+  quoteConfirmContactNote?: InputMaybe<StringFilter>;
+  contactNotifHeading?: InputMaybe<StringFilter>;
+  contactNotifReplyNote?: InputMaybe<StringFilter>;
+  quoteNotifConfirmButton?: InputMaybe<StringFilter>;
+  quoteNotifConfirmNote?: InputMaybe<StringFilter>;
 };
 
 export type SettingsAddressFilter = {
@@ -404,6 +430,7 @@ export type SettingsFilter = {
   phoneHref?: InputMaybe<StringFilter>;
   email?: InputMaybe<StringFilter>;
   notificationEmail?: InputMaybe<StringFilter>;
+  emailCopy?: InputMaybe<SettingsEmailCopyFilter>;
   address?: InputMaybe<SettingsAddressFilter>;
   social?: InputMaybe<SettingsSocialFilter>;
   logos?: InputMaybe<SettingsLogosFilter>;
@@ -1292,6 +1319,18 @@ export type DocumentMutation = {
   pricingOption?: InputMaybe<PricingOptionMutation>;
 };
 
+export type SettingsEmailCopyMutation = {
+  quoteConfirmSubject?: InputMaybe<Scalars['String']['input']>;
+  quoteConfirmHeading?: InputMaybe<Scalars['String']['input']>;
+  quoteConfirmIntro?: InputMaybe<Scalars['String']['input']>;
+  quoteConfirmSummaryLabel?: InputMaybe<Scalars['String']['input']>;
+  quoteConfirmContactNote?: InputMaybe<Scalars['String']['input']>;
+  contactNotifHeading?: InputMaybe<Scalars['String']['input']>;
+  contactNotifReplyNote?: InputMaybe<Scalars['String']['input']>;
+  quoteNotifConfirmButton?: InputMaybe<Scalars['String']['input']>;
+  quoteNotifConfirmNote?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type SettingsAddressMutation = {
   street?: InputMaybe<Scalars['String']['input']>;
   suburb?: InputMaybe<Scalars['String']['input']>;
@@ -1358,6 +1397,7 @@ export type SettingsMutation = {
   phoneHref?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   notificationEmail?: InputMaybe<Scalars['String']['input']>;
+  emailCopy?: InputMaybe<SettingsEmailCopyMutation>;
   address?: InputMaybe<SettingsAddressMutation>;
   social?: InputMaybe<SettingsSocialMutation>;
   logos?: InputMaybe<SettingsLogosMutation>;
@@ -1710,7 +1750,7 @@ export type PricingOptionMutation = {
   tech?: InputMaybe<PricingOptionTechMutation>;
 };
 
-export type SettingsPartsFragment = { __typename: 'Settings', name?: string | null, legalName?: string | null, domain?: string | null, abn?: string | null, licenseNumber?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, footerTagline?: string | null, footerBio?: string | null, warrantyBlurb?: string | null, footerServicesHeading?: string | null, footerCompanyHeading?: string | null, address?: { __typename: 'SettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, logos?: { __typename: 'SettingsLogos', light?: string | null, dark?: string | null, icon?: string | null } | null, pricing?: { __typename: 'SettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, mainNav?: Array<{ __typename: 'SettingsMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'SettingsCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'SettingsFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'SettingsFooterCompanyNav', label?: string | null, href?: string | null } | null> | null, paymentTerms?: { __typename: 'SettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null };
+export type SettingsPartsFragment = { __typename: 'Settings', name?: string | null, legalName?: string | null, domain?: string | null, abn?: string | null, licenseNumber?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, footerTagline?: string | null, footerBio?: string | null, warrantyBlurb?: string | null, footerServicesHeading?: string | null, footerCompanyHeading?: string | null, emailCopy?: { __typename: 'SettingsEmailCopy', quoteConfirmSubject?: string | null, quoteConfirmHeading?: string | null, quoteConfirmIntro?: string | null, quoteConfirmSummaryLabel?: string | null, quoteConfirmContactNote?: string | null, contactNotifHeading?: string | null, contactNotifReplyNote?: string | null, quoteNotifConfirmButton?: string | null, quoteNotifConfirmNote?: string | null } | null, address?: { __typename: 'SettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, logos?: { __typename: 'SettingsLogos', light?: string | null, dark?: string | null, icon?: string | null } | null, pricing?: { __typename: 'SettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, mainNav?: Array<{ __typename: 'SettingsMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'SettingsCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'SettingsFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'SettingsFooterCompanyNav', label?: string | null, href?: string | null } | null> | null, paymentTerms?: { __typename: 'SettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null };
 
 export type PagePartsFragment = { __typename: 'Page', galleryBlurb?: string | null, blocks?: Array<{ __typename: 'PageBlocksHero', variant?: string | null, badge?: string | null, headlineWhite?: string | null, headlineYellow?: string | null, subtext?: string | null, imageSrc?: string | null, imageAlt?: string | null, showWarrantyBadge?: boolean | null, adaptorCaption?: string | null, accentWord?: string | null, trustItems?: Array<string | null> | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksTrustBar', items?: Array<{ __typename: 'PageBlocksTrustBarItems', iconKey?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWhyRetrofit', eyebrow?: string | null, heading1?: string | null, heading2?: string | null, items?: Array<{ __typename: 'PageBlocksWhyRetrofitItems', iconKey?: string | null, headline?: string | null, sub?: string | null } | null> | null } | { __typename: 'PageBlocksProcessSteps', heading?: string | null, subheading?: string | null, cta?: { __typename: 'PageBlocksProcessStepsCta', label?: string | null, href?: string | null } | null, steps?: Array<{ __typename: 'PageBlocksProcessStepsSteps', title?: string | null, body?: string | null, callout?: string | null, imageSrc?: string | null, imageAlt?: string | null } | null> | null } | { __typename: 'PageBlocksEstimateCta', headline?: string | null, subtext?: string | null, caption?: string | null, cta?: { __typename: 'PageBlocksEstimateCtaCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksFaq', heading?: string | null, subheading?: string | null, faqs?: Array<{ __typename: 'PageBlocksFaqFaqs', q?: string | null, a?: string | null } | null> | null } | { __typename: 'PageBlocksServiceSection', id?: string | null, eyebrow?: string | null, heading?: string | null, bodyText?: string | null, bullets?: Array<string | null> | null, variant?: string | null, imageSrc?: string | null, imageAlt?: string | null, primaryCta?: { __typename: 'PageBlocksServiceSectionPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksServiceSectionSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksStoryWithStats', eyebrow?: string | null, paragraphs?: Array<string | null> | null, quote?: string | null, stats?: Array<{ __typename: 'PageBlocksStoryWithStatsStats', value?: string | null, label?: string | null } | null> | null } | { __typename: 'PageBlocksWarrantyCoverage', coveredEyebrow?: string | null, coveredHeading?: string | null, notCoveredEyebrow?: string | null, notCoveredHeading?: string | null, claimEyebrow?: string | null, claimSteps?: Array<string | null> | null, coveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageCoveredItems', item?: string | null, detail?: string | null } | null> | null, notCoveredItems?: Array<{ __typename: 'PageBlocksWarrantyCoverageNotCoveredItems', item?: string | null, detail?: string | null } | null> | null } | { __typename: 'PageBlocksContactCards', phoneSublabel?: string | null, emailSublabel?: string | null, serviceAreaLabel?: string | null, serviceAreaValue?: string | null, areaSublabel?: string | null, emergencyLabel?: string | null, emergencyValue?: string | null, emergencySublabel?: string | null } | { __typename: 'PageBlocksContactForm', heading?: string | null } | { __typename: 'PageBlocksCtaBanner', heading?: string | null, subtext?: string | null, trustItems?: Array<string | null> | null, primaryCta?: { __typename: 'PageBlocksCtaBannerPrimaryCta', label?: string | null, href?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksCtaBannerSecondaryCta', label?: string | null, href?: string | null } | null } | { __typename: 'PageBlocksGlassComparison', eyebrow?: string | null, heading?: string | null, subtext?: string | null, secondStoreySurcharge?: number | null, quieterLabel?: string | null, lessHeatLabel?: string | null, getMyPriceLabel?: string | null, selectedLabel?: string | null, specLinkLabel?: string | null, pressHint?: string | null, eastWestBold?: string | null, eastWestBody?: string | null, comparisonNote?: string | null, step1Label?: string | null, step1Heading?: string | null, measureInstruction?: string | null, measureNote?: string | null, addWindowLabel?: string | null, changeLabel?: string | null, step2Label?: string | null, yourQuoteLabel?: string | null, noMeasurementsHint?: string | null, accuracyNote?: string | null, measurementOffNote?: string | null, budgetPrompt?: string | null, sendQuoteLabel?: string | null, dialogTitle?: string | null, dialogDescription?: string | null, modalQuoteSummaryLabel?: string | null, modalSubmitLabel?: string | null, modalSendingLabel?: string | null, modalErrorMessage?: string | null, successEyebrow?: string | null, successTitle?: string | null, successBody?: string | null, startNewQuoteLabel?: string | null } | { __typename: 'PageBlocksGlassTechSpecs', eyebrow?: string | null, heading?: string | null, description?: string | null } | { __typename: 'PageBlocksAdaptorDisclosure', heading?: string | null, mobileSubtitle?: string | null, body1?: string | null, body2?: string | null } | { __typename: 'PageBlocksPaymentTerms', eyebrow?: string | null, heading?: string | null, depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | { __typename: 'PageBlocksFreeAdvice', eyebrow?: string | null, headingLine1?: string | null, headingLine2?: string | null, body?: string | null, buttonLabel?: string | null } | { __typename: 'PageBlocksWhatElseStrip', eyebrow?: string | null, heading?: string | null, cta?: { __typename: 'PageBlocksWhatElseStripCta', label?: string | null, href?: string | null } | null, services?: Array<{ __typename: 'PageBlocksWhatElseStripServices', label?: string | null, href?: string | null } | null> | null } | { __typename: 'PageBlocksEmergencyStrip', boldText?: string | null, text?: string | null, cta?: { __typename: 'PageBlocksEmergencyStripCta', label?: string | null, href?: string | null } | null } | null> | null };
 
@@ -1723,7 +1763,7 @@ export type SettingsQueryVariables = Exact<{
 }>;
 
 
-export type SettingsQuery = { __typename?: 'Query', settings: { __typename: 'Settings', id: string, name?: string | null, legalName?: string | null, domain?: string | null, abn?: string | null, licenseNumber?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, footerTagline?: string | null, footerBio?: string | null, warrantyBlurb?: string | null, footerServicesHeading?: string | null, footerCompanyHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, address?: { __typename: 'SettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, logos?: { __typename: 'SettingsLogos', light?: string | null, dark?: string | null, icon?: string | null } | null, pricing?: { __typename: 'SettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, mainNav?: Array<{ __typename: 'SettingsMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'SettingsCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'SettingsFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'SettingsFooterCompanyNav', label?: string | null, href?: string | null } | null> | null, paymentTerms?: { __typename: 'SettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null } };
+export type SettingsQuery = { __typename?: 'Query', settings: { __typename: 'Settings', id: string, name?: string | null, legalName?: string | null, domain?: string | null, abn?: string | null, licenseNumber?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, footerTagline?: string | null, footerBio?: string | null, warrantyBlurb?: string | null, footerServicesHeading?: string | null, footerCompanyHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, emailCopy?: { __typename: 'SettingsEmailCopy', quoteConfirmSubject?: string | null, quoteConfirmHeading?: string | null, quoteConfirmIntro?: string | null, quoteConfirmSummaryLabel?: string | null, quoteConfirmContactNote?: string | null, contactNotifHeading?: string | null, contactNotifReplyNote?: string | null, quoteNotifConfirmButton?: string | null, quoteNotifConfirmNote?: string | null } | null, address?: { __typename: 'SettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, logos?: { __typename: 'SettingsLogos', light?: string | null, dark?: string | null, icon?: string | null } | null, pricing?: { __typename: 'SettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, mainNav?: Array<{ __typename: 'SettingsMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'SettingsCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'SettingsFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'SettingsFooterCompanyNav', label?: string | null, href?: string | null } | null> | null, paymentTerms?: { __typename: 'SettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null } };
 
 export type SettingsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1735,7 +1775,7 @@ export type SettingsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SettingsConnectionQuery = { __typename?: 'Query', settingsConnection: { __typename?: 'SettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SettingsConnectionEdges', cursor: string, node?: { __typename: 'Settings', id: string, name?: string | null, legalName?: string | null, domain?: string | null, abn?: string | null, licenseNumber?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, footerTagline?: string | null, footerBio?: string | null, warrantyBlurb?: string | null, footerServicesHeading?: string | null, footerCompanyHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, address?: { __typename: 'SettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, logos?: { __typename: 'SettingsLogos', light?: string | null, dark?: string | null, icon?: string | null } | null, pricing?: { __typename: 'SettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, mainNav?: Array<{ __typename: 'SettingsMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'SettingsCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'SettingsFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'SettingsFooterCompanyNav', label?: string | null, href?: string | null } | null> | null, paymentTerms?: { __typename: 'SettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null } | null } | null> | null } };
+export type SettingsConnectionQuery = { __typename?: 'Query', settingsConnection: { __typename?: 'SettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SettingsConnectionEdges', cursor: string, node?: { __typename: 'Settings', id: string, name?: string | null, legalName?: string | null, domain?: string | null, abn?: string | null, licenseNumber?: string | null, phone?: string | null, phoneTel?: string | null, phoneHref?: string | null, email?: string | null, notificationEmail?: string | null, footerTagline?: string | null, footerBio?: string | null, warrantyBlurb?: string | null, footerServicesHeading?: string | null, footerCompanyHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, emailCopy?: { __typename: 'SettingsEmailCopy', quoteConfirmSubject?: string | null, quoteConfirmHeading?: string | null, quoteConfirmIntro?: string | null, quoteConfirmSummaryLabel?: string | null, quoteConfirmContactNote?: string | null, contactNotifHeading?: string | null, contactNotifReplyNote?: string | null, quoteNotifConfirmButton?: string | null, quoteNotifConfirmNote?: string | null } | null, address?: { __typename: 'SettingsAddress', street?: string | null, suburb?: string | null, state?: string | null, postcode?: string | null, country?: string | null, display?: string | null } | null, social?: { __typename: 'SettingsSocial', facebook?: string | null, instagram?: string | null, google?: string | null } | null, logos?: { __typename: 'SettingsLogos', light?: string | null, dark?: string | null, icon?: string | null } | null, pricing?: { __typename: 'SettingsPricing', retrofitFromPerSqm?: number | null, retrofitFromDisplay?: string | null } | null, mainNav?: Array<{ __typename: 'SettingsMainNav', label?: string | null, href?: string | null } | null> | null, ctaNav?: { __typename: 'SettingsCtaNav', label?: string | null, href?: string | null } | null, footerServicesNav?: Array<{ __typename: 'SettingsFooterServicesNav', label?: string | null, href?: string | null } | null> | null, footerCompanyNav?: Array<{ __typename: 'SettingsFooterCompanyNav', label?: string | null, href?: string | null } | null> | null, paymentTerms?: { __typename: 'SettingsPaymentTerms', depositTitle?: string | null, depositBody?: string | null, completionTitle?: string | null, completionBody?: string | null, warrantyTitle?: string | null, warrantyBody?: string | null } | null } | null } | null> | null } };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1807,6 +1847,18 @@ export const SettingsPartsFragmentDoc = gql`
   phoneHref
   email
   notificationEmail
+  emailCopy {
+    __typename
+    quoteConfirmSubject
+    quoteConfirmHeading
+    quoteConfirmIntro
+    quoteConfirmSummaryLabel
+    quoteConfirmContactNote
+    contactNotifHeading
+    contactNotifReplyNote
+    quoteNotifConfirmButton
+    quoteNotifConfirmNote
+  }
   address {
     __typename
     street
@@ -2455,7 +2507,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "http://localhost:4001/graphql",
+        url: "https://content.tinajs.io/2.3/content/34e25a60-9430-43d9-bbb5-67ac6a1ddc46/github/main",
         queries,
       })
     )

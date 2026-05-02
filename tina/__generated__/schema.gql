@@ -96,6 +96,18 @@ type Collection {
 
 union DocumentNode = Settings | Page | Gallery | PricingOption | Folder
 
+type SettingsEmailCopy {
+  quoteConfirmSubject: String
+  quoteConfirmHeading: String
+  quoteConfirmIntro: String
+  quoteConfirmSummaryLabel: String
+  quoteConfirmContactNote: String
+  contactNotifHeading: String
+  contactNotifReplyNote: String
+  quoteNotifConfirmButton: String
+  quoteNotifConfirmNote: String
+}
+
 type SettingsAddress {
   street: String
   suburb: String
@@ -162,6 +174,7 @@ type Settings implements Node & Document {
   phoneHref: String
   email: String
   notificationEmail: String
+  emailCopy: SettingsEmailCopy
   address: SettingsAddress
   social: SettingsSocial
   logos: SettingsLogos
@@ -186,6 +199,18 @@ input StringFilter {
   eq: String
   exists: Boolean
   in: [String]
+}
+
+input SettingsEmailCopyFilter {
+  quoteConfirmSubject: StringFilter
+  quoteConfirmHeading: StringFilter
+  quoteConfirmIntro: StringFilter
+  quoteConfirmSummaryLabel: StringFilter
+  quoteConfirmContactNote: StringFilter
+  contactNotifHeading: StringFilter
+  contactNotifReplyNote: StringFilter
+  quoteNotifConfirmButton: StringFilter
+  quoteNotifConfirmNote: StringFilter
 }
 
 input SettingsAddressFilter {
@@ -271,6 +296,7 @@ input SettingsFilter {
   phoneHref: StringFilter
   email: StringFilter
   notificationEmail: StringFilter
+  emailCopy: SettingsEmailCopyFilter
   address: SettingsAddressFilter
   social: SettingsSocialFilter
   logos: SettingsLogosFilter
@@ -1028,6 +1054,18 @@ input DocumentMutation {
   pricingOption: PricingOptionMutation
 }
 
+input SettingsEmailCopyMutation {
+  quoteConfirmSubject: String
+  quoteConfirmHeading: String
+  quoteConfirmIntro: String
+  quoteConfirmSummaryLabel: String
+  quoteConfirmContactNote: String
+  contactNotifHeading: String
+  contactNotifReplyNote: String
+  quoteNotifConfirmButton: String
+  quoteNotifConfirmNote: String
+}
+
 input SettingsAddressMutation {
   street: String
   suburb: String
@@ -1094,6 +1132,7 @@ input SettingsMutation {
   phoneHref: String
   email: String
   notificationEmail: String
+  emailCopy: SettingsEmailCopyMutation
   address: SettingsAddressMutation
   social: SettingsSocialMutation
   logos: SettingsLogosMutation
