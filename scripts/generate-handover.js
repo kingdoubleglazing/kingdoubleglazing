@@ -344,8 +344,81 @@ const doc = new Document({
       tip('Whenever you change your phone number or email, update it in Settings. It will automatically update everywhere on the site in one go.'),
       spacer(),
 
-      // ── SECTION 4: PAGES ───────────────────────────────────────────────────
-      h1('4. Editing Your Pages'),
+      // ── SECTION 4: EMAIL TEMPLATES ─────────────────────────────────────────
+      h1('4. Editing Your Email Templates'),
+      p('Every time a customer submits a quote or fills in the contact form, two emails are sent automatically:'),
+      bullet('One to the customer confirming their request.'),
+      bullet('One to you as an internal notification.'),
+      spacer(),
+      p('You can change the wording of both without touching any code. Go to:'),
+      p('Editor (admin) → Settings → Email Copy'),
+      spacer(),
+
+      h2('4.1  Quote Confirmation (sent to the customer)'),
+      p('This is what the customer receives after they submit an instant quote. You can edit:'),
+      spacer(),
+      new Table({
+        width: { size: 9360, type: WidthType.DXA },
+        columnWidths: [3200, 6160],
+        rows: [
+          headerRow(['Field in editor', 'What it controls'], [3200, 6160]),
+          ...[
+            ['Quote confirm: subject line', 'The subject line of the email the customer receives'],
+            ['Quote confirm: heading', 'The big heading inside the email body'],
+            ['Quote confirm: intro', 'The paragraph after "Hi [customer name] —". Write naturally, e.g. "Thanks for getting in touch..."'],
+            ['Quote confirm: summary label', 'The label above the quote summary box, e.g. "Your estimate"'],
+            ['Quote confirm: contact note', 'A short note at the bottom. Use {phone} and it will be replaced with your actual phone number automatically'],
+          ].map(([field, desc], i) => new TableRow({ children: [
+            new TableCell({ borders, width: { size: 3200, type: WidthType.DXA }, shading: { fill: i % 2 === 0 ? WHITE : GRAY, type: ShadingType.CLEAR }, margins: { top: 80, bottom: 80, left: 120, right: 120 }, children: [new Paragraph({ children: [new TextRun({ text: field, bold: true, size: 20, font: 'Arial', color: BRAND })] })] }),
+            new TableCell({ borders, width: { size: 6160, type: WidthType.DXA }, shading: { fill: i % 2 === 0 ? WHITE : GRAY, type: ShadingType.CLEAR }, margins: { top: 80, bottom: 80, left: 120, right: 120 }, children: [new Paragraph({ children: [new TextRun({ text: desc, size: 20, font: 'Arial', color: TEXT })] })] }),
+          ]})),
+        ],
+      }),
+      spacer(),
+
+      h2('4.2  Contact Notification (sent to you)'),
+      p('This is the internal email you receive when someone fills in the contact form. You can edit:'),
+      spacer(),
+      new Table({
+        width: { size: 9360, type: WidthType.DXA },
+        columnWidths: [3200, 6160],
+        rows: [
+          headerRow(['Field in editor', 'What it controls'], [3200, 6160]),
+          ...[
+            ['Contact notification: heading', 'The heading in the email you receive, e.g. "New contact enquiry"'],
+            ['Contact notification: reply note', 'A reminder note at the bottom. Use {name} and it is replaced with the customer\'s name'],
+          ].map(([field, desc], i) => new TableRow({ children: [
+            new TableCell({ borders, width: { size: 3200, type: WidthType.DXA }, shading: { fill: i % 2 === 0 ? WHITE : GRAY, type: ShadingType.CLEAR }, margins: { top: 80, bottom: 80, left: 120, right: 120 }, children: [new Paragraph({ children: [new TextRun({ text: field, bold: true, size: 20, font: 'Arial', color: BRAND })] })] }),
+            new TableCell({ borders, width: { size: 6160, type: WidthType.DXA }, shading: { fill: i % 2 === 0 ? WHITE : GRAY, type: ShadingType.CLEAR }, margins: { top: 80, bottom: 80, left: 120, right: 120 }, children: [new Paragraph({ children: [new TextRun({ text: desc, size: 20, font: 'Arial', color: TEXT })] })] }),
+          ]})),
+        ],
+      }),
+      spacer(),
+
+      h2('4.3  Quote Notification (sent to you)'),
+      p('This is the internal email you receive when someone submits an instant quote request. You can edit:'),
+      spacer(),
+      new Table({
+        width: { size: 9360, type: WidthType.DXA },
+        columnWidths: [3200, 6160],
+        rows: [
+          headerRow(['Field in editor', 'What it controls'], [3200, 6160]),
+          ...[
+            ['Quote notification: confirm button label', 'The text on the button you click to confirm a quote, e.g. "Confirm this quote"'],
+            ['Quote notification: confirm note', 'A short note explaining what confirming the quote does'],
+          ].map(([field, desc], i) => new TableRow({ children: [
+            new TableCell({ borders, width: { size: 3200, type: WidthType.DXA }, shading: { fill: i % 2 === 0 ? WHITE : GRAY, type: ShadingType.CLEAR }, margins: { top: 80, bottom: 80, left: 120, right: 120 }, children: [new Paragraph({ children: [new TextRun({ text: field, bold: true, size: 20, font: 'Arial', color: BRAND })] })] }),
+            new TableCell({ borders, width: { size: 6160, type: WidthType.DXA }, shading: { fill: i % 2 === 0 ? WHITE : GRAY, type: ShadingType.CLEAR }, margins: { top: 80, bottom: 80, left: 120, right: 120 }, children: [new Paragraph({ children: [new TextRun({ text: desc, size: 20, font: 'Arial', color: TEXT })] })] }),
+          ]})),
+        ],
+      }),
+      spacer(),
+      tip('The placeholders like {name} and {phone} are special — they get replaced with the real values automatically. Do not delete the curly braces when editing.'),
+      screenshotNote('Settings → Email Copy open in the editor, showing the quote confirmation fields.'),
+      spacer(),
+
+      // ── SECTION 5: PAGES ───────────────────────────────────────────────────
+      h1('5. Editing Your Pages'),
 
       h2('4.1  Home Page'),
       p('This is the first thing people see. You can edit:'),
@@ -394,8 +467,8 @@ const doc = new Document({
       p('Your story and team. You can edit all the text here.'),
       spacer(),
 
-      // ── SECTION 5: LEADS / QUOTES ─────────────────────────────────────────
-      h1('5. Viewing Customer Leads and Quote Requests'),
+      // ── SECTION 6: LEADS / QUOTES ─────────────────────────────────────────
+      h1('6. Viewing Customer Leads and Quote Requests'),
       p('Every time someone fills in the contact form or uses the instant quote calculator, the details are saved to your database and you get an email notification.'),
       spacer(),
       p('To view all leads and quote requests:'),
@@ -409,8 +482,8 @@ const doc = new Document({
       tip('You will also receive an email every time someone submits a quote. Check your inbox (and spam folder the first time) to make sure those are coming through.'),
       spacer(),
 
-      // ── SECTION 6: EMAILS ─────────────────────────────────────────────────
-      h1('6. Email Notifications (Resend)'),
+      // ── SECTION 7: EMAILS ─────────────────────────────────────────────────
+      h1('7. Email Notifications (Resend)'),
       p('Resend is the service that sends you an email every time a customer submits a quote. It is already set up and working.'),
       spacer(),
       p('You normally do not need to log in to Resend unless you want to:'),
@@ -421,8 +494,8 @@ const doc = new Document({
       p('Log in at https://resend.com using Google or GitHub.'),
       spacer(),
 
-      // ── SECTION 7: HOSTING ─────────────────────────────────────────────────
-      h1('7. Your Website Hosting (Vercel)'),
+      // ── SECTION 8: HOSTING ─────────────────────────────────────────────────
+      h1('8. Your Website Hosting (Vercel)'),
       p('Vercel keeps your website live. It is fully automatic — you do not need to do anything day to day.'),
       spacer(),
       p('The only times you would log in to Vercel (https://vercel.com) are:'),
@@ -433,8 +506,8 @@ const doc = new Document({
       tip('If the website ever goes down, check vercel.com first. The dashboard will tell you if there is an issue.'),
       spacer(),
 
-      // ── SECTION 8: CODE CHANGES ────────────────────────────────────────────
-      h1('8. Making Bigger Changes (Code)'),
+      // ── SECTION 9: CODE CHANGES ────────────────────────────────────────────
+      h1('9. Making Bigger Changes (Code)'),
       p('For anything beyond text and images — like adding a new page, changing the layout, or adding a new feature — someone will need to edit the code.'),
       spacer(),
       p('You have two options:'),
@@ -475,15 +548,15 @@ const doc = new Document({
       tip('For anything that will go live on the public website, always test it on a staging/preview link first (Vercel automatically creates one for every code change).'),
       spacer(),
 
-      // ── SECTION 9: DOMAIN ──────────────────────────────────────────────────
-      h1('9. Your Domain Name'),
+      // ── SECTION 10: DOMAIN ──────────────────────────────────────────────────
+      h1('10. Your Domain Name'),
       p('Your domain is kingdoubleglazing.com.au. It is pointed to your Vercel hosting.'),
       spacer(),
       p('The domain is managed separately from this setup. If you ever need to renew it or update DNS records, contact whoever you registered the domain with (check your email for the original registration receipt).'),
       spacer(),
 
-      // ── SECTION 10: QUICK REFERENCE ────────────────────────────────────────
-      h1('10. Quick Reference — Common Tasks'),
+      // ── SECTION 11: QUICK REFERENCE ────────────────────────────────────────
+      h1('11. Quick Reference — Common Tasks'),
       spacer(),
       new Table({
         width: { size: 9360, type: WidthType.DXA },
@@ -494,6 +567,8 @@ const doc = new Document({
             ['Change my phone number', 'Editor (admin) → Settings → Phone fields → Save'],
             ['Change my email address', 'Editor (admin) → Settings → Email → Save'],
             ['Update my pricing', 'Editor (admin) → Settings → Pricing section → Save'],
+            ['Edit the quote email customers receive', 'Editor (admin) → Settings → Email Copy → Quote confirm fields → Save'],
+            ['Edit my internal notification emails', 'Editor (admin) → Settings → Email Copy → Contact/Quote notification fields → Save'],
             ['Add a gallery photo', 'Editor (admin) → Gallery → + Add Item → Upload photo → Save'],
             ['Remove a gallery photo', 'Editor (admin) → Gallery → Click item → Delete icon → Save'],
             ['Edit the home page headline', 'Editor (admin) → Pages → Home → Edit Hero section → Save'],
@@ -509,8 +584,8 @@ const doc = new Document({
       }),
       spacer(),
 
-      // ── SECTION 11: NEED HELP ──────────────────────────────────────────────
-      h1('11. Need Help?'),
+      // ── SECTION 12: NEED HELP ──────────────────────────────────────────────
+      h1('12. Need Help?'),
       p('If something does not look right on the website or you are not sure how to make a change, you have a few options:'),
       spacer(),
       bullet('Use ChatGPT — describe the problem and paste in the relevant section of this document for context.'),
