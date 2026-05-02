@@ -37,6 +37,41 @@ interface GlassComparisonTableProps {
   secondStoreySurcharge: number
   phone: string
   phoneHref: string
+  eyebrow?: string | null
+  heading?: string | null
+  subtext?: string | null
+  quieterLabel?: string | null
+  lessHeatLabel?: string | null
+  getMyPriceLabel?: string | null
+  selectedLabel?: string | null
+  specLinkLabel?: string | null
+  pressHint?: string | null
+  eastWestBold?: string | null
+  eastWestBody?: string | null
+  comparisonNote?: string | null
+  step1Label?: string | null
+  step1Heading?: string | null
+  measureInstruction?: string | null
+  measureNote?: string | null
+  addWindowLabel?: string | null
+  changeLabel?: string | null
+  step2Label?: string | null
+  yourQuoteLabel?: string | null
+  noMeasurementsHint?: string | null
+  accuracyNote?: string | null
+  measurementOffNote?: string | null
+  budgetPrompt?: string | null
+  sendQuoteLabel?: string | null
+  dialogTitle?: string | null
+  dialogDescription?: string | null
+  modalQuoteSummaryLabel?: string | null
+  modalSubmitLabel?: string | null
+  modalSendingLabel?: string | null
+  modalErrorMessage?: string | null
+  successEyebrow?: string | null
+  successTitle?: string | null
+  successBody?: string | null
+  startNewQuoteLabel?: string | null
 }
 
 // Tailwind class strings must be literal — not constructed dynamically
@@ -49,7 +84,7 @@ const GRID_CLASS: Record<number, string> = {
   6: 'grid-cols-2 sm:grid-cols-3',
 }
 
-export function GlassComparisonTable({ options, secondStoreySurcharge, phone, phoneHref }: GlassComparisonTableProps) {
+export function GlassComparisonTable({ options, secondStoreySurcharge, phone, phoneHref, eyebrow, heading, subtext, quieterLabel, lessHeatLabel, getMyPriceLabel, selectedLabel, specLinkLabel, pressHint, eastWestBold, eastWestBody, comparisonNote, step1Label, step1Heading, measureInstruction, measureNote, addWindowLabel, changeLabel, step2Label, yourQuoteLabel, noMeasurementsHint, accuracyNote, measurementOffNote, budgetPrompt, sendQuoteLabel, dialogTitle, dialogDescription, modalQuoteSummaryLabel, modalSubmitLabel, modalSendingLabel, modalErrorMessage, successEyebrow, successTitle, successBody, startNewQuoteLabel }: GlassComparisonTableProps) {
   const optionsMap = Object.fromEntries(options.map(o => [o.optionKey, o]))
   const optionKeys = options.map(o => o.optionKey)
   const topKey = optionKeys[optionKeys.length - 1] // last option is always the premium tier
@@ -125,16 +160,16 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
         {/* Header */}
         <div className="text-center mb-8 md:mb-10">
           <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-            Glass Options
+            {eyebrow ?? 'Glass Options'}
           </p>
           <h2
             className="font-display uppercase leading-[0.9] text-on-surface"
             style={{ fontSize: 'clamp(1.35rem,5vw,3.5rem)' }}
           >
-            What do I want to achieve?
+            {heading ?? 'What do I want to achieve?'}
           </h2>
           <p className="font-sans text-sm text-on-surface mt-3">
-            Select an option to get your price.
+            {subtext ?? 'Select an option to get your price.'}
           </p>
         </div>
 
@@ -212,7 +247,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                         isSelected ? 'text-on-surface/70' : isTop ? 'text-inverse-on-surface/80' : 'text-on-surface/80',
                       ].join(' ')}
                     >
-                      quieter
+                      {quieterLabel ?? 'quieter'}
                     </p>
                   </div>
                   <div>
@@ -231,7 +266,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                         isSelected ? 'text-on-surface/70' : isTop ? 'text-inverse-on-surface/80' : 'text-on-surface/80',
                       ].join(' ')}
                     >
-                      less heat
+                      {lessHeatLabel ?? 'less heat'}
                     </p>
                   </div>
                 </div>
@@ -247,7 +282,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                       : 'text-primary/60 group-hover:text-primary',
                   ].join(' ')}
                 >
-                  {isSelected ? '✓ Selected' : 'Get my price →'}
+                  {isSelected ? (selectedLabel ?? '✓ Selected') : (getMyPriceLabel ?? 'Get my price →')}
                 </p>
 
                 {/* Spec link */}
@@ -263,7 +298,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                       : 'text-on-surface/70 hover:text-on-surface/70',
                   ].join(' ')}
                 >
-                  What&apos;s this made of? ↓
+                  {specLinkLabel ?? "What's this made of? ↓"}
                 </a>
               </div>
             )
@@ -274,15 +309,15 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
         {!selectedOption && (
           <>
             <p className="mt-5 text-center font-sans text-sm text-on-surface">
-              Press any option to get your price.
+              {pressHint ?? 'Press any option to get your price.'}
             </p>
             <div className="mt-6 border-l-4 border-primary-container pl-4">
               <p className="font-sans text-sm text-on-surface leading-relaxed">
-                <strong>East or west-facing rooms?</strong> They get more heat. Choose Option C or D.
+                <strong>{eastWestBold ?? 'East or west-facing rooms?'}</strong> {eastWestBody ?? 'They get more heat. Choose Option C or D.'}
               </p>
             </div>
             <p className="mt-4 font-sans text-xs text-on-surface/80 leading-relaxed">
-              All figures compared to standard single glazing — what most Melbourne homes have now.
+              {comparisonNote ?? 'All figures compared to standard single glazing — what most Melbourne homes have now.'}
             </p>
           </>
         )}
@@ -301,28 +336,28 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                 onClick={reset}
                 className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-primary/70 hover:text-primary transition-colors duration-150"
               >
-                Change →
+                {changeLabel ?? 'Change →'}
               </button>
             </div>
 
             {/* Step 1 of 2: Window measurements */}
             <div>
               <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-on-surface mb-2">
-                Step 1 of 2
+                {step1Label ?? 'Step 1 of 2'}
               </p>
               <p
                 className="font-display uppercase text-on-surface leading-none mb-4"
                 style={{ fontSize: 'clamp(1.2rem,3vw,1.75rem)' }}
               >
-                Your windows
+                {step1Heading ?? 'Your windows'}
               </p>
 
               <div className="mb-5 border-l-2 border-primary-container pl-3">
                 <p className="font-sans text-sm text-on-surface leading-relaxed">
-                  Measure the glass, not the frame. Enter height and width in millimetres.
+                  {measureInstruction ?? 'Measure the glass, not the frame. Enter height and width in millimetres.'}
                 </p>
                 <p className="font-sans text-xs text-on-surface/60 mt-1 leading-relaxed">
-                  Same size three times? Enter one row and set quantity to 3.
+                  {measureNote ?? 'Same size three times? Enter one row and set quantity to 3.'}
                 </p>
               </div>
 
@@ -349,17 +384,17 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                 onClick={addRow}
                 className="mt-4 w-full py-3 border border-dashed border-outline-variant text-on-surface/50 hover:border-primary hover:text-primary font-headline text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-150"
               >
-                + Add another window
+                {addWindowLabel ?? '+ Add another window'}
               </button>
             </div>
 
             {/* Step 2 of 2: Price */}
             <div className="mt-8 pt-8 border-t border-surface-container-high">
               <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-on-surface mb-2">
-                Step 2 of 2
+                {step2Label ?? 'Step 2 of 2'}
               </p>
               <p className="font-headline text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-on-surface/70 mb-2">
-                Your quote
+                {yourQuoteLabel ?? 'Your quote'}
               </p>
 
               <p
@@ -377,7 +412,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
 
               {!total && (
                 <p className="font-sans text-xs text-on-surface/50 mt-2">
-                  Updates as you enter your windows above.
+                  {noMeasurementsHint ?? 'Updates as you enter your windows above.'}
                 </p>
               )}
 
@@ -404,18 +439,16 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
 
                   <div className="border-l-4 border-primary-container pl-4 mt-5">
                     <p className="font-sans text-sm font-semibold text-on-surface">
-                      If you&apos;ve filled this out correctly, your price is accurate to within 10%.
+                      {accuracyNote ?? "If you've filled this out correctly, your price is accurate to within 10%."}
                     </p>
                     <p className="font-sans text-xs text-on-surface/60 leading-relaxed mt-1">
-                      If your measurements are off, the final quote may adjust slightly. We confirm
-                      everything on site before any work starts.
+                      {measurementOffNote ?? 'If your measurements are off, the final quote may adjust slightly. We confirm everything on site before any work starts.'}
                     </p>
                   </div>
 
                   <div className="mt-5 bg-primary-container text-on-primary-fixed px-5 py-3">
                     <p className="font-sans text-sm font-medium leading-snug">
-                      If this is within your budget, send your quote through — we'll call to
-                      confirm and book the install.
+                      {budgetPrompt ?? "If this is within your budget, send your quote through — we'll call to confirm and book the install."}
                     </p>
                   </div>
 
@@ -424,7 +457,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                     onClick={() => setDialogOpen(true)}
                     className="mt-6 w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 active:scale-[0.98]"
                   >
-                    Send Us Your Quote →
+                    {sendQuoteLabel ?? 'Send Us Your Quote →'}
                   </button>
                   <a
                     href={phoneHref}
@@ -447,23 +480,23 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
           {quoteState.status === 'success' ? (
             <div className="px-6 pt-10 pb-8 text-center">
               <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">
-                ✓ Sent.
+                {successEyebrow ?? '✓ Sent.'}
               </p>
               <DialogTitle
                 className="font-display uppercase text-on-surface leading-none mb-3"
                 style={{ fontSize: 'clamp(1.8rem,5vw,2.8rem)' }}
               >
-                We'll be in touch soon.
+                {successTitle ?? "We'll be in touch soon."}
               </DialogTitle>
               <p className="font-sans text-sm text-on-surface/70 leading-relaxed mb-8 max-w-xs mx-auto">
-                Once we confirm your quote you&apos;ll receive an email with your price locked in.
+                {successBody ?? "Once we confirm your quote you'll receive an email with your price locked in."}
               </p>
               <button
                 type="button"
                 onClick={() => { setDialogOpen(false); reset() }}
                 className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface hover:text-primary transition-colors duration-150 underline underline-offset-4"
               >
-                Start a new quote
+                {startNewQuoteLabel ?? 'Start a new quote'}
               </button>
             </div>
           ) : (
@@ -477,10 +510,10 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
               <div className="px-6 pt-8 pb-6">
                 <DialogHeader className="mb-6">
                   <DialogTitle style={{ fontSize: 'clamp(1.4rem,4vw,2rem)' }}>
-                    Send Us Your Quote
+                    {dialogTitle ?? 'Send Us Your Quote'}
                   </DialogTitle>
                   <DialogDescription className="mt-1">
-                    We'll call to confirm and book your install.
+                    {dialogDescription ?? "We'll call to confirm and book your install."}
                   </DialogDescription>
                 </DialogHeader>
 
@@ -488,7 +521,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                 {total && selectedOption && (
                   <div className="bg-surface-container-low border border-surface-container-high px-4 py-3 mb-6">
                     <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-on-surface/60 mb-1">
-                      Your quote
+                      {modalQuoteSummaryLabel ?? 'Your quote'}
                     </p>
                     <p className="font-display uppercase text-primary leading-none" style={{ fontSize: '2rem' }}>
                       ${total.toLocaleString()}
@@ -509,7 +542,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
 
                 {quoteState.status === 'error' && (
                   <p className="mt-4 font-sans text-sm text-red-600" role="alert">
-                    {quoteState.message ?? 'Something went wrong. Please try again.'}
+                    {quoteState.message ?? (modalErrorMessage ?? 'Something went wrong. Please try again.')}
                   </p>
                 )}
 
@@ -518,7 +551,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                   disabled={quotePending || !total}
                   className="mt-6 w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {quotePending ? 'Sending…' : 'Send Us Your Quote →'}
+                  {quotePending ? (modalSendingLabel ?? 'Sending…') : (modalSubmitLabel ?? 'Send Us Your Quote →')}
                 </button>
 
                 <a

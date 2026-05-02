@@ -18,15 +18,20 @@ import { cn } from '@/lib/utils'
 const transparentNavRoutes = ['/']
 
 export interface HeaderProps {
-  mainNav: Array<{ label: string; href: string }>
+  mainNav: Array<{ label: string; href: string; tinaLabel?: string }>
   ctaNav: { label: string; href: string }
   phone: string
   phoneHref: string
   logoLight: string
   logoDark: string
+  tinaFields?: {
+    phone?: string
+    ctaLabel?: string
+    mainNav?: Array<{ tinaLabel?: string } | undefined>
+  }
 }
 
-export function Header({ mainNav, ctaNav, phone, phoneHref, logoLight, logoDark }: HeaderProps) {
+export function Header({ mainNav, ctaNav, phone, phoneHref, logoLight, logoDark, tinaFields }: HeaderProps) {
   const pathname = usePathname()
   const isTransparent = transparentNavRoutes.includes(pathname)
   const [isHidden, setIsHidden] = useState(false)
@@ -78,7 +83,7 @@ export function Header({ mainNav, ctaNav, phone, phoneHref, logoLight, logoDark 
 
           {/* Main nav — desktop */}
           <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1 flex-1 justify-center">
-            {mainNav.map(({ label, href }) => (
+            {mainNav.map(({ label, href, tinaLabel }, i) => (
               <Link
                 key={href}
                 href={href}
@@ -89,7 +94,7 @@ export function Header({ mainNav, ctaNav, phone, phoneHref, logoLight, logoDark 
                     : 'text-on-surface hover:text-on-surface hover:bg-surface-container-low'
                 )}
               >
-                {label}
+                <span data-tina-field={tinaLabel ?? tinaFields?.mainNav?.[i]?.tinaLabel}>{label}</span>
               </Link>
             ))}
           </nav>
@@ -105,14 +110,14 @@ export function Header({ mainNav, ctaNav, phone, phoneHref, logoLight, logoDark 
               aria-label={`Call us: ${phone}`}
             >
               <Phone size={15} aria-hidden="true" />
-              {phone}
+              <span data-tina-field={tinaFields?.phone}>{phone}</span>
             </Link>
 
             <Link
               href={ctaNav.href}
               className="hidden lg:inline-flex items-center font-headline text-sm font-bold uppercase tracking-wide px-5 py-2 bg-primary-container text-on-primary-fixed hover:bg-primary-fixed-dim transition-colors duration-150"
             >
-              {ctaNav.label}
+              <span data-tina-field={tinaFields?.ctaLabel}>{ctaNav.label}</span>
             </Link>
 
             {/* Mobile hamburger */}
@@ -140,14 +145,14 @@ export function Header({ mainNav, ctaNav, phone, phoneHref, logoLight, logoDark 
                   </SheetClose>
                   <nav aria-label="Mobile navigation">
                     <ul className="space-y-1 mb-6">
-                      {mainNav.map(({ label, href }) => (
+                      {mainNav.map(({ label, href, tinaLabel }, i) => (
                         <li key={href}>
                           <SheetClose asChild>
                             <Link
                               href={href}
                               className="font-headline text-base font-semibold uppercase tracking-wide px-3 py-2.5 block transition-colors duration-150 text-inverse-on-surface hover:text-primary-container"
                             >
-                              {label}
+                              <span data-tina-field={tinaLabel ?? tinaFields?.mainNav?.[i]?.tinaLabel}>{label}</span>
                             </Link>
                           </SheetClose>
                         </li>
@@ -160,7 +165,7 @@ export function Header({ mainNav, ctaNav, phone, phoneHref, logoLight, logoDark 
                         href={ctaNav.href}
                         className="w-full inline-flex items-center justify-center font-headline text-sm font-bold uppercase tracking-wide px-6 py-3 bg-primary-container text-on-primary-fixed"
                       >
-                        {ctaNav.label} →
+                        <span data-tina-field={tinaFields?.ctaLabel}>{ctaNav.label}</span> →
                       </Link>
                     </SheetClose>
                     <a
@@ -168,7 +173,7 @@ export function Header({ mainNav, ctaNav, phone, phoneHref, logoLight, logoDark 
                       className="font-headline inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-inverse-on-surface hover:text-primary-container transition-colors duration-150"
                     >
                       <Phone size={14} aria-hidden="true" />
-                      {phone}
+                      <span data-tina-field={tinaFields?.phone}>{phone}</span>
                     </a>
                   </div>
                 </div>

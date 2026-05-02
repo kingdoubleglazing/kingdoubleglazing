@@ -1,14 +1,18 @@
 {
+  "geo": {
+    "latitude": -37.8577,
+    "longitude": 145.0594
+  },
   "name": "King Double Glazing",
   "legalName": "Brooklyn Glass Pty Ltd t/a King Double Glazing",
   "domain": "https://kingdoubleglazing.com.au",
+  "abn": "87 627 894 428",
+  "licenseNumber": "",
   "phone": "0406 470 595",
   "phoneTel": "+61406470595",
   "phoneHref": "tel:+61406470595",
-  "email": "hello@kingdoubleglazing.com.au",
-  "abn": "87 627 894 428",
-  "licenseNumber": "",
-  "notificationEmail": "tasmarkou1969@gmail.com",
+  "email": "tasmarkou1969@gmail.com",
+  "notificationEmail": "clupaio4@gmail.com",
   "address": {
     "street": "5 Glenarm Road",
     "suburb": "Glen Iris",
@@ -17,8 +21,11 @@
     "country": "AU",
     "display": "5 Glenarm Road, Glen Iris VIC 3146, Australia"
   },
-  "geo": { "latitude": -37.8577, "longitude": 145.0594 },
-  "social": { "facebook": "", "instagram": "", "google": "" },
+  "social": {
+    "facebook": "",
+    "instagram": "",
+    "google": ""
+  },
   "logos": {
     "light": "/logo-light.png",
     "dark": "/logo-dark.png",
@@ -28,6 +35,85 @@
     "retrofitFromPerSqm": 595,
     "retrofitFromDisplay": "From $595/m²"
   },
+  "footerTagline": "Stop. Don't Overpay.",
+  "footerBio": "Melbourne's retrofit window specialists. We'll beat any genuine quote by 30%.",
+  "warrantyBlurb": "10-year warranty on every job.",
+  "mainNav": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "Services",
+      "href": "/services/"
+    },
+    {
+      "label": "Gallery",
+      "href": "/gallery/"
+    },
+    {
+      "label": "Who We Are",
+      "href": "/about/"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
+    }
+  ],
+  "ctaNav": {
+    "label": "Get Quote",
+    "href": "/instant-estimate/"
+  },
+  "footerServicesHeading": "Services",
+  "footerServicesNav": [
+    {
+      "label": "Retrofit Double Glazing",
+      "href": "/services/#retrofit"
+    },
+    {
+      "label": "Emergency Glass Repair",
+      "href": "/services/#emergency"
+    },
+    {
+      "label": "Shower Screens",
+      "href": "/services/#shower-screens"
+    },
+    {
+      "label": "Glass Splashbacks",
+      "href": "/services/#splashbacks"
+    },
+    {
+      "label": "Custom Mirrors",
+      "href": "/services/#mirrors"
+    },
+    {
+      "label": "Commercial Glazing",
+      "href": "/services/#commercial"
+    }
+  ],
+  "footerCompanyHeading": "Company",
+  "footerCompanyNav": [
+    {
+      "label": "Who We Are",
+      "href": "/about/"
+    },
+    {
+      "label": "Gallery",
+      "href": "/gallery/"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
+    },
+    {
+      "label": "Warranty",
+      "href": "/warranty/"
+    },
+    {
+      "label": "Get an Instant Estimate",
+      "href": "/instant-estimate/"
+    }
+  ],
   "paymentTerms": {
     "depositTitle": "50% Deposit to Start",
     "depositBody": "Pay 50% to get your glass made.",
@@ -35,33 +121,5 @@
     "completionBody": "Pay the other 50% when the job is done.",
     "warrantyTitle": "Made for You, Backed for 10 Years",
     "warrantyBody": "All glass is made to measure for your home. If anything needs adjusting after install, we fix it — typically within 2–3 weeks."
-  },
-  "footerTagline": "Stop. Don't Overpay.",
-  "footerBio": "Melbourne's retrofit window specialists. We'll beat any genuine quote by 30%.",
-  "warrantyBlurb": "10-year warranty on every job.",
-  "mainNav": [
-    { "label": "Home", "href": "/" },
-    { "label": "Services", "href": "/services/" },
-    { "label": "Gallery", "href": "/gallery/" },
-    { "label": "Who We Are", "href": "/about/" },
-    { "label": "Contact", "href": "/contact/" }
-  ],
-  "ctaNav": { "label": "Get Quote", "href": "/instant-estimate/" },
-  "footerServicesHeading": "Services",
-  "footerServicesNav": [
-    { "label": "Retrofit Double Glazing", "href": "/services/#retrofit" },
-    { "label": "Emergency Glass Repair", "href": "/services/#emergency" },
-    { "label": "Shower Screens", "href": "/services/#shower-screens" },
-    { "label": "Glass Splashbacks", "href": "/services/#splashbacks" },
-    { "label": "Custom Mirrors", "href": "/services/#mirrors" },
-    { "label": "Commercial Glazing", "href": "/services/#commercial" }
-  ],
-  "footerCompanyHeading": "Company",
-  "footerCompanyNav": [
-    { "label": "Who We Are", "href": "/about/" },
-    { "label": "Gallery", "href": "/gallery/" },
-    { "label": "Contact", "href": "/contact/" },
-    { "label": "Warranty", "href": "/warranty/" },
-    { "label": "Get an Instant Estimate", "href": "/instant-estimate/" }
-  ]
+  }
 }

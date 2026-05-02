@@ -13,8 +13,8 @@ import { WarrantyCoverageBlock, type WarrantyCoverageBlockData } from './Warrant
 import { ContactCardsBlock, type ContactCardsBlockData } from './ContactCardsBlock'
 import { ContactFormBlock, type ContactFormBlockData } from './ContactFormBlock'
 import { CTABannerBlock, type CTABannerBlockData } from './CTABannerBlock'
-import { GlassComparisonBlock } from './GlassComparisonBlock'
-import { GlassTechSpecsBlock } from './GlassTechSpecsBlock'
+import { GlassComparisonBlock, type GlassComparisonBlockData } from './GlassComparisonBlock'
+import { GlassTechSpecsBlock, type GlassTechSpecsBlockData } from './GlassTechSpecsBlock'
 import type { PricingOption } from '@/lib/types'
 import { WhatElseStripBlock, type WhatElseStripBlockData } from './WhatElseStripBlock'
 import { EmergencyStripBlock, type EmergencyStripBlockData } from './EmergencyStripBlock'
@@ -75,10 +75,10 @@ export function BlockRenderer({ blocks, pricingOptions = [] }: { blocks: AnyBloc
             return <CTABannerBlock key={key} block={block as CTABannerBlockData} />
 
           case 'PageBlocksGlassComparison':
-            return <GlassComparisonBlock key={key} pricingOptions={pricingOptions} />
+            return <GlassComparisonBlock key={key} block={block as GlassComparisonBlockData} pricingOptions={pricingOptions} />
 
           case 'PageBlocksGlassTechSpecs':
-            return <GlassTechSpecsBlock key={key} pricingOptions={pricingOptions} />
+            return <GlassTechSpecsBlock key={key} block={block as GlassTechSpecsBlockData} pricingOptions={pricingOptions} />
 
           case 'PageBlocksAdaptorDisclosure':
             return <AdaptorDisclosure key={key} block={block as AdaptorDisclosureBlockData} />

@@ -74,6 +74,7 @@ fragment SettingsParts on Settings {
 
 fragment PageParts on Page {
   __typename
+  galleryBlurb
   blocks {
     __typename
     ... on PageBlocksHero {
@@ -97,6 +98,7 @@ fragment PageParts on Page {
       showWarrantyBadge
       adaptorCaption
       accentWord
+      trustItems
     }
     ... on PageBlocksTrustBar {
       items {
@@ -183,6 +185,11 @@ fragment PageParts on Page {
       }
     }
     ... on PageBlocksWarrantyCoverage {
+      coveredEyebrow
+      coveredHeading
+      notCoveredEyebrow
+      notCoveredHeading
+      claimEyebrow
       coveredItems {
         __typename
         item
@@ -198,7 +205,11 @@ fragment PageParts on Page {
     ... on PageBlocksContactCards {
       phoneSublabel
       emailSublabel
+      serviceAreaLabel
+      serviceAreaValue
       areaSublabel
+      emergencyLabel
+      emergencyValue
       emergencySublabel
     }
     ... on PageBlocksContactForm {
@@ -220,10 +231,47 @@ fragment PageParts on Page {
       trustItems
     }
     ... on PageBlocksGlassComparison {
-      placeholder
+      eyebrow
+      heading
+      subtext
+      secondStoreySurcharge
+      quieterLabel
+      lessHeatLabel
+      getMyPriceLabel
+      selectedLabel
+      specLinkLabel
+      pressHint
+      eastWestBold
+      eastWestBody
+      comparisonNote
+      step1Label
+      step1Heading
+      measureInstruction
+      measureNote
+      addWindowLabel
+      changeLabel
+      step2Label
+      yourQuoteLabel
+      noMeasurementsHint
+      accuracyNote
+      measurementOffNote
+      budgetPrompt
+      sendQuoteLabel
+      dialogTitle
+      dialogDescription
+      modalQuoteSummaryLabel
+      modalSubmitLabel
+      modalSendingLabel
+      modalErrorMessage
+      successEyebrow
+      successTitle
+      successBody
+      startNewQuoteLabel
     }
     ... on PageBlocksGlassTechSpecs {
-      placeholder
+      eyebrow
+      heading
+      description
     }
     ... on PageBlocksAdaptorDisclosure {
       heading

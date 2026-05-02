@@ -6,11 +6,10 @@
             "badge": "Stop. Don't Overpay. \u00b7 10-Year Warranty \u00b7 Beat Any Quote 30%",
             "headlineWhite": "Quieter Home. Lower Bills.",
             "headlineYellow": "Without Replacing Your Windows",
-            "subtext": "We add a second pane to your existing windows. No ripping out, no mess. Up to 70% quieter.",
+            "adaptorCaption": "We add a second pane to your existing windows. No ripping out, no mess. Up to 70% quieter.",
             "imageSrc": "/hero/hero-double-glazing.webp",
             "imageAlt": "Double glazing upgrade on an existing window in a Melbourne home",
             "showWarrantyBadge": true,
-            "adaptorCaption": "Our standard adapters are engineered to suit a wide range of window configurations.",
             "primaryCta": {
                 "label": "Generate My Quote \u2192",
                 "href": "/instant-estimate/"

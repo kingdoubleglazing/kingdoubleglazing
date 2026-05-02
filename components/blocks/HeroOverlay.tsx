@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Check } from 'lucide-react'
 import { getSiteSettings } from '@/lib/site-settings'
 import { WarrantyBadge } from '@/components/ui/WarrantyBadge'
 import { HeroCTA } from './HeroCTA'
@@ -59,14 +60,6 @@ export function HeroOverlay({ block }: { block: HeroBlockData }) {
             </span>
           )}
         </h1>
-        {block.subtext && (
-          <p
-            data-tina-field={block.tina?.subtext}
-            className="font-sans text-lg md:text-xl text-white mb-6 max-w-2xl leading-relaxed"
-          >
-            {block.subtext}
-          </p>
-        )}
         {block.adaptorCaption && (
           <div className="border-l-4 border-primary-container pl-4 mb-6 max-w-xl">
             <p
@@ -78,6 +71,28 @@ export function HeroOverlay({ block }: { block: HeroBlockData }) {
             </p>
           </div>
         )}
+        {block.subtext && (
+          <p
+            data-tina-field={block.tina?.subtext}
+            className="font-sans text-lg md:text-xl text-white mb-6 max-w-2xl leading-relaxed"
+          >
+            {block.subtext}
+          </p>
+        )}
+        {block.trustItems && block.trustItems.length > 0 && (
+          <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
+            {block.trustItems.map((item, i) => (
+              <span
+                // biome-ignore lint/suspicious/noArrayIndexKey: static list
+                key={i}
+                className="inline-flex items-center gap-2 font-headline text-xs font-semibold uppercase tracking-widest text-white/70"
+              >
+                <Check size={12} className="text-primary-container flex-shrink-0" aria-hidden="true" />
+                {item}
+              </span>
+            ))}
+          </div>
+        )}
         <div className="flex flex-wrap items-center gap-3 md:gap-4">
           {block.primaryCta?.label && (
             <HeroCTA
@@ -86,12 +101,14 @@ export function HeroOverlay({ block }: { block: HeroBlockData }) {
               tina={block.tina?.primaryCta}
             />
           )}
-          <HeroContactButton
-            variant="overlay"
-            label={block.secondaryCta?.label}
-            href={block.secondaryCta?.href}
-            tina={block.tina?.secondaryCta}
-          />
+          {block.secondaryCta?.label && (
+            <HeroContactButton
+              variant="overlay"
+              label={block.secondaryCta.label}
+              href={block.secondaryCta?.href}
+              tina={block.tina?.secondaryCta}
+            />
+          )}
           {block.showWarrantyBadge && (
             <div className="ml-auto hidden sm:block">
               <WarrantyBadge />

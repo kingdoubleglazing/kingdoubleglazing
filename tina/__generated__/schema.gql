@@ -321,6 +321,7 @@ type PageBlocksHero {
   showWarrantyBadge: Boolean
   adaptorCaption: String
   accentWord: String
+  trustItems: [String]
 }
 
 type PageBlocksTrustBarItems {
@@ -434,6 +435,11 @@ type PageBlocksWarrantyCoverageNotCoveredItems {
 }
 
 type PageBlocksWarrantyCoverage {
+  coveredEyebrow: String
+  coveredHeading: String
+  notCoveredEyebrow: String
+  notCoveredHeading: String
+  claimEyebrow: String
   coveredItems: [PageBlocksWarrantyCoverageCoveredItems]
   notCoveredItems: [PageBlocksWarrantyCoverageNotCoveredItems]
   claimSteps: [String]
@@ -442,7 +448,11 @@ type PageBlocksWarrantyCoverage {
 type PageBlocksContactCards {
   phoneSublabel: String
   emailSublabel: String
+  serviceAreaLabel: String
+  serviceAreaValue: String
   areaSublabel: String
+  emergencyLabel: String
+  emergencyValue: String
   emergencySublabel: String
 }
 
@@ -469,11 +479,48 @@ type PageBlocksCtaBanner {
 }
 
 type PageBlocksGlassComparison {
-  placeholder: String
+  eyebrow: String
+  heading: String
+  subtext: String
+  secondStoreySurcharge: Float
+  quieterLabel: String
+  lessHeatLabel: String
+  getMyPriceLabel: String
+  selectedLabel: String
+  specLinkLabel: String
+  pressHint: String
+  eastWestBold: String
+  eastWestBody: String
+  comparisonNote: String
+  step1Label: String
+  step1Heading: String
+  measureInstruction: String
+  measureNote: String
+  addWindowLabel: String
+  changeLabel: String
+  step2Label: String
+  yourQuoteLabel: String
+  noMeasurementsHint: String
+  accuracyNote: String
+  measurementOffNote: String
+  budgetPrompt: String
+  sendQuoteLabel: String
+  dialogTitle: String
+  dialogDescription: String
+  modalQuoteSummaryLabel: String
+  modalSubmitLabel: String
+  modalSendingLabel: String
+  modalErrorMessage: String
+  successEyebrow: String
+  successTitle: String
+  successBody: String
+  startNewQuoteLabel: String
 }
 
 type PageBlocksGlassTechSpecs {
-  placeholder: String
+  eyebrow: String
+  heading: String
+  description: String
 }
 
 type PageBlocksAdaptorDisclosure {
@@ -533,6 +580,7 @@ type PageBlocksEmergencyStrip {
 union PageBlocks = PageBlocksHero | PageBlocksTrustBar | PageBlocksWhyRetrofit | PageBlocksProcessSteps | PageBlocksEstimateCta | PageBlocksFaq | PageBlocksServiceSection | PageBlocksStoryWithStats | PageBlocksWarrantyCoverage | PageBlocksContactCards | PageBlocksContactForm | PageBlocksCtaBanner | PageBlocksGlassComparison | PageBlocksGlassTechSpecs | PageBlocksAdaptorDisclosure | PageBlocksPaymentTerms | PageBlocksFreeAdvice | PageBlocksWhatElseStrip | PageBlocksEmergencyStrip
 
 type Page implements Node & Document {
+  galleryBlurb: String
   blocks: [PageBlocks]
   id: ID!
   _sys: SystemInfo!
@@ -567,6 +615,7 @@ input PageBlocksHeroFilter {
   showWarrantyBadge: BooleanFilter
   adaptorCaption: StringFilter
   accentWord: StringFilter
+  trustItems: StringFilter
 }
 
 input PageBlocksTrustBarItemsFilter {
@@ -680,6 +729,11 @@ input PageBlocksWarrantyCoverageNotCoveredItemsFilter {
 }
 
 input PageBlocksWarrantyCoverageFilter {
+  coveredEyebrow: StringFilter
+  coveredHeading: StringFilter
+  notCoveredEyebrow: StringFilter
+  notCoveredHeading: StringFilter
+  claimEyebrow: StringFilter
   coveredItems: PageBlocksWarrantyCoverageCoveredItemsFilter
   notCoveredItems: PageBlocksWarrantyCoverageNotCoveredItemsFilter
   claimSteps: StringFilter
@@ -688,7 +742,11 @@ input PageBlocksWarrantyCoverageFilter {
 input PageBlocksContactCardsFilter {
   phoneSublabel: StringFilter
   emailSublabel: StringFilter
+  serviceAreaLabel: StringFilter
+  serviceAreaValue: StringFilter
   areaSublabel: StringFilter
+  emergencyLabel: StringFilter
+  emergencyValue: StringFilter
   emergencySublabel: StringFilter
 }
 
@@ -715,11 +773,48 @@ input PageBlocksCtaBannerFilter {
 }
 
 input PageBlocksGlassComparisonFilter {
-  placeholder: StringFilter
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtext: StringFilter
+  secondStoreySurcharge: NumberFilter
+  quieterLabel: StringFilter
+  lessHeatLabel: StringFilter
+  getMyPriceLabel: StringFilter
+  selectedLabel: StringFilter
+  specLinkLabel: StringFilter
+  pressHint: StringFilter
+  eastWestBold: StringFilter
+  eastWestBody: StringFilter
+  comparisonNote: StringFilter
+  step1Label: StringFilter
+  step1Heading: StringFilter
+  measureInstruction: StringFilter
+  measureNote: StringFilter
+  addWindowLabel: StringFilter
+  changeLabel: StringFilter
+  step2Label: StringFilter
+  yourQuoteLabel: StringFilter
+  noMeasurementsHint: StringFilter
+  accuracyNote: StringFilter
+  measurementOffNote: StringFilter
+  budgetPrompt: StringFilter
+  sendQuoteLabel: StringFilter
+  dialogTitle: StringFilter
+  dialogDescription: StringFilter
+  modalQuoteSummaryLabel: StringFilter
+  modalSubmitLabel: StringFilter
+  modalSendingLabel: StringFilter
+  modalErrorMessage: StringFilter
+  successEyebrow: StringFilter
+  successTitle: StringFilter
+  successBody: StringFilter
+  startNewQuoteLabel: StringFilter
 }
 
 input PageBlocksGlassTechSpecsFilter {
-  placeholder: StringFilter
+  eyebrow: StringFilter
+  heading: StringFilter
+  description: StringFilter
 }
 
 input PageBlocksAdaptorDisclosureFilter {
@@ -799,6 +894,7 @@ input PageBlocksFilter {
 }
 
 input PageFilter {
+  galleryBlurb: StringFilter
   blocks: PageBlocksFilter
 }
 
@@ -1037,6 +1133,7 @@ input PageBlocksHeroMutation {
   showWarrantyBadge: Boolean
   adaptorCaption: String
   accentWord: String
+  trustItems: [String]
 }
 
 input PageBlocksTrustBarItemsMutation {
@@ -1150,6 +1247,11 @@ input PageBlocksWarrantyCoverageNotCoveredItemsMutation {
 }
 
 input PageBlocksWarrantyCoverageMutation {
+  coveredEyebrow: String
+  coveredHeading: String
+  notCoveredEyebrow: String
+  notCoveredHeading: String
+  claimEyebrow: String
   coveredItems: [PageBlocksWarrantyCoverageCoveredItemsMutation]
   notCoveredItems: [PageBlocksWarrantyCoverageNotCoveredItemsMutation]
   claimSteps: [String]
@@ -1158,7 +1260,11 @@ input PageBlocksWarrantyCoverageMutation {
 input PageBlocksContactCardsMutation {
   phoneSublabel: String
   emailSublabel: String
+  serviceAreaLabel: String
+  serviceAreaValue: String
   areaSublabel: String
+  emergencyLabel: String
+  emergencyValue: String
   emergencySublabel: String
 }
 
@@ -1185,11 +1291,48 @@ input PageBlocksCtaBannerMutation {
 }
 
 input PageBlocksGlassComparisonMutation {
-  placeholder: String
+  eyebrow: String
+  heading: String
+  subtext: String
+  secondStoreySurcharge: Float
+  quieterLabel: String
+  lessHeatLabel: String
+  getMyPriceLabel: String
+  selectedLabel: String
+  specLinkLabel: String
+  pressHint: String
+  eastWestBold: String
+  eastWestBody: String
+  comparisonNote: String
+  step1Label: String
+  step1Heading: String
+  measureInstruction: String
+  measureNote: String
+  addWindowLabel: String
+  changeLabel: String
+  step2Label: String
+  yourQuoteLabel: String
+  noMeasurementsHint: String
+  accuracyNote: String
+  measurementOffNote: String
+  budgetPrompt: String
+  sendQuoteLabel: String
+  dialogTitle: String
+  dialogDescription: String
+  modalQuoteSummaryLabel: String
+  modalSubmitLabel: String
+  modalSendingLabel: String
+  modalErrorMessage: String
+  successEyebrow: String
+  successTitle: String
+  successBody: String
+  startNewQuoteLabel: String
 }
 
 input PageBlocksGlassTechSpecsMutation {
-  placeholder: String
+  eyebrow: String
+  heading: String
+  description: String
 }
 
 input PageBlocksAdaptorDisclosureMutation {
@@ -1269,6 +1412,7 @@ input PageBlocksMutation {
 }
 
 input PageMutation {
+  galleryBlurb: String
   blocks: [PageBlocksMutation]
 }
 

@@ -45,7 +45,7 @@ function augmentBlocks(blocks: AnyBlock[]): AnyBlock[] {
       case 'storyWithStats':
         return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), paragraphs: sf(block, 'paragraphs'), quote: sf(block, 'quote'), stats: ((block.stats as AnyBlock[]) ?? []).map((stat: AnyBlock) => stat ? { value: sf(stat, 'value'), label: sf(stat, 'label') } : undefined) } }
       case 'warrantyCoverage':
-        return { ...block, tina: { coveredItems: ((block.coveredItems as AnyBlock[]) ?? []).map((item: AnyBlock) => item ? { item: sf(item, 'item'), detail: sf(item, 'detail') } : undefined), notCoveredItems: ((block.notCoveredItems as AnyBlock[]) ?? []).map((item: AnyBlock) => item ? { item: sf(item, 'item'), detail: sf(item, 'detail') } : undefined), claimSteps: sf(block, 'claimSteps') } }
+        return { ...block, tina: { coveredEyebrow: sf(block, 'coveredEyebrow'), coveredHeading: sf(block, 'coveredHeading'), notCoveredEyebrow: sf(block, 'notCoveredEyebrow'), notCoveredHeading: sf(block, 'notCoveredHeading'), claimEyebrow: sf(block, 'claimEyebrow'), coveredItems: ((block.coveredItems as AnyBlock[]) ?? []).map((item: AnyBlock) => item ? { item: sf(item, 'item'), detail: sf(item, 'detail') } : undefined), notCoveredItems: ((block.notCoveredItems as AnyBlock[]) ?? []).map((item: AnyBlock) => item ? { item: sf(item, 'item'), detail: sf(item, 'detail') } : undefined), claimSteps: sf(block, 'claimSteps') } }
       case 'contactForm':
         return { ...block, tina: { heading: sf(block, 'heading') } }
       case 'ctaBanner':
@@ -53,7 +53,9 @@ function augmentBlocks(blocks: AnyBlock[]): AnyBlock[] {
       case 'trustBar':
         return { ...block, tina: { items: ((block.items as AnyBlock[]) ?? []).map((item: AnyBlock) => item ? { iconKey: sf(item, 'iconKey'), label: sf(item, 'label') } : undefined) } }
       case 'contactCards':
-        return { ...block, tina: { phoneSublabel: sf(block, 'phoneSublabel'), emailSublabel: sf(block, 'emailSublabel'), areaSublabel: sf(block, 'areaSublabel'), emergencySublabel: sf(block, 'emergencySublabel') } }
+        return { ...block, tina: { phoneSublabel: sf(block, 'phoneSublabel'), emailSublabel: sf(block, 'emailSublabel'), serviceAreaLabel: sf(block, 'serviceAreaLabel'), serviceAreaValue: sf(block, 'serviceAreaValue'), areaSublabel: sf(block, 'areaSublabel'), emergencyLabel: sf(block, 'emergencyLabel'), emergencyValue: sf(block, 'emergencyValue'), emergencySublabel: sf(block, 'emergencySublabel') } }
+      case 'glassTechSpecs':
+        return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), heading: sf(block, 'heading'), description: sf(block, 'description') } }
       case 'adaptorDisclosure':
         return { ...block, tina: { heading: sf(block, 'heading'), mobileSubtitle: sf(block, 'mobileSubtitle'), body1: sf(block, 'body1'), body2: sf(block, 'body2') } }
       case 'paymentTerms':

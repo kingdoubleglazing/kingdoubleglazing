@@ -3,10 +3,20 @@ import { getSiteSettings } from '@/lib/site-settings'
 
 export interface WarrantyCoverageBlockData {
   __typename?: string
+  coveredEyebrow?: string | null
+  coveredHeading?: string | null
+  notCoveredEyebrow?: string | null
+  notCoveredHeading?: string | null
+  claimEyebrow?: string | null
   coveredItems?: Array<{ item?: string | null; detail?: string | null } | null> | null
   notCoveredItems?: Array<{ item?: string | null; detail?: string | null } | null> | null
   claimSteps?: (string | null)[] | null
   tina?: {
+    coveredEyebrow?: string
+    coveredHeading?: string
+    notCoveredEyebrow?: string
+    notCoveredHeading?: string
+    claimEyebrow?: string
     coveredItems?: Array<{ item?: string; detail?: string } | undefined>
     notCoveredItems?: Array<{ item?: string; detail?: string } | undefined>
     claimSteps?: string
@@ -25,14 +35,18 @@ export function WarrantyCoverageBlock({ block }: { block: WarrantyCoverageBlockD
         <div className="max-w-5xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             <div>
-              <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">
-                What&apos;s Covered
+              <p
+                data-tina-field={block.tina?.coveredEyebrow}
+                className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4"
+              >
+                {block.coveredEyebrow ?? "What's Covered"}
               </p>
               <h2
+                data-tina-field={block.tina?.coveredHeading}
                 className="font-display uppercase leading-[0.88] text-on-surface mb-8"
                 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
               >
-                10 Years. Full Stop.
+                {block.coveredHeading ?? '10 Years. Full Stop.'}
               </h2>
               <ul className="space-y-0 ghost-border">
                 {covered.map((c, i) => (
@@ -60,14 +74,18 @@ export function WarrantyCoverageBlock({ block }: { block: WarrantyCoverageBlockD
             </div>
 
             <div>
-              <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface/60 mb-4">
-                What&apos;s Not Covered
+              <p
+                data-tina-field={block.tina?.notCoveredEyebrow}
+                className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface/60 mb-4"
+              >
+                {block.notCoveredEyebrow ?? "What's Not Covered"}
               </p>
               <h2
+                data-tina-field={block.tina?.notCoveredHeading}
                 className="font-display uppercase leading-[0.88] text-on-surface mb-8"
                 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
               >
-                Exclusions
+                {block.notCoveredHeading ?? 'Exclusions'}
               </h2>
               <ul className="space-y-0 ghost-border mb-10">
                 {notCovered.map((c, i) => (
@@ -95,8 +113,11 @@ export function WarrantyCoverageBlock({ block }: { block: WarrantyCoverageBlockD
 
               {claimSteps.length > 0 && (
                 <>
-                  <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">
-                    How to Make a Claim
+                  <p
+                    data-tina-field={block.tina?.claimEyebrow}
+                    className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4"
+                  >
+                    {block.claimEyebrow ?? 'How to Make a Claim'}
                   </p>
                   <ol className="space-y-3" data-tina-field={block.tina?.claimSteps}>
                     {claimSteps.map((step, i) => (

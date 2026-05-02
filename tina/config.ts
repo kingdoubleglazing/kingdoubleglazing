@@ -123,11 +123,13 @@ export default defineConfig({
               contact: '/contact',
               warranty: '/warranty',
               estimate: '/instant-estimate',
+              gallery: '/gallery',
             }
             return routes[document._sys.filename] ?? null
           },
         },
         fields: [
+          { name: 'galleryBlurb', type: 'string', label: 'Gallery: bottom blurb (optional)', ui: { component: 'textarea' as const } },
           {
             name: 'blocks',
             type: 'object',
@@ -154,8 +156,9 @@ export default defineConfig({
                   { name: 'imageSrc', type: 'image', label: 'Image' },
                   { name: 'imageAlt', type: 'string', label: 'Image Alt Text' },
                   { name: 'showWarrantyBadge', type: 'boolean', label: 'Show Warranty Badge' },
-                  { name: 'adaptorCaption', type: 'string', label: 'Adaptor Caption (optional)' },
+                  { name: 'adaptorCaption', type: 'string', label: 'Accent Caption (with gold border)', ui: { component: 'textarea' } },
                   { name: 'accentWord', type: 'string', label: 'Background Accent Word (e.g. TAS, COVERED)' },
+                  { name: 'trustItems', type: 'string', list: true, label: 'Trust Checkmarks (e.g. No email needed)' },
                 ],
               },
 
@@ -339,6 +342,11 @@ export default defineConfig({
                 label: 'Warranty Coverage',
                 ui: { itemProps: () => ({ label: '🛡 Warranty Coverage' }) },
                 fields: [
+                  { name: 'coveredEyebrow', type: 'string', label: '"What\'s Covered" eyebrow' },
+                  { name: 'coveredHeading', type: 'string', label: '"What\'s Covered" heading' },
+                  { name: 'notCoveredEyebrow', type: 'string', label: '"What\'s Not Covered" eyebrow' },
+                  { name: 'notCoveredHeading', type: 'string', label: '"What\'s Not Covered" heading' },
+                  { name: 'claimEyebrow', type: 'string', label: 'Claim steps eyebrow' },
                   { name: 'coveredItems', type: 'object', list: true, label: "What's Covered",
                     ui: { itemProps: (item: { item?: string }) => ({ label: item?.item }) },
                     fields: [
@@ -365,7 +373,11 @@ export default defineConfig({
                 fields: [
                   { name: 'phoneSublabel', type: 'string', label: 'Phone sublabel' },
                   { name: 'emailSublabel', type: 'string', label: 'Email sublabel' },
+                  { name: 'serviceAreaLabel', type: 'string', label: 'Service Area card label' },
+                  { name: 'serviceAreaValue', type: 'string', label: 'Service Area card value' },
                   { name: 'areaSublabel', type: 'string', label: 'Service Area sublabel' },
+                  { name: 'emergencyLabel', type: 'string', label: 'Emergency card label' },
+                  { name: 'emergencyValue', type: 'string', label: 'Emergency card value' },
                   { name: 'emergencySublabel', type: 'string', label: 'Emergency sublabel' },
                 ],
               },
@@ -399,7 +411,51 @@ export default defineConfig({
                 name: 'glassComparison',
                 label: 'Glass Comparison & Estimate Tool',
                 ui: { itemProps: () => ({ label: '🔬 Glass Comparison + Tool' }) },
-                fields: [{ name: 'placeholder', type: 'string', label: 'Static section — no options', ui: { component: 'hidden' } }],
+                fields: [
+                  // Header
+                  { name: 'eyebrow', type: 'string', label: 'Eyebrow label' },
+                  { name: 'heading', type: 'string', label: 'Heading' },
+                  { name: 'subtext', type: 'string', label: 'Subtext', ui: { component: 'textarea' as const } },
+                  { name: 'secondStoreySurcharge', type: 'number', label: 'Second storey surcharge ($)' },
+                  // Option card labels
+                  { name: 'quieterLabel', type: 'string', label: 'Card: "quieter" label' },
+                  { name: 'lessHeatLabel', type: 'string', label: 'Card: "less heat" label' },
+                  { name: 'getMyPriceLabel', type: 'string', label: 'Card: "Get my price →" CTA' },
+                  { name: 'selectedLabel', type: 'string', label: 'Card: "Selected" badge' },
+                  { name: 'specLinkLabel', type: 'string', label: 'Card: "What\'s this made of?" link' },
+                  // Pre-selection hints
+                  { name: 'pressHint', type: 'string', label: 'Hint: "Press any option…" line' },
+                  { name: 'eastWestBold', type: 'string', label: 'Hint: east/west bold text' },
+                  { name: 'eastWestBody', type: 'string', label: 'Hint: east/west body text' },
+                  { name: 'comparisonNote', type: 'string', label: 'Hint: comparison footnote', ui: { component: 'textarea' as const } },
+                  // Step 1
+                  { name: 'step1Label', type: 'string', label: 'Step 1 label (e.g. Step 1 of 2)' },
+                  { name: 'step1Heading', type: 'string', label: 'Step 1 heading (e.g. Your windows)' },
+                  { name: 'measureInstruction', type: 'string', label: 'Step 1: measure instruction', ui: { component: 'textarea' as const } },
+                  { name: 'measureNote', type: 'string', label: 'Step 1: measure tip', ui: { component: 'textarea' as const } },
+                  { name: 'addWindowLabel', type: 'string', label: 'Step 1: add window button' },
+                  { name: 'changeLabel', type: 'string', label: 'Step 1: change option link' },
+                  // Step 2
+                  { name: 'step2Label', type: 'string', label: 'Step 2 label (e.g. Step 2 of 2)' },
+                  { name: 'yourQuoteLabel', type: 'string', label: 'Step 2: "Your quote" label' },
+                  { name: 'noMeasurementsHint', type: 'string', label: 'Step 2: empty state hint' },
+                  { name: 'accuracyNote', type: 'string', label: 'Step 2: accuracy note (bold)', ui: { component: 'textarea' as const } },
+                  { name: 'measurementOffNote', type: 'string', label: 'Step 2: measurement caveat', ui: { component: 'textarea' as const } },
+                  { name: 'budgetPrompt', type: 'string', label: 'Step 2: budget prompt', ui: { component: 'textarea' as const } },
+                  { name: 'sendQuoteLabel', type: 'string', label: 'Step 2: send quote button' },
+                  // Modal — form
+                  { name: 'dialogTitle', type: 'string', label: 'Modal: title' },
+                  { name: 'dialogDescription', type: 'string', label: 'Modal: description' },
+                  { name: 'modalQuoteSummaryLabel', type: 'string', label: 'Modal: quote summary label' },
+                  { name: 'modalSubmitLabel', type: 'string', label: 'Modal: submit button' },
+                  { name: 'modalSendingLabel', type: 'string', label: 'Modal: sending state' },
+                  { name: 'modalErrorMessage', type: 'string', label: 'Modal: error fallback message' },
+                  // Modal — success
+                  { name: 'successEyebrow', type: 'string', label: 'Success: eyebrow (e.g. ✓ Sent.)' },
+                  { name: 'successTitle', type: 'string', label: 'Success: title' },
+                  { name: 'successBody', type: 'string', label: 'Success: body', ui: { component: 'textarea' as const } },
+                  { name: 'startNewQuoteLabel', type: 'string', label: 'Success: "Start a new quote" link' },
+                ],
               },
 
               // ── Glass Tech Specs ──────────────────────────────────────
@@ -407,7 +463,11 @@ export default defineConfig({
                 name: 'glassTechSpecs',
                 label: 'Glass Tech Specs',
                 ui: { itemProps: () => ({ label: '⚗️ Glass Tech Specs' }) },
-                fields: [{ name: 'placeholder', type: 'string', label: 'Static section — no options', ui: { component: 'hidden' } }],
+                fields: [
+                  { name: 'eyebrow', type: 'string', label: 'Eyebrow label' },
+                  { name: 'heading', type: 'string', label: 'Heading' },
+                  { name: 'description', type: 'string', label: 'Description', ui: { component: 'textarea' as const } },
+                ],
               },
 
               // ── Adaptor Disclosure ────────────────────────────────────

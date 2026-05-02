@@ -11,6 +11,11 @@
     },
     {
       "_template": "warrantyCoverage",
+      "coveredEyebrow": "What's Covered",
+      "coveredHeading": "10 Years. Full Stop.",
+      "notCoveredEyebrow": "What's Not Covered",
+      "notCoveredHeading": "Exclusions",
+      "claimEyebrow": "How to Make a Claim",
       "coveredItems": [
         {
           "item": "Glass units",

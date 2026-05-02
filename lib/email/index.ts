@@ -8,7 +8,7 @@ function getResend() {
 }
 
 import { siteConfig } from '@/data/site'
-const TAS_EMAIL = 'clupaio4@gmail.com' // TEMP: testing — revert to siteConfig.notificationEmail
+const TAS_EMAIL = siteConfig.notificationEmail
 const FROM_EMAIL = 'King Double Glazing <noreply@kingdoubleglazing.com.au>'
 
 export async function sendContactNotification(data: {
