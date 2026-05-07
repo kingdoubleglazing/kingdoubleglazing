@@ -1,15 +1,11 @@
 {
   "blocks": [
     {
-      "_template": "hero",
       "variant": "split",
       "badge": "About King Double Glazing",
       "headlineWhite": "Built by a Family",
       "headlineYellow": "of Melbourne Glaziers",
       "subtext": "Tas Markou ran two double glazing factories. He found a way to drop the price — because most companies charge more than families can afford. 40+ staff at peak. 25+ years in the trade.",
-      "imageSrc": "/testimonial-founder/founder.webp",
-      "imageAlt": "Tas Markou, founder of King Double Glazing",
-      "accentWord": "TAS",
       "primaryCta": {
         "label": "Generate My Quote →",
         "href": "/instant-estimate/"
@@ -17,10 +13,13 @@
       "secondaryCta": {
         "label": "0406 470 595",
         "href": "tel:+61406470595"
-      }
+      },
+      "imageSrc": "/Gemini_Generated_Image_147hol147hol147h%20(1)%20(1)%20(1).webp",
+      "imageAlt": "Tas Markou, founder of King Double Glazing",
+      "accentWord": "TAS",
+      "_template": "hero"
     },
     {
-      "_template": "trustBar",
       "items": [
         {
           "iconKey": "clock",
@@ -38,10 +37,10 @@
           "iconKey": "wrench",
           "label": "Fits Most Existing Frames"
         }
-      ]
+      ],
+      "_template": "trustBar"
     },
     {
-      "_template": "storyWithStats",
       "eyebrow": "The Origin Story",
       "paragraphs": [
         "I grew up in glass. My father was a glazier and I was doing installs as a kid. I ran two factories. Along the way I found a way to drop the price — most companies charge way more than families can afford.",
@@ -66,18 +65,18 @@
           "value": "1-2 days",
           "label": "Typical install time"
         }
-      ]
+      ],
+      "_template": "storyWithStats"
     },
     {
-      "_template": "freeAdvice",
       "eyebrow": "Free Advice",
       "headingLine1": "Got a question",
       "headingLine2": "we haven't covered?",
       "body": "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.",
-      "buttonLabel": "Call Us"
+      "buttonLabel": "Call Us",
+      "_template": "freeAdvice"
     },
     {
-      "_template": "ctaBanner",
       "heading": "Ready to\nGet Started?",
       "subtext": "Generate your own quote in minutes. Or call us directly — no call centres, no middlemen.",
       "primaryCta": {
@@ -92,7 +91,8 @@
         "Price locked at quote",
         "10-year warranty",
         "We beat any quote by 30%"
-      ]
+      ],
+      "_template": "ctaBanner"
     }
   ]
 }
