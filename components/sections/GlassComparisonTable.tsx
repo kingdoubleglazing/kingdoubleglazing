@@ -73,7 +73,7 @@ interface GlassComparisonTableProps {
 
 const LABEL_CLASS = 'block font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface mb-2'
 
-export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, heading, subtext, quieterLabel, lessHeatLabel, comparisonNote, eastWestBold, eastWestBody, step1Heading, measureInstruction, measureNote, addWindowLabel, yourQuoteLabel, noMeasurementsHint, accuracyNote, measurementOffNote, budgetPrompt, sendQuoteLabel, dialogTitle, dialogDescription, modalQuoteSummaryLabel, modalSubmitLabel, modalSendingLabel, modalErrorMessage, successEyebrow, successTitle, successBody, startNewQuoteLabel }: GlassComparisonTableProps) {
+export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, heading, subtext, quieterLabel, lessHeatLabel, step1Heading, addWindowLabel, yourQuoteLabel, noMeasurementsHint, accuracyNote, measurementOffNote, budgetPrompt, sendQuoteLabel, dialogTitle, dialogDescription, modalQuoteSummaryLabel, modalSubmitLabel, modalSendingLabel, modalErrorMessage, successEyebrow, successTitle, successBody, startNewQuoteLabel }: GlassComparisonTableProps) {
   const optionsMap = Object.fromEntries(options.map(o => [o.optionKey, o]))
   const optionKeys = options.map(o => o.optionKey)
 
@@ -176,7 +176,7 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
             </select>
             {selectedOpt && (
               <p className="mt-2 font-sans text-xs text-on-surface/70 leading-relaxed">
-                {selectedOpt.noisePct}% {quieterLabel ?? 'quieter'} · {selectedOpt.heatPct}% {lessHeatLabel ?? 'less heat'} — {comparisonNote ?? 'compared to standard 3mm clear window pane glass.'}
+                {selectedOpt.noisePct}% {quieterLabel ?? 'quieter'} · {selectedOpt.heatPct}% {lessHeatLabel ?? 'less heat'}
               </p>
             )}
             {selectedOpt?.spec && (
@@ -184,20 +184,11 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
                 Glass make-up: {selectedOpt.spec}
               </p>
             )}
-            <p className="mt-2 font-sans text-xs text-on-surface/70 leading-relaxed">
-              <strong>{eastWestBold ?? 'East or west-facing rooms?'}</strong> {eastWestBody ?? 'They get more heat — consider Option C or D.'}
-            </p>
           </div>
 
           {/* 2 — Your windows */}
           <div>
             <label className={LABEL_CLASS}>{step1Heading ?? 'Your windows'}</label>
-            <p className="font-sans text-xs text-on-surface/70 leading-relaxed mb-1">
-              {measureInstruction ?? 'Measure the glass, not the frame. Enter height and width in millimetres.'}
-            </p>
-            <p className="font-sans text-xs text-on-surface/50 leading-relaxed mb-4">
-              {measureNote ?? 'Same size three times? Enter one row and set quantity to 3.'}
-            </p>
 
             <div className="space-y-3">
               {rows.map((row, i) => (
