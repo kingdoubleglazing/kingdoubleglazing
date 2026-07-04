@@ -4,9 +4,10 @@
             "_template": "hero",
             "variant": "overlay",
             "badge": "Stop. Don't Overpay. \u00b7 10-Year Warranty \u00b7 Beat Any Quote 30%",
-            "headlineWhite": "Quieter Home. Lower Bills.",
-            "headlineYellow": "Without Replacing Your Windows",
-            "adaptorCaption": "We add a second pane to your existing windows. No ripping out, no mess. Up to 70% quieter.",
+            "headlineWhite": "Why Choose the King",
+            "headlineYellow": "Double Glazing System?",
+            "adaptorCaption": "The answer is simple: we only replace the glass. Your existing window and door frames stay exactly as they are.",
+            "subtext": "That means no costly frame replacements, no unnecessary structural alterations, and a faster, more affordable upgrade to high-performance double glazing.",
             "imageSrc": "/hero/hero-double-glazing.webp",
             "imageAlt": "Double glazing upgrade on an existing window in a Melbourne home",
             "showWarrantyBadge": true,
@@ -18,14 +19,6 @@
                 "label": "0406 470 595",
                 "href": "tel:+61406470595"
             }
-        },
-        {
-            "_template": "serviceSection",
-            "id": "why-choose-king",
-            "eyebrow": "Why Choose King",
-            "heading": "Why choose the King Double Glazing System?",
-            "bodyText": "The answer is simple: we only replace the glass. Your existing window and door frames stay exactly as they are. That means no costly frame replacements, no unnecessary structural alterations, and a faster, more affordable upgrade to high-performance double glazing.",
-            "variant": "featured"
         },
         {
             "_template": "trustBar",
