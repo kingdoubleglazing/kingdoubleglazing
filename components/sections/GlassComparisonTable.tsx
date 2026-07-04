@@ -152,50 +152,85 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
         {/* One continuous form */}
         <div className="space-y-8">
 
-          {/* 1 — Glass option (dropdown). Price + stats shown in the labels below. */}
-          <div>
-            <label htmlFor="glass-option" className={LABEL_CLASS}>
-              Glass option
-            </label>
-            <select
-              id="glass-option"
-              value={selectedOption ?? ''}
-              onChange={e => {
-                const key = e.target.value as OptionKey
-                setSelectedOption(key)
-                router.replace(`?option=${key}`, { scroll: false })
-              }}
-              className={`w-full ${CONTROL_CLASS}`}
-            >
+          {/* 1 — Glass option. All options shown at once — each row carries its
+              own $/m² rate + stats in point form. Tapping one drives the quote. */}
+          <fieldset>
+            <legend className={LABEL_CLASS}>Choose your glass</legend>
+            <div className="space-y-2" role="radiogroup" aria-label="Glass option">
               {optionKeys.map(key => {
                 const o = optionsMap[key]
+                const isSelected = selectedOption === key
                 return (
-                  <option key={key} value={key}>
-                    {o.label} — {o.sublabel}
-                  </option>
+                  <label
+                    key={key}
+                    htmlFor={`glass-${key}`}
+                    className={[
+                      'relative grid grid-cols-[auto_1fr_auto] items-center gap-3 sm:gap-4 cursor-pointer',
+                      'bg-surface border px-3 py-3 sm:px-4 transition-colors duration-150',
+                      'focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary',
+                      isSelected
+                        ? 'border-primary bg-primary/8 shadow-[inset_3px_0_0_var(--color-primary)]'
+                        : 'border-surface-container-high hover:border-primary/60',
+                    ].join(' ')}
+                  >
+                    <input
+                      type="radio"
+                      name="glass-option"
+                      id={`glass-${key}`}
+                      value={key}
+                      checked={isSelected}
+                      onChange={() => {
+                        setSelectedOption(key)
+                        router.replace(`?option=${key}`, { scroll: false })
+                      }}
+                      className="sr-only"
+                    />
+
+                    <span
+                      className="font-display uppercase leading-none text-primary w-[1.1em] text-center"
+                      style={{ fontSize: 'clamp(1.9rem,7vw,2.6rem)' }}
+                      aria-hidden="true"
+                    >
+                      {key}
+                    </span>
+
+                    <span className="min-w-0">
+                      <span className="block font-headline text-sm sm:text-base font-bold uppercase tracking-wide text-on-surface leading-tight">
+                        {o.sublabel}
+                      </span>
+                      <span className="block font-headline text-xs font-semibold uppercase tracking-wide text-on-surface/55 mt-0.5">
+                        {o.noisePct}% {quieterLabel ?? 'quieter'} · {o.heatPct}% {lessHeatLabel ?? 'less heat'}
+                      </span>
+                    </span>
+
+                    <span className="text-right whitespace-nowrap flex items-baseline gap-1 justify-end">
+                      <span
+                        className={[
+                          'font-display uppercase leading-none tabular-nums',
+                          isSelected ? 'text-primary' : 'text-on-surface',
+                        ].join(' ')}
+                        style={{ fontSize: 'clamp(1.4rem,6vw,1.9rem)' }}
+                      >
+                        ${o.pricePerSqm}
+                      </span>
+                      <span className="font-headline text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-on-surface/45">
+                        /m²
+                      </span>
+                    </span>
+
+                    {isSelected && (
+                      <span
+                        className="absolute top-1.5 right-1.5 w-4 h-4 bg-primary text-white flex items-center justify-center text-[0.6rem] font-bold rounded-full"
+                        aria-hidden="true"
+                      >
+                        ✓
+                      </span>
+                    )}
+                  </label>
                 )
               })}
-            </select>
-
-            {selectedOpt && (
-              <div className="mt-3 space-y-2.5">
-                <p className="font-display uppercase text-primary leading-none" style={{ fontSize: 'clamp(1.5rem,5vw,2.25rem)' }}>
-                  From ${selectedOpt.pricePerSqm}/m²
-                </p>
-                <div className="flex flex-wrap gap-x-4 gap-y-1">
-                  <span className="font-headline text-xl font-bold uppercase tracking-wide text-on-surface">
-                    {selectedOpt.noisePct}% {quieterLabel ?? 'quieter'}
-                  </span>
-                  <span className="font-headline text-xl font-bold uppercase tracking-wide text-on-surface">
-                    {selectedOpt.heatPct}% {lessHeatLabel ?? 'less heat'}
-                  </span>
-                </div>
-                {selectedOpt.spec && (
-                  <p className="font-sans text-sm text-on-surface/70">Glass make-up: {selectedOpt.spec}</p>
-                )}
-              </div>
-            )}
-          </div>
+            </div>
+          </fieldset>
 
           {/* 2 — Your windows */}
           <div>
@@ -269,6 +304,26 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
                       {optionsMap[selectedOption].label} · ${optionsMap[selectedOption].pricePerSqm}/m²
                     </span>
                   </div>
+                </div>
+
+                {/* Exact glass you're getting — stats live here, not in the picker */}
+                <div className="mt-4 bg-surface border border-surface-container-high p-4">
+                  <p className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface/60 mb-2">
+                    Your glass — {optionsMap[selectedOption].label}: {optionsMap[selectedOption].sublabel}
+                  </p>
+                  <div className="flex flex-wrap gap-x-6 gap-y-1">
+                    <span className="font-headline text-lg font-bold uppercase tracking-wide text-on-surface">
+                      {optionsMap[selectedOption].noisePct}% {quieterLabel ?? 'quieter'}
+                    </span>
+                    <span className="font-headline text-lg font-bold uppercase tracking-wide text-on-surface">
+                      {optionsMap[selectedOption].heatPct}% {lessHeatLabel ?? 'less heat'}
+                    </span>
+                  </div>
+                  {optionsMap[selectedOption].spec && (
+                    <p className="font-sans text-sm text-on-surface/60 mt-2">
+                      Glass make-up: {optionsMap[selectedOption].spec}
+                    </p>
+                  )}
                 </div>
 
                 <div className="border-l-4 border-primary-container pl-4 mt-5">
