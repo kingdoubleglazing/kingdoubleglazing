@@ -180,13 +180,13 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
             {selectedOpt && (
               <div className="mt-3 space-y-2.5">
                 <p className="font-display uppercase text-primary leading-none" style={{ fontSize: 'clamp(1.5rem,5vw,2.25rem)' }}>
-                  From ${selectedOpt.pricePerSqm}<span className="text-[0.5em] tracking-normal">/m²</span>
+                  From ${selectedOpt.pricePerSqm}/m²
                 </p>
                 <div className="flex flex-wrap gap-x-4 gap-y-1">
-                  <span className="font-headline text-sm font-bold uppercase tracking-wide text-on-surface">
+                  <span className="font-headline text-xl font-bold uppercase tracking-wide text-on-surface">
                     {selectedOpt.noisePct}% {quieterLabel ?? 'quieter'}
                   </span>
-                  <span className="font-headline text-sm font-bold uppercase tracking-wide text-on-surface">
+                  <span className="font-headline text-xl font-bold uppercase tracking-wide text-on-surface">
                     {selectedOpt.heatPct}% {lessHeatLabel ?? 'less heat'}
                   </span>
                 </div>
