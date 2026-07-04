@@ -74,7 +74,7 @@
       "faqs": [
         {
           "q": "How accurate is the online price?",
-          "a": "Within about 10%, as long as your measurements are correct. We confirm the final figure when we measure on site."
+          "a": "Within about 10% when your measurements are correct — we confirm the final figure on site."
         },
         {
           "q": "How do I measure my windows?",
@@ -82,35 +82,35 @@
         },
         {
           "q": "What about the deposit?",
-          "a": "50% deposit to start fabrication — your glass is custom-made — then the remaining 50% once your install is scheduled. No surprise fees."
+          "a": "50% deposit to start fabrication, and the remaining 50% once your install is scheduled."
         },
         {
           "q": "What is the second storey surcharge?",
-          "a": "Second storey windows are harder to access, so we add a flat $150 per window. Tick the second storey box on any row and the calculator includes it."
+          "a": "A flat $150 per window for harder-to-access second-storey glass, added automatically when you tick the box."
         },
         {
           "q": "Will the adaptor change how my window looks?",
-          "a": "Our frame reduces the glass size you see by about 40mm overall in height, and 20mm per side, approximately. This is how we fit insulated glass into your existing frames without replacing them — most customers don't notice the difference after install."
+          "a": "Our frame reduces the glass you see by about 40mm in height and 20mm per side, which most customers don't notice."
         },
         {
           "q": "What's covered by the warranty?",
-          "a": "Our 10-year warranty covers the glass unit, the seals, and our workmanship. If anything fails within that time, we come back and fix it — no charge."
+          "a": "Our 10-year warranty covers the glass unit, seals, and workmanship, fixed free if anything fails."
         },
         {
           "q": "How long from quote to install?",
-          "a": "Once your deposit is in, fabrication typically takes 2–3 weeks. We'll confirm your install date as soon as materials are ready."
+          "a": "Fabrication typically takes 2–3 weeks from deposit, then we book your install."
         },
         {
           "q": "Do I have to give my email to see the price?",
-          "a": "No. Your price appears as you enter your windows — no email or phone number needed. Send it through only when you're ready to proceed."
+          "a": "No — your price appears as you enter your windows, with no email or phone number needed."
         },
         {
           "q": "Does the price include installation?",
-          "a": "Yes. Every quote includes glass, installation, frame preparation, rubbish removal, and 10-year warranty. No hidden extras."
+          "a": "Yes — every quote includes glass, installation, frame prep, rubbish removal, and the 10-year warranty."
         },
         {
           "q": "What if I already have a quote from someone else?",
-          "a": "Send it to us. If it's a genuine quote, we'll beat it by 30% — guaranteed in writing, same 10-year warranty."
+          "a": "Send us any genuine written quote and we'll beat it by 30%, in writing."
         }
       ]
     }
