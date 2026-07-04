@@ -103,7 +103,7 @@ export function FAQ({
               </summary>
 
               {/* Answer — full width on mobile, indented under the question on desktop */}
-              <div className="px-4 pb-5 md:px-7 md:pb-7 md:pl-[calc(1.75rem+2rem+1.25rem)]">
+              <div className="px-4 pb-7 md:px-7 md:pb-8 md:pl-[calc(1.75rem+2rem+1.25rem)]">
                 <div className="h-px w-8 bg-primary-container mb-3 md:mb-5" aria-hidden="true" />
                 <p
                   data-tina-field={tinaFields?.[i]?.a || undefined}
