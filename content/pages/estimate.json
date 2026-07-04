@@ -25,7 +25,7 @@
       "_template": "glassComparison",
       "eyebrow": "Glass Options",
       "heading": "What do I want to achieve?",
-      "subtext": "Select an option to get your price.",
+      "subtext": "See your price per square metre for each option — all from standard 3mm clear window pane glass.",
       "secondStoreySurcharge": 150,
       "quieterLabel": "quieter",
       "lessHeatLabel": "less heat",
@@ -35,7 +35,7 @@
       "pressHint": "Press any option to get your price.",
       "eastWestBold": "East or west-facing rooms?",
       "eastWestBody": "They get more heat. Choose Option C or D.",
-      "comparisonNote": "All figures compared to standard single glazing — what most Melbourne homes have now.",
+      "comparisonNote": "The quieter and less-heat figures show the reduction from standard 3mm clear window glass.",
       "step1Label": "Step 1 of 2",
       "step1Heading": "Your windows",
       "measureInstruction": "Measure the glass, not the frame. Enter height and width in millimetres.",
@@ -59,12 +59,6 @@
       "successTitle": "We'll be in touch soon.",
       "successBody": "Once we confirm your quote you'll receive an email with your price locked in.",
       "startNewQuoteLabel": "Start a new quote"
-    },
-    {
-      "_template": "glassTechSpecs",
-      "eyebrow": "Technical Data",
-      "heading": "Glass Specification Summary",
-      "description": "Full composition and performance data for each option. All figures compared to standard 3mm single glazing."
     },
     {
       "_template": "paymentTerms",
@@ -123,32 +117,6 @@
           "q": "What if I already have a quote from someone else?",
           "a": "Send it to us. If it's a genuine quote, we'll beat it by 30% — guaranteed in writing, same 10-year warranty."
         }
-      ]
-    },
-    {
-      "_template": "freeAdvice",
-      "eyebrow": "Free Advice",
-      "headingLine1": "Got a question",
-      "headingLine2": "we haven't covered?",
-      "body": "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.",
-      "buttonLabel": "Call Us"
-    },
-    {
-      "_template": "ctaBanner",
-      "heading": "Ready for the\nFormal Quote?",
-      "subtext": "Once you have an estimate, call us to confirm and book the installation.",
-      "primaryCta": {
-        "label": "Contact Us",
-        "href": "/contact/"
-      },
-      "secondaryCta": {
-        "label": "0406 470 595",
-        "href": "tel:+61406470595"
-      },
-      "trustItems": [
-        "Price locked at quote",
-        "10-year warranty",
-        "We beat any quote by 30%"
       ]
     }
   ]

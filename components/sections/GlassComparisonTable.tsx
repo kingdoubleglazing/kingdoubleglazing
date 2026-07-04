@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useActionState, useEffect, useRef } from 'react'
+import { useState, useActionState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Phone } from 'lucide-react'
 import { calculateQuote, type OptionKey, type WindowRow } from '@/data/pricing'
 import { submitQuote, type QuoteState } from '@/app/(site)/actions/quote'
 import type { PricingOption } from '@/lib/types'
@@ -35,8 +34,6 @@ function parseRow(r: RowDraft): WindowRow | null {
 interface GlassComparisonTableProps {
   options: PricingOption[]
   secondStoreySurcharge: number
-  phone: string
-  phoneHref: string
   eyebrow?: string | null
   heading?: string | null
   subtext?: string | null
@@ -84,7 +81,7 @@ const GRID_CLASS: Record<number, string> = {
   6: 'grid-cols-2 sm:grid-cols-3',
 }
 
-export function GlassComparisonTable({ options, secondStoreySurcharge, phone, phoneHref, eyebrow, heading, subtext, quieterLabel, lessHeatLabel, getMyPriceLabel, selectedLabel, specLinkLabel, pressHint, eastWestBold, eastWestBody, comparisonNote, step1Label, step1Heading, measureInstruction, measureNote, addWindowLabel, changeLabel, step2Label, yourQuoteLabel, noMeasurementsHint, accuracyNote, measurementOffNote, budgetPrompt, sendQuoteLabel, dialogTitle, dialogDescription, modalQuoteSummaryLabel, modalSubmitLabel, modalSendingLabel, modalErrorMessage, successEyebrow, successTitle, successBody, startNewQuoteLabel }: GlassComparisonTableProps) {
+export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, heading, subtext, quieterLabel, lessHeatLabel, getMyPriceLabel, selectedLabel, eastWestBold, eastWestBody, comparisonNote, step1Heading, measureInstruction, measureNote, addWindowLabel, yourQuoteLabel, noMeasurementsHint, accuracyNote, measurementOffNote, budgetPrompt, sendQuoteLabel, dialogTitle, dialogDescription, modalQuoteSummaryLabel, modalSubmitLabel, modalSendingLabel, modalErrorMessage, successEyebrow, successTitle, successBody, startNewQuoteLabel }: GlassComparisonTableProps) {
   const optionsMap = Object.fromEntries(options.map(o => [o.optionKey, o]))
   const optionKeys = options.map(o => o.optionKey)
   const topKey = optionKeys[optionKeys.length - 1] // last option is always the premium tier
@@ -92,14 +89,13 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, phone, ph
 
   const router = useRouter()
   const searchParams = useSearchParams()
-const [selectedOption, setSelectedOption] = useState<OptionKey | null>(null)
+  const [selectedOption, setSelectedOption] = useState<OptionKey | null>(null)
   const [rows, setRows] = useState<RowDraft[]>([{ ...BLANK_ROW }])
   const [dialogOpen, setDialogOpen] = useState(false)
   const [quoteState, quoteAction, quotePending] = useActionState(
     submitQuote,
     { status: 'idle' } as QuoteState,
   )
-  const calcRef = useRef<HTMLDivElement>(null)
 
   // Sync from URL on mount
   /* eslint-disable react-hooks/exhaustive-deps, react-hooks/set-state-in-effect */
@@ -111,19 +107,12 @@ const [selectedOption, setSelectedOption] = useState<OptionKey | null>(null)
   }, [searchParams])
   /* eslint-enable react-hooks/exhaustive-deps, react-hooks/set-state-in-effect */
 
-
   function handleSelect(key: OptionKey) {
-    const firstSelection = selectedOption === null
     setSelectedOption(key)
     router.replace(`?option=${key}`, { scroll: false })
-    if (firstSelection) {
-      requestAnimationFrame(() => {
-        calcRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-      })
-    }
   }
 
-function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
+  function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
     setRows(prev => {
       const next = [...prev]
       next[i] = { ...next[i], [field]: value }
@@ -152,6 +141,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
     selectedOpt && validRows.length > 0 ? calculateQuote(selectedOpt.pricePerSqm, validRows, secondStoreySurcharge) : null
   const total = rawTotal ? Math.round(rawTotal / 10) * 10 : null
   const totalWindows = validRows.reduce((s, r) => s + r.quantity, 0)
+  const totalSqm = validRows.reduce((s, r) => s + (r.heightMm / 1000) * (r.widthMm / 1000) * r.quantity, 0)
 
   // ── Main view ──────────────────────────────────────────────────────────────
   return (
@@ -170,11 +160,11 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
             {heading ?? 'What do I want to achieve?'}
           </h2>
           <p className="font-sans text-sm text-on-surface mt-3">
-            {subtext ?? 'Select an option to get your price.'}
+            {subtext ?? 'See your price per square metre for each option below.'}
           </p>
         </div>
 
-        {/* responsive grid — adapts to however many options exist */}
+        {/* responsive grid — every option shows its price up front (no selection needed) */}
         <div className={`grid ${gridClass} gap-3`}>
           {optionKeys.map(key => {
             const opt = optionsMap[key]
@@ -223,11 +213,23 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                 {/* Sublabel */}
                 <p
                   className={[
-                    'font-headline text-xs font-semibold uppercase tracking-wide leading-tight mb-3',
+                    'font-headline text-xs font-semibold uppercase tracking-wide leading-tight mb-2',
                     isSelected ? 'text-on-surface' : isTop ? 'text-inverse-on-surface' : 'text-on-surface',
                   ].join(' ')}
                 >
                   {opt.sublabel}
+                </p>
+
+                {/* Instant price — shown for every option, no selection required */}
+                <p
+                  className={[
+                    'font-display uppercase leading-none mb-3',
+                    isSelected ? 'text-primary' : isTop ? 'text-primary-container' : 'text-on-surface',
+                  ].join(' ')}
+                  style={{ fontSize: 'clamp(1.1rem,3.5vw,1.6rem)' }}
+                >
+                  From ${opt.pricePerSqm}
+                  <span className="text-[0.55em] tracking-normal">/m²</span>
                 </p>
 
                 {/* Metrics */}
@@ -285,193 +287,159 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                 >
                   {isSelected ? (selectedLabel ?? '✓ Selected') : (getMyPriceLabel ?? 'Get my price →')}
                 </p>
-
-                {/* Spec link */}
-                <a
-                  href={`#tech-specs-${key.toLowerCase()}`}
-                  onClick={e => e.stopPropagation()}
-                  className={[
-                    'mt-2 text-left font-sans text-xs underline underline-offset-2 transition-colors duration-150',
-                    isSelected
-                      ? 'text-on-surface/50 hover:text-on-surface/70'
-                      : isTop
-                      ? 'text-inverse-on-surface/70 hover:text-inverse-on-surface/70'
-                      : 'text-on-surface/70 hover:text-on-surface/70',
-                  ].join(' ')}
-                >
-                  {specLinkLabel ?? "What's this made of? ↓"}
-                </a>
               </div>
             )
           })}
         </div>
 
-        {/* Contextual hints — only before selection */}
-        {!selectedOption && (
-          <>
-            <p className="mt-5 text-center font-sans text-sm text-on-surface">
-              {pressHint ?? 'Press any option to get your price.'}
+        {/* Baseline note (glass options are measured from standard 3mm glass) — always visible */}
+        <p className="mt-5 font-sans text-xs text-on-surface/70 leading-relaxed">
+          {comparisonNote ?? 'The quieter and less-heat figures show the reduction from standard 3mm clear window glass.'}
+        </p>
+        <div className="mt-4 border-l-4 border-primary-container pl-4">
+          <p className="font-sans text-sm text-on-surface leading-relaxed">
+            <strong>{eastWestBold ?? 'East or west-facing rooms?'}</strong> {eastWestBody ?? 'They get more heat. Choose Option C or D.'}
+          </p>
+        </div>
+
+        {/* ── Calculator — single page, measurements always visible ──────── */}
+        <div className="mt-10 max-w-2xl">
+
+          {/* Your windows */}
+          <p
+            className="font-display uppercase text-on-surface leading-none mb-3"
+            style={{ fontSize: 'clamp(1.2rem,3vw,1.75rem)' }}
+          >
+            {step1Heading ?? 'Your windows'}
+          </p>
+
+          <div className="mb-4 border-l-2 border-primary-container pl-3">
+            <p className="font-sans text-sm text-on-surface leading-relaxed">
+              {measureInstruction ?? 'Measure the glass, not the frame. Enter height and width in millimetres.'}
             </p>
-            <div className="mt-6 border-l-4 border-primary-container pl-4">
-              <p className="font-sans text-sm text-on-surface leading-relaxed">
-                <strong>{eastWestBold ?? 'East or west-facing rooms?'}</strong> {eastWestBody ?? 'They get more heat. Choose Option C or D.'}
-              </p>
-            </div>
-            <p className="mt-4 font-sans text-xs text-on-surface/80 leading-relaxed">
-              {comparisonNote ?? 'All figures compared to standard single glazing — what most Melbourne homes have now.'}
+            <p className="font-sans text-xs text-on-surface/60 mt-1 leading-relaxed">
+              {measureNote ?? 'Same size three times? Enter one row and set quantity to 3.'}
             </p>
-          </>
-        )}
-
-        {/* ── Inline calculator (revealed on option select) ──────────────── */}
-        {selectedOption && (
-          <div ref={calcRef} className="mt-8 max-w-2xl">
-
-            {/* Selected option summary + change link */}
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-surface-container-high">
-              <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface">
-                {optionsMap[selectedOption].label}: {optionsMap[selectedOption].sublabel}
-              </p>
-              <button
-                type="button"
-                onClick={reset}
-                className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-primary/70 hover:text-primary transition-colors duration-150"
-              >
-                {changeLabel ?? 'Change →'}
-              </button>
-            </div>
-
-            {/* Step 1 of 2: Window measurements */}
-            <div>
-              <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-on-surface mb-2">
-                {step1Label ?? 'Step 1 of 2'}
-              </p>
-              <p
-                className="font-display uppercase text-on-surface leading-none mb-4"
-                style={{ fontSize: 'clamp(1.2rem,3vw,1.75rem)' }}
-              >
-                {step1Heading ?? 'Your windows'}
-              </p>
-
-              <div className="mb-5 border-l-2 border-primary-container pl-3">
-                <p className="font-sans text-sm text-on-surface leading-relaxed">
-                  {measureInstruction ?? 'Measure the glass, not the frame. Enter height and width in millimetres.'}
-                </p>
-                <p className="font-sans text-xs text-on-surface/60 mt-1 leading-relaxed">
-                  {measureNote ?? 'Same size three times? Enter one row and set quantity to 3.'}
-                </p>
-              </div>
-
-              <div className="flex justify-center mb-5">
-                <WindowDiagram />
-              </div>
-
-              <div className="space-y-4">
-                {rows.map((row, i) => (
-                  <WindowRowInput
-                    key={i}
-                    index={i}
-                    row={row}
-                    onChange={(field, val) => updateRow(i, field, val)}
-                    onRemove={() => removeRow(i)}
-                    canRemove={rows.length > 1}
-                    secondStoreySurcharge={secondStoreySurcharge}
-                  />
-                ))}
-              </div>
-
-              <button
-                type="button"
-                onClick={addRow}
-                className="mt-4 w-full py-3 border border-dashed border-outline-variant text-on-surface/50 hover:border-primary hover:text-primary font-headline text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-150"
-              >
-                {addWindowLabel ?? '+ Add another window'}
-              </button>
-            </div>
-
-            {/* Step 2 of 2: Price */}
-            <div className="mt-8 pt-8 border-t border-surface-container-high">
-              <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-on-surface mb-2">
-                {step2Label ?? 'Step 2 of 2'}
-              </p>
-              <p className="font-headline text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-on-surface/70 mb-2">
-                {yourQuoteLabel ?? 'Your quote'}
-              </p>
-
-              <p
-                className="font-display uppercase text-primary leading-none transition-all duration-200"
-                style={{ fontSize: 'clamp(2.25rem,7vw,4rem)' }}
-                aria-live="polite"
-                aria-label={
-                  total
-                    ? `Quote total: $${total.toLocaleString()}`
-                    : 'Enter your window measurements above'
-                }
-              >
-                {total ? `$${total.toLocaleString()}` : '—'}
-              </p>
-
-              {!total && (
-                <p className="font-sans text-xs text-on-surface/50 mt-2">
-                  {noMeasurementsHint ?? 'Updates as you enter your windows above.'}
-                </p>
-              )}
-
-              {total && (
-                <>
-                  <div className="mt-4 space-y-1">
-                    {validRows.map((r, i) => {
-                      const sqm = (r.heightMm / 1000) * (r.widthMm / 1000)
-                      const opt = optionsMap[selectedOption!]
-                      const rowCost =
-                        sqm * opt.pricePerSqm * r.quantity +
-                        (r.secondStorey ? secondStoreySurcharge * r.quantity : 0)
-                      return (
-                        <div key={i} className="flex justify-between gap-4 font-sans text-xs text-on-surface/60">
-                          <span>
-                            {r.heightMm}×{r.widthMm}mm · qty {r.quantity}
-                            {r.secondStorey ? ' · 2nd floor' : ''}
-                          </span>
-                          <span className="shrink-0">${Math.round(rowCost).toLocaleString()}</span>
-                        </div>
-                      )
-                    })}
-                  </div>
-
-                  <div className="border-l-4 border-primary-container pl-4 mt-5">
-                    <p className="font-sans text-sm font-semibold text-on-surface">
-                      {accuracyNote ?? "If you've filled this out correctly, your price is accurate to within 10%."}
-                    </p>
-                    <p className="font-sans text-xs text-on-surface/60 leading-relaxed mt-1">
-                      {measurementOffNote ?? 'If your measurements are off, the final quote may adjust slightly. We confirm everything on site before any work starts.'}
-                    </p>
-                  </div>
-
-                  <div className="mt-5 bg-primary-container text-on-primary-fixed px-5 py-3">
-                    <p className="font-sans text-sm font-medium leading-snug">
-                      {budgetPrompt ?? "If this is within your budget, send your quote through — we'll call to confirm and book the install."}
-                    </p>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setDialogOpen(true)}
-                    className="mt-6 w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 active:scale-[0.98]"
-                  >
-                    {sendQuoteLabel ?? 'Send Us Your Quote →'}
-                  </button>
-                  <a
-                    href={phoneHref}
-                    className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-primary/40 text-primary font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary/10 transition-colors duration-150"
-                  >
-                    <Phone size={16} aria-hidden="true" />
-                    Or Call Us — {phone}
-                  </a>
-                </>
-              )}
-            </div>
           </div>
-        )}
+
+          <div className="flex justify-center mb-5">
+            <WindowDiagram />
+          </div>
+
+          <div className="space-y-4">
+            {rows.map((row, i) => (
+              <WindowRowInput
+                key={i}
+                index={i}
+                row={row}
+                onChange={(field, val) => updateRow(i, field, val)}
+                onRemove={() => removeRow(i)}
+                canRemove={rows.length > 1}
+                secondStoreySurcharge={secondStoreySurcharge}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={addRow}
+            className="mt-4 w-full py-3 border border-dashed border-outline-variant text-on-surface/50 hover:border-primary hover:text-primary font-headline text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-150"
+          >
+            {addWindowLabel ?? '+ Add another window'}
+          </button>
+
+          {/* Your quote */}
+          <div className="mt-8 pt-8 border-t border-surface-container-high">
+            <p className="font-headline text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-on-surface/70 mb-2">
+              {yourQuoteLabel ?? 'Your quote'}
+            </p>
+
+            {!selectedOption ? (
+              <p className="font-sans text-sm text-on-surface/60 leading-relaxed">
+                Pick an option above to see your full quote.
+              </p>
+            ) : (
+              <>
+                <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface mb-3">
+                  {optionsMap[selectedOption].label}: {optionsMap[selectedOption].sublabel}
+                </p>
+
+                <p
+                  className="font-display uppercase text-primary leading-none transition-all duration-200"
+                  style={{ fontSize: 'clamp(2.25rem,7vw,4rem)' }}
+                  aria-live="polite"
+                  aria-label={
+                    total
+                      ? `Quote total: $${total.toLocaleString()}`
+                      : 'Enter your window measurements above'
+                  }
+                >
+                  {total ? `$${total.toLocaleString()}` : '—'}
+                </p>
+
+                {!total && (
+                  <p className="font-sans text-xs text-on-surface/50 mt-2">
+                    {noMeasurementsHint ?? 'Updates as you enter your windows above.'}
+                  </p>
+                )}
+
+                {total && (
+                  <>
+                    <div className="mt-4 space-y-1">
+                      {validRows.map((r, i) => {
+                        const sqm = (r.heightMm / 1000) * (r.widthMm / 1000)
+                        const opt = optionsMap[selectedOption!]
+                        const rowCost =
+                          sqm * opt.pricePerSqm * r.quantity +
+                          (r.secondStorey ? secondStoreySurcharge * r.quantity : 0)
+                        return (
+                          <div key={i} className="flex justify-between gap-4 font-sans text-xs text-on-surface/60">
+                            <span>
+                              {r.heightMm}×{r.widthMm}mm · qty {r.quantity}
+                              {r.secondStorey ? ' · 2nd floor' : ''} · ${opt.pricePerSqm}/m²
+                            </span>
+                            <span className="shrink-0">${Math.round(rowCost).toLocaleString()}</span>
+                          </div>
+                        )
+                      })}
+
+                      {/* Total area + rate for the selected product */}
+                      <div className="flex justify-between gap-4 font-sans text-xs font-semibold text-on-surface border-t border-surface-container-high pt-2 mt-2">
+                        <span>Total area: {totalSqm.toFixed(2)} m²</span>
+                        <span className="shrink-0">
+                          {optionsMap[selectedOption].label} · ${optionsMap[selectedOption].pricePerSqm}/m²
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="border-l-4 border-primary-container pl-4 mt-5">
+                      <p className="font-sans text-sm font-semibold text-on-surface">
+                        {accuracyNote ?? "If you've filled this out correctly, your price is accurate to within 10%."}
+                      </p>
+                      <p className="font-sans text-xs text-on-surface/60 leading-relaxed mt-1">
+                        {measurementOffNote ?? 'If your measurements are off, the final quote may adjust slightly. We confirm everything on site before any work starts.'}
+                      </p>
+                    </div>
+
+                    <div className="mt-5 bg-primary-container text-on-primary-fixed px-5 py-3">
+                      <p className="font-sans text-sm font-medium leading-snug">
+                        {budgetPrompt ?? "If this is within your budget, send your quote through — we'll call to confirm and book the install."}
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setDialogOpen(true)}
+                      className="mt-6 w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 active:scale-[0.98]"
+                    >
+                      {sendQuoteLabel ?? 'Send Us Your Quote →'}
+                    </button>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+        </div>
 
       </div>
 
@@ -528,7 +496,7 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                       ${total.toLocaleString()}
                     </p>
                     <p className="font-sans text-xs text-on-surface/60 mt-1">
-                      {optionsMap[selectedOption].label} · {totalWindows} window{totalWindows !== 1 ? 's' : ''}
+                      {optionsMap[selectedOption].label} · {totalWindows} window{totalWindows !== 1 ? 's' : ''} · {totalSqm.toFixed(2)} m²
                     </p>
                   </div>
                 )}
@@ -554,14 +522,6 @@ function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
                 >
                   {quotePending ? (modalSendingLabel ?? 'Sending…') : (modalSubmitLabel ?? 'Send Us Your Quote →')}
                 </button>
-
-                <a
-                  href={phoneHref}
-                  className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-primary/40 text-primary font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-3 hover:bg-primary/10 transition-colors duration-150"
-                >
-                  <Phone size={16} aria-hidden="true" />
-                  Or Call Us — {phone}
-                </a>
               </div>
             </form>
           )}

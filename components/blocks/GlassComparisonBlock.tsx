@@ -1,6 +1,5 @@
 import { Suspense } from 'react'
 import { GlassComparisonTable } from '@/components/sections/GlassComparisonTable'
-import { getSiteSettings } from '@/lib/site-settings'
 import type { PricingOption } from '@/lib/types'
 
 export interface GlassComparisonBlockData {
@@ -51,15 +50,11 @@ export interface GlassComparisonBlockData {
 }
 
 export function GlassComparisonBlock({ pricingOptions = [], block }: { pricingOptions?: PricingOption[]; block?: GlassComparisonBlockData }) {
-  const settings = getSiteSettings()
-
   return (
     <Suspense fallback={<div className="bg-surface-container-low h-96" />}>
       <GlassComparisonTable
         options={pricingOptions}
         secondStoreySurcharge={block?.secondStoreySurcharge ?? 150}
-        phone={settings.phone}
-        phoneHref={settings.phoneHref}
         eyebrow={block?.eyebrow}
         heading={block?.heading}
         subtext={block?.subtext}
