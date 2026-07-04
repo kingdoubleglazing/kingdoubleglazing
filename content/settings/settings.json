@@ -124,13 +124,5 @@
       "label": "Get an Instant Estimate",
       "href": "/instant-estimate/"
     }
-  ],
-  "paymentTerms": {
-    "depositTitle": "50% Deposit to Start",
-    "depositBody": "Pay 50% to get your glass made.",
-    "completionTitle": "50% on Completion",
-    "completionBody": "Pay the other 50% when the job is done.",
-    "warrantyTitle": "Made for You, Backed for 10 Years",
-    "warrantyBody": "All glass is made to measure for your home. If anything needs adjusting after install, we fix it — typically within 2–3 weeks."
-  }
+  ]
 }

@@ -73,15 +73,6 @@ fragment SettingsParts on Settings {
     label
     href
   }
-  paymentTerms {
-    __typename
-    depositTitle
-    depositBody
-    completionTitle
-    completionBody
-    warrantyTitle
-    warrantyBody
-  }
 }
 
 fragment PageParts on Page {
@@ -290,16 +281,6 @@ fragment PageParts on Page {
       mobileSubtitle
       body1
       body2
-    }
-    ... on PageBlocksPaymentTerms {
-      eyebrow
-      heading
-      depositTitle
-      depositBody
-      completionTitle
-      completionBody
-      warrantyTitle
-      warrantyBody
     }
     ... on PageBlocksFreeAdvice {
       eyebrow

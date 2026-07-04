@@ -110,15 +110,6 @@ export default defineConfig({
             { name: 'label', type: 'string', label: 'Label' },
             { name: 'href', type: 'string', label: 'Path' },
           ]},
-          // ── Payment Terms (global — shared across all pages) ──────────────
-          { name: 'paymentTerms', type: 'object', label: 'Payment Terms', fields: [
-            { name: 'depositTitle', type: 'string', label: 'Deposit title' },
-            { name: 'depositBody', type: 'string', label: 'Deposit body', ui: { component: 'textarea' as const } },
-            { name: 'completionTitle', type: 'string', label: 'Completion title' },
-            { name: 'completionBody', type: 'string', label: 'Completion body', ui: { component: 'textarea' as const } },
-            { name: 'warrantyTitle', type: 'string', label: 'Warranty title' },
-            { name: 'warrantyBody', type: 'string', label: 'Warranty body', ui: { component: 'textarea' as const } },
-          ]},
         ],
       },
 
@@ -495,22 +486,6 @@ export default defineConfig({
                   { name: 'mobileSubtitle', type: 'string', label: 'Mobile subtitle' },
                   { name: 'body1', type: 'string', label: 'Body paragraph 1', ui: { component: 'textarea' as const } },
                   { name: 'body2', type: 'string', label: 'Body paragraph 2', ui: { component: 'textarea' as const } },
-                ],
-              },
-              // ── Payment Terms ─────────────────────────────────────────
-              {
-                name: 'paymentTerms',
-                label: 'Payment Terms',
-                ui: { itemProps: () => ({ label: '💳 Payment Terms' }) },
-                fields: [
-                  { name: 'eyebrow', type: 'string', label: 'Eyebrow' },
-                  { name: 'heading', type: 'string', label: 'Heading' },
-                  { name: 'depositTitle', type: 'string', label: 'Deposit title' },
-                  { name: 'depositBody', type: 'string', label: 'Deposit body', ui: { component: 'textarea' as const } },
-                  { name: 'completionTitle', type: 'string', label: 'Completion title' },
-                  { name: 'completionBody', type: 'string', label: 'Completion body', ui: { component: 'textarea' as const } },
-                  { name: 'warrantyTitle', type: 'string', label: 'Warranty title' },
-                  { name: 'warrantyBody', type: 'string', label: 'Warranty body', ui: { component: 'textarea' as const } },
                 ],
               },
               // ── Free Advice CTA ───────────────────────────────────────

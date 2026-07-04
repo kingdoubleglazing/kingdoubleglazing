@@ -58,8 +58,6 @@ function augmentBlocks(blocks: AnyBlock[]): AnyBlock[] {
         return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), heading: sf(block, 'heading'), description: sf(block, 'description') } }
       case 'adaptorDisclosure':
         return { ...block, tina: { heading: sf(block, 'heading'), mobileSubtitle: sf(block, 'mobileSubtitle'), body1: sf(block, 'body1'), body2: sf(block, 'body2') } }
-      case 'paymentTerms':
-        return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), heading: sf(block, 'heading'), depositTitle: sf(block, 'depositTitle'), depositBody: sf(block, 'depositBody'), completionTitle: sf(block, 'completionTitle'), completionBody: sf(block, 'completionBody'), warrantyTitle: sf(block, 'warrantyTitle'), warrantyBody: sf(block, 'warrantyBody') } }
       case 'freeAdvice':
         return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), headingLine1: sf(block, 'headingLine1'), headingLine2: sf(block, 'headingLine2'), body: sf(block, 'body'), buttonLabel: sf(block, 'buttonLabel') } }
       case 'whatElseStrip':

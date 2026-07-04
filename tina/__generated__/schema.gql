@@ -154,15 +154,6 @@ type SettingsFooterCompanyNav {
   href: String
 }
 
-type SettingsPaymentTerms {
-  depositTitle: String
-  depositBody: String
-  completionTitle: String
-  completionBody: String
-  warrantyTitle: String
-  warrantyBody: String
-}
-
 type Settings implements Node & Document {
   name: String
   legalName: String
@@ -188,7 +179,6 @@ type Settings implements Node & Document {
   footerServicesNav: [SettingsFooterServicesNav]
   footerCompanyHeading: String
   footerCompanyNav: [SettingsFooterCompanyNav]
-  paymentTerms: SettingsPaymentTerms
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -276,15 +266,6 @@ input SettingsFooterCompanyNavFilter {
   href: StringFilter
 }
 
-input SettingsPaymentTermsFilter {
-  depositTitle: StringFilter
-  depositBody: StringFilter
-  completionTitle: StringFilter
-  completionBody: StringFilter
-  warrantyTitle: StringFilter
-  warrantyBody: StringFilter
-}
-
 input SettingsFilter {
   name: StringFilter
   legalName: StringFilter
@@ -310,7 +291,6 @@ input SettingsFilter {
   footerServicesNav: SettingsFooterServicesNavFilter
   footerCompanyHeading: StringFilter
   footerCompanyNav: SettingsFooterCompanyNavFilter
-  paymentTerms: SettingsPaymentTermsFilter
 }
 
 type SettingsConnectionEdges {
@@ -556,17 +536,6 @@ type PageBlocksAdaptorDisclosure {
   body2: String
 }
 
-type PageBlocksPaymentTerms {
-  eyebrow: String
-  heading: String
-  depositTitle: String
-  depositBody: String
-  completionTitle: String
-  completionBody: String
-  warrantyTitle: String
-  warrantyBody: String
-}
-
 type PageBlocksFreeAdvice {
   eyebrow: String
   headingLine1: String
@@ -603,7 +572,7 @@ type PageBlocksEmergencyStrip {
   cta: PageBlocksEmergencyStripCta
 }
 
-union PageBlocks = PageBlocksHero | PageBlocksTrustBar | PageBlocksWhyRetrofit | PageBlocksProcessSteps | PageBlocksEstimateCta | PageBlocksFaq | PageBlocksServiceSection | PageBlocksStoryWithStats | PageBlocksWarrantyCoverage | PageBlocksContactCards | PageBlocksContactForm | PageBlocksCtaBanner | PageBlocksGlassComparison | PageBlocksGlassTechSpecs | PageBlocksAdaptorDisclosure | PageBlocksPaymentTerms | PageBlocksFreeAdvice | PageBlocksWhatElseStrip | PageBlocksEmergencyStrip
+union PageBlocks = PageBlocksHero | PageBlocksTrustBar | PageBlocksWhyRetrofit | PageBlocksProcessSteps | PageBlocksEstimateCta | PageBlocksFaq | PageBlocksServiceSection | PageBlocksStoryWithStats | PageBlocksWarrantyCoverage | PageBlocksContactCards | PageBlocksContactForm | PageBlocksCtaBanner | PageBlocksGlassComparison | PageBlocksGlassTechSpecs | PageBlocksAdaptorDisclosure | PageBlocksFreeAdvice | PageBlocksWhatElseStrip | PageBlocksEmergencyStrip
 
 type Page implements Node & Document {
   galleryBlurb: String
@@ -850,17 +819,6 @@ input PageBlocksAdaptorDisclosureFilter {
   body2: StringFilter
 }
 
-input PageBlocksPaymentTermsFilter {
-  eyebrow: StringFilter
-  heading: StringFilter
-  depositTitle: StringFilter
-  depositBody: StringFilter
-  completionTitle: StringFilter
-  completionBody: StringFilter
-  warrantyTitle: StringFilter
-  warrantyBody: StringFilter
-}
-
 input PageBlocksFreeAdviceFilter {
   eyebrow: StringFilter
   headingLine1: StringFilter
@@ -913,7 +871,6 @@ input PageBlocksFilter {
   glassComparison: PageBlocksGlassComparisonFilter
   glassTechSpecs: PageBlocksGlassTechSpecsFilter
   adaptorDisclosure: PageBlocksAdaptorDisclosureFilter
-  paymentTerms: PageBlocksPaymentTermsFilter
   freeAdvice: PageBlocksFreeAdviceFilter
   whatElseStrip: PageBlocksWhatElseStripFilter
   emergencyStrip: PageBlocksEmergencyStripFilter
@@ -1112,15 +1069,6 @@ input SettingsFooterCompanyNavMutation {
   href: String
 }
 
-input SettingsPaymentTermsMutation {
-  depositTitle: String
-  depositBody: String
-  completionTitle: String
-  completionBody: String
-  warrantyTitle: String
-  warrantyBody: String
-}
-
 input SettingsMutation {
   name: String
   legalName: String
@@ -1146,7 +1094,6 @@ input SettingsMutation {
   footerServicesNav: [SettingsFooterServicesNavMutation]
   footerCompanyHeading: String
   footerCompanyNav: [SettingsFooterCompanyNavMutation]
-  paymentTerms: SettingsPaymentTermsMutation
 }
 
 input PageBlocksHeroPrimaryCtaMutation {
@@ -1381,17 +1328,6 @@ input PageBlocksAdaptorDisclosureMutation {
   body2: String
 }
 
-input PageBlocksPaymentTermsMutation {
-  eyebrow: String
-  heading: String
-  depositTitle: String
-  depositBody: String
-  completionTitle: String
-  completionBody: String
-  warrantyTitle: String
-  warrantyBody: String
-}
-
 input PageBlocksFreeAdviceMutation {
   eyebrow: String
   headingLine1: String
@@ -1444,7 +1380,6 @@ input PageBlocksMutation {
   glassComparison: PageBlocksGlassComparisonMutation
   glassTechSpecs: PageBlocksGlassTechSpecsMutation
   adaptorDisclosure: PageBlocksAdaptorDisclosureMutation
-  paymentTerms: PageBlocksPaymentTermsMutation
   freeAdvice: PageBlocksFreeAdviceMutation
   whatElseStrip: PageBlocksWhatElseStripMutation
   emergencyStrip: PageBlocksEmergencyStripMutation

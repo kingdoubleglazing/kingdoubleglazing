@@ -1,6 +1,5 @@
 import { TrustBar, type TrustBarBlockData } from '@/components/sections/TrustBar'
 import { AdaptorDisclosure, type AdaptorDisclosureBlockData } from '@/components/AdaptorDisclosure'
-import { PaymentTerms, type PaymentTermsBlockData } from '@/components/PaymentTerms'
 import { FreeAdviceBlock, type FreeAdviceBlockData } from '@/components/FreeAdviceBlock'
 import { HeroBlock, type HeroBlockData } from './HeroBlock'
 import { WhyRetrofitBlock, type WhyRetrofitBlockData } from './WhyRetrofitBlock'
@@ -82,9 +81,6 @@ export function BlockRenderer({ blocks, pricingOptions = [] }: { blocks: AnyBloc
 
           case 'PageBlocksAdaptorDisclosure':
             return <AdaptorDisclosure key={key} block={block as AdaptorDisclosureBlockData} />
-
-          case 'PageBlocksPaymentTerms':
-            return <PaymentTerms key={key} block={block as PaymentTermsBlockData} />
 
           case 'PageBlocksFreeAdvice':
             return <FreeAdviceBlock key={key} block={block as FreeAdviceBlockData} />

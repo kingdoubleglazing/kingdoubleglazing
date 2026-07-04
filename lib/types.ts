@@ -29,8 +29,6 @@ export interface Settings {
   footerTagline?: string
   footerBio?: string
   warrantyBlurb?: string
-  // Payment terms (global — shared across all pages)
-  paymentTerms?: { depositTitle: string; depositBody: string; completionTitle: string; completionBody: string; warrantyTitle: string; warrantyBody: string }
   // Navigation
   mainNav: Array<{ label: string; href: string }>
   ctaNav: { label: string; href: string }
