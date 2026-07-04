@@ -1,4 +1,3 @@
-import { CheckCircle, DollarSign } from 'lucide-react'
 import { getSiteSettings } from '@/lib/site-settings'
 
 export interface PaymentTermsBlockData {
@@ -38,58 +37,46 @@ export function PaymentTerms({ block }: { block?: PaymentTermsBlockData }) {
 
   return (
     <section className="bg-white py-12 md:py-16">
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="border border-black">
-          <div className="px-6 py-6 md:px-8 border-b border-black/10">
-            <p
-              data-tina-field={block?.tina?.eyebrow}
-              className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-black mb-1"
+      <div className="max-w-3xl mx-auto px-4">
+        <p
+          data-tina-field={block?.tina?.eyebrow}
+          className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-black mb-1"
+        >
+          {eyebrow}
+        </p>
+        <h2
+          data-tina-field={block?.tina?.heading}
+          className="font-display uppercase text-black leading-none mb-6"
+          style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}
+        >
+          {heading}
+        </h2>
+
+        <div className="space-y-5">
+          <div>
+            <h3
+              data-tina-field={block?.tina?.depositTitle}
+              className="font-headline text-sm font-semibold uppercase tracking-wide text-black mb-1"
             >
-              {eyebrow}
-            </p>
-            <h2
-              data-tina-field={block?.tina?.heading}
-              className="font-display uppercase text-black leading-none"
-              style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}
-            >
-              {heading}
-            </h2>
+              {depositTitle}
+            </h3>
+            <p data-tina-field={block?.tina?.depositBody} className="font-sans text-sm text-black leading-relaxed">{depositBody}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-black/10">
-            <div className="px-6 py-6 md:px-8">
-              <div className="flex items-center gap-2 mb-3">
-                <DollarSign size={16} strokeWidth={2} className="text-primary-container shrink-0" aria-hidden="true" />
-                <h3
-                  data-tina-field={block?.tina?.depositTitle}
-                  className="font-headline text-sm font-semibold uppercase tracking-wide text-black"
-                >
-                  {depositTitle}
-                </h3>
-              </div>
-              <div className="h-0.5 w-6 bg-primary-container mb-3" aria-hidden="true" />
-              <p data-tina-field={block?.tina?.depositBody} className="font-sans text-sm text-black leading-relaxed">{depositBody}</p>
-            </div>
-
-            <div className="px-6 py-6 md:px-8">
-              <div className="flex items-center gap-2 mb-3">
-                <CheckCircle size={16} strokeWidth={2} className="text-primary-container shrink-0" aria-hidden="true" />
-                <h3
-                  data-tina-field={block?.tina?.completionTitle}
-                  className="font-headline text-sm font-semibold uppercase tracking-wide text-black"
-                >
-                  {completionTitle}
-                </h3>
-              </div>
-              <div className="h-0.5 w-6 bg-primary-container mb-3" aria-hidden="true" />
-              <p data-tina-field={block?.tina?.completionBody} className="font-sans text-sm text-black leading-relaxed">{completionBody}</p>
-            </div>
+          <div>
+            <h3
+              data-tina-field={block?.tina?.completionTitle}
+              className="font-headline text-sm font-semibold uppercase tracking-wide text-black mb-1"
+            >
+              {completionTitle}
+            </h3>
+            <p data-tina-field={block?.tina?.completionBody} className="font-sans text-sm text-black leading-relaxed">{completionBody}</p>
           </div>
 
-          <div className="px-6 py-6 md:px-8 border-t border-black/10 bg-black/[0.02]">
+          <div>
             <h3
               data-tina-field={block?.tina?.warrantyTitle}
-              className="font-headline text-sm font-semibold uppercase tracking-wide text-black mb-2"
+              className="font-headline text-sm font-semibold uppercase tracking-wide text-black mb-1"
             >
               {warrantyTitle}
             </h3>
