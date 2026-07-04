@@ -47,11 +47,6 @@
       "heading": "Send Us a Message"
     },
     {
-      "_template": "paymentTerms",
-      "eyebrow": "How payment works",
-      "heading": "Payment Terms & Assurance"
-    },
-    {
       "_template": "faq",
       "heading": "Common Questions",
       "subheading": "Quick answers before you get in touch.",

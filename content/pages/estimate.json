@@ -61,11 +61,6 @@
       "startNewQuoteLabel": "Start a new quote"
     },
     {
-      "_template": "paymentTerms",
-      "eyebrow": "How payment works",
-      "heading": "Payment Terms & Assurance"
-    },
-    {
       "_template": "adaptorDisclosure",
       "heading": "About our adaptors",
       "mobileSubtitle": "Reduces the glass you see by ~40mm in height, 20mm each side. Tap to read more.",

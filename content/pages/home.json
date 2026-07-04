@@ -6,8 +6,7 @@
             "badge": "Stop. Don't Overpay. \u00b7 10-Year Warranty \u00b7 Beat Any Quote 30%",
             "headlineWhite": "Why Choose the King",
             "headlineYellow": "Double Glazing System?",
-            "adaptorCaption": "The answer is simple: we only replace the glass. Your existing window and door frames stay exactly as they are.",
-            "subtext": "That means no costly frame replacements, no unnecessary structural alterations, and a faster, more affordable upgrade to high-performance double glazing.",
+            "subtext": "The answer is simple: we only replace the glass. Your existing window and door frames stay exactly as they are.\n\nThat means no costly frame replacements, no unnecessary structural alterations, and a faster, more affordable upgrade to high-performance double glazing.",
             "imageSrc": "/hero/hero-double-glazing.webp",
             "imageAlt": "Double glazing upgrade on an existing window in a Melbourne home",
             "showWarrantyBadge": true,
@@ -121,11 +120,6 @@
                     "imageAlt": "Glazier completing a retrofit double glazing installation"
                 }
             ]
-        },
-        {
-            "_template": "paymentTerms",
-            "eyebrow": "How payment works",
-            "heading": "Payment Terms & Assurance"
         },
         {
             "_template": "estimateCta",

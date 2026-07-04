@@ -72,12 +72,18 @@ export function HeroOverlay({ block }: { block: HeroBlockData }) {
           </div>
         )}
         {block.subtext && (
-          <p
-            data-tina-field={block.tina?.subtext}
-            className="font-sans text-lg md:text-xl text-white mb-6 max-w-2xl leading-relaxed"
-          >
-            {block.subtext}
-          </p>
+          <div className="mb-6 max-w-2xl space-y-4">
+            {block.subtext.split(/\n+/).filter(p => p.trim()).map((para, i) => (
+              <p
+                // biome-ignore lint/suspicious/noArrayIndexKey: static split
+                key={i}
+                data-tina-field={i === 0 ? block.tina?.subtext : undefined}
+                className="font-sans text-lg md:text-xl text-white leading-relaxed"
+              >
+                {para}
+              </p>
+            ))}
+          </div>
         )}
         {block.trustItems && block.trustItems.length > 0 && (
           <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
