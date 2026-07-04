@@ -71,25 +71,15 @@ interface GlassComparisonTableProps {
   startNewQuoteLabel?: string | null
 }
 
-// Tailwind class strings must be literal — not constructed dynamically
-const GRID_CLASS: Record<number, string> = {
-  1: 'grid-cols-1',
-  2: 'grid-cols-2',
-  3: 'grid-cols-2 sm:grid-cols-3',
-  4: 'grid-cols-2 md:grid-cols-4',
-  5: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5',
-  6: 'grid-cols-2 sm:grid-cols-3',
-}
+const LABEL_CLASS = 'block font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface mb-2'
 
-export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, heading, subtext, quieterLabel, lessHeatLabel, getMyPriceLabel, selectedLabel, eastWestBold, eastWestBody, comparisonNote, step1Heading, measureInstruction, measureNote, addWindowLabel, yourQuoteLabel, noMeasurementsHint, accuracyNote, measurementOffNote, budgetPrompt, sendQuoteLabel, dialogTitle, dialogDescription, modalQuoteSummaryLabel, modalSubmitLabel, modalSendingLabel, modalErrorMessage, successEyebrow, successTitle, successBody, startNewQuoteLabel }: GlassComparisonTableProps) {
+export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, heading, subtext, quieterLabel, lessHeatLabel, comparisonNote, eastWestBold, eastWestBody, step1Heading, measureInstruction, measureNote, addWindowLabel, yourQuoteLabel, noMeasurementsHint, accuracyNote, measurementOffNote, budgetPrompt, sendQuoteLabel, dialogTitle, dialogDescription, modalQuoteSummaryLabel, modalSubmitLabel, modalSendingLabel, modalErrorMessage, successEyebrow, successTitle, successBody, startNewQuoteLabel }: GlassComparisonTableProps) {
   const optionsMap = Object.fromEntries(options.map(o => [o.optionKey, o]))
   const optionKeys = options.map(o => o.optionKey)
-  const topKey = optionKeys[optionKeys.length - 1] // last option is always the premium tier
-  const gridClass = GRID_CLASS[optionKeys.length] ?? 'grid-cols-2 sm:grid-cols-3'
 
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [selectedOption, setSelectedOption] = useState<OptionKey | null>(null)
+  const [selectedOption, setSelectedOption] = useState<OptionKey | null>(options[0]?.optionKey ?? null)
   const [rows, setRows] = useState<RowDraft[]>([{ ...BLANK_ROW }])
   const [dialogOpen, setDialogOpen] = useState(false)
   const [quoteState, quoteAction, quotePending] = useActionState(
@@ -97,20 +87,13 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
     { status: 'idle' } as QuoteState,
   )
 
-  // Sync from URL on mount
+  // Sync from URL on mount (shareable ?option=A links)
   /* eslint-disable react-hooks/exhaustive-deps, react-hooks/set-state-in-effect */
   useEffect(() => {
     const opt = searchParams.get('option') as OptionKey
-    if (optionKeys.includes(opt) && !selectedOption) {
-      setSelectedOption(opt)
-    }
+    if (optionKeys.includes(opt)) setSelectedOption(opt)
   }, [searchParams])
   /* eslint-enable react-hooks/exhaustive-deps, react-hooks/set-state-in-effect */
-
-  function handleSelect(key: OptionKey) {
-    setSelectedOption(key)
-    router.replace(`?option=${key}`, { scroll: false })
-  }
 
   function updateRow(i: number, field: keyof RowDraft, value: string | boolean) {
     setRows(prev => {
@@ -130,7 +113,7 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
   }
 
   function reset() {
-    setSelectedOption(null)
+    setSelectedOption(options[0]?.optionKey ?? null)
     setRows([{ ...BLANK_ROW }])
     router.replace('?', { scroll: false })
   }
@@ -143,299 +126,171 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
   const totalWindows = validRows.reduce((s, r) => s + r.quantity, 0)
   const totalSqm = validRows.reduce((s, r) => s + (r.heightMm / 1000) * (r.widthMm / 1000) * r.quantity, 0)
 
-  // ── Main view ──────────────────────────────────────────────────────────────
+  // ── Single-page quote form ───────────────────────────────────────────────
   return (
     <section className="bg-surface-container-low py-14 md:py-18" id="estimate-form">
-      <div className="max-w-5xl mx-auto px-4">
+      <div className="max-w-2xl mx-auto px-4">
 
         {/* Header */}
-        <div className="text-center mb-8 md:mb-10">
+        <div className="mb-8">
           <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
             {eyebrow ?? 'Glass Options'}
           </p>
           <h2
-            className="font-display uppercase leading-[0.9] text-on-surface"
-            style={{ fontSize: 'clamp(1.35rem,5vw,3.5rem)' }}
+            className="font-display uppercase leading-[0.95] text-on-surface"
+            style={{ fontSize: 'clamp(1.6rem,5vw,3rem)' }}
           >
-            {heading ?? 'What do I want to achieve?'}
+            {heading ?? 'Get your instant quote'}
           </h2>
-          <p className="font-sans text-sm text-on-surface mt-3">
-            {subtext ?? 'See your price per square metre for each option below.'}
-          </p>
+          {subtext && (
+            <p className="font-sans text-sm text-on-surface mt-3 leading-relaxed">{subtext}</p>
+          )}
         </div>
 
-        {/* responsive grid — every option shows its price up front (no selection needed) */}
-        <div className={`grid ${gridClass} gap-3`}>
-          {optionKeys.map(key => {
-            const opt = optionsMap[key]
-            const isTop = key === topKey
-            const isSelected = selectedOption === key
+        {/* One continuous form */}
+        <div className="space-y-8">
 
-            return (
-              <div
-                key={key}
-                role="button"
-                tabIndex={0}
-                onClick={() => handleSelect(key)}
-                onKeyDown={e => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    handleSelect(key)
-                  }
-                }}
-                className={[
-                  'relative flex flex-col p-4 md:p-5 cursor-pointer transition-all duration-150 group',
-                  'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
-                  isSelected
-                    ? 'border-2 border-primary bg-primary/8 scale-[1.02]'
-                    : isTop
-                    ? 'bg-inverse-surface border border-primary-container hover:border-primary-container active:scale-[0.98]'
-                    : 'bg-surface border border-surface-container-high hover:border-primary/60 hover:bg-surface-container active:scale-[0.98]',
-                ].join(' ')}
-              >
-                {isSelected && (
-                  <span className="absolute top-1.5 right-1.5 font-headline text-[0.5rem] font-semibold uppercase tracking-widest bg-primary text-white px-1.5 py-0.5 leading-none">
-                    Selected
-                  </span>
-                )}
+          {/* 1 — Glass option (dropdown) */}
+          <div>
+            <label htmlFor="glass-option" className={LABEL_CLASS}>
+              Glass option
+            </label>
+            <select
+              id="glass-option"
+              value={selectedOption ?? ''}
+              onChange={e => {
+                const key = e.target.value as OptionKey
+                setSelectedOption(key)
+                router.replace(`?option=${key}`, { scroll: false })
+              }}
+              className="w-full bg-white border border-outline-variant px-3 py-3 font-sans text-sm text-on-surface focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+            >
+              {optionKeys.map(key => {
+                const o = optionsMap[key]
+                return (
+                  <option key={key} value={key}>
+                    {o.label} — {o.sublabel} — from ${o.pricePerSqm}/m²
+                  </option>
+                )
+              })}
+            </select>
+            {selectedOpt && (
+              <p className="mt-2 font-sans text-xs text-on-surface/70 leading-relaxed">
+                {selectedOpt.noisePct}% {quieterLabel ?? 'quieter'} · {selectedOpt.heatPct}% {lessHeatLabel ?? 'less heat'} — {comparisonNote ?? 'compared to standard 3mm clear window pane glass.'}
+              </p>
+            )}
+            {selectedOpt?.spec && (
+              <p className="mt-1 font-sans text-xs text-on-surface/50">
+                Glass make-up: {selectedOpt.spec}
+              </p>
+            )}
+            <p className="mt-2 font-sans text-xs text-on-surface/70 leading-relaxed">
+              <strong>{eastWestBold ?? 'East or west-facing rooms?'}</strong> {eastWestBody ?? 'They get more heat — consider Option C or D.'}
+            </p>
+          </div>
 
-                {/* Option letter */}
-                <span
-                  className={[
-                    'font-display uppercase leading-none mb-2',
-                    isSelected ? 'text-primary' : isTop ? 'text-primary-container' : 'text-primary',
-                  ].join(' ')}
-                  style={{ fontSize: 'clamp(2rem,5vw,3rem)' }}
-                >
-                  {key}
-                </span>
+          {/* 2 — Your windows */}
+          <div>
+            <label className={LABEL_CLASS}>{step1Heading ?? 'Your windows'}</label>
+            <p className="font-sans text-xs text-on-surface/70 leading-relaxed mb-1">
+              {measureInstruction ?? 'Measure the glass, not the frame. Enter height and width in millimetres.'}
+            </p>
+            <p className="font-sans text-xs text-on-surface/50 leading-relaxed mb-4">
+              {measureNote ?? 'Same size three times? Enter one row and set quantity to 3.'}
+            </p>
 
-                {/* Sublabel */}
-                <p
-                  className={[
-                    'font-headline text-xs font-semibold uppercase tracking-wide leading-tight mb-2',
-                    isSelected ? 'text-on-surface' : isTop ? 'text-inverse-on-surface' : 'text-on-surface',
-                  ].join(' ')}
-                >
-                  {opt.sublabel}
-                </p>
+            <div className="space-y-3">
+              {rows.map((row, i) => (
+                <WindowRowInput
+                  key={i}
+                  index={i}
+                  row={row}
+                  onChange={(field, val) => updateRow(i, field, val)}
+                  onRemove={() => removeRow(i)}
+                  canRemove={rows.length > 1}
+                  secondStoreySurcharge={secondStoreySurcharge}
+                />
+              ))}
+            </div>
 
-                {/* Instant price — shown for every option, no selection required */}
-                <p
-                  className={[
-                    'font-display uppercase leading-none mb-3',
-                    isSelected ? 'text-primary' : isTop ? 'text-primary-container' : 'text-on-surface',
-                  ].join(' ')}
-                  style={{ fontSize: 'clamp(1.1rem,3.5vw,1.6rem)' }}
-                >
-                  From ${opt.pricePerSqm}
-                  <span className="text-[0.55em] tracking-normal">/m²</span>
-                </p>
+            <button
+              type="button"
+              onClick={addRow}
+              className="mt-3 w-full py-2.5 border border-dashed border-outline-variant text-on-surface/50 hover:border-primary hover:text-primary font-headline text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-150"
+            >
+              {addWindowLabel ?? '+ Add another window'}
+            </button>
+          </div>
 
-                {/* Metrics */}
-                <div className="space-y-2 mb-3">
-                  <div>
-                    <p
-                      className={[
-                        'font-display uppercase leading-none',
-                        isSelected ? 'text-primary' : isTop ? 'text-primary-container' : 'text-on-surface',
-                      ].join(' ')}
-                      style={{ fontSize: 'clamp(1.5rem,4vw,2.25rem)' }}
-                    >
-                      {opt.noisePct}%
-                    </p>
-                    <p
-                      className={[
-                        'font-headline text-[0.6rem] font-semibold uppercase tracking-wide',
-                        isSelected ? 'text-on-surface/70' : isTop ? 'text-inverse-on-surface/80' : 'text-on-surface/80',
-                      ].join(' ')}
-                    >
-                      {quieterLabel ?? 'quieter'}
-                    </p>
-                  </div>
-                  <div>
-                    <p
-                      className={[
-                        'font-display uppercase leading-none',
-                        isSelected ? 'text-primary' : isTop ? 'text-primary-container' : 'text-on-surface',
-                      ].join(' ')}
-                      style={{ fontSize: 'clamp(1.5rem,4vw,2.25rem)' }}
-                    >
-                      {opt.heatPct}%
-                    </p>
-                    <p
-                      className={[
-                        'font-headline text-[0.6rem] font-semibold uppercase tracking-wide',
-                        isSelected ? 'text-on-surface/70' : isTop ? 'text-inverse-on-surface/80' : 'text-on-surface/80',
-                      ].join(' ')}
-                    >
-                      {lessHeatLabel ?? 'less heat'}
-                    </p>
+          {/* 3 — Your quote */}
+          <div className="border-t border-surface-container-high pt-6">
+            <label className={LABEL_CLASS}>{yourQuoteLabel ?? 'Your quote'}</label>
+
+            <p
+              className="font-display uppercase text-primary leading-none"
+              style={{ fontSize: 'clamp(2rem,7vw,3.5rem)' }}
+              aria-live="polite"
+              aria-label={total ? `Quote total: $${total.toLocaleString()}` : 'Enter your window measurements above'}
+            >
+              {total ? `$${total.toLocaleString()}` : '—'}
+            </p>
+
+            {!total && (
+              <p className="font-sans text-xs text-on-surface/50 mt-2">
+                {noMeasurementsHint ?? 'Updates as you enter your windows above.'}
+              </p>
+            )}
+
+            {total && selectedOption && (
+              <>
+                <div className="mt-4 space-y-1">
+                  {validRows.map((r, i) => {
+                    const sqm = (r.heightMm / 1000) * (r.widthMm / 1000)
+                    const opt = optionsMap[selectedOption]
+                    const rowCost =
+                      sqm * opt.pricePerSqm * r.quantity +
+                      (r.secondStorey ? secondStoreySurcharge * r.quantity : 0)
+                    return (
+                      <div key={i} className="flex justify-between gap-4 font-sans text-xs text-on-surface/60">
+                        <span>
+                          {r.heightMm}×{r.widthMm}mm · qty {r.quantity}
+                          {r.secondStorey ? ' · 2nd floor' : ''} · ${opt.pricePerSqm}/m²
+                        </span>
+                        <span className="shrink-0">${Math.round(rowCost).toLocaleString()}</span>
+                      </div>
+                    )
+                  })}
+
+                  <div className="flex justify-between gap-4 font-sans text-xs font-semibold text-on-surface border-t border-surface-container-high pt-2 mt-2">
+                    <span>Total area: {totalSqm.toFixed(2)} m²</span>
+                    <span className="shrink-0">
+                      {optionsMap[selectedOption].label} · ${optionsMap[selectedOption].pricePerSqm}/m²
+                    </span>
                   </div>
                 </div>
 
-                {/* CTA label */}
-                <p
-                  className={[
-                    'mt-auto font-headline text-[0.65rem] font-semibold uppercase tracking-[0.15em] transition-colors duration-150',
-                    isSelected
-                      ? 'text-primary'
-                      : isTop
-                      ? 'text-primary-container group-hover:text-primary-fixed-dim'
-                      : 'text-primary/60 group-hover:text-primary',
-                  ].join(' ')}
-                >
-                  {isSelected ? (selectedLabel ?? '✓ Selected') : (getMyPriceLabel ?? 'Get my price →')}
-                </p>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Baseline note (glass options are measured from standard 3mm glass) — always visible */}
-        <p className="mt-5 font-sans text-xs text-on-surface/70 leading-relaxed">
-          {comparisonNote ?? 'The quieter and less-heat figures show the reduction from standard 3mm clear window glass.'}
-        </p>
-        <div className="mt-4 border-l-4 border-primary-container pl-4">
-          <p className="font-sans text-sm text-on-surface leading-relaxed">
-            <strong>{eastWestBold ?? 'East or west-facing rooms?'}</strong> {eastWestBody ?? 'They get more heat. Choose Option C or D.'}
-          </p>
-        </div>
-
-        {/* ── Calculator — single page, measurements always visible ──────── */}
-        <div className="mt-10 max-w-2xl">
-
-          {/* Your windows */}
-          <p
-            className="font-display uppercase text-on-surface leading-none mb-3"
-            style={{ fontSize: 'clamp(1.2rem,3vw,1.75rem)' }}
-          >
-            {step1Heading ?? 'Your windows'}
-          </p>
-
-          <div className="mb-4 border-l-2 border-primary-container pl-3">
-            <p className="font-sans text-sm text-on-surface leading-relaxed">
-              {measureInstruction ?? 'Measure the glass, not the frame. Enter height and width in millimetres.'}
-            </p>
-            <p className="font-sans text-xs text-on-surface/60 mt-1 leading-relaxed">
-              {measureNote ?? 'Same size three times? Enter one row and set quantity to 3.'}
-            </p>
-          </div>
-
-          <div className="flex justify-center mb-5">
-            <WindowDiagram />
-          </div>
-
-          <div className="space-y-4">
-            {rows.map((row, i) => (
-              <WindowRowInput
-                key={i}
-                index={i}
-                row={row}
-                onChange={(field, val) => updateRow(i, field, val)}
-                onRemove={() => removeRow(i)}
-                canRemove={rows.length > 1}
-                secondStoreySurcharge={secondStoreySurcharge}
-              />
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={addRow}
-            className="mt-4 w-full py-3 border border-dashed border-outline-variant text-on-surface/50 hover:border-primary hover:text-primary font-headline text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-150"
-          >
-            {addWindowLabel ?? '+ Add another window'}
-          </button>
-
-          {/* Your quote */}
-          <div className="mt-8 pt-8 border-t border-surface-container-high">
-            <p className="font-headline text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-on-surface/70 mb-2">
-              {yourQuoteLabel ?? 'Your quote'}
-            </p>
-
-            {!selectedOption ? (
-              <p className="font-sans text-sm text-on-surface/60 leading-relaxed">
-                Pick an option above to see your full quote.
-              </p>
-            ) : (
-              <>
-                <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-on-surface mb-3">
-                  {optionsMap[selectedOption].label}: {optionsMap[selectedOption].sublabel}
-                </p>
-
-                <p
-                  className="font-display uppercase text-primary leading-none transition-all duration-200"
-                  style={{ fontSize: 'clamp(2.25rem,7vw,4rem)' }}
-                  aria-live="polite"
-                  aria-label={
-                    total
-                      ? `Quote total: $${total.toLocaleString()}`
-                      : 'Enter your window measurements above'
-                  }
-                >
-                  {total ? `$${total.toLocaleString()}` : '—'}
-                </p>
-
-                {!total && (
-                  <p className="font-sans text-xs text-on-surface/50 mt-2">
-                    {noMeasurementsHint ?? 'Updates as you enter your windows above.'}
+                <div className="border-l-4 border-primary-container pl-4 mt-5">
+                  <p className="font-sans text-sm font-semibold text-on-surface">
+                    {accuracyNote ?? "If you've filled this out correctly, your price is accurate to within 10%."}
                   </p>
-                )}
+                  <p className="font-sans text-xs text-on-surface/60 leading-relaxed mt-1">
+                    {measurementOffNote ?? 'If your measurements are off, the final quote may adjust slightly. We confirm everything on site before any work starts.'}
+                  </p>
+                </div>
 
-                {total && (
-                  <>
-                    <div className="mt-4 space-y-1">
-                      {validRows.map((r, i) => {
-                        const sqm = (r.heightMm / 1000) * (r.widthMm / 1000)
-                        const opt = optionsMap[selectedOption!]
-                        const rowCost =
-                          sqm * opt.pricePerSqm * r.quantity +
-                          (r.secondStorey ? secondStoreySurcharge * r.quantity : 0)
-                        return (
-                          <div key={i} className="flex justify-between gap-4 font-sans text-xs text-on-surface/60">
-                            <span>
-                              {r.heightMm}×{r.widthMm}mm · qty {r.quantity}
-                              {r.secondStorey ? ' · 2nd floor' : ''} · ${opt.pricePerSqm}/m²
-                            </span>
-                            <span className="shrink-0">${Math.round(rowCost).toLocaleString()}</span>
-                          </div>
-                        )
-                      })}
+                <div className="mt-5 bg-primary-container text-on-primary-fixed px-5 py-3">
+                  <p className="font-sans text-sm font-medium leading-snug">
+                    {budgetPrompt ?? "If this is within your budget, send your quote through — we'll call to confirm and book the install."}
+                  </p>
+                </div>
 
-                      {/* Total area + rate for the selected product */}
-                      <div className="flex justify-between gap-4 font-sans text-xs font-semibold text-on-surface border-t border-surface-container-high pt-2 mt-2">
-                        <span>Total area: {totalSqm.toFixed(2)} m²</span>
-                        <span className="shrink-0">
-                          {optionsMap[selectedOption].label} · ${optionsMap[selectedOption].pricePerSqm}/m²
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="border-l-4 border-primary-container pl-4 mt-5">
-                      <p className="font-sans text-sm font-semibold text-on-surface">
-                        {accuracyNote ?? "If you've filled this out correctly, your price is accurate to within 10%."}
-                      </p>
-                      <p className="font-sans text-xs text-on-surface/60 leading-relaxed mt-1">
-                        {measurementOffNote ?? 'If your measurements are off, the final quote may adjust slightly. We confirm everything on site before any work starts.'}
-                      </p>
-                    </div>
-
-                    <div className="mt-5 bg-primary-container text-on-primary-fixed px-5 py-3">
-                      <p className="font-sans text-sm font-medium leading-snug">
-                        {budgetPrompt ?? "If this is within your budget, send your quote through — we'll call to confirm and book the install."}
-                      </p>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => setDialogOpen(true)}
-                      className="mt-6 w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 active:scale-[0.98]"
-                    >
-                      {sendQuoteLabel ?? 'Send Us Your Quote →'}
-                    </button>
-                  </>
-                )}
+                <button
+                  type="button"
+                  onClick={() => setDialogOpen(true)}
+                  className="mt-6 w-full bg-primary-container text-on-primary-fixed font-headline text-sm font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 active:scale-[0.98]"
+                >
+                  {sendQuoteLabel ?? 'Send Us Your Quote →'}
+                </button>
               </>
             )}
           </div>
@@ -685,29 +540,5 @@ function LightField({
         className="bg-white border border-outline-variant px-4 py-3 font-sans text-base text-on-surface placeholder:text-on-surface/30 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
       />
     </div>
-  )
-}
-
-function WindowDiagram() {
-  return (
-    <svg
-      width="110"
-      height="110"
-      viewBox="0 0 110 110"
-      aria-label="Window measurement diagram — height and width"
-      className="opacity-70"
-    >
-      <rect x="25" y="8" width="70" height="80" fill="none" stroke="rgba(0,0,0,0.25)" strokeWidth="2" />
-      <line x1="25" y1="48" x2="95" y2="48" stroke="rgba(0,0,0,0.12)" strokeWidth="1" />
-      <line x1="60" y1="8"  x2="60" y2="88" stroke="rgba(0,0,0,0.12)" strokeWidth="1" />
-      <line x1="14" y1="8"  x2="14" y2="88" stroke="#c9a800" strokeWidth="1.5" />
-      <line x1="10" y1="8"  x2="18" y2="8"  stroke="#c9a800" strokeWidth="1.5" />
-      <line x1="10" y1="88" x2="18" y2="88" stroke="#c9a800" strokeWidth="1.5" />
-      <text x="8" y="52" textAnchor="middle" fontSize="9" fill="#c9a800" transform="rotate(-90,8,52)" fontFamily="sans-serif">H</text>
-      <line x1="25" y1="100" x2="95" y2="100" stroke="#c9a800" strokeWidth="1.5" />
-      <line x1="25" y1="96"  x2="25" y2="104" stroke="#c9a800" strokeWidth="1.5" />
-      <line x1="95" y1="96"  x2="95" y2="104" stroke="#c9a800" strokeWidth="1.5" />
-      <text x="60" y="109" textAnchor="middle" fontSize="9" fill="#c9a800" fontFamily="sans-serif">W</text>
-    </svg>
   )
 }
