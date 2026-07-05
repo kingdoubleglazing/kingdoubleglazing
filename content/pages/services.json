@@ -1,14 +1,11 @@
 {
   "blocks": [
     {
-      "_template": "hero",
       "variant": "overlay",
       "badge": "All Services",
       "headlineWhite": "One Team.",
       "headlineYellow": "Every Job.",
       "subtext": "Retrofit double glazing is our main business — we add a second pane to your existing windows. We also do emergency repairs, shower screens, splashbacks, mirrors, and commercial glazing. 10-year warranty on every job.",
-      "imageSrc": "/hero/hero-services.webp",
-      "imageAlt": "Double glazing services Melbourne",
       "primaryCta": {
         "label": "Generate My Quote →",
         "href": "/instant-estimate/"
@@ -16,10 +13,12 @@
       "secondaryCta": {
         "label": "0406 470 595",
         "href": "tel:+61406470595"
-      }
+      },
+      "imageSrc": "/hero/hero-services.webp",
+      "imageAlt": "Double glazing services Melbourne",
+      "_template": "hero"
     },
     {
-      "_template": "trustBar",
       "items": [
         {
           "iconKey": "clock",
@@ -37,17 +36,14 @@
           "iconKey": "wrench",
           "label": "Fits Most Existing Frames"
         }
-      ]
+      ],
+      "_template": "trustBar"
     },
     {
-      "_template": "serviceSection",
       "id": "retrofit",
       "eyebrow": "Our Main Service",
       "heading": "Retrofit Double Glazing",
       "bodyText": "We add a second layer of glass to your existing windows — no frame replacement. Works on timber, aluminium, and steel frames. Installed in one day with minimal disruption.",
-      "variant": "featured",
-      "imageSrc": "/stock/double-glazed-2000px.webp",
-      "imageAlt": "Double glazed window close-up — retrofit installation Melbourne",
       "bullets": [
         "Works on existing timber, aluminium & steel frames",
         "Up to 70% quieter — ideal for tram & traffic noise",
@@ -56,6 +52,9 @@
         "10-year warranty on glass and workmanship",
         "Beat any genuine quote by 30% — guaranteed in writing"
       ],
+      "variant": "featured",
+      "imageSrc": "/stock/double-glazed-2000px.webp",
+      "imageAlt": "Double glazed window close-up — retrofit installation Melbourne",
       "primaryCta": {
         "label": "Get My Quote →",
         "href": "/instant-estimate/"
@@ -63,24 +62,21 @@
       "secondaryCta": {
         "label": "See How It Works",
         "href": "/about/"
-      }
+      },
+      "_template": "serviceSection"
     },
     {
-      "_template": "adaptorDisclosure",
       "heading": "About our adaptors",
       "mobileSubtitle": "Reduces the glass you see by ~40mm in height, 20mm each side. Tap to read more.",
       "body1": "We use special fittings to attach new glass to your existing frame. Our frame reduces the glass size you see by about 40mm overall in height, and 20mm per side, approximately — that is the only visible change. No ripping out, no plastering, no mess.",
-      "body2": "This saves you thousands compared to full window replacement."
+      "body2": "This saves you thousands compared to full window replacement.",
+      "_template": "adaptorDisclosure"
     },
     {
-      "_template": "serviceSection",
       "id": "emergency",
       "eyebrow": "24/7 Emergency",
       "heading": "Emergency Glass Repair",
       "bodyText": "Broken window? We respond within 2–4 hours across Melbourne. Temporary board-up available if immediate replacement isn't possible. Insurance documentation provided on request.",
-      "variant": "danger",
-      "imageSrc": "/stock/AdobeStock_323273938.webp",
-      "imageAlt": "Emergency glass repair — glazier on site in Melbourne",
       "bullets": [
         "24/7 emergency response across Melbourne",
         "2–4 hour response time for inner suburbs",
@@ -88,26 +84,29 @@
         "All glass types: single, double, shower screens, shopfronts",
         "Insurance documentation on request"
       ],
+      "variant": "danger",
+      "imageSrc": "/stock/AdobeStock_323273938.webp",
+      "imageAlt": "Emergency glass repair — glazier on site in Melbourne",
       "primaryCta": {
         "label": "Call Now",
         "href": "tel:+61406470595"
-      }
+      },
+      "_template": "serviceSection"
     },
     {
-      "_template": "serviceSection",
       "id": "shower-screens",
       "eyebrow": "Bathroom",
       "heading": "Shower Screens",
       "bodyText": "Semi-frameless and frameless shower screens supplied and installed across Melbourne. We measure on site for a perfect fit.",
-      "variant": "default",
-      "imageSrc": "/stock/shower-pane-1000x667-1.webp",
-      "imageAlt": "Semi-frameless shower screen installation Melbourne",
       "bullets": [
         "Semi-frameless and frameless options",
         "Custom sizes measured on site",
         "Toughened safety glass",
         "Clean, minimal installation"
       ],
+      "variant": "default",
+      "imageSrc": "/stock/shower-pane-1000x667-1.webp",
+      "imageAlt": "Semi-frameless shower screen installation Melbourne",
       "primaryCta": {
         "label": "Get a Quote →",
         "href": "/contact/?service=shower-visit"
@@ -115,55 +114,52 @@
       "secondaryCta": {
         "label": "Send measurements",
         "href": "/contact/?service=shower-diy"
-      }
+      },
+      "_template": "serviceSection"
     },
     {
-      "_template": "serviceSection",
       "id": "splashbacks",
       "eyebrow": "Kitchen & Bath",
       "heading": "Glass Splashbacks",
       "bodyText": "Custom glass splashbacks in any colour for kitchens and bathrooms. Toughened safety glass, cut to size and installed by our team.",
-      "variant": "dark",
-      "imageSrc": "/stock/splashback-2.webp",
-      "imageAlt": "Kitchen glass splashback installation Melbourne",
       "bullets": [
         "Any colour — matched to your paint or tile",
         "Toughened safety glass",
         "Custom cut to size",
         "Easy to clean, no grout lines"
       ],
+      "variant": "dark",
+      "imageSrc": "/stock/splashback-2.webp",
+      "imageAlt": "Kitchen glass splashback installation Melbourne",
       "primaryCta": {
         "label": "Get a Quote →",
         "href": "/contact/"
-      }
+      },
+      "_template": "serviceSection"
     },
     {
-      "_template": "serviceSection",
       "id": "mirrors",
       "eyebrow": "Décor",
       "heading": "Custom Mirrors",
       "bodyText": "Custom-cut mirrors for bathrooms, gyms, hallways, and feature walls. Any size, any shape, cut and fitted by our team.",
-      "variant": "default",
       "bullets": [
         "Any size and shape",
         "Frameless or framed options",
         "Cut and fitted on site",
         "Bevelled edges available"
       ],
+      "variant": "default",
       "primaryCta": {
         "label": "Get a Quote →",
         "href": "/contact/"
-      }
+      },
+      "_template": "serviceSection"
     },
     {
-      "_template": "serviceSection",
       "id": "commercial",
       "eyebrow": "Commercial",
       "heading": "Commercial Glazing",
       "bodyText": "Shopfront glazing, office partitions, and large-format commercial glass. We supply and install across Melbourne with competitive trade pricing.",
-      "variant": "dark",
-      "imageSrc": "/hero/hero-commercial-glazing.webp",
-      "imageAlt": "Commercial glazing — shopfront and office glass Melbourne",
       "bullets": [
         "Shopfronts and entrances",
         "Office partitions and screens",
@@ -171,13 +167,16 @@
         "Insurance and strata work",
         "Trade pricing available"
       ],
+      "variant": "dark",
+      "imageSrc": "/hero/hero-commercial-glazing.webp",
+      "imageAlt": "Commercial glazing — shopfront and office glass Melbourne",
       "primaryCta": {
         "label": "Get a Quote →",
         "href": "/contact/"
-      }
+      },
+      "_template": "serviceSection"
     },
     {
-      "_template": "faq",
       "heading": "Service Questions",
       "subheading": "Common questions about what we do.",
       "faqs": [
@@ -229,18 +228,18 @@
           "q": "Do you provide quotes on-site?",
           "a": "Retrofit quotes are done online with our Instant Estimate, while shower screens and custom work need a site measure."
         }
-      ]
+      ],
+      "_template": "faq"
     },
     {
-      "_template": "freeAdvice",
       "eyebrow": "Free Advice",
       "headingLine1": "Got a question",
       "headingLine2": "we haven't covered?",
       "body": "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.",
-      "buttonLabel": "Call Us"
+      "buttonLabel": "Call Us",
+      "_template": "freeAdvice"
     },
     {
-      "_template": "ctaBanner",
       "heading": "Ready to Get\nStarted?",
       "subtext": "Generate your own quote in minutes, or call us directly for any service.",
       "primaryCta": {
@@ -255,10 +254,10 @@
         "Price locked at quote",
         "10-year warranty",
         "We beat any quote by 30%"
-      ]
+      ],
+      "_template": "ctaBanner"
     },
     {
-      "_template": "ownerBio",
       "eyebrow": "Meet the Owner",
       "name": "Tas Markou",
       "role": "Founder & Master Glazier",
@@ -270,9 +269,10 @@
       ],
       "quote": "If we can't beat any genuine quote by 30%, I'll tell you straight. Stop. Don't overpay. — Tas",
       "cta": {
-        "label": "Read Tas's Full Story →",
+        "label": "Read Tas's Full Story",
         "href": "/about/"
-      }
+      },
+      "_template": "ownerBio"
     }
   ]
 }
