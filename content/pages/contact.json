@@ -1,14 +1,11 @@
 {
   "blocks": [
     {
-      "_template": "hero",
       "variant": "overlay",
       "badge": "Get in Touch",
       "headlineWhite": "Get a Quote.",
       "headlineYellow": "No Pressure.",
       "subtext": "Price yourself online first. Call us when you'd like to proceed.",
-      "imageSrc": "/hero/hero-home.webp",
-      "imageAlt": "Contact King Double Glazing Melbourne",
       "primaryCta": {
         "label": "Generate My Quote →",
         "href": "/instant-estimate/"
@@ -16,10 +13,12 @@
       "secondaryCta": {
         "label": "0406 470 595",
         "href": "tel:+61406470595"
-      }
+      },
+      "imageSrc": "/hero/hero-home.webp",
+      "imageAlt": "Contact King Double Glazing Melbourne",
+      "_template": "hero"
     },
     {
-      "_template": "trustBar",
       "items": [
         {
           "iconKey": "clock",
@@ -37,10 +36,10 @@
           "iconKey": "wrench",
           "label": "Fits Most Existing Frames"
         }
-      ]
+      ],
+      "_template": "trustBar"
     },
     {
-      "_template": "contactCards",
       "phoneSublabel": "Mon–Fri 8am–6pm · Emergency 24/7",
       "emailSublabel": "Reply within one business day",
       "serviceAreaLabel": "Service Area",
@@ -48,14 +47,14 @@
       "areaSublabel": "Eastern, northern & inner-western suburbs",
       "emergencyLabel": "Emergency",
       "emergencyValue": "24/7 Emergency Glass",
-      "emergencySublabel": "2–4 hour response, inner suburbs"
+      "emergencySublabel": "2–4 hour response, inner suburbs",
+      "_template": "contactCards"
     },
     {
-      "_template": "contactForm",
-      "heading": "Send Us a Message"
+      "heading": "Send Us a Message",
+      "_template": "contactForm"
     },
     {
-      "_template": "faq",
       "heading": "Common Questions",
       "subheading": "Quick answers before you get in touch.",
       "faqs": [
@@ -71,18 +70,18 @@
           "q": "What areas do you service?",
           "a": "All of metropolitan Melbourne — call us for outer-metro jobs."
         }
-      ]
+      ],
+      "_template": "faq"
     },
     {
-      "_template": "freeAdvice",
       "eyebrow": "Free Advice",
       "headingLine1": "Got a question",
       "headingLine2": "we haven't covered?",
       "body": "Call us directly. Free advice, no sales pitch. 25+ years in glazing — we'll give you a straight answer.",
-      "buttonLabel": "Call Us"
+      "buttonLabel": "Call Us",
+      "_template": "freeAdvice"
     },
     {
-      "_template": "ctaBanner",
       "heading": "Want the\nNumber First?",
       "subtext": "Use the Quote Generator — see your price in minutes, no email required. Then contact us when you're ready.",
       "primaryCta": {
@@ -97,10 +96,10 @@
         "Price locked at quote",
         "10-year warranty",
         "We beat any quote by 30%"
-      ]
+      ],
+      "_template": "ctaBanner"
     },
     {
-      "_template": "ownerBio",
       "eyebrow": "Meet the Owner",
       "name": "Tas Markou",
       "role": "Founder & Master Glazier",
@@ -112,9 +111,10 @@
       ],
       "quote": "If we can't beat any genuine quote by 30%, I'll tell you straight. Stop. Don't overpay. — Tas",
       "cta": {
-        "label": "Read Tas's Full Story →",
+        "label": "Read Tas's Full Story ",
         "href": "/about/"
-      }
+      },
+      "_template": "ownerBio"
     }
   ]
 }
