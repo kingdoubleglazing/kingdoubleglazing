@@ -1,3 +1,5 @@
+import { tf } from '@/lib/tina'
+
 export interface StoryWithStatsBlockData {
   __typename?: string
   eyebrow?: string | null
@@ -8,12 +10,6 @@ export interface StoryWithStatsBlockData {
     value?: string | null
     label?: string | null
   } | null> | null
-  tina?: {
-    eyebrow?: string
-    paragraphs?: string
-    quote?: string
-    stats?: Array<{ value?: string; label?: string } | undefined>
-  }
 }
 
 export function StoryWithStatsBlock({ block }: { block: StoryWithStatsBlockData }) {
@@ -21,16 +17,18 @@ export function StoryWithStatsBlock({ block }: { block: StoryWithStatsBlockData 
   const stats = (block.stats ?? []).filter(Boolean)
 
   return (
-    <section className="bg-surface py-16 md:py-24">
+    <section data-tina-field={tf(block)} className="bg-surface py-16 md:py-24">
       <div className="max-w-5xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <p
-              data-tina-field={block.tina?.eyebrow}
-              className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4"
-            >
-              {block.eyebrow ?? 'The Origin Story'}
-            </p>
+            {block.eyebrow && (
+              <p
+                data-tina-field={tf(block, 'eyebrow')}
+                className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4"
+              >
+                {block.eyebrow}
+              </p>
+            )}
             <h2
               className="font-display uppercase leading-[0.88] text-on-surface mb-8"
               style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
@@ -40,14 +38,14 @@ export function StoryWithStatsBlock({ block }: { block: StoryWithStatsBlockData 
             </h2>
             <div className="space-y-5 font-sans text-base text-on-surface leading-relaxed max-w-xl">
               {paragraphs.map((para, i) => (
-                <p key={i} data-tina-field={block.tina?.paragraphs}>
+                <p key={i} data-tina-field={tf(block, 'paragraphs', i)}>
                   {para}
                 </p>
               ))}
               {block.quote && (
                 <blockquote className="border-l-4 border-primary-container pl-5 not-italic">
                   <p
-                    data-tina-field={block.tina?.quote}
+                    data-tina-field={tf(block, 'quote')}
                     className="font-sans text-base font-semibold text-on-surface leading-relaxed"
                   >
                     {block.quote}
@@ -67,19 +65,23 @@ export function StoryWithStatsBlock({ block }: { block: StoryWithStatsBlockData 
                   style={{ '--i': i } as any}
                 >
                   <div className="h-0.5 w-8 bg-primary-container mb-5" aria-hidden="true" />
-                  <p
-                    data-tina-field={block.tina?.stats?.[i]?.value}
-                    className="font-display uppercase leading-none text-primary-container mb-2"
-                    style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
-                  >
-                    {stat!.value}
-                  </p>
-                  <p
-                    data-tina-field={block.tina?.stats?.[i]?.label}
-                    className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface"
-                  >
-                    {stat!.label}
-                  </p>
+                  {stat!.value && (
+                    <p
+                      data-tina-field={tf(stat, 'value')}
+                      className="font-display uppercase leading-none text-primary-container mb-2"
+                      style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
+                    >
+                      {stat!.value}
+                    </p>
+                  )}
+                  {stat!.label && (
+                    <p
+                      data-tina-field={tf(stat, 'label')}
+                      className="font-headline text-xs font-semibold uppercase tracking-[0.15em] text-on-surface"
+                    >
+                      {stat!.label}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>

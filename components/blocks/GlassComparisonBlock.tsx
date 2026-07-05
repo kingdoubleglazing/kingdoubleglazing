@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { GlassComparisonTable } from '@/components/sections/GlassComparisonTable'
+import { tf } from '@/lib/tina'
 import type { PricingOption } from '@/lib/types'
 
 export interface GlassComparisonBlockData {
@@ -50,11 +51,36 @@ export interface GlassComparisonBlockData {
 }
 
 export function GlassComparisonBlock({ pricingOptions = [], block }: { pricingOptions?: PricingOption[]; block?: GlassComparisonBlockData }) {
+  const tid = (field: string) => (block ? tf(block, field) : undefined)
+  const tinaIds = {
+    eyebrow: tid('eyebrow'),
+    heading: tid('heading'),
+    subtext: tid('subtext'),
+    step1Heading: tid('step1Heading'),
+    addWindowLabel: tid('addWindowLabel'),
+    yourQuoteLabel: tid('yourQuoteLabel'),
+    noMeasurementsHint: tid('noMeasurementsHint'),
+    accuracyNote: tid('accuracyNote'),
+    measurementOffNote: tid('measurementOffNote'),
+    budgetPrompt: tid('budgetPrompt'),
+    sendQuoteLabel: tid('sendQuoteLabel'),
+    dialogTitle: tid('dialogTitle'),
+    dialogDescription: tid('dialogDescription'),
+    modalQuoteSummaryLabel: tid('modalQuoteSummaryLabel'),
+    modalSubmitLabel: tid('modalSubmitLabel'),
+    modalErrorMessage: tid('modalErrorMessage'),
+    successEyebrow: tid('successEyebrow'),
+    successTitle: tid('successTitle'),
+    successBody: tid('successBody'),
+    startNewQuoteLabel: tid('startNewQuoteLabel'),
+  }
   return (
     <Suspense fallback={<div className="bg-surface-container-low h-96" />}>
       <GlassComparisonTable
         options={pricingOptions}
         secondStoreySurcharge={block?.secondStoreySurcharge ?? 150}
+        tinaSelf={block ? tf(block) : undefined}
+        tinaIds={tinaIds}
         eyebrow={block?.eyebrow}
         heading={block?.heading}
         subtext={block?.subtext}

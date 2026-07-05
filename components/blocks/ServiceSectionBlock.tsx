@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { GoldLinkButton } from '@/components/ui/GoldLinkButton'
 import { GhostLinkButton } from '@/components/ui/GhostLinkButton'
+import { tf } from '@/lib/tina'
 
 export interface ServiceSectionBlockData {
   __typename?: string
@@ -14,14 +15,6 @@ export interface ServiceSectionBlockData {
   imageAlt?: string | null
   primaryCta?: { label?: string | null; href?: string | null } | null
   secondaryCta?: { label?: string | null; href?: string | null } | null
-  tina?: {
-    eyebrow?: string
-    heading?: string
-    bodyText?: string
-    bullets?: string
-    primaryCta?: { label?: string; href?: string }
-    secondaryCta?: { label?: string; href?: string }
-  }
 }
 
 export function ServiceSectionBlock({ block }: { block: ServiceSectionBlockData }) {
@@ -46,41 +39,53 @@ export function ServiceSectionBlock({ block }: { block: ServiceSectionBlockData 
   const border = isFeatured ? 'border-l-4 border-primary-container pl-8' : ''
 
   return (
-    <section id={block.id ?? undefined} className={`${bg} py-16 md:py-20 scroll-mt-20`}>
+    <section
+      id={block.id ?? undefined}
+      data-tina-field={tf(block)}
+      className={`${bg} py-16 md:py-20 scroll-mt-20`}
+    >
       <div className="max-w-5xl mx-auto px-4">
         <div className={`grid grid-cols-1 ${block.imageSrc ? 'lg:grid-cols-2 gap-12 lg:gap-20 items-center' : ''}`}>
           <div className={border}>
-            <p
-              data-tina-field={block.tina?.eyebrow}
-              className={`font-headline text-xs font-semibold uppercase tracking-[0.2em] mb-4 ${eyebrowClass}`}
-            >
-              {block.eyebrow}
-            </p>
-            <h2
-              data-tina-field={block.tina?.heading}
-              className={`font-display uppercase leading-none mb-8 ${headingClass}`}
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
-            >
-              {block.heading}
-            </h2>
-            <p
-              data-tina-field={block.tina?.bodyText}
-              className={`font-sans text-base ${textClass} leading-relaxed mb-6`}
-            >
-              {block.bodyText}
-            </p>
+            {block.eyebrow && (
+              <p
+                data-tina-field={tf(block, 'eyebrow')}
+                className={`font-headline text-xs font-semibold uppercase tracking-[0.2em] mb-4 ${eyebrowClass}`}
+              >
+                {block.eyebrow}
+              </p>
+            )}
+            {block.heading && (
+              <h2
+                data-tina-field={tf(block, 'heading')}
+                className={`font-display uppercase leading-none mb-8 ${headingClass}`}
+                style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
+              >
+                {block.heading}
+              </h2>
+            )}
+            {block.bodyText && (
+              <p
+                data-tina-field={tf(block, 'bodyText')}
+                className={`font-sans text-base ${textClass} leading-relaxed mb-6`}
+              >
+                {block.bodyText}
+              </p>
+            )}
             {(block.bullets ?? []).filter(Boolean).length > 0 && (
               <ul className="space-y-3 mb-8">
-                {(block.bullets ?? []).filter(Boolean).map((b, i) => (
-                  <li
-                    key={i}
-                    data-tina-field={block.tina?.bullets}
-                    className={`flex items-start gap-3 font-sans text-sm ${textClass}`}
-                  >
-                    <span className={`${checkClass} font-bold mt-0.5 shrink-0`}>✓</span>
-                    {b}
-                  </li>
-                ))}
+                {(block.bullets ?? []).map((b, i) =>
+                  b ? (
+                    <li
+                      key={i}
+                      data-tina-field={tf(block, 'bullets', i)}
+                      className={`flex items-start gap-3 font-sans text-sm ${textClass}`}
+                    >
+                      <span className={`${checkClass} font-bold mt-0.5 shrink-0`}>✓</span>
+                      {b}
+                    </li>
+                  ) : null,
+                )}
               </ul>
             )}
             {(block.primaryCta?.label || block.secondaryCta?.label) && (
@@ -89,21 +94,24 @@ export function ServiceSectionBlock({ block }: { block: ServiceSectionBlockData 
                   <GoldLinkButton
                     label={block.primaryCta.label}
                     href={block.primaryCta.href ?? '/contact/'}
-                    tinaField={block.tina?.primaryCta?.label}
+                    tinaField={tf(block.primaryCta, 'label')}
                   />
                 )}
                 {block.secondaryCta?.label && (
                   <GhostLinkButton
                     label={block.secondaryCta.label}
                     href={block.secondaryCta.href ?? '/contact/'}
-                    tinaField={block.tina?.secondaryCta?.label}
+                    tinaField={tf(block.secondaryCta, 'label')}
                   />
                 )}
               </div>
             )}
           </div>
           {block.imageSrc && (
-            <div className="relative min-h-[280px] md:min-h-[400px] overflow-hidden">
+            <div
+              data-tina-field={tf(block, 'imageSrc')}
+              className="relative min-h-[280px] md:min-h-[400px] overflow-hidden"
+            >
               <Image
                 src={block.imageSrc}
                 alt={block.imageAlt ?? ''}

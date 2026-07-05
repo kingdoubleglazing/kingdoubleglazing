@@ -40,7 +40,15 @@
       ]
     },
     {
-      "_template": "contactCards"
+      "_template": "contactCards",
+      "phoneSublabel": "Mon–Fri 8am–6pm · Emergency 24/7",
+      "emailSublabel": "Reply within one business day",
+      "serviceAreaLabel": "Service Area",
+      "serviceAreaValue": "All of Melbourne",
+      "areaSublabel": "Eastern, northern & inner-western suburbs",
+      "emergencyLabel": "Emergency",
+      "emergencyValue": "24/7 Emergency Glass",
+      "emergencySublabel": "2–4 hour response, inner suburbs"
     },
     {
       "_template": "contactForm",

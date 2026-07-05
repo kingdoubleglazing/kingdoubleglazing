@@ -1,4 +1,5 @@
 import { FAQ } from '@/components/sections/FAQ'
+import { tf } from '@/lib/tina'
 
 export interface FAQBlockData {
   __typename?: string
@@ -9,26 +10,22 @@ export interface FAQBlockData {
     q?: string | null
     a?: string | null
   } | null> | null
-  tina?: {
-    heading?: string
-    subheading?: string
-    faqs?: Array<{ q?: string; a?: string } | undefined>
-  }
 }
 
 export function FAQBlock({ block }: { block: FAQBlockData }) {
-  const items = (block.faqs ?? [])
-    .filter(Boolean)
-    .map(f => ({ q: f!.q ?? '', a: f!.a ?? '' }))
+  const rawFaqs = (block.faqs ?? []).filter(Boolean)
+  const items = rawFaqs.map(f => ({ q: f!.q ?? '', a: f!.a ?? '' }))
+  const tinaFields = rawFaqs.map(f => ({ q: tf(f, 'q'), a: tf(f, 'a') }))
 
   return (
     <FAQ
-      heading={block.heading ?? 'Common Questions'}
-      subheading={block.subheading ?? 'Plain answers, no jargon.'}
+      heading={block.heading ?? undefined}
+      subheading={block.subheading ?? undefined}
       items={items}
-      tinaHeading={block.tina?.heading}
-      tinaSubheading={block.tina?.subheading}
-      tinaFields={block.tina?.faqs}
+      tinaSelf={tf(block)}
+      tinaHeading={tf(block, 'heading')}
+      tinaSubheading={tf(block, 'subheading')}
+      tinaFields={tinaFields}
     />
   )
 }

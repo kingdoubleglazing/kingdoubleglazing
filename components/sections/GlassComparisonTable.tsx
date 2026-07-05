@@ -34,6 +34,29 @@ function parseRow(r: RowDraft): WindowRow | null {
 interface GlassComparisonTableProps {
   options: PricingOption[]
   secondStoreySurcharge: number
+  tinaSelf?: string
+  tinaIds?: {
+    eyebrow?: string
+    heading?: string
+    subtext?: string
+    step1Heading?: string
+    addWindowLabel?: string
+    yourQuoteLabel?: string
+    noMeasurementsHint?: string
+    accuracyNote?: string
+    measurementOffNote?: string
+    budgetPrompt?: string
+    sendQuoteLabel?: string
+    dialogTitle?: string
+    dialogDescription?: string
+    modalQuoteSummaryLabel?: string
+    modalSubmitLabel?: string
+    modalErrorMessage?: string
+    successEyebrow?: string
+    successTitle?: string
+    successBody?: string
+    startNewQuoteLabel?: string
+  }
   eyebrow?: string | null
   heading?: string | null
   subtext?: string | null
@@ -75,7 +98,7 @@ const LABEL_CLASS = 'block font-headline text-sm font-semibold uppercase trackin
 const FIELD_LABEL_CLASS = 'font-headline text-xs font-semibold uppercase tracking-[0.12em] text-on-surface'
 const CONTROL_CLASS = 'bg-white border border-outline-variant px-3 py-3 font-sans text-base text-on-surface focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2'
 
-export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, heading, subtext, quieterLabel, lessHeatLabel, step1Heading, addWindowLabel, yourQuoteLabel, noMeasurementsHint, accuracyNote, measurementOffNote, budgetPrompt, sendQuoteLabel, dialogTitle, dialogDescription, modalQuoteSummaryLabel, modalSubmitLabel, modalSendingLabel, modalErrorMessage, successEyebrow, successTitle, successBody, startNewQuoteLabel }: GlassComparisonTableProps) {
+export function GlassComparisonTable({ options, secondStoreySurcharge, tinaSelf, tinaIds, eyebrow, heading, subtext, quieterLabel, lessHeatLabel, step1Heading, addWindowLabel, yourQuoteLabel, noMeasurementsHint, accuracyNote, measurementOffNote, budgetPrompt, sendQuoteLabel, dialogTitle, dialogDescription, modalQuoteSummaryLabel, modalSubmitLabel, modalSendingLabel, modalErrorMessage, successEyebrow, successTitle, successBody, startNewQuoteLabel }: GlassComparisonTableProps) {
   const optionsMap = Object.fromEntries(options.map(o => [o.optionKey, o]))
   const optionKeys = options.map(o => o.optionKey)
 
@@ -130,22 +153,27 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
 
   // ── Single-page quote form ───────────────────────────────────────────────
   return (
-    <section className="bg-surface-container-low py-14 md:py-18" id="estimate-form">
+    <section data-tina-field={tinaSelf} className="bg-surface-container-low py-14 md:py-18" id="estimate-form">
       <div className="max-w-2xl mx-auto px-4">
 
         {/* Header */}
         <div className="mb-8">
-          <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-            {eyebrow ?? 'Glass Options'}
-          </p>
-          <h2
-            className="font-display uppercase leading-[0.95] text-on-surface"
-            style={{ fontSize: 'clamp(1.6rem,5vw,3rem)' }}
-          >
-            {heading ?? 'Get your instant quote'}
-          </h2>
+          {eyebrow && (
+            <p data-tina-field={tinaIds?.eyebrow} className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
+              {eyebrow}
+            </p>
+          )}
+          {heading && (
+            <h2
+              data-tina-field={tinaIds?.heading}
+              className="font-display uppercase leading-[0.95] text-on-surface"
+              style={{ fontSize: 'clamp(1.6rem,5vw,3rem)' }}
+            >
+              {heading}
+            </h2>
+          )}
           {subtext && (
-            <p className="font-sans text-base text-on-surface mt-3 leading-relaxed">{subtext}</p>
+            <p data-tina-field={tinaIds?.subtext} className="font-sans text-base text-on-surface mt-3 leading-relaxed">{subtext}</p>
           )}
         </div>
 
@@ -234,7 +262,7 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
 
           {/* 2 — Your windows */}
           <div>
-            <label className={LABEL_CLASS}>{step1Heading ?? 'Your windows'}</label>
+            <label data-tina-field={tinaIds?.step1Heading} className={LABEL_CLASS}>{step1Heading ?? 'Your windows'}</label>
 
             <div className="space-y-3">
               {rows.map((row, i) => (
@@ -253,6 +281,7 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
             <button
               type="button"
               onClick={addRow}
+              data-tina-field={tinaIds?.addWindowLabel}
               className="mt-3 w-full py-3 border border-dashed border-outline-variant text-on-surface/70 hover:border-primary hover:text-primary font-headline text-sm font-semibold uppercase tracking-[0.15em] transition-colors duration-150"
             >
               {addWindowLabel ?? '+ Add another window'}
@@ -261,7 +290,7 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
 
           {/* 3 — Your quote */}
           <div className="border-t border-surface-container-high pt-6">
-            <label className={LABEL_CLASS}>{yourQuoteLabel ?? 'Your quote'}</label>
+            <label data-tina-field={tinaIds?.yourQuoteLabel} className={LABEL_CLASS}>{yourQuoteLabel ?? 'Your quote'}</label>
 
             <p
               className="font-display uppercase text-primary leading-none"
@@ -273,7 +302,7 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
             </p>
 
             {!total && (
-              <p className="font-sans text-sm text-on-surface/60 mt-2">
+              <p data-tina-field={tinaIds?.noMeasurementsHint} className="font-sans text-sm text-on-surface/60 mt-2">
                 {noMeasurementsHint ?? 'Updates as you enter your windows above.'}
               </p>
             )}
@@ -327,16 +356,16 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
                 </div>
 
                 <div className="border-l-4 border-primary-container pl-4 mt-5">
-                  <p className="font-sans text-base font-semibold text-on-surface">
+                  <p data-tina-field={tinaIds?.accuracyNote} className="font-sans text-base font-semibold text-on-surface">
                     {accuracyNote ?? "If you've filled this out correctly, your price is accurate to within 10%."}
                   </p>
-                  <p className="font-sans text-sm text-on-surface/70 leading-relaxed mt-1">
+                  <p data-tina-field={tinaIds?.measurementOffNote} className="font-sans text-sm text-on-surface/70 leading-relaxed mt-1">
                     {measurementOffNote ?? 'If your measurements are off, the final quote may adjust slightly. We confirm everything on site before any work starts.'}
                   </p>
                 </div>
 
                 <div className="mt-5 bg-primary-container text-on-primary-fixed px-5 py-3">
-                  <p className="font-sans text-base font-medium leading-snug">
+                  <p data-tina-field={tinaIds?.budgetPrompt} className="font-sans text-base font-medium leading-snug">
                     {budgetPrompt ?? "If this is within your budget, send your quote through — we'll call to confirm and book the install."}
                   </p>
                 </div>
@@ -344,6 +373,7 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
                 <button
                   type="button"
                   onClick={() => setDialogOpen(true)}
+                  data-tina-field={tinaIds?.sendQuoteLabel}
                   className="mt-6 w-full bg-primary-container text-on-primary-fixed font-headline text-base font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 active:scale-[0.98]"
                 >
                   {sendQuoteLabel ?? 'Send Us Your Quote →'}
@@ -360,21 +390,23 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
         <DialogContent className="p-0">
           {quoteState.status === 'success' ? (
             <div className="px-6 pt-10 pb-8 text-center">
-              <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">
+              <p data-tina-field={tinaIds?.successEyebrow} className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">
                 {successEyebrow ?? '✓ Sent.'}
               </p>
               <DialogTitle
+                data-tina-field={tinaIds?.successTitle}
                 className="font-display uppercase text-on-surface leading-none mb-3"
                 style={{ fontSize: 'clamp(1.8rem,5vw,2.8rem)' }}
               >
                 {successTitle ?? "We'll be in touch soon."}
               </DialogTitle>
-              <p className="font-sans text-sm text-on-surface/70 leading-relaxed mb-8 max-w-xs mx-auto">
+              <p data-tina-field={tinaIds?.successBody} className="font-sans text-sm text-on-surface/70 leading-relaxed mb-8 max-w-xs mx-auto">
                 {successBody ?? "Once we confirm your quote you'll receive an email with your price locked in."}
               </p>
               <button
                 type="button"
                 onClick={() => { setDialogOpen(false); reset() }}
+                data-tina-field={tinaIds?.startNewQuoteLabel}
                 className="font-headline text-sm font-semibold uppercase tracking-[0.15em] text-on-surface hover:text-primary transition-colors duration-150 underline underline-offset-4"
               >
                 {startNewQuoteLabel ?? 'Start a new quote'}
@@ -390,10 +422,10 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
 
               <div className="px-6 pt-8 pb-6">
                 <DialogHeader className="mb-6">
-                  <DialogTitle style={{ fontSize: 'clamp(1.4rem,4vw,2rem)' }}>
+                  <DialogTitle data-tina-field={tinaIds?.dialogTitle} style={{ fontSize: 'clamp(1.4rem,4vw,2rem)' }}>
                     {dialogTitle ?? 'Send Us Your Quote'}
                   </DialogTitle>
-                  <DialogDescription className="mt-1">
+                  <DialogDescription data-tina-field={tinaIds?.dialogDescription} className="mt-1">
                     {dialogDescription ?? "We'll call to confirm and book your install."}
                   </DialogDescription>
                 </DialogHeader>
@@ -401,7 +433,7 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
                 {/* Quote summary */}
                 {total && selectedOption && (
                   <div className="bg-surface-container-low border border-surface-container-high px-4 py-3 mb-6">
-                    <p className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-on-surface/60 mb-1">
+                    <p data-tina-field={tinaIds?.modalQuoteSummaryLabel} className="font-headline text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-on-surface/60 mb-1">
                       {modalQuoteSummaryLabel ?? 'Your quote'}
                     </p>
                     <p className="font-display uppercase text-primary leading-none" style={{ fontSize: '2rem' }}>
@@ -422,7 +454,7 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
                 </div>
 
                 {quoteState.status === 'error' && (
-                  <p className="mt-4 font-sans text-sm text-red-600" role="alert">
+                  <p data-tina-field={tinaIds?.modalErrorMessage} className="mt-4 font-sans text-sm text-red-600" role="alert">
                     {quoteState.message ?? (modalErrorMessage ?? 'Something went wrong. Please try again.')}
                   </p>
                 )}
@@ -430,6 +462,7 @@ export function GlassComparisonTable({ options, secondStoreySurcharge, eyebrow, 
                 <button
                   type="submit"
                   disabled={quotePending || !total}
+                  data-tina-field={tinaIds?.modalSubmitLabel}
                   className="mt-6 w-full bg-primary-container text-on-primary-fixed font-headline text-base font-semibold uppercase tracking-[0.12em] px-8 py-4 hover:bg-primary-fixed-dim transition-colors duration-150 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {quotePending ? (modalSendingLabel ?? 'Sending…') : (modalSubmitLabel ?? 'Send Us Your Quote →')}

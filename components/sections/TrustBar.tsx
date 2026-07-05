@@ -28,6 +28,7 @@ import {
   Zap,
   type LucideIcon,
 } from 'lucide-react'
+import { tf } from '@/lib/tina'
 
 const ICON_MAP: Record<string, LucideIcon> = {
   alertTriangle: AlertTriangle,
@@ -59,13 +60,6 @@ const ICON_MAP: Record<string, LucideIcon> = {
   zap: Zap,
 }
 
-const FALLBACK_ITEMS = [
-  { icon: Clock,       label: '50+ Years Combined Experience' },
-  { icon: Star,        label: 'Beat Any Quote by 30%' },
-  { icon: ShieldCheck, label: '10-Year Warranty' },
-  { icon: Wrench,      label: 'Fits Most Existing Frames' },
-]
-
 interface TrustItem {
   icon: LucideIcon
   label: string
@@ -74,9 +68,6 @@ interface TrustItem {
 export interface TrustBarBlockData {
   __typename?: string
   items?: Array<{ iconKey?: string | null; label?: string | null } | null> | null
-  tina?: {
-    items?: Array<{ iconKey?: string; label?: string } | undefined>
-  }
 }
 
 interface TrustBarProps {
@@ -85,44 +76,45 @@ interface TrustBarProps {
 }
 
 export function TrustBar({ items, block }: TrustBarProps) {
-  let resolvedItems = items
-
-  if (!resolvedItems) {
-    if (block?.items?.length) {
-      resolvedItems = block.items
+  // Keep a reference to the live Tina node for each row so inline-edit ids
+  // resolve correctly; the `items` prop path has no node (static render).
+  const rows = items
+    ? items.map(({ icon, label }) => ({ node: undefined as unknown, Icon: icon, label }))
+    : (block?.items ?? [])
         .filter(Boolean)
         .map(item => ({
-          icon: ICON_MAP[item!.iconKey ?? ''] ?? Clock,
+          node: item,
+          Icon: ICON_MAP[item!.iconKey ?? ''] ?? Clock,
           label: item!.label ?? '',
         }))
-    } else {
-      resolvedItems = FALLBACK_ITEMS
-    }
-  }
+
+  if (!rows.some(({ label }) => label)) return null
 
   return (
-    <div className="bg-inverse-surface">
+    <div data-tina-field={tf(block)} className="bg-inverse-surface">
       <ul className="flex flex-col md:flex-row md:items-stretch md:justify-between max-w-5xl mx-auto divide-y md:divide-y-0 md:divide-x divide-white/10">
-        {resolvedItems.map(({ icon: Icon, label }, i) => (
-          <li
-            key={label}
-            data-tina-field={block?.tina?.items?.[i]?.iconKey}
-            className="flex items-center gap-2.5 px-6 py-3.5 md:flex-1 md:justify-center"
-          >
-            <Icon
-              size={16}
-              strokeWidth={2.5}
-              aria-hidden="true"
-              className="text-primary-container shrink-0"
-            />
-            <span
-              data-tina-field={block?.tina?.items?.[i]?.label}
-              className="font-headline text-xs font-semibold uppercase tracking-widest text-inverse-on-surface whitespace-nowrap"
+        {rows.map(({ node, Icon, label }, i) =>
+          label ? (
+            <li
+              key={`${label}-${i}`}
+              data-tina-field={tf(node)}
+              className="flex items-center gap-2.5 px-6 py-3.5 md:flex-1 md:justify-center"
             >
-              {label}
-            </span>
-          </li>
-        ))}
+              <Icon
+                size={16}
+                strokeWidth={2.5}
+                aria-hidden="true"
+                className="text-primary-container shrink-0"
+              />
+              <span
+                data-tina-field={tf(node, 'label')}
+                className="font-headline text-xs font-semibold uppercase tracking-widest text-inverse-on-surface whitespace-nowrap"
+              >
+                {label}
+              </span>
+            </li>
+          ) : null,
+        )}
       </ul>
     </div>
   )

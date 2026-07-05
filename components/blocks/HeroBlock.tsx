@@ -16,16 +16,7 @@ export interface HeroBlockData {
   showWarrantyBadge?: boolean | null
   adaptorCaption?: string | null
   accentWord?: string | null
-  trustItems?: string[] | null
-  tina?: {
-    badge?: string
-    headlineWhite?: string
-    headlineYellow?: string
-    subtext?: string
-    adaptorCaption?: string
-    primaryCta?: { label?: string; href?: string }
-    secondaryCta?: { label?: string; href?: string }
-  }
+  trustItems?: (string | null)[] | null
 }
 
 export function HeroBlock({ block }: { block: HeroBlockData }) {

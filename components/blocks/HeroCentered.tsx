@@ -1,9 +1,10 @@
 import Image from 'next/image'
+import { tf } from '@/lib/tina'
 import type { HeroBlockData } from './HeroBlock'
 
 export function HeroCentered({ block }: { block: HeroBlockData }) {
   return (
-    <section className="bg-inverse-surface py-16 md:py-24 overflow-hidden relative">
+    <section data-tina-field={tf(block)} className="bg-inverse-surface py-16 md:py-24 overflow-hidden relative">
       {block.imageSrc && (
         <>
           <Image
@@ -13,6 +14,7 @@ export function HeroCentered({ block }: { block: HeroBlockData }) {
             priority
             className="object-cover object-center"
             sizes="100vw"
+            data-tina-field={tf(block, 'imageSrc')}
           />
           <div
             className="absolute inset-0 bg-black/60"
@@ -31,24 +33,32 @@ export function HeroCentered({ block }: { block: HeroBlockData }) {
       )}
       <div className="relative max-w-5xl mx-auto px-4 text-center">
         {block.badge && (
-          <span className="inline-block bg-primary-container text-on-primary-fixed font-headline text-xs font-semibold uppercase tracking-widest px-3 py-1 mb-5">
+          <span
+            data-tina-field={tf(block, 'badge')}
+            className="inline-block bg-primary-container text-on-primary-fixed font-headline text-xs font-semibold uppercase tracking-widest px-3 py-1 mb-5"
+          >
             {block.badge}
           </span>
         )}
-        <h1
-          className="font-display uppercase leading-none text-inverse-on-surface mb-6 text-center"
-          style={{ fontSize: 'clamp(3rem, 9vw, 7rem)' }}
-        >
-          <span data-tina-field={block.tina?.headlineWhite}>
-            {block.headlineWhite}
-          </span>{' '}
-          <span data-tina-field={block.tina?.headlineYellow} className="text-primary-container">
-            {block.headlineYellow}
-          </span>
-        </h1>
+        {(block.headlineWhite || block.headlineYellow) && (
+          <h1
+            className="font-display uppercase leading-none text-inverse-on-surface mb-6 text-center"
+            style={{ fontSize: 'clamp(3rem, 9vw, 7rem)' }}
+          >
+            {block.headlineWhite && (
+              <span data-tina-field={tf(block, 'headlineWhite')}>{block.headlineWhite}</span>
+            )}
+            {block.headlineWhite && block.headlineYellow && ' '}
+            {block.headlineYellow && (
+              <span data-tina-field={tf(block, 'headlineYellow')} className="text-primary-container">
+                {block.headlineYellow}
+              </span>
+            )}
+          </h1>
+        )}
         {block.subtext && (
           <p
-            data-tina-field={block.tina?.subtext}
+            data-tina-field={tf(block, 'subtext')}
             className="font-sans text-base text-inverse-on-surface max-w-xl mx-auto leading-relaxed text-center"
           >
             {block.subtext}

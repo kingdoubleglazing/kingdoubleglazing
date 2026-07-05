@@ -3,15 +3,12 @@ import { Button } from '@/components/ui/Button'
 interface HeroCTAProps {
   label: string
   href: string
-  tina?: {
-    label?: string
-    href?: string
-  }
+  tinaField?: string
 }
 
-export function HeroCTA({ label, href, tina }: HeroCTAProps) {
+export function HeroCTA({ label, href, tinaField }: HeroCTAProps) {
   return (
-    <Button as="link" href={href} size="lg" data-tina-field={tina?.label}>
+    <Button as="link" href={href} size="lg" data-tina-field={tinaField}>
       {label}
     </Button>
   )

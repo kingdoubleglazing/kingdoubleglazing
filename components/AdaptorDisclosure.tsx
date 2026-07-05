@@ -1,4 +1,5 @@
 import { Ruler } from 'lucide-react'
+import { tf } from '@/lib/tina'
 
 export interface AdaptorDisclosureBlockData {
   __typename?: string
@@ -6,22 +7,16 @@ export interface AdaptorDisclosureBlockData {
   mobileSubtitle?: string | null
   body1?: string | null
   body2?: string | null
-  tina?: {
-    heading?: string
-    mobileSubtitle?: string
-    body1?: string
-    body2?: string
-  }
 }
 
 export function AdaptorDisclosure({ block }: { block?: AdaptorDisclosureBlockData }) {
-  const heading        = block?.heading        ?? 'About our adaptors'
-  const mobileSubtitle = block?.mobileSubtitle ?? 'Adds ~20mm to your frame. Tap to read more.'
-  const body1          = block?.body1          ?? 'We use special fittings to attach new glass to your existing frame. Your frame gets about 20mm wider — that is the only visible change. No ripping out, no plastering, no mess.'
-  const body2          = block?.body2          ?? 'This saves you thousands compared to full window replacement.'
+  const heading        = block?.heading
+  const mobileSubtitle = block?.mobileSubtitle
+  const body1          = block?.body1
+  const body2          = block?.body2
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8 md:py-10">
+    <div data-tina-field={tf(block)} className="max-w-5xl mx-auto px-4 py-8 md:py-10">
       <div className="border border-black/10 bg-white">
         {/* Desktop: always visible, icon-left layout */}
         <div className="hidden md:flex items-start gap-6 px-7 py-6">
@@ -29,14 +24,16 @@ export function AdaptorDisclosure({ block }: { block?: AdaptorDisclosureBlockDat
             <Ruler size={18} strokeWidth={1.5} className="text-black/70" aria-hidden="true" />
           </div>
           <div>
-            <h3
-              data-tina-field={block?.tina?.heading}
-              className="font-headline text-sm font-semibold uppercase tracking-wide text-black mb-3"
-            >
-              {heading}
-            </h3>
-            <p data-tina-field={block?.tina?.body1} className="font-sans text-sm text-black leading-relaxed">{body1}</p>
-            <p data-tina-field={block?.tina?.body2} className="font-sans text-sm text-black leading-relaxed mt-3">{body2}</p>
+            {heading && (
+              <h3
+                data-tina-field={tf(block, 'heading')}
+                className="font-headline text-sm font-semibold uppercase tracking-wide text-black mb-3"
+              >
+                {heading}
+              </h3>
+            )}
+            {body1 && <p data-tina-field={tf(block, 'body1')} className="font-sans text-sm text-black leading-relaxed">{body1}</p>}
+            {body2 && <p data-tina-field={tf(block, 'body2')} className="font-sans text-sm text-black leading-relaxed mt-3">{body2}</p>}
           </div>
         </div>
 
@@ -47,19 +44,21 @@ export function AdaptorDisclosure({ block }: { block?: AdaptorDisclosureBlockDat
               <Ruler size={14} strokeWidth={1.5} className="text-black/70" aria-hidden="true" />
             </div>
             <span className="font-headline text-sm font-semibold uppercase tracking-wide text-black flex-1 leading-snug">
-              <span data-tina-field={block?.tina?.heading}>{heading}</span>
-              <span
-                data-tina-field={block?.tina?.mobileSubtitle}
-                className="block font-sans text-xs font-normal normal-case tracking-normal text-black/70 mt-0.5"
-              >
-                {mobileSubtitle}
-              </span>
+              {heading && <span data-tina-field={tf(block, 'heading')}>{heading}</span>}
+              {mobileSubtitle && (
+                <span
+                  data-tina-field={tf(block, 'mobileSubtitle')}
+                  className="block font-sans text-xs font-normal normal-case tracking-normal text-black/70 mt-0.5"
+                >
+                  {mobileSubtitle}
+                </span>
+              )}
             </span>
             <span className="text-black/70 text-lg leading-none shrink-0" aria-hidden="true">+</span>
           </summary>
           <div className="px-5 pb-6 pt-1 border-t border-black/8">
-            <p data-tina-field={block?.tina?.body1} className="font-sans text-sm text-black leading-relaxed">{body1}</p>
-            <p data-tina-field={block?.tina?.body2} className="font-sans text-sm text-black leading-relaxed mt-3">{body2}</p>
+            {body1 && <p data-tina-field={tf(block, 'body1')} className="font-sans text-sm text-black leading-relaxed">{body1}</p>}
+            {body2 && <p data-tina-field={tf(block, 'body2')} className="font-sans text-sm text-black leading-relaxed mt-3">{body2}</p>}
           </div>
         </details>
       </div>

@@ -11,16 +11,18 @@ interface FAQProps {
   items: readonly FaqItem[]
   /** Emit FAQPage JSON-LD schema. Set false if the parent page already emits it. */
   emitSchema?: boolean
+  tinaSelf?: string
   tinaHeading?: string
   tinaSubheading?: string
   tinaFields?: ReadonlyArray<{ q?: string; a?: string } | undefined>
 }
 
 export function FAQ({
-  heading = 'Common Questions',
-  subheading = 'Everything Melbourne homeowners ask before booking.',
+  heading,
+  subheading,
   items,
   emitSchema = true,
+  tinaSelf,
   tinaHeading,
   tinaSubheading,
   tinaFields,
@@ -37,7 +39,10 @@ export function FAQ({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       )}
-      <section className="bg-surface-container-low py-12 md:py-24">
+      <section
+        data-tina-field={tinaSelf}
+        className="bg-surface-container-low py-12 md:py-24"
+      >
       <div className="max-w-5xl mx-auto px-4">
 
         {/* Header */}
@@ -46,20 +51,24 @@ export function FAQ({
             <p className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
               FAQ
             </p>
-            <h2
-              data-tina-field={tinaHeading || undefined}
-              className="font-display uppercase leading-[0.88] text-on-surface"
-              style={{ fontSize: 'clamp(2rem, 6vw, 5rem)' }}
-            >
-              {heading}
-            </h2>
+            {heading && (
+              <h2
+                data-tina-field={tinaHeading}
+                className="font-display uppercase leading-[0.88] text-on-surface"
+                style={{ fontSize: 'clamp(2rem, 6vw, 5rem)' }}
+              >
+                {heading}
+              </h2>
+            )}
           </div>
-          <p
-            data-tina-field={tinaSubheading || undefined}
-            className="font-sans text-base text-on-surface max-w-sm leading-relaxed lg:text-right"
-          >
-            {subheading}
-          </p>
+          {subheading && (
+            <p
+              data-tina-field={tinaSubheading}
+              className="font-sans text-base text-on-surface max-w-sm leading-relaxed lg:text-right"
+            >
+              {subheading}
+            </p>
+          )}
         </div>
 
         {/* Accordion — native <details>, zero JS */}
@@ -81,12 +90,14 @@ export function FAQ({
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <h3
-                    data-tina-field={tinaFields?.[i]?.q || undefined}
-                    className="font-headline text-sm md:text-base font-semibold uppercase tracking-wide text-on-surface leading-snug pt-0.5 md:pt-1"
-                  >
-                    {item.q}
-                  </h3>
+                  {item.q && (
+                    <h3
+                      data-tina-field={tinaFields?.[i]?.q}
+                      className="font-headline text-sm md:text-base font-semibold uppercase tracking-wide text-on-surface leading-snug pt-0.5 md:pt-1"
+                    >
+                      {item.q}
+                    </h3>
+                  )}
                 </div>
 
                 {/* Expand/collapse indicator */}
@@ -105,12 +116,14 @@ export function FAQ({
               {/* Answer — full width on mobile, indented under the question on desktop */}
               <div className="px-4 pb-7 md:px-7 md:pb-8 md:pl-[calc(1.75rem+2rem+1.25rem)]">
                 <div className="h-px w-8 bg-primary-container mb-3 md:mb-5" aria-hidden="true" />
-                <p
-                  data-tina-field={tinaFields?.[i]?.a || undefined}
-                  className="font-sans text-sm md:text-base text-on-surface leading-relaxed"
-                >
-                  {item.a}
-                </p>
+                {item.a && (
+                  <p
+                    data-tina-field={tinaFields?.[i]?.a}
+                    className="font-sans text-sm md:text-base text-on-surface leading-relaxed"
+                  >
+                    {item.a}
+                  </p>
+                )}
               </div>
             </details>
           ))}

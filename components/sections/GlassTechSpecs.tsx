@@ -12,33 +12,40 @@ interface GlassTechSpecsProps {
   eyebrow?: string | null
   heading?: string | null
   description?: string | null
+  tinaSelf?: string
   tinaEyebrow?: string
   tinaHeading?: string
   tinaDescription?: string
 }
 
-export function GlassTechSpecs({ options, eyebrow, heading, description, tinaEyebrow, tinaHeading, tinaDescription }: GlassTechSpecsProps) {
+export function GlassTechSpecs({ options, eyebrow, heading, description, tinaSelf, tinaEyebrow, tinaHeading, tinaDescription }: GlassTechSpecsProps) {
   const OPTION_KEYS = options.map(o => o.optionKey)
   const OPTIONS = Object.fromEntries(options.map(o => [o.optionKey, o]))
 
   return (
-    <section id="tech-specs" className="bg-surface-container-low py-14 md:py-18">
+    <section id="tech-specs" data-tina-field={tinaSelf} className="bg-surface-container-low py-14 md:py-18">
       <div className="max-w-5xl mx-auto px-4">
 
         <div className="mb-8">
-          <p data-tina-field={tinaEyebrow} className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-            {eyebrow ?? 'Technical Data'}
-          </p>
-          <h2
-            data-tina-field={tinaHeading}
-            className="font-display uppercase leading-[0.9] text-on-surface"
-            style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}
-          >
-            {heading ?? 'Glass Specification Summary'}
-          </h2>
-          <p data-tina-field={tinaDescription} className="font-sans text-sm text-on-surface mt-3 max-w-lg">
-            {description ?? 'Full composition and performance data for each option. All figures compared to standard 3mm single glazing.'}
-          </p>
+          {eyebrow && (
+            <p data-tina-field={tinaEyebrow} className="font-headline text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
+              {eyebrow}
+            </p>
+          )}
+          {heading && (
+            <h2
+              data-tina-field={tinaHeading}
+              className="font-display uppercase leading-[0.9] text-on-surface"
+              style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}
+            >
+              {heading}
+            </h2>
+          )}
+          {description && (
+            <p data-tina-field={tinaDescription} className="font-sans text-sm text-on-surface mt-3 max-w-lg">
+              {description}
+            </p>
+          )}
         </div>
 
         {/* Mobile: stacked cards */}

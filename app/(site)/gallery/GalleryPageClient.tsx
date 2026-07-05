@@ -2,8 +2,9 @@
 
 import { useEffect } from 'react'
 import Image from 'next/image'
-import { useTina, tinaField } from 'tinacms/dist/react'
+import { useTina } from 'tinacms/dist/react'
 import { BlockRenderer } from '@/components/blocks/BlockRenderer'
+import { tf } from '@/lib/tina'
 import type { GalleryConnectionQuery, GalleryConnectionQueryVariables } from '@/tina/__generated__/types'
 import type { GalleryItem } from '@/lib/types'
 
@@ -24,11 +25,6 @@ type TinaGalleryNode = {
   _sys?: object
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function sf(obj: object, field: string): string | undefined {
-  try { return (tinaField as (o: any, f: any) => string)(obj, field) || undefined } catch { return undefined }
-}
-
 function blockTemplate(block: AnyBlock): string {
   if (block._template) return block._template as string
   if (block.__typename) {
@@ -37,23 +33,6 @@ function blockTemplate(block: AnyBlock): string {
       .replace(/^[A-Z]/, (c: string) => c.toLowerCase())
   }
   return ''
-}
-
-function augmentBlock(block: AnyBlock): AnyBlock {
-  if (!block) return block
-  const t = blockTemplate(block)
-  switch (t) {
-    case 'hero':
-      return { ...block, tina: { badge: sf(block, 'badge'), headlineWhite: sf(block, 'headlineWhite'), headlineYellow: sf(block, 'headlineYellow'), subtext: sf(block, 'subtext') } }
-    case 'trustBar':
-      return { ...block, tina: { items: ((block.items as AnyBlock[]) ?? []).map((item: AnyBlock) => item ? { iconKey: sf(item, 'iconKey'), label: sf(item, 'label') } : undefined) } }
-    case 'ctaBanner':
-      return { ...block, tina: { heading: sf(block, 'heading'), subtext: sf(block, 'subtext'), primaryCta: block.primaryCta ? { label: sf(block.primaryCta, 'label'), href: sf(block.primaryCta, 'href') } : undefined, secondaryCta: block.secondaryCta ? { label: sf(block.secondaryCta, 'label'), href: sf(block.secondaryCta, 'href') } : undefined, trustItems: sf(block, 'trustItems') } }
-    case 'ownerBio':
-      return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), name: sf(block, 'name'), role: sf(block, 'role'), imageSrc: sf(block, 'imageSrc'), paragraphs: sf(block, 'paragraphs'), quote: sf(block, 'quote'), cta: block.cta ? { label: sf(block.cta, 'label'), href: sf(block.cta, 'href') } : undefined } }
-    default:
-      return block
-  }
 }
 
 export function GalleryPageClient({
@@ -66,10 +45,10 @@ export function GalleryPageClient({
   fallbackBlocks?: AnyBlock[]
 }) {
   const { data: pageData } = useTina(tinaPage)
-  const rawBlocks: AnyBlock[] = pageData?.page?.blocks ?? fallbackBlocks
-  const blocks = rawBlocks.map(augmentBlock)
-  const galleryBlurb: string = pageData?.page?.galleryBlurb ?? 'Every job above came with a 10-year warranty on glass and workmanship.'
-  const galleryBlurbTina = sf(pageData?.page ?? {}, 'galleryBlurb')
+  // Blocks come straight from useTina, so each still carries Tina's
+  // `_content_source` metadata; block components derive their own edit ids via tf().
+  const blocks: AnyBlock[] = pageData?.page?.blocks ?? fallbackBlocks
+  const galleryBlurb: string | undefined = pageData?.page?.galleryBlurb ?? undefined
 
   const bottomTemplates = ['ctaBanner', 'ownerBio']
   const topBlocks = blocks.filter(b => !bottomTemplates.includes(blockTemplate(b)))
@@ -115,7 +94,7 @@ export function GalleryPageClient({
             {galleryItems.map((item) => (
               <figure
                 key={item.id}
-                data-tina-field={sf(item, 'src')}
+                data-tina-field={tf(item, 'src')}
                 className="group overflow-hidden bg-surface-variant relative aspect-[4/3]"
               >
                 {item.src && (
@@ -127,24 +106,28 @@ export function GalleryPageClient({
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 )}
-                <figcaption
-                  data-tina-field={sf(item, 'caption')}
-                  className="absolute bottom-0 left-0 right-0 bg-inverse-surface/80 px-3 py-2 text-inverse-on-surface font-headline text-xs uppercase tracking-wide translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                >
-                  {item.caption}
-                </figcaption>
+                {item.caption && (
+                  <figcaption
+                    data-tina-field={tf(item, 'caption')}
+                    className="absolute bottom-0 left-0 right-0 bg-inverse-surface/80 px-3 py-2 text-inverse-on-surface font-headline text-xs uppercase tracking-wide translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+                  >
+                    {item.caption}
+                  </figcaption>
+                )}
               </figure>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
-            <p
-              data-tina-field={galleryBlurbTina}
-              className="font-sans text-sm text-on-surface/80 mb-6"
-            >
-              {galleryBlurb}
-            </p>
-          </div>
+          {galleryBlurb && (
+            <div className="mt-12 text-center">
+              <p
+                data-tina-field={tf(pageData?.page, 'galleryBlurb')}
+                className="font-sans text-sm text-on-surface/80 mb-6"
+              >
+                {galleryBlurb}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 

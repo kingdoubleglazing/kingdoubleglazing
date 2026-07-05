@@ -4,14 +4,22 @@ import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { ContactForm } from '@/components/sections/ContactForm'
 import { getSiteSettings } from '@/lib/site-settings'
+import { tf } from '@/lib/tina'
 
 export interface ContactFormBlockData {
   __typename?: string
   heading?: string | null
-  tina?: { heading?: string }
 }
 
-function ContactFormInner({ heading, tinaHeading }: { heading: string; tinaHeading?: string }) {
+function ContactFormInner({
+  heading,
+  tinaHeading,
+  tinaSelf,
+}: {
+  heading?: string | null
+  tinaHeading?: string
+  tinaSelf?: string
+}) {
   const params = useSearchParams()
   const isUploadFlow = params.get('upload') === '1'
   const settings = getSiteSettings()
@@ -19,7 +27,7 @@ function ContactFormInner({ heading, tinaHeading }: { heading: string; tinaHeadi
   return (
     <>
       {isUploadFlow && <UploadQuoteSection />}
-      <section className="bg-surface py-12 md:py-16">
+      <section data-tina-field={tinaSelf} className="bg-surface py-12 md:py-16">
         <div className="max-w-5xl mx-auto px-4">
           {heading && (
             <h2
@@ -42,10 +50,13 @@ function ContactFormInner({ heading, tinaHeading }: { heading: string; tinaHeadi
 }
 
 export function ContactFormBlock({ block }: { block: ContactFormBlockData }) {
-  const heading = block.heading ?? 'Send Us a Message'
   return (
     <Suspense fallback={<div className="bg-surface h-96" />}>
-      <ContactFormInner heading={heading} tinaHeading={block.tina?.heading} />
+      <ContactFormInner
+        heading={block.heading}
+        tinaHeading={tf(block, 'heading')}
+        tinaSelf={tf(block)}
+      />
     </Suspense>
   )
 }

@@ -1,4 +1,5 @@
 import { ProcessSteps } from '@/components/sections/ProcessSteps'
+import { tf } from '@/lib/tina'
 
 export interface ProcessStepsBlockData {
   __typename?: string
@@ -13,27 +14,25 @@ export interface ProcessStepsBlockData {
     imageSrc?: string | null
     imageAlt?: string | null
   } | null> | null
-  tina?: {
-    heading?: string
-    subheading?: string
-    ctaRef?: string
-    cta?: { label?: string; href?: string }
-    steps?: Array<{ title?: string; body?: string; callout?: string } | undefined>
-  }
 }
 
 export function ProcessStepsBlock({ block }: { block: ProcessStepsBlockData }) {
-  const steps = (block.steps ?? [])
-    .filter(Boolean)
-    .map((step, i) => ({
-      id: String(i),
-      title: step!.title ?? '',
-      body: step!.body ?? '',
-      callout: step!.callout ?? undefined,
-      imageSrc: step!.imageSrc ?? undefined,
-      imageAlt: step!.imageAlt ?? undefined,
-      order: i,
-    }))
+  const rawSteps = (block.steps ?? []).filter(Boolean)
+
+  const steps = rawSteps.map((step, i) => ({
+    id: String(i),
+    title: step!.title ?? undefined,
+    body: step!.body ?? undefined,
+    callout: step!.callout ?? undefined,
+    imageSrc: step!.imageSrc ?? undefined,
+    imageAlt: step!.imageAlt ?? undefined,
+  }))
+
+  const tinaSteps = rawSteps.map(step => ({
+    title: tf(step, 'title'),
+    body: tf(step, 'body'),
+    callout: tf(step, 'callout'),
+  }))
 
   return (
     <ProcessSteps
@@ -41,7 +40,11 @@ export function ProcessStepsBlock({ block }: { block: ProcessStepsBlockData }) {
       heading={block.heading ?? undefined}
       subheading={block.subheading ?? undefined}
       cta={block.cta?.label && block.cta?.href ? { label: block.cta.label, href: block.cta.href } : undefined}
-      tinaFields={block.tina}
+      tinaSelf={tf(block)}
+      tinaHeading={tf(block, 'heading')}
+      tinaSubheading={tf(block, 'subheading')}
+      tinaCta={tf(block.cta)}
+      tinaSteps={tinaSteps}
     />
   )
 }
