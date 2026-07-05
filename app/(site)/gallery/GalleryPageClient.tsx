@@ -49,6 +49,8 @@ function augmentBlock(block: AnyBlock): AnyBlock {
       return { ...block, tina: { items: ((block.items as AnyBlock[]) ?? []).map((item: AnyBlock) => item ? { iconKey: sf(item, 'iconKey'), label: sf(item, 'label') } : undefined) } }
     case 'ctaBanner':
       return { ...block, tina: { heading: sf(block, 'heading'), subtext: sf(block, 'subtext'), primaryCta: block.primaryCta ? { label: sf(block.primaryCta, 'label'), href: sf(block.primaryCta, 'href') } : undefined, secondaryCta: block.secondaryCta ? { label: sf(block.secondaryCta, 'label'), href: sf(block.secondaryCta, 'href') } : undefined, trustItems: sf(block, 'trustItems') } }
+    case 'ownerBio':
+      return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), name: sf(block, 'name'), role: sf(block, 'role'), imageSrc: sf(block, 'imageSrc'), paragraphs: sf(block, 'paragraphs'), quote: sf(block, 'quote'), cta: block.cta ? { label: sf(block.cta, 'label'), href: sf(block.cta, 'href') } : undefined } }
     default:
       return block
   }
@@ -69,8 +71,9 @@ export function GalleryPageClient({
   const galleryBlurb: string = pageData?.page?.galleryBlurb ?? 'Every job above came with a 10-year warranty on glass and workmanship.'
   const galleryBlurbTina = sf(pageData?.page ?? {}, 'galleryBlurb')
 
-  const topBlocks = blocks.filter(b => blockTemplate(b) !== 'ctaBanner')
-  const bottomBlocks = blocks.filter(b => blockTemplate(b) === 'ctaBanner')
+  const bottomTemplates = ['ctaBanner', 'ownerBio']
+  const topBlocks = blocks.filter(b => !bottomTemplates.includes(blockTemplate(b)))
+  const bottomBlocks = blocks.filter(b => bottomTemplates.includes(blockTemplate(b)))
 
   const { data: galleryData } = useTina(tinaGallery as TinaGalleryResult)
 

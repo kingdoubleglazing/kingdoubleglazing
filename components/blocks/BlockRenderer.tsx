@@ -17,6 +17,7 @@ import { GlassTechSpecsBlock, type GlassTechSpecsBlockData } from './GlassTechSp
 import type { PricingOption } from '@/lib/types'
 import { WhatElseStripBlock, type WhatElseStripBlockData } from './WhatElseStripBlock'
 import { EmergencyStripBlock, type EmergencyStripBlockData } from './EmergencyStripBlock'
+import { OwnerBioBlock, type OwnerBioBlockData } from './OwnerBioBlock'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyBlock = { __typename?: string; _template?: string; [key: string]: any }
@@ -90,6 +91,9 @@ export function BlockRenderer({ blocks, pricingOptions = [] }: { blocks: AnyBloc
 
           case 'PageBlocksEmergencyStrip':
             return <EmergencyStripBlock key={key} block={block as EmergencyStripBlockData} />
+
+          case 'PageBlocksOwnerBio':
+            return <OwnerBioBlock key={key} block={block as OwnerBioBlockData} />
 
           default:
             return null

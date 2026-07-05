@@ -90,6 +90,23 @@
         "10-year warranty",
         "We beat any quote by 30%"
       ]
+    },
+    {
+      "_template": "ownerBio",
+      "eyebrow": "Meet the Owner",
+      "name": "Tas Markou",
+      "role": "Founder & Master Glazier",
+      "imageSrc": "/Gemini_Generated_Image_147hol147hol147h%20(1)%20(1)%20(1).webp",
+      "imageAlt": "Tas Markou, founder of King Double Glazing",
+      "paragraphs": [
+        "Tas grew up in glass. His father was a glazier and he was doing installs as a kid. Over 25+ years he built and ran two double glazing factories, with 40+ staff at their peak.",
+        "Along the way he found a way to drop the price — because most companies charge far more than families can afford. Today he runs King on one promise: transparent quoting, fair pricing, and a 10-year warranty on every job."
+      ],
+      "quote": "If we can't beat any genuine quote by 30%, I'll tell you straight. Stop. Don't overpay. — Tas",
+      "cta": {
+        "label": "Read Tas's Full Story →",
+        "href": "/about/"
+      }
     }
   ]
 }

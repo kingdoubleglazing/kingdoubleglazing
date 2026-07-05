@@ -527,6 +527,22 @@ export default defineConfig({
                   { name: 'cta', type: 'object' as const, label: 'CTA Link', fields: ctaFields },
                 ],
               },
+              // ── Owner Bio (Meet the Owner — Tas) ──────────────────────
+              {
+                name: 'ownerBio',
+                label: 'Owner Bio',
+                ui: { itemProps: (item: { name?: string }) => ({ label: `👤 Owner: ${item?.name ?? 'Tas'}` }) },
+                fields: [
+                  { name: 'eyebrow', type: 'string', label: 'Eyebrow (e.g. Meet the Owner)' },
+                  { name: 'name', type: 'string', label: 'Owner Name' },
+                  { name: 'role', type: 'string', label: 'Role / Title' },
+                  { name: 'imageSrc', type: 'image', label: 'Portrait Photo' },
+                  { name: 'imageAlt', type: 'string', label: 'Photo Alt Text' },
+                  { name: 'paragraphs', type: 'string', list: true, label: 'Bio Paragraphs', ui: { component: 'textarea' as const } },
+                  { name: 'quote', type: 'string', label: 'Pull Quote (optional)', ui: { component: 'textarea' as const } },
+                  { name: 'cta', type: 'object' as const, label: 'CTA Button (optional)', fields: ctaFields },
+                ],
+              },
             ],
           },
         ],

@@ -64,6 +64,8 @@ function augmentBlocks(blocks: AnyBlock[]): AnyBlock[] {
         return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), heading: sf(block, 'heading'), cta: block.cta ? { label: sf(block.cta, 'label'), href: sf(block.cta, 'href') } : undefined, services: ((block.services as AnyBlock[]) ?? []).map((s: AnyBlock) => s ? { label: sf(s, 'label'), href: sf(s, 'href') } : undefined) } }
       case 'emergencyStrip':
         return { ...block, tina: { boldText: sf(block, 'boldText'), text: sf(block, 'text'), cta: block.cta ? { label: sf(block.cta, 'label'), href: sf(block.cta, 'href') } : undefined } }
+      case 'ownerBio':
+        return { ...block, tina: { eyebrow: sf(block, 'eyebrow'), name: sf(block, 'name'), role: sf(block, 'role'), imageSrc: sf(block, 'imageSrc'), paragraphs: sf(block, 'paragraphs'), quote: sf(block, 'quote'), cta: block.cta ? { label: sf(block.cta, 'label'), href: sf(block.cta, 'href') } : undefined } }
       default:
         return block
     }

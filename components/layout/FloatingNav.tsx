@@ -3,7 +3,15 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Phone } from 'lucide-react'
+import { Menu, Phone } from 'lucide-react'
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 
 interface FloatingNavProps {
@@ -102,8 +110,8 @@ export function FloatingNav({ logoSrc, mainNav, ctaNav, phone, phoneHref, tinaMa
               ))}
             </div>
 
-            {/* Right: phone + Get Quote */}
-            <div className="hidden sm:flex items-center gap-3 shrink-0">
+            {/* Right cluster: phone + Get Quote + mobile menu */}
+            <div className="flex items-center gap-3 shrink-0">
               <Link
                 href={phoneHref}
                 className="hidden xl:inline-flex items-center gap-1.5 font-headline text-xs font-semibold uppercase tracking-wide text-white hover:text-white transition-colors duration-150"
@@ -114,10 +122,65 @@ export function FloatingNav({ logoSrc, mainNav, ctaNav, phone, phoneHref, tinaMa
               </Link>
               <Link
                 href={ctaNav.href}
-                className="font-headline text-xs font-bold uppercase tracking-wide px-4 py-2 bg-primary-container text-on-primary-fixed hover:bg-primary-fixed-dim transition-colors duration-150"
+                className="hidden sm:inline-flex items-center font-headline text-xs font-bold uppercase tracking-wide px-4 py-2 bg-primary-container text-on-primary-fixed hover:bg-primary-fixed-dim transition-colors duration-150"
               >
                 {ctaNav.label}
               </Link>
+
+              {/* Mobile hamburger */}
+              <Sheet>
+                <SheetTrigger
+                  className="lg:hidden inline-flex items-center justify-center p-2 text-white hover:text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-container"
+                  aria-label="Open navigation menu"
+                >
+                  <Menu size={22} aria-hidden="true" />
+                </SheetTrigger>
+
+                <SheetContent side="right">
+                  <SheetTitle className="sr-only">Navigation</SheetTitle>
+                  <SheetDescription>Site navigation menu</SheetDescription>
+                  <div className="flex flex-col h-full overflow-y-auto pt-12 pb-8 px-6">
+                    <SheetClose asChild>
+                      <Link href="/" className="mb-8 inline-block" aria-label="King Double Glazing — home">
+                        <Image src={logoSrc} alt="King Double Glazing" width={120} height={47} className="h-10 w-auto" />
+                      </Link>
+                    </SheetClose>
+                    <nav aria-label="Mobile navigation">
+                      <ul className="space-y-1 mb-6">
+                        {mainNav.map(({ label, href, tinaLabel }, i) => (
+                          <li key={href}>
+                            <SheetClose asChild>
+                              <Link
+                                href={href}
+                                className="font-headline text-base font-semibold uppercase tracking-wide px-3 py-2.5 block transition-colors duration-150 text-inverse-on-surface hover:text-primary-container"
+                              >
+                                <span data-tina-field={tinaLabel ?? tinaMainNav?.[i]?.tinaLabel}>{label}</span>
+                              </Link>
+                            </SheetClose>
+                          </li>
+                        ))}
+                      </ul>
+                    </nav>
+                    <div className="mt-auto space-y-3 pt-6 border-t border-white/10">
+                      <SheetClose asChild>
+                        <Link
+                          href={ctaNav.href}
+                          className="w-full inline-flex items-center justify-center font-headline text-sm font-bold uppercase tracking-wide px-6 py-3 bg-primary-container text-on-primary-fixed"
+                        >
+                          {ctaNav.label} →
+                        </Link>
+                      </SheetClose>
+                      <a
+                        href={phoneHref}
+                        className="font-headline inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-inverse-on-surface hover:text-primary-container transition-colors duration-150"
+                      >
+                        <Phone size={14} aria-hidden="true" />
+                        {phone}
+                      </a>
+                    </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
 
           </div>

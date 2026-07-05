@@ -572,7 +572,23 @@ type PageBlocksEmergencyStrip {
   cta: PageBlocksEmergencyStripCta
 }
 
-union PageBlocks = PageBlocksHero | PageBlocksTrustBar | PageBlocksWhyRetrofit | PageBlocksProcessSteps | PageBlocksEstimateCta | PageBlocksFaq | PageBlocksServiceSection | PageBlocksStoryWithStats | PageBlocksWarrantyCoverage | PageBlocksContactCards | PageBlocksContactForm | PageBlocksCtaBanner | PageBlocksGlassComparison | PageBlocksGlassTechSpecs | PageBlocksAdaptorDisclosure | PageBlocksFreeAdvice | PageBlocksWhatElseStrip | PageBlocksEmergencyStrip
+type PageBlocksOwnerBioCta {
+  label: String
+  href: String
+}
+
+type PageBlocksOwnerBio {
+  eyebrow: String
+  name: String
+  role: String
+  imageSrc: String
+  imageAlt: String
+  paragraphs: [String]
+  quote: String
+  cta: PageBlocksOwnerBioCta
+}
+
+union PageBlocks = PageBlocksHero | PageBlocksTrustBar | PageBlocksWhyRetrofit | PageBlocksProcessSteps | PageBlocksEstimateCta | PageBlocksFaq | PageBlocksServiceSection | PageBlocksStoryWithStats | PageBlocksWarrantyCoverage | PageBlocksContactCards | PageBlocksContactForm | PageBlocksCtaBanner | PageBlocksGlassComparison | PageBlocksGlassTechSpecs | PageBlocksAdaptorDisclosure | PageBlocksFreeAdvice | PageBlocksWhatElseStrip | PageBlocksEmergencyStrip | PageBlocksOwnerBio
 
 type Page implements Node & Document {
   galleryBlurb: String
@@ -855,6 +871,22 @@ input PageBlocksEmergencyStripFilter {
   cta: PageBlocksEmergencyStripCtaFilter
 }
 
+input PageBlocksOwnerBioCtaFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
+input PageBlocksOwnerBioFilter {
+  eyebrow: StringFilter
+  name: StringFilter
+  role: StringFilter
+  imageSrc: ImageFilter
+  imageAlt: StringFilter
+  paragraphs: StringFilter
+  quote: StringFilter
+  cta: PageBlocksOwnerBioCtaFilter
+}
+
 input PageBlocksFilter {
   hero: PageBlocksHeroFilter
   trustBar: PageBlocksTrustBarFilter
@@ -874,6 +906,7 @@ input PageBlocksFilter {
   freeAdvice: PageBlocksFreeAdviceFilter
   whatElseStrip: PageBlocksWhatElseStripFilter
   emergencyStrip: PageBlocksEmergencyStripFilter
+  ownerBio: PageBlocksOwnerBioFilter
 }
 
 input PageFilter {
@@ -1364,6 +1397,22 @@ input PageBlocksEmergencyStripMutation {
   cta: PageBlocksEmergencyStripCtaMutation
 }
 
+input PageBlocksOwnerBioCtaMutation {
+  label: String
+  href: String
+}
+
+input PageBlocksOwnerBioMutation {
+  eyebrow: String
+  name: String
+  role: String
+  imageSrc: String
+  imageAlt: String
+  paragraphs: [String]
+  quote: String
+  cta: PageBlocksOwnerBioCtaMutation
+}
+
 input PageBlocksMutation {
   hero: PageBlocksHeroMutation
   trustBar: PageBlocksTrustBarMutation
@@ -1383,6 +1432,7 @@ input PageBlocksMutation {
   freeAdvice: PageBlocksFreeAdviceMutation
   whatElseStrip: PageBlocksWhatElseStripMutation
   emergencyStrip: PageBlocksEmergencyStripMutation
+  ownerBio: PageBlocksOwnerBioMutation
 }
 
 input PageMutation {

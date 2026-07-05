@@ -312,6 +312,20 @@ fragment PageParts on Page {
         href
       }
     }
+    ... on PageBlocksOwnerBio {
+      eyebrow
+      name
+      role
+      imageSrc
+      imageAlt
+      paragraphs
+      quote
+      cta {
+        __typename
+        label
+        href
+      }
+    }
   }
 }
 
