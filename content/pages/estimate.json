@@ -1,28 +1,27 @@
 {
   "blocks": [
     {
-      "_template": "hero",
       "variant": "overlay",
       "badge": "Quote Generator",
       "headlineWhite": "Generate Your Own Quote.",
       "headlineYellow": "See Your Price in Minutes.",
-      "adaptorCaption": "Price yourself online first. Call us when you'd like to proceed.",
       "subtext": "We'll beat any genuine quote by 30%. That's a promise in writing.",
+      "primaryCta": {
+        "label": "Generate My Quote →",
+        "href": "#estimate-form"
+      },
+      "imageSrc": "/hero/hero-double-glazing.webp",
+      "imageAlt": "Double glazing upgrade in progress on a Melbourne home",
+      "adaptorCaption": "Price yourself online first. Call us when you'd like to proceed.",
       "trustItems": [
         "Enter Your Window Sizes",
         "See Your Price Instantly",
         "No Email Needed",
         "10-Year Warranty"
       ],
-      "primaryCta": {
-        "label": "Generate My Quote →",
-        "href": "#estimate-form"
-      },
-      "imageSrc": "/hero/hero-double-glazing.webp",
-      "imageAlt": "Double glazing upgrade in progress on a Melbourne home"
+      "_template": "hero"
     },
     {
-      "_template": "glassComparison",
       "eyebrow": "Glass Options",
       "heading": "What reduction do you want to achieve from standard 3mm Clear window glass?",
       "subtext": "See your price per square metre for each glass option.",
@@ -58,17 +57,17 @@
       "successEyebrow": "✓ Sent.",
       "successTitle": "We'll be in touch soon.",
       "successBody": "Once we confirm your quote you'll receive an email with your price locked in.",
-      "startNewQuoteLabel": "Start a new quote"
+      "startNewQuoteLabel": "Start a new quote",
+      "_template": "glassComparison"
     },
     {
-      "_template": "adaptorDisclosure",
       "heading": "About our adaptors",
       "mobileSubtitle": "Reduces the glass you see by ~40mm in height, 20mm each side. Tap to read more.",
       "body1": "We use special fittings to attach new glass to your existing frame. Our frame reduces the glass size you see by about 40mm overall in height, and 20mm per side, approximately — that is the only visible change. No ripping out, no plastering, no mess.",
-      "body2": "This saves you thousands compared to full window replacement."
+      "body2": "This saves you thousands compared to full window replacement.",
+      "_template": "adaptorDisclosure"
     },
     {
-      "_template": "faq",
       "heading": "Quote Generator FAQ",
       "subheading": "Common questions about the tool and how it works.",
       "faqs": [
@@ -112,10 +111,10 @@
           "q": "What if I already have a quote from someone else?",
           "a": "Send us any genuine written quote and we'll beat it by 30%, in writing."
         }
-      ]
+      ],
+      "_template": "faq"
     },
     {
-      "_template": "ownerBio",
       "eyebrow": "Meet the Owner",
       "name": "Tas Markou",
       "role": "Founder & Master Glazier",
@@ -127,9 +126,10 @@
       ],
       "quote": "If we can't beat any genuine quote by 30%, I'll tell you straight. Stop. Don't overpay. — Tas",
       "cta": {
-        "label": "Read Tas's Full Story →",
+        "label": "Read Tas's Full Story",
         "href": "/about/"
-      }
+      },
+      "_template": "ownerBio"
     }
   ]
 }
